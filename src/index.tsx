@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Providers from 'providers';
 
 import App from './App';
 import reportWebVitals from './reportWebVitals';
@@ -9,7 +10,9 @@ import 'style/themes/default/main.scss';
 
 ReactDOM.render(
     <React.StrictMode>
-        <App />
+        <Providers>
+            <App />
+        </Providers>
     </React.StrictMode>,
     document.getElementById('root')
 );

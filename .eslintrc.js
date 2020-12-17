@@ -1,7 +1,7 @@
 module.exports = {
     extends: [
-        'airbnb-typescript',
-        'airbnb/hooks',
+        /*'airbnb-typescript',
+        'airbnb/hooks',*/
         'plugin:@typescript-eslint/recommended',
         'plugin:jest/recommended',
         'prettier',
@@ -10,7 +10,15 @@ module.exports = {
         'plugin:prettier/recommended'
     ],
     ignorePatterns: ['.eslintrc.js'],
-    plugins: ['react', '@typescript-eslint', 'jest', 'simple-import-sort', 'prefer-arrow', 'sort-destructure-keys'],
+    plugins: [
+        'react',
+        '@typescript-eslint',
+        'jest',
+        'simple-import-sort',
+        'prefer-arrow',
+        'sort-destructure-keys',
+        'sort-keys-fix'
+    ],
     env: {
         browser: true,
         es6: true,
@@ -31,7 +39,6 @@ module.exports = {
     },
     rules: {
         'linebreak-style': 'off',
-        'indent': ['error', 4],
         'simple-import-sort/imports': ['error', {
             groups: [
                 // Side effect imports.
@@ -49,7 +56,7 @@ module.exports = {
             ],
         }],
         'simple-import-sort/exports': 'error',
-        'sort-keys': ['error', 'asc', {
+        'sort-keys-fix/sort-keys-fix': ['error', 'asc', {
             'caseSensitive': false,
             'natural': true
         }],
@@ -66,17 +73,17 @@ module.exports = {
                 'classPropertiesAllowed': false
             }
         ],
-        'arrow-body-style': ["error", "as-needed"],
-
-        'quotes': ['warn', 'single'],
+        'arrow-body-style': ['error', 'as-needed'],
 
         'react/jsx-sort-default-props': 'error',
         'react/jsx-sort-props': 'error',
+        'react/jsx-props-no-spreading': 'off',
 
         'prefer-destructuring': ['error', {
             'array': false,
             'object': true
         }],
         'no-console': 'warn',
+        '@typescript-eslint/no-explicit-any': 'off'
     },
 };
