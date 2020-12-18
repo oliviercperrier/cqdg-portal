@@ -1,33 +1,26 @@
 import React from 'react';
-import { useCallback } from 'react';
+import { useEffect } from 'react';
 import { Redirect, useLocation } from 'react-router-dom';
 import { useKeycloak } from '@react-keycloak/web';
+import { Spin } from 'antd';
 import get from 'lodash/get';
 
-import Header from 'components/Header';
-
-const Login = () => {
+const Login = (): React.ReactElement => {
     const location = useLocation<{ [key: string]: unknown }>();
     const currentLocationState = location.state || {
-        from: { pathname: '/' },
+        from: { pathname: '/files' },
     };
 
-    const { keycloak } = useKeycloak();
+    const { initialized, keycloak } = useKeycloak();
     const isAuthenticated = get(keycloak, 'authenticated', false);
 
-    const loginHanlder = useCallback(() => {
-        if (keycloak) {
+    useEffect(() => {
+        if (initialized && keycloak && !isAuthenticated) {
             keycloak.login();
         }
-    }, [keycloak]);
-    if (isAuthenticated) return <Redirect to={currentLocationState.from as string} />;
+    }, [initialized]);
 
-    return (
-        <div>
-            <Header />
-            <div>login Page</div>
-            <button onClick={loginHanlder}>LOGIN</button>
-        </div>
-    );
+    if (isAuthenticated) return <Redirect to={currentLocationState.from as string} />;
+    return <Spin spinning />;
 };
 export default Login;

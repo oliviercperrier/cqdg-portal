@@ -3,24 +3,25 @@
 import * as React from 'react';
 import { Redirect, Route, RouteComponentProps, RouteProps } from 'react-router-dom';
 import { useKeycloak } from '@react-keycloak/web';
+import { Spin } from 'antd';
 import get from 'lodash/get';
+import { isAuthenticated } from 'providers/Keycloak/keycloak';
 
-interface PrivateRouteProps extends RouteProps {
+
+interface AuthRouteProps extends RouteProps {
     component: React.ComponentType<RouteComponentProps<any>>;
 }
 
-export default ({ component: Component, ...rest }: PrivateRouteProps): React.ReactElement => {
-    const { keycloak } = useKeycloak();
-    const isAuthenticated = get(keycloak, 'authenticated', false);
-
+export default ({ component: Component, ...rest }: AuthRouteProps): React.ReactElement => {
+    const { initialized } = useKeycloak();
     return (
         <Route
             {...rest}
             render={(props) =>
-                isAuthenticated ? (
+                isAuthenticated() ? (
                     <Component {...props} />
                 ) : (
-                        <Redirect to={{ pathname: '/login', state: { from: props.location } }} />
+                        !initialized ? <Spin spinning /> : !isAuthenticated && <Redirect to={{ pathname: '/login', state: { from: props.location } }} />
                     )
             }
         />

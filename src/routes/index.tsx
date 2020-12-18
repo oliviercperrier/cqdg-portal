@@ -4,7 +4,7 @@ import FileRepoPage from 'pages/FileRepo';
 import HomePage from 'pages/Home';
 import LoginPage from 'pages/Login';
 
-import PrivateRoute from './PrivateRoute';
+import AuthRoute from './AuthRoute';
 
 export default (): React.ReactElement => (
     <Router>
@@ -15,7 +15,7 @@ export default (): React.ReactElement => (
             <Route exact path="/login">
                 <LoginPage />
             </Route>
-            <PrivateRoute component={FileRepoPage} exact path="/files" />
+            <AuthRoute component={FileRepoPage} exact path="/files" />
         </Switch>
     </Router>
 );

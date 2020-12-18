@@ -1,9 +1,9 @@
 import Keycloak from 'keycloak-js';
+import get from 'lodash/get';
 
-const keycloak: Keycloak.KeycloakInstance = Keycloak({
-    clientId: 'cqdg-client',
-    realm: 'CQDG',
-    url: 'https://auth.qa.cqdg.ferlab.bio/auth/',
-});
+const keyCloakConfig = JSON.parse(process.env.REACT_APP_KEYCLOAK_CONFIG as string);
+const keycloak: Keycloak.KeycloakInstance = Keycloak(keyCloakConfig);
+
+export const isAuthenticated = (): boolean => get(keycloak, 'authenticated', false);
 
 export default keycloak;
