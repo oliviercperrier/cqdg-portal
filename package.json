@@ -31,7 +31,7 @@
         "start": "react-scripts start",
         "build": "react-scripts build",
         "test": "react-scripts test",
-        "lint&fix": "eslint --fix",
+        "lint&fix": "eslint --fix --rule 'no-console: 2'",
         "eject": "react-scripts eject",
         "theme": "npm run theme:antd;",
         "theme:antd": "npm run theme:antd:colors && npm run theme:antd:main",
