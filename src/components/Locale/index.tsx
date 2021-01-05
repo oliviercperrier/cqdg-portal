@@ -1,13 +1,16 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
+import { Button } from 'antd';
 import { defaultLocale } from 'providers/Intl';
 import { setlocale } from 'store/cache/locales';
 import { GET_LOCALE } from 'store/queries/locales';
 
+import './Locale.modules.scss';
+
 const availableLocales = ['fr', 'en'];
 const localesMapping: Record<string, string> = {
-    en: 'fr',
-    fr: 'en',
+    en: 'FR',
+    fr: 'EN',
 };
 
 const Locale = (): React.ReactElement => {
@@ -20,9 +23,9 @@ const Locale = (): React.ReactElement => {
     }
 
     return (
-        <button
-            onClick={() => setlocale(localesMapping[locale])}
-        >{`Change language to: ${localesMapping[locale]}`}</button>
+        <Button className="locale" onClick={() => setlocale(localesMapping[locale])} shape="circle">
+            {localesMapping[locale]}
+        </Button>
     );
 };
 

@@ -1,0 +1,5 @@
+@import '../../style/themes/default/mixins';
+
+button.locale {
+    @include default-button-action;
+}

@@ -1,0 +1,17 @@
+@import 'colors';
+
+@mixin default-button-action {
+    &:hover{
+        background-color: $white;
+        border: 1px solid $gray-4;
+    }
+    &:focus{
+        background-color: $white;
+        border: 1px solid $primary-color;
+    }
+    &:active, &--active{
+        color: $blue-7;
+        border: 1px solid $blue-7;
+    }
+
+}
