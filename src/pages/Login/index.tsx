@@ -8,7 +8,7 @@ import get from 'lodash/get';
 const Login = (): React.ReactElement => {
     const location = useLocation<{ [key: string]: unknown }>();
     const currentLocationState = location.state || {
-        from: { pathname: '/files' },
+        from: { pathname: '/' },
     };
 
     const { initialized, keycloak } = useKeycloak();

@@ -9,8 +9,8 @@ import './Locale.modules.scss';
 
 const availableLocales = ['fr', 'en'];
 const localesMapping: Record<string, string> = {
-    en: 'FR',
-    fr: 'EN',
+    en: 'fr',
+    fr: 'en',
 };
 
 const Locale = (): React.ReactElement => {
@@ -24,7 +24,7 @@ const Locale = (): React.ReactElement => {
 
     return (
         <Button className="locale" onClick={() => setlocale(localesMapping[locale])} shape="circle">
-            {localesMapping[locale]}
+            {localesMapping[locale].toUpperCase()}
         </Button>
     );
 };

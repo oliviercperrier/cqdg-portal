@@ -3,7 +3,9 @@
 import React from 'react';
 import { AiOutlineLogin, AiOutlineLogout } from 'react-icons/ai';
 import { Link, useLocation } from 'react-router-dom';
+import { useKeycloak } from '@react-keycloak/web';
 import { Button, Divider } from 'antd';
+import { t } from 'locales/utils';
 import { isAuthenticated } from 'providers/Keycloak/keycloak';
 
 import DatabaseIcon from 'components/Icon/Database';
@@ -15,6 +17,7 @@ import './Header.modules.scss';
 
 const Header = (): React.ReactElement => {
     const location = useLocation();
+    const { keycloak } = useKeycloak();
     return (
         <header className="header">
             <div className="header__logo">
@@ -25,40 +28,38 @@ const Header = (): React.ReactElement => {
 
             <div className="header__nav">
                 <Link to="/files">
-                    <Button className="menu-item" icon={<DatabaseIcon className="menu-item-icon" />}>
-                        Répertoire de fichiers
+                    <Button className={`menu-item ${location.pathname.includes('/files') ? 'menu-item--active' : ''}`} icon={<DatabaseIcon className="menu-item-icon" />}>
+                        {t('nav.file.repo')}
                     </Button>
                 </Link>
                 <Link to="/studies">
-                    <Button className="menu-item" icon={<StorageIcon className="menu-item-icon" />}>
-                        Études
+                    <Button className={`menu-item ${location.pathname.includes('/studies') ? 'menu-item--active' : ''}`} icon={<StorageIcon className="menu-item-icon" />}>
+                        {t('nav.studies')}
                     </Button>
                 </Link>
             </div>
 
             <div className="header__actions">
                 {isAuthenticated() ? (
-                    <Link className="header__actions--logout" to={{ pathname: '/logout', state: { from: location.pathname } }}>
-                        <Button type="text">
-                            <AiOutlineLogout className="icon" />
-                            Déconnexion
-                        </Button>
-                    </Link>
+                    <Button className="logout" onClick={() => keycloak.logout()} type="text">
+                        <AiOutlineLogout className="icon" />
+                        {t('nav.logout')}
+                    </Button>
                 ) : (
-                        <Link className="header__actions--login" to={{ pathname: '/login', state: { from: location.pathname } }}>
-                            <Button type="text">
+                        <Link to={{ pathname: '/login', state: { from: location.pathname } }}>
+                            <Button className="login" type="text">
                                 <AiOutlineLogin className="icon" />
-                                Connexion
+                                {t('nav.login')}
                             </Button>
                         </Link>
                     )}
                 <Divider className="separator" type="vertical" />
                 <Button className="link" href="https://docs.qa.cqdg.ferlab.bio/" target="_blank" type="link">
-                    Documentation
+                    {t('nav.documentation')}
                     <ExternalIcon className="link--icon" />
                 </Button>
                 <Button className="link" href="https://cqdg.ca/en.html" target="_blank" type="link">
-                    Site Web
+                    {t('nav.website')}
                     <ExternalIcon className="link--icon" />
                 </Button>
                 <Locale />

@@ -52,11 +52,9 @@
             height: 1.9em;
         }
 
-        &--login, &--logout {
-            button {
-                display: flex;
-                align-items: center;
-            }
+        .login, .logout {
+            display: flex;
+            align-items: center;
 
             .icon {
                 margin-right: .5rem;

@@ -13,4 +13,6 @@ export const flatLocale = (locale: Record<string, any>, path: string[] = [], dat
     return data;
 };
 
-export const t = (key: string, values = {}): React.ReactElement => <FormattedMessage id={key} values={values} />;
+export const t = (key: string, values = {}, defaultMessage = ''): React.ReactElement => (
+    <FormattedMessage defaultMessage={defaultMessage} id={key} values={values} />
+);

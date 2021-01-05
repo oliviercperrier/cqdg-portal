@@ -13,7 +13,7 @@ export default ({ children }: IProvider): ReactElement => {
     } = useQuery<any>(GET_LOCALE);
 
     const selectedTranslation = translations[locale];
-
+    console.log(translations);
     return (
         <IntlProvider defaultLocale={defaultLocale} locale={locale} messages={selectedTranslation}>
             {children}
