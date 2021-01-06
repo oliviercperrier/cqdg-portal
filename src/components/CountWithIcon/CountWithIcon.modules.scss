@@ -1,0 +1,37 @@
+.count__container {
+    display: flex;
+
+    .wrapper__text {
+        margin-left: 1.6rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    
+        letter-spacing: 0.16px;  
+        color: #18486B;
+
+        .count {
+            line-height: 2.4rem;
+            font-weight: 600;
+            font-size: 1.6rem;
+        }
+
+        .label {
+            line-height: 2.2rem;
+        }
+    }
+}
+
+/*.inline-count-container {
+  display: flex;
+  color: #003457;
+  font-weight: 600;
+  align-items: center;
+}
+
+.inline-count-container .icon-count {
+  margin-right: 6px;
+  fill: #003457; /* gray-9 */
+  /*width: 16px;
+  height: 16px;
+}*/

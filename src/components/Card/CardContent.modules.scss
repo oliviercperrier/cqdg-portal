@@ -1,0 +1,27 @@
+.stack, .stackCenter {
+    display: grid;
+    grid-gap: 1rem;
+    grid-auto-flow: row;
+}
+
+.headerFooter {
+    display: grid;
+    grid-gap: 1rem;
+    grid-template-rows: 2.2rem 1fr 5rem;
+    height: 100%;
+}
+
+.stackCenter {
+    justify-items: center;
+}
+
+.header2Column {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 2rem;
+    padding: 0 .8rem;
+}
+
+.header2Column > :first-child {
+    grid-column: 1 / -1;
+}

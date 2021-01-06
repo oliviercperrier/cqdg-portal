@@ -1,7 +1,7 @@
 import React from 'react';
-import { TClassName } from 'types/generic/TClassname';
+import { IClassNameProp } from 'types/generic';
 
-const Storage = ({ className = '' }: TClassName): React.ReactElement => (
+const Storage = ({ className = '' }: IClassNameProp): React.ReactElement => (
     <svg
         className={className}
         fill="currentColor"

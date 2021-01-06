@@ -1,7 +1,7 @@
 import React from 'react';
-import { TClassName } from 'types/generic/TClassname';
+import { IClassNameProp } from 'types/generic';
 
-const ExternalLink = ({ className = '' }: TClassName): React.ReactElement => (
+const ExternalLink = ({ className = '' }: IClassNameProp): React.ReactElement => (
     <svg
         className={className}
         fill="currentColor"
