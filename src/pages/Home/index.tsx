@@ -2,6 +2,8 @@
 import React, { useEffect, useState } from 'react';
 import { AiOutlineArrowRight } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
+import { Bar } from '@nivo/bar';
+import { Pie } from '@nivo/pie';
 import { Button } from 'antd';
 import { t } from 'locales/utils';
 import { isAuthenticated } from 'providers/Keycloak/keycloak';
@@ -26,7 +28,7 @@ import StudyIcon from 'components/Icon/Study';
 
 import './Home.modules.scss';
 
-const Home = () => {
+const Home = (): React.ReactElement => {
     const [data, setData] = useState([]);
     useEffect(() => {
         const fetchData = async () => {
@@ -111,16 +113,97 @@ const Home = () => {
                         <CardContainerNotched className="graph" type="hovered">
                             <CardContent cardType="stack">
                                 <h3>{t('home.graphs.graph1.title')}</h3>
+                                <Bar
+                                    axisBottom={{
+                                        tickValues: [0, 20, 40, 60, 80, 100],
+                                    }}
+                                    colors={({ data }) => data.color}
+                                    data={[
+                                        { color: '#D06D5E', id: 'Melanoma', value: 38 },
+                                        { color: '#36CFC9', id: 'Colon and Rectal Cancer', value: 15 },
+                                        { color: '#F759AB', id: 'Pancreatic Cancer', value: 4 },
+                                        { color: '#FFB600', id: 'Bladder Cancer', value: 39 },
+                                        { color: '#FF7A45', id: 'Liver Cancer', value: 90 },
+                                        { color: '#FF7A45', id: 'Endometrial Cancer', value: 17 },
+                                        { color: '#08979C', id: 'Breast Cancer', value: 17 },
+                                        { color: '#00AEEF', id: 'Kidney Cancer', value: 78 },
+                                        { color: '#FF9C6E', id: 'Non-Hodgkin Lymphoma', value: 58 },
+                                        { color: '#FF85C0', id: 'Leukemia', value: 18 },
+                                    ]}
+                                    enableGridX
+                                    enableGridY
+                                    enableLabel={false}
+                                    height={240}
+                                    layout="horizontal"
+                                    margin={{ bottom: 20, left: 125, right: 110, top: 0 }}
+                                    padding={0.3}
+                                    theme={{
+                                        fontSize: 10,
+                                        textColor: '#486F90'
+                                    }}
+                                    width={430}
+                                />
                             </CardContent>
                         </CardContainerNotched>
                         <CardContainerNotched className="graph" type="hovered">
                             <CardContent cardType="stack">
                                 <h3>{t('home.graphs.graph2.title')}</h3>
+                                <Pie
+                                    colors={({ data }) => data.color}
+                                    data={[
+                                        { color: '#FFB600', id: 'Cancer', value: 50 },
+                                        { color: '#D06D5E', id: 'Generl health', value: 25 },
+                                        { color: '#B9BD31', id: 'Rare disease', value: 25 },
+                                    ]}
+                                    enableRadialLabels={false}
+                                    enableSliceLabels={false}
+                                    height={240}
+                                    legends={[{ anchor: 'right', direction: 'column', itemHeight: 18, itemWidth: 50 }]}
+                                    margin={{ bottom: 0, left: -80, right: 110, top: 0 }}
+                                    theme={{
+                                        fontSize: 10,
+                                        textColor: '#486F90'
+                                    }}
+                                    width={430}
+
+                                />
                             </CardContent>
                         </CardContainerNotched>
                         <CardContainerNotched className="graph" type="hovered">
                             <CardContent cardType="stack">
                                 <h3>{t('home.graphs.graph3.title')}</h3>
+                                <Bar
+                                    axisBottom={{
+                                        tickValues: [0, 20, 40, 60, 80, 100],
+                                    }}
+                                    colors={({ data }) => data.color}
+                                    data={[
+                                        { color: '#D06D5E', id: 'Melanoma', value: 38 },
+                                        { color: '#36CFC9', id: 'Colon and Rectal Cancer', value: 15 },
+                                        { color: '#F759AB', id: 'Pancreatic Cancer', value: 4 },
+                                        { color: '#FFB600', id: 'Bladder Cancer', value: 39 },
+                                        { color: '#FF7A45', id: 'Liver Cancer', value: 90 },
+                                        { color: '#FF7A45', id: 'Endometrial Cancer', value: 17 },
+                                        { color: '#08979C', id: 'Breast Cancer', value: 17 },
+                                        { color: '#00AEEF', id: 'Kidney Cancer', value: 78 },
+                                        { color: '#FF9C6E', id: 'Non-Hodgkin Lymphoma', value: 58 },
+                                        { color: '#FF85C0', id: 'Leukemia', value: 18 },
+                                    ]}
+
+                                    enableGridX
+                                    enableGridY
+                                    enableLabel={false}
+                                    height={240}
+                                    layout="horizontal"
+                                    margin={{ bottom: 20, left: 125, right: 110, top: 0 }}
+                                    padding={0.3}
+                                    theme={{
+                                        fontSize: 10,
+                                        textColor: '#486F90'
+                                    }}
+                                    width={430}
+                                />
+
                             </CardContent>
                         </CardContainerNotched>
                     </section>
