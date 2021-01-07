@@ -1,7 +1,5 @@
 module.exports = {
     extends: [
-        /*'airbnb-typescript',
-        'airbnb/hooks',*/
         'plugin:@typescript-eslint/recommended',
         'plugin:jest/recommended',
         'prettier',
@@ -64,7 +62,7 @@ module.exports = {
             'caseSensitive': false
         }],
         'sort-vars': 'error',
-
+        'no-nested-ternary': 0,
         'prefer-arrow/prefer-arrow-functions': [
             'error',
             {

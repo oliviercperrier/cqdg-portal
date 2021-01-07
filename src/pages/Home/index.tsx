@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import React, { useEffect, useState } from 'react';
 import { AiOutlineArrowRight } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
@@ -61,27 +60,27 @@ const Home = (): React.ReactElement => {
                                         </Button>
                                     </>
                                 ) : (
-                                        <>
-                                            <Link to="/files">
-                                                <Button
-                                                    className={`menu-item`}
-                                                    icon={<DatabaseIcon className="menu-item-icon" />}
-                                                    type="primary"
-                                                >
-                                                    {t('nav.file.repo')}
-                                                </Button>
-                                            </Link>
-                                            <Link to="/studies">
-                                                <Button
-                                                    className={`menu-item`}
-                                                    icon={<StorageIcon className="menu-item-icon" />}
-                                                    type="primary"
-                                                >
-                                                    {t('nav.studies')}
-                                                </Button>
-                                            </Link>
-                                        </>
-                                    )}
+                                    <>
+                                        <Link to="/files">
+                                            <Button
+                                                className={`menu-item`}
+                                                icon={<DatabaseIcon className="menu-item-icon" />}
+                                                type="primary"
+                                            >
+                                                {t('nav.file.repo')}
+                                            </Button>
+                                        </Link>
+                                        <Link to="/studies">
+                                            <Button
+                                                className={`menu-item`}
+                                                icon={<StorageIcon className="menu-item-icon" />}
+                                                type="primary"
+                                            >
+                                                {t('nav.studies')}
+                                            </Button>
+                                        </Link>
+                                    </>
+                                )}
                             </div>
                         </div>
                         <div className="data">
@@ -139,7 +138,7 @@ const Home = (): React.ReactElement => {
                                     padding={0.3}
                                     theme={{
                                         fontSize: 10,
-                                        textColor: '#486F90'
+                                        textColor: '#486F90',
                                     }}
                                     width={430}
                                 />
@@ -162,10 +161,9 @@ const Home = (): React.ReactElement => {
                                     margin={{ bottom: 0, left: -80, right: 110, top: 0 }}
                                     theme={{
                                         fontSize: 10,
-                                        textColor: '#486F90'
+                                        textColor: '#486F90',
                                     }}
                                     width={430}
-
                                 />
                             </CardContent>
                         </CardContainerNotched>
@@ -189,7 +187,6 @@ const Home = (): React.ReactElement => {
                                         { color: '#FF9C6E', id: 'Non-Hodgkin Lymphoma', value: 58 },
                                         { color: '#FF85C0', id: 'Leukemia', value: 18 },
                                     ]}
-
                                     enableGridX
                                     enableGridY
                                     enableLabel={false}
@@ -199,11 +196,10 @@ const Home = (): React.ReactElement => {
                                     padding={0.3}
                                     theme={{
                                         fontSize: 10,
-                                        textColor: '#486F90'
+                                        textColor: '#486F90',
                                     }}
                                     width={430}
                                 />
-
                             </CardContent>
                         </CardContainerNotched>
                     </section>
