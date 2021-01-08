@@ -1,0 +1,15 @@
+@import  '../../style/themes/default/mixins';
+
+#root {
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+}
+
+.layout-app {
+    &__content {
+        background-color: $gray-3;
+        flex-grow: 1;
+        overflow: hidden;
+    }
+}

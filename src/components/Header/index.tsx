@@ -5,6 +5,7 @@ import { useKeycloak } from '@react-keycloak/web';
 import { Button, Divider } from 'antd';
 import { t } from 'locales/utils';
 import { isAuthenticated } from 'providers/Keycloak/keycloak';
+import { IClassNameProp } from 'types/generic';
 
 import DatabaseIcon from 'components/Icon/Database';
 import ExternalIcon from 'components/Icon/ExternalLink';
@@ -13,11 +14,11 @@ import Locale from 'components/Locale';
 
 import './Header.modules.scss';
 
-const Header = (): React.ReactElement => {
+const Header = ({ className = '' }: IClassNameProp): React.ReactElement => {
     const location = useLocation();
     const { keycloak } = useKeycloak();
     return (
-        <header className="header">
+        <header className={`header ${className}`}>
             <div className="header__logo">
                 <Link to="/">
                     <img src="/assets/img/logo.svg" />

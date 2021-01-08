@@ -2,10 +2,12 @@
 
 @mixin default-button-action {
     &:hover{
+        color: $primary-color;
         background-color: $white;
         border: 1px solid $gray-4;
     }
     &:focus{
+        color: $primary-color;
         background-color: $white;
         border: 1px solid $primary-color;
     }
@@ -76,4 +78,18 @@
     font-size: 1.6rem;
     line-height: 2.4rem;
     color: $primary-color;
+}
+
+@mixin default-link-action {
+    padding: 0;
+    color: $gray-7;
+
+    &:not([disabled]):hover {
+        color: $gray-7;
+        text-decoration: underline;
+    }
+    &:focus {
+        color: $gray-7;
+        text-decoration: underline;
+    }
 }

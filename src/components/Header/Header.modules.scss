@@ -72,6 +72,7 @@
 
             &:not([disable]):hover {
                 text-decoration: underline;
+                color: $gray-7;
             }
         }
     }

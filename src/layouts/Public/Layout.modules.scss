@@ -1,0 +1,10 @@
+.layout-public {
+    &__header {
+        position: fixed;
+        z-index: 10;
+    }
+
+    &__content {
+        padding-top: 7.2rem;
+    }
+}

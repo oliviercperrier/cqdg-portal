@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Redirect, Route, RouteComponentProps, RouteProps } from 'react-router-dom';
 import { useKeycloak } from '@react-keycloak/web';
 import { Spin } from 'antd';
+import AppLayout from 'layouts/App';
 import { isAuthenticated } from 'providers/Keycloak/keycloak';
 
 interface AuthRouteProps extends RouteProps {
@@ -16,7 +17,9 @@ export default ({ component: Component, ...rest }: AuthRouteProps): React.ReactE
             {...rest}
             render={(props) =>
                 isAuthorized ? (
-                    <Component {...props} />
+                    <AppLayout>
+                        <Component {...props} />
+                    </AppLayout>
                 ) : !initialized ? (
                     <Spin spinning />
                 ) : (

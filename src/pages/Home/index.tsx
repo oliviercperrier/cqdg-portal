@@ -38,7 +38,6 @@ const Home = (): React.ReactElement => {
     }, []);
     return (
         <>
-            <Header />
             <main className="home">
                 <div className="home__contentWrapper">
                     <section className="home__contentWrapper__hero">

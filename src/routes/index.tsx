@@ -8,14 +8,15 @@ import StudyPage from 'pages/Study';
 import Head from 'components/Seo/Head';
 
 import AuthRoute from './AuthRoute';
+import PublicRoute from './PublicRoute';
 
 export default (): React.ReactElement => (
     <Router>
         <Route>{({ location: { pathname } }) => <Head pageName={pathname.split('/')[1]} />}</Route>
         <Switch>
-            <Route exact path="/">
+            <PublicRoute exact path="/">
                 <HomePage />
-            </Route>
+            </PublicRoute>
             <Route exact path="/login">
                 <LoginPage />
             </Route>
