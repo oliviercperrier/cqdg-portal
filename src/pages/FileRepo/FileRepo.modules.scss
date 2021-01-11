@@ -1,0 +1,24 @@
+@import '../../style/themes/default/colors';
+.file-repo {
+    &__graph-content {
+        background: $white;
+        padding: 1.2rem 1.6rem;
+        display: flex;
+        border: 1px solid $gray-4;
+        border-radius: 2px;
+        margin-bottom: 1.6rem;
+    }
+
+    .tabs-container {
+        height: 100%;
+
+        &__panes {
+            padding: 2.4rem;
+            background: $white;
+            border-left: 1px solid $gray-4;
+            border-right: 1px solid $gray-4;
+            border-bottom: 1px solid $gray-4;
+        }
+    
+    }
+}

@@ -10,8 +10,8 @@ interface AuthRouteProps extends RouteProps {
 }
 
 export default ({ component: Component, ...rest }: AuthRouteProps): React.ReactElement => {
-    const { initialized } = useKeycloak();
-    const isAuthorized = isAuthenticated();
+    const { initialized, keycloak } = useKeycloak();
+    const isAuthorized = isAuthenticated(keycloak);
     return (
         <Route
             {...rest}

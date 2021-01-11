@@ -28,7 +28,7 @@ const Header = ({ className = '' }: IClassNameProp): React.ReactElement => {
             <div className="header__nav">
                 <Link to="/files">
                     <Button
-                        className={`menu-item ${location.pathname.includes('/files') ? 'menu-item--active' : ''}`}
+                        className={`menu-item ${location.pathname.includes('/files') ? '--active' : ''}`}
                         icon={<DatabaseIcon className="menu-item-icon" />}
                     >
                         {t('nav.file.repo')}
@@ -36,7 +36,7 @@ const Header = ({ className = '' }: IClassNameProp): React.ReactElement => {
                 </Link>
                 <Link to="/studies">
                     <Button
-                        className={`menu-item ${location.pathname.includes('/studies') ? 'menu-item--active' : ''}`}
+                        className={`menu-item ${location.pathname.includes('/studies') ? '--active' : ''}`}
                         icon={<StorageIcon className="menu-item-icon" />}
                     >
                         {t('nav.studies')}
@@ -45,8 +45,16 @@ const Header = ({ className = '' }: IClassNameProp): React.ReactElement => {
             </div>
 
             <div className="header__actions">
-                {isAuthenticated() ? (
-                    <Button className="logout" onClick={() => keycloak.logout()} type="text">
+                {isAuthenticated(keycloak) ? (
+                    <Button
+                        className="logout"
+                        onClick={() =>
+                            keycloak.logout({
+                                redirectUri: window.location.origin,
+                            })
+                        }
+                        type="text"
+                    >
                         <AiOutlineLogout className="icon" />
                         {t('nav.logout')}
                     </Button>

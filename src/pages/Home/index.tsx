@@ -3,6 +3,7 @@ import { AiOutlineArrowRight } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 import { Bar } from '@nivo/bar';
 import { Pie } from '@nivo/pie';
+import { useKeycloak } from '@react-keycloak/web';
 import { Button } from 'antd';
 import { t } from 'locales/utils';
 import { isAuthenticated } from 'providers/Keycloak/keycloak';
@@ -12,7 +13,6 @@ import CardContainerNotched from 'components/Card/CardContainerNotched';
 import CardContent from 'components/Card/CardContent';
 import CountWithIcon from 'components/CountWithIcon';
 import Footer from 'components/Footer';
-import Header from 'components/Header';
 import CloudIcon from 'components/Icon/Cloud';
 import CloudStorageIcon from 'components/Icon/CloudStorage';
 import DataIcon from 'components/Icon/Data';
@@ -29,6 +29,7 @@ import './Home.modules.scss';
 
 const Home = (): React.ReactElement => {
     const [data, setData] = useState([]);
+    const { keycloak } = useKeycloak();
     useEffect(() => {
         const fetchData = async () => {
             const data = await getHomeStats();
@@ -48,7 +49,7 @@ const Home = (): React.ReactElement => {
                                 <p>{t('home.hero.text')}</p>
                             </div>
                             <div className="buttons">
-                                {!isAuthenticated() ? (
+                                {!isAuthenticated(keycloak) ? (
                                     <>
                                         <Button className="buttons__login" type="primary">
                                             {t('home.hero.buttons.connection')}{' '}

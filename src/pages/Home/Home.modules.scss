@@ -58,18 +58,11 @@ body {
                 }
 
                 &__login {
-                    @include primary-button-action;
-                    display: flex;
-                    align-items: center;
-
                     &__icon {
                         margin-left: .5rem;
                     }
                 }
 
-                &__create {
-                    @include ghost-button-action;
-                }
                 .menu-item {
                     display: flex;
                     align-items: center;
@@ -92,7 +85,7 @@ body {
                     } 
         
                     span {
-                        color: $primary-color;
+                        color: $blue-1;
                         font-size: 1.2rem;
                         line-height: 2rem;
                     }
@@ -124,7 +117,7 @@ body {
                     @include margin-8-bottom;
                     font-size: 2.4rem;
                     line-height: 3.2rem;
-                    color: $primary-color;
+                    color: $blue-1;
                 }
 
                 p {

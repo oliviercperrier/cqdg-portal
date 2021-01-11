@@ -27,20 +27,57 @@
             height: auto;
         }
     }
-}
 
+    .side-panel-content {
+        flex-grow: 1;
+        font-size: 12px;
+        overflow: hidden;
+        padding: 0px 17px;
+    
+        &__tabs {
+            .icon {
+                margin-right: 1rem;
+            }
+        }
+    }
+    
+    .side-panel-footer {
+        align-items: center;
+        border-top: thin solid #D8E1EB;
+        color: #486F90;
+        display: flex;
+        flex-grow: 0;
+        flex-shrink: 0;
+        height: 44px;
+        justify-content: center;
+      
+        .link {
+            text-decoration: underline;
+            font-size: 1.2rem;
+            @include default-link-action;
+    
+            > span {
+                text-decoration: underline;
+            }
+        }
+    }
+}
 
 
 .side-panel-collapsed {
-  width: 48px;
-  overflow: hidden;
+    width: 48px;
+    overflow: hidden;
+
+    .side-panel-content {
+        display: none;
+    }
+
+    .side-panel-footer {
+        display: none;
+    }
 }
 
-.side-panel .side-panel-header > button {
-  padding: 0;
-}
-
-.side-panel .fui-filters-container-header button {
+/*.side-panel .fui-filters-container-header button {
   padding: 0;
 }
 
@@ -50,55 +87,10 @@
   justify-content: start;
   align-items: center;
   background-color: white;
-  color: #003457; /* gray-9*/
+  color: #003457; 
   font-size: 14px;
   font-weight: 600;
-  border-bottom: thin solid #D8E1EB; /* gray-4 */
+  border-bottom: thin solid #D8E1EB; 
   padding: 5px 14px;
-}
-
-.side-panel-content {
-  flex-grow: 1;
-  font-size: 12px;
-  overflow: hidden;
-  padding: 0px 17px
- }
-
- .side-panel-collapsed {
-    .side-panel-content {
-        display: none;
-    }
-}
-
-.side-panel-collapsed .side-panel-footer {
-    display: none;
-}
-
-.side-panel-footer {
-    align-items: center;
-    border-top: thin solid #D8E1EB;
-    color: #486F90;
-    display: flex;
-    flex-grow: 0;
-    flex-shrink: 0;
-    height: 44px;
-    justify-content: center;
-  
-    .link {
-        text-decoration: underline;
-        font-size: 1.2rem;
-        @include default-link-action;
-
-        > span {
-            text-decoration: underline;
-        }
-    }
-}
-
-/*.side-panel-footer .spacer {
-  border-left: thin solid #90A9C1;
-  flex-grow: 0;
-  height: 10px;
-  margin: 0 5px;
-  width: 1px;
 }*/
+

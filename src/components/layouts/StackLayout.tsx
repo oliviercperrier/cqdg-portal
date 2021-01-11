@@ -18,7 +18,7 @@ interface IStackLayout extends IExtraProps {
     vertical?: boolean;
     horizontal?: boolean;
     children: React.ReactNode;
-    className: string;
+    className?: string;
     grow?: boolean;
 }
 

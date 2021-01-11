@@ -1,0 +1,51 @@
+@import '../../style/themes/default/colors';
+
+.query-builder {
+    padding: 1.8rem 1.4rem;
+    margin-bottom: 1.4rem;
+
+    &--with-filters {
+        background: $white;
+    }
+
+    &--no-filters {
+        background: $gray-4;
+
+        .wrapper-builder {
+            align-items: center;
+        }
+    }
+
+    .wrapper-builder{
+        display: flex;
+        align-items: flex-start;
+    }
+
+    .wrapper-filters{
+        display: flex;
+        margin: -.6rem -.6rem -.6rem 1.2rem;
+        flex-wrap: wrap;
+    }
+
+    .close-icon {
+        width: 2.0rem;
+        height: 2.0rem;
+        fill: $gray-6;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    .left-arrow {
+        fill: $blue-1;
+        width: 1.4rem;
+        height: 1.4rem;
+    }
+
+    .no-filters-text {
+        margin-left: 1.5rem;
+        color: $blue-1;
+        font-size: 1.4rem;
+    }
+}

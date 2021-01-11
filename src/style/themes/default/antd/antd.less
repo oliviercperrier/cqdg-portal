@@ -1,17 +1,110 @@
 @import '../../../../../node_modules/antd/dist/antd.less';
-@import './_colors.less';
+@import '_colors.less';
 
-@white: #fff;
+@text-color: @blue-1;
 
-@btn-default-color: @text-color;
+// Buttons
+@btn-default-color: @blue-1;
 @btn-default-bg: @gray-2;
 @btn-default-border: @gray-4;
 
-@btn-primary-color: @primary-color;
-@btn-primary-bg: @gold-4;
+.ant-btn {
+    &:hover{
+        color: @blue-1;
+        background-color: @white;
+        border-color: @gray-4;
+    }
+    &:focus{
+        color: @blue-1;
+        background-color: @white;
+        border-color: @blue-1;
+    }
+    &:active, &.--active{
+        color: @blue-7;
+        border-color: @blue-7;
+    }    
+}
 
-@btn-default-ghost-color: @white;
-@btn-default-ghost-bg: transparent;
-@btn-default-ghost-border: @white;
+
+@btn-primary-color: @blue-1;
+@btn-primary-bg: @gold-4;
+.ant-btn-primary {
+    font-size: 1.6rem; 
+    display: flex;
+    align-items: center;
+    &:hover{
+        background-color: @gold-5;
+        border-color: @gold-5;
+    }
+    &:focus{
+        background-color: @white;
+        border-color: @gold-5;
+    }
+    &:disabled {
+        color: @gray-4;
+        background-color: @gray-6;
+        border-color: @gray-6;
+    }
+}
+
+@btn-ghost-color: @white;
+@btn-ghost-bg: transparent;
+@btn-ghost-border: @white;
+.ant-btn-ghost {
+    font-size: 1.6rem;
+    &:hover{
+        border-color: @gold-3;
+        color: @gold-3;
+        background-color: transparent;
+    }
+    &:focus{
+        border-color: @gold-3;
+        color: @white;
+        background-color: transparent;
+    }
+
+    &:disabled {
+        color: @gray-4;
+        border-color: @gray-6;
+        background-color: transparent;
+    }
+
+}
 
 @btn-text-hover-bg: @gray-3;
+
+// Link
+.ant-btn-link, .ant-btn-text {
+    border: none;
+
+    &:hover {
+        background-color: transparent;
+    }
+}
+
+// Tabs
+@tabs-active-color: @blue-7;
+@tabs-highlight-color: @blue-7;
+@tabs-card-active-color: @blue-7;
+@tabs-card-head-background: @gray-3;
+@tabs-ink-bar-color: @blue-7;
+@tabs-bar-margin: 0;
+.ant-tabs-top {
+    .ant-tabs-nav {
+        &::before {
+            border-color: @gray-4;
+        }
+    }    
+}
+
+.ant-tabs-card {
+    .ant-tabs-nav {
+        .ant-tabs-tab {
+            border: 1px solid @gray-4;
+        }
+    }
+
+    .ant-tabs-content {
+        height: 100%;
+    }
+}

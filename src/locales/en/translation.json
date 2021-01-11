@@ -4,6 +4,7 @@
         "files.title": "Files",
         "files": "files",
         "cases": "donors",
+        "donors.title": "Donors",
         "donors": "donors",
         "studies": "studies",
         "study": "study",
@@ -27,7 +28,7 @@
             "clear": "Clear"
         },
         "tables": {
-            "showing": "Showing <strong>${start}</strong> - <strong>${end}</strong> of <strong>${total}</strong> ${docType}",
+            "showing": "Showing <strong>{start}</strong> - <strong>{end}</strong> of <strong>{total}</strong> {docType}",
             "footer": {
                 "Show": "Show",
                 "entries": "Entries"
@@ -70,9 +71,9 @@
     },
     "cart": {
         "title": "Cart",
-        "partial": "${nbFilesInCart} out of ${nbFilesInSearchResult} files already in your cart. Click to add or remove all the files.",
+        "partial": "{nbFilesInCart} out of {nbFilesInSearchResult} files already in your cart. Click to add or remove all the files.",
         "messages": {
-            "max_items": "The cart is limited to ${max} files.",
+            "max_items": "The cart is limited to {max} files.",
             "max_items.desc": "Please narrow the search criteria or remove some files from the cart to add more."
         },
         "actions": {
@@ -389,8 +390,8 @@
             "by.facet.title": "Start searching by selecting a facet"
         },
         "tabs": {
-            "files": "Files (${count})",
-            "cases": "Donors (${count})"
+            "files": "Files ({count})",
+            "donors": "Donors ({count})"
         },
         "download": {
             "options.all.json": "All to JSON",

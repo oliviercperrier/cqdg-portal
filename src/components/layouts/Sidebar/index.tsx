@@ -1,26 +1,75 @@
 import React, { useState } from 'react';
-import { AiOutlineMenuFold } from 'react-icons/ai';
+import { AiOutlineMenu, AiOutlineMenuFold } from 'react-icons/ai';
+import { MdInsertDriveFile, MdPeople } from 'react-icons/md';
 import { useIntl } from 'react-intl';
+import { useHistory } from 'react-router-dom';
 import { Button, Divider } from 'antd';
+import { Tabs } from 'antd';
 import classNames from 'classnames/bind';
 import { t } from 'locales/utils';
-import { IChildrenProp } from 'types/generic';
+
+import { readQuery, updateQuery } from 'utils/query';
 
 import './SideBar.modules.scss';
 
-const SideBar = ({ children }: IChildrenProp): React.ReactElement => {
+export type FiltersProp = {
+    files: React.ReactElement;
+    donors: React.ReactElement;
+};
+interface ISideBarProps {
+    filters: FiltersProp;
+}
+
+const { TabPane } = Tabs;
+const tabKey = 'facetTab';
+
+const SideBar = ({ filters }: ISideBarProps): React.ReactElement => {
     const [isCollapsed, setIsCollapsed] = useState(false);
     const intl = useIntl();
+    const history = useHistory();
+
+    const onTabChange = (activeKey: string) => {
+        updateQuery(tabKey, activeKey, history);
+    };
 
     const isCollapsedClassName = classNames({ 'side-panel-collapsed': isCollapsed });
     return (
         <div className={`side-panel ${isCollapsedClassName}`}>
             <div className="side-panel-header">
                 <Button onClick={() => setIsCollapsed(!isCollapsed)} type="text">
-                    <AiOutlineMenuFold />
+                    {isCollapsed ? <AiOutlineMenu /> : <AiOutlineMenuFold />}
                 </Button>
             </div>
-            <div className="side-panel-content">{children}</div>
+            <div className="side-panel-content">
+                <Tabs
+                    activeKey={readQuery(tabKey, 'files')}
+                    className="side-panel-content__tabs"
+                    onChange={onTabChange}
+                >
+                    <TabPane
+                        key="files"
+                        tab={
+                            <span>
+                                <MdInsertDriveFile className="icon" />
+                                {t('global.files.title')}
+                            </span>
+                        }
+                    >
+                        {filters.files}
+                    </TabPane>
+                    <TabPane
+                        key="donors"
+                        tab={
+                            <span>
+                                <MdPeople className="icon" />
+                                {t('global.donors.title')}
+                            </span>
+                        }
+                    >
+                        {filters.donors}
+                    </TabPane>
+                </Tabs>
+            </div>
             <div className="side-panel-footer">
                 <Button className="link" href="mailto:support@cqdg.ca" type="link">
                     {t('short_footer.info')}

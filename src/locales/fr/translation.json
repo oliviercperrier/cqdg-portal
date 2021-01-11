@@ -4,6 +4,7 @@
         "files.title": "Fichiers",
         "files": "fichiers",
         "cases": "donneurs",
+        "donors.title": "Donneurs",
         "donors": "donneurs",
         "studies": "études",
         "study": "étude",
@@ -27,7 +28,7 @@
             "clear": "Enlever"
         },
         "tables": {
-            "showing": "Affichage de <strong>${start}</strong> - <strong>${end}</strong> ${docType} sur <strong>${total}</strong>",
+            "showing": "Affichage de <strong>{start}</strong> - <strong>{end}</strong> {docType} sur <strong>{total}</strong>",
             "footer": {
                 "Show": "Show",
                 "entries": "Entrées"
@@ -71,9 +72,9 @@
     },
     "cart": {
         "title": "Panier",
-        "partial": "${nbFilesInCart} fichier sur ${nbFilesInSearchResult} déjà dans votre panier. Cliquer pour tout ajouter ou tout supprimer.",
+        "partial": "{nbFilesInCart} fichier sur {nbFilesInSearchResult} déjà dans votre panier. Cliquer pour tout ajouter ou tout supprimer.",
         "messages": {
-            "max_items": "Le panier est limité à ${max} fichiers.",
+            "max_items": "Le panier est limité à {max} fichiers.",
             "max_items.desc": "Veuillez affiner les critères de recherche ou supprimer certains fichiers du panier pour en ajouter d'autres."
         },
         "actions": {
@@ -390,8 +391,8 @@
             "by.facet.title": "Démarrer la recherche en selectionant une facette"
         },
         "tabs": {
-            "files": "Fichiers (${count})",
-            "cases": "Donneurs (${count})"
+            "files": "Fichiers ({count})",
+            "donors": "Donneurs ({count})"
         },
         "download": {
             "options.all.json": "Tout en JSON",
