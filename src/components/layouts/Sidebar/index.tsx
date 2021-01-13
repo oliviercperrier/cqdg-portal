@@ -8,9 +8,10 @@ import { Tabs } from 'antd';
 import classNames from 'classnames/bind';
 import { t } from 'locales/utils';
 
+import ScrollView from 'components/layouts/ScrollView';
 import { readQuery, updateQuery } from 'utils/query';
 
-import './SideBar.modules.scss';
+import './SideBar.scss';
 
 export type FiltersProp = {
     files: React.ReactElement;
@@ -43,30 +44,34 @@ const SideBar = ({ filters }: ISideBarProps): React.ReactElement => {
             <div className="side-panel-content">
                 <Tabs
                     activeKey={readQuery(tabKey, 'files')}
-                    className="side-panel-content__tabs"
+                    className="side-panel-content__panes"
                     onChange={onTabChange}
                 >
                     <TabPane
                         key="files"
                         tab={
-                            <span>
+                            <div className="side-panel-content__panes__tab">
                                 <MdInsertDriveFile className="icon" />
                                 {t('global.files.title')}
-                            </span>
+                            </div>
                         }
                     >
-                        {filters.files}
+                        <ScrollView className="side-panel-content__panes__content" vertical>
+                            {filters.files}
+                        </ScrollView>
                     </TabPane>
                     <TabPane
                         key="donors"
                         tab={
-                            <span>
+                            <div className="side-panel-content__panes__tab">
                                 <MdPeople className="icon" />
                                 {t('global.donors.title')}
-                            </span>
+                            </div>
                         }
                     >
-                        {filters.donors}
+                        <ScrollView className="side-panel-content__panes__content" vertical>
+                            {filters.donors}
+                        </ScrollView>
                     </TabPane>
                 </Tabs>
             </div>

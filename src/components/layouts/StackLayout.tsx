@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 
-import './StackLayout.modules.scss';
+import './StackLayout.scss';
 
 export enum StackOrientation {
     Vertical = 'vertical',
@@ -20,9 +20,11 @@ interface IStackLayout extends IExtraProps {
     children: React.ReactNode;
     className?: string;
     grow?: boolean;
+    center?: boolean;
 }
 
 const StackLayout = ({
+    center,
     children,
     className,
     grow = false,
@@ -45,7 +47,9 @@ const StackLayout = ({
 
     return (
         <div
-            className={`fui-stack-layout ${definedOrientation} ${grow ? 'grow' : ''} ${className || ''}`}
+            className={`fui-stack-layout ${definedOrientation} ${grow ? 'grow' : ''} ${center ? 'center' : ''} ${
+                className || ''
+            }`}
             {...extraProps}
         >
             {children}

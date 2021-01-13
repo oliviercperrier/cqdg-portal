@@ -391,7 +391,8 @@
         },
         "tabs": {
             "files": "Files ({count})",
-            "donors": "Donors ({count})"
+            "donors": "Donors ({count})",
+            "summary": "Summary"
         },
         "download": {
             "options.all.json": "All to JSON",

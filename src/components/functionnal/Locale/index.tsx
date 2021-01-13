@@ -5,7 +5,7 @@ import { defaultLocale } from 'providers/Intl';
 import { setlocale } from 'store/cache/locales';
 import { GET_LOCALE } from 'store/queries/locales';
 
-import './Locale.modules.scss';
+import './Locale.scss';
 
 const availableLocales = ['fr', 'en'];
 const localesMapping: Record<string, string> = {

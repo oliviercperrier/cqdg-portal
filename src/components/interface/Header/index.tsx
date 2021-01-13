@@ -7,12 +7,12 @@ import { t } from 'locales/utils';
 import { isAuthenticated } from 'providers/Keycloak/keycloak';
 import { IClassNameProp } from 'types/generic';
 
-import DatabaseIcon from 'components/Icon/Database';
-import ExternalIcon from 'components/Icon/ExternalLink';
-import StorageIcon from 'components/Icon/Storage';
-import Locale from 'components/Locale';
+import Locale from 'components/functionnal/Locale';
+import DatabaseIcon from 'components/interface/Icon/Database';
+import ExternalIcon from 'components/interface/Icon/ExternalLink';
+import StorageIcon from 'components/interface/Icon/Storage';
 
-import './Header.modules.scss';
+import './Header.scss';
 
 const Header = ({ className = '' }: IClassNameProp): React.ReactElement => {
     const location = useLocation();

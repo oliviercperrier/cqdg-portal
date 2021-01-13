@@ -1,0 +1,8 @@
+@import '../../style/themes/default/colors';
+
+.bordered-container {
+  padding: 2.4rem;
+  background: $white;
+  border: 1px solid $gray-4;
+  border-radius: 2px;
+}

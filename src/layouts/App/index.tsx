@@ -1,10 +1,10 @@
 import React from 'react';
 import { IChildrenProp } from 'types/generic';
 
-import Header from 'components/Header';
+import Header from 'components/interface/Header';
 import StackLayout from 'components/layouts/StackLayout';
 
-import './Layout.modules.scss';
+import './Layout.scss';
 
 const Layout = ({ children }: IChildrenProp): React.ReactElement => (
     <StackLayout className="layout-app" grow vertical>

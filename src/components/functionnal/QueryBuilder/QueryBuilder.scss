@@ -1,8 +1,14 @@
-@import '../../style/themes/default/colors';
+@import '../../../style/themes/default/colors';
 
 .query-builder {
     padding: 1.8rem 1.4rem;
     margin-bottom: 1.4rem;
+    border-radius: 2px;
+
+    .wrapper-builder{
+        display: flex;
+        align-items: flex-start;
+    }
 
     &--with-filters {
         background: $white;
@@ -14,11 +20,6 @@
         .wrapper-builder {
             align-items: center;
         }
-    }
-
-    .wrapper-builder{
-        display: flex;
-        align-items: flex-start;
     }
 
     .wrapper-filters{

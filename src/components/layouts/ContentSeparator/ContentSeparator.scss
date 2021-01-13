@@ -1,0 +1,10 @@
+@import '../../../style/themes/default/colors';
+
+.separator-container {
+    .divider {
+        margin: 0 1.8rem;
+        height: 1.9rem;
+        top: 0;
+        border-color: $gray-4;
+    }
+}

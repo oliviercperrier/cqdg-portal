@@ -24816,6 +24816,9 @@ div.ant-typography-edit-content.ant-typography-rtl {
 .ant-tabs-top .ant-tabs-nav::before {
   border-color: #D8E1EB;
 }
+.ant-tabs-top .ant-tabs-nav .ant-tabs-tab:hover {
+  color: #008FC7;
+}
 .ant-tabs-card .ant-tabs-nav .ant-tabs-tab {
   border: 1px solid #D8E1EB;
 }

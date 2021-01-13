@@ -11,4 +11,8 @@
     &.grow {
         flex-grow: 1;
     }
+
+    &.center {
+        align-items: center;
+    }
 }

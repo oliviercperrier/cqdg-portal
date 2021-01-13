@@ -2,7 +2,7 @@ import React, { ReactElement } from 'react';
 import { AiOutlineCloseCircle, AiOutlineLeft } from 'react-icons/ai';
 import { t } from 'locales/utils';
 
-import './QueryBuilder.modules.scss';
+import './QueryBuilder.scss';
 
 const QueryBuilder = (): ReactElement => {
     const hasCurrentFilters = [].length > 0;

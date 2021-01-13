@@ -2,7 +2,7 @@ import React from 'react';
 import { t } from 'locales/utils';
 import { IClassNameProp } from 'types/generic';
 
-import './CountWithIcon.modules.scss';
+import './CountWithIcon.scss';
 
 type CountWithIconTypeEnum = 'inline' | 'stack';
 

@@ -5,23 +5,29 @@ import { useQuery } from '@apollo/client';
 import { Tabs } from 'antd';
 import QueryLayout from 'layouts/Query';
 import { t } from 'locales/utils';
-import { GET_FILES } from 'store/queries/fileRepo';
+import get from 'lodash/get';
+import FilesTable from 'pages/Files/table/FilesTable';
+import { FILE_PAGE_METADATA } from 'store/queries/files';
 
+import QueryBuilder from 'components/functionnal/QueryBuilder';
 import StackLayout from 'components/layouts/StackLayout';
-import QueryBuilder from 'components/QueryBuilder';
 import { readQuery, updateQuery } from 'utils/query';
 
-import './FileRepo.modules.scss';
+import './Files.scss';
 
 const { TabPane } = Tabs;
 const tabKey = 'searchTableTab';
 const FileRepo = () => {
     const history = useHistory();
-    const { data, error, loading } = useQuery<any>(GET_FILES);
+    const { data, error, loading } = useQuery<any>(FILE_PAGE_METADATA);
+    //console.log(data, error, loading);
 
     const onTabChange = (activeKey: string) => {
         updateQuery(tabKey, activeKey, history);
     };
+
+    const filesTotal = get(data, 'File.hits.total', 0);
+    const donorsTotal = get(data, 'Donor.hits.total', 0);
 
     return (
         <QueryLayout
@@ -31,7 +37,6 @@ const FileRepo = () => {
             <StackLayout grow vertical>
                 <QueryBuilder />
                 <StackLayout grow vertical>
-                    <div className="file-repo__graph-content">graphs</div>
                     <StackLayout grow vertical>
                         <Tabs
                             activeKey={readQuery(tabKey, 'files')}
@@ -43,28 +48,37 @@ const FileRepo = () => {
                                 className="tabs-container__panes"
                                 key="files"
                                 tab={
-                                    <span>
+                                    <div className="tabs-container__panes__tab">
                                         <MdInsertDriveFile className="icon" />
-                                        {t('repo.tabs.files', { count: 0 })}
-                                    </span>
+                                        {t('repo.tabs.files', { count: filesTotal })}
+                                    </div>
                                 }
                             >
                                 <StackLayout grow vertical>
-                                    content
+                                    <FilesTable />
                                 </StackLayout>
                             </TabPane>
                             <TabPane
                                 className="tabs-container__panes"
                                 key="donors"
                                 tab={
-                                    <span>
+                                    <div className="tabs-container__panes__tab">
                                         <MdPeople className="icon" />
-                                        {t('repo.tabs.donors', { count: 0 })}
-                                    </span>
+                                        {t('repo.tabs.donors', { count: donorsTotal })}
+                                    </div>
                                 }
                             >
                                 <StackLayout grow vertical>
                                     content 2
+                                </StackLayout>
+                            </TabPane>
+                            <TabPane
+                                className="tabs-container__panes"
+                                key="summary"
+                                tab={<div className="tabs-container__panes__tab">{t('repo.tabs.summary')}</div>}
+                            >
+                                <StackLayout grow vertical>
+                                    content 3
                                 </StackLayout>
                             </TabPane>
                         </Tabs>

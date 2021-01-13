@@ -1,7 +1,7 @@
 import React from 'react';
 import { IBasicProp } from 'types/generic';
 
-import './CardContainerNotched.modules.scss';
+import './CardContainerNotched.scss';
 
 type ContainerTypeEnum = 'none' | 'header' | 'hover' | 'hovered';
 

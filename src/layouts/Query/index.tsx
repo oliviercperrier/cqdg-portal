@@ -4,7 +4,7 @@ import { IBasicProp } from 'types/generic';
 import SideBar, { FiltersProp } from 'components/layouts/Sidebar';
 import StackLayout from 'components/layouts/StackLayout';
 
-import './Layout.modules.scss';
+import './Layout.scss';
 
 interface QueryLayoutProps extends IBasicProp {
     filters: FiltersProp;

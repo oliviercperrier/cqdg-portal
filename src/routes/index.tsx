@@ -1,11 +1,11 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import FileRepoPage from 'pages/FileRepo';
+import FilesPage from 'pages/Files';
 import HomePage from 'pages/Home';
 import LoginPage from 'pages/Login';
-import StudyPage from 'pages/Study';
+import StudiesPage from 'pages/Studies';
 
-import Head from 'components/Seo/Head';
+import Head from 'components/seo/Head';
 
 import AuthRoute from './AuthRoute';
 import PublicRoute from './PublicRoute';
@@ -20,8 +20,8 @@ export default (): React.ReactElement => (
             <Route exact path="/login">
                 <LoginPage />
             </Route>
-            <AuthRoute component={FileRepoPage} exact path="/files" />
-            <AuthRoute component={StudyPage} exact path="/studies" />
+            <AuthRoute component={FilesPage} exact path="/files" />
+            <AuthRoute component={StudiesPage} exact path="/studies" />
         </Switch>
     </Router>
 );

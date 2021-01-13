@@ -9,23 +9,23 @@ import { t } from 'locales/utils';
 import { isAuthenticated } from 'providers/Keycloak/keycloak';
 import { getHomeStats } from 'services/api';
 
-import CardContainerNotched from 'components/Card/CardContainerNotched';
-import CardContent from 'components/Card/CardContent';
-import CountWithIcon from 'components/CountWithIcon';
-import Footer from 'components/Footer';
-import CloudIcon from 'components/Icon/Cloud';
-import CloudStorageIcon from 'components/Icon/CloudStorage';
-import DataIcon from 'components/Icon/Data';
-import DatabaseIcon from 'components/Icon/Database';
-import DocIcon from 'components/Icon/Doc';
-import DonorIcon from 'components/Icon/Donor';
-import ExomeIcon from 'components/Icon/Exome';
-import FileIcon from 'components/Icon/File';
-import GenomeIcon from 'components/Icon/Genome';
-import StorageIcon from 'components/Icon/Storage';
-import StudyIcon from 'components/Icon/Study';
+import Footer from 'components/interface/Footer';
+import CloudIcon from 'components/interface/Icon/Cloud';
+import CloudStorageIcon from 'components/interface/Icon/CloudStorage';
+import DataIcon from 'components/interface/Icon/Data';
+import DatabaseIcon from 'components/interface/Icon/Database';
+import DocIcon from 'components/interface/Icon/Doc';
+import DonorIcon from 'components/interface/Icon/Donor';
+import ExomeIcon from 'components/interface/Icon/Exome';
+import FileIcon from 'components/interface/Icon/File';
+import GenomeIcon from 'components/interface/Icon/Genome';
+import StorageIcon from 'components/interface/Icon/Storage';
+import StudyIcon from 'components/interface/Icon/Study';
+import CardContainerNotched from 'components/layouts/Card/CardContainerNotched';
+import CardContent from 'components/layouts/Card/CardContent';
+import CountWithIcon from 'components/layouts/CountWithIcon';
 
-import './Home.modules.scss';
+import './Home.scss';
 
 const Home = (): React.ReactElement => {
     const [data, setData] = useState([]);

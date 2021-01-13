@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './ScrollView.modules.scss';
+import './ScrollView.scss';
 
 export enum StackOrientation {
     Vertical = 'vertical',
@@ -12,7 +12,7 @@ interface IScrollView {
     vertical?: boolean;
     horizontal?: boolean;
     children: React.ReactNode;
-    className: string;
+    className?: string;
 }
 
 const ScrollView = ({ children, className, horizontal, orientation, vertical }: IScrollView): React.ReactElement => {
