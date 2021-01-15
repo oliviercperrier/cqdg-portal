@@ -1,5 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
+import cx from 'classnames';
 
 import './StackLayout.scss';
 
@@ -21,6 +22,7 @@ interface IStackLayout extends IExtraProps {
     className?: string;
     grow?: boolean;
     center?: boolean;
+    noScroll?: boolean;
 }
 
 const StackLayout = ({
@@ -29,6 +31,7 @@ const StackLayout = ({
     className,
     grow = false,
     horizontal,
+    noScroll = false,
     onClick,
     orientation,
     vertical,
@@ -45,13 +48,10 @@ const StackLayout = ({
         extraProps.onKeyDown = onClick;
     }
 
+    const compoundCN = cx(className, { center, grow, noScroll });
+
     return (
-        <div
-            className={`fui-stack-layout ${definedOrientation} ${grow ? 'grow' : ''} ${center ? 'center' : ''} ${
-                className || ''
-            }`}
-            {...extraProps}
-        >
+        <div className={`fui-stack-layout ${definedOrientation} ${compoundCN}`} {...extraProps}>
             {children}
         </div>
     );

@@ -1,0 +1,11 @@
+@import '../../../style/themes/default/colors';
+
+.files-table {
+    .files-table-lock {
+        color: $red-6;
+    }
+
+    .files-table-lock-open {
+        color: $lime-7;
+    }
+}

@@ -9,7 +9,7 @@ import classNames from 'classnames/bind';
 import { t } from 'locales/utils';
 
 import ScrollView from 'components/layouts/ScrollView';
-import { readQuery, updateQuery } from 'utils/query';
+import { readQueryParam, updateQueryParam } from 'utils/url/query';
 
 import './SideBar.scss';
 
@@ -30,7 +30,7 @@ const SideBar = ({ filters }: ISideBarProps): React.ReactElement => {
     const history = useHistory();
 
     const onTabChange = (activeKey: string) => {
-        updateQuery(tabKey, activeKey, history);
+        updateQueryParam(tabKey, activeKey, history);
     };
 
     const isCollapsedClassName = classNames({ 'side-panel-collapsed': isCollapsed });
@@ -43,7 +43,7 @@ const SideBar = ({ filters }: ISideBarProps): React.ReactElement => {
             </div>
             <div className="side-panel-content">
                 <Tabs
-                    activeKey={readQuery(tabKey, 'files')}
+                    activeKey={readQueryParam(tabKey, 'files')}
                     className="side-panel-content__panes"
                     onChange={onTabChange}
                 >

@@ -195,7 +195,7 @@
         "experimental_strategy": "Stratégie expérimentale",
         "platform": "Platforme",
         "files.count": "Nombre de fichiers",
-        "cases.hits.edges.submitter_donor_id": "Nombre de donneurs",
+        "donors": "Nombre de donneurs",
         "submitter_donor_id": "ID du donneur",
         "file": "Fichier",
         "range": {

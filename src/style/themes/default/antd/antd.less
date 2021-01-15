@@ -1,23 +1,24 @@
 @import '../../../../../node_modules/antd/dist/antd.less';
 @import '_colors.less';
 
-@text-color: @blue-1;
+@text-color: @gray-8;
+@font-size-base: 1.4rem;
 
 // Buttons
-@btn-default-color: @blue-1;
+@btn-default-color: @gray-8;
 @btn-default-bg: @gray-2;
 @btn-default-border: @gray-4;
 
 .ant-btn {
     &:hover{
-        color: @blue-1;
+        color: @gray-8;
         background-color: @white;
         border-color: @gray-4;
     }
     &:focus{
-        color: @blue-1;
+        color: @gray-8;
         background-color: @white;
-        border-color: @blue-1;
+        border-color: @gray-8;
     }
     &:active, &.--active{
         color: @blue-7;
@@ -26,7 +27,7 @@
 }
 
 
-@btn-primary-color: @blue-1;
+@btn-primary-color: @gray-8;
 @btn-primary-bg: @gold-4;
 .ant-btn-primary {
     font-size: 1.6rem; 
@@ -111,4 +112,66 @@
     .ant-tabs-content {
         height: 100%;
     }
+}
+
+// Table
+@table-header-bg: @gray-3;
+@table-header-color: @gray-9;
+@table-header-sort-bg: @gray-6;
+@table-header-sort-active-bg:@gray-4;
+
+.ant-table-thead {
+    tr th {
+        font-weight: 600;
+
+        &.ant-table-column-sort {
+            background: @gray-3;
+        }
+    }
+
+    th.numerical {
+        text-align: right;
+    }
+}
+
+.ant-table-tbody {
+    td.numerical {
+        text-align: right;
+    }
+
+    > tr.ant-table-row.odd{
+    
+        &:hover > td {
+        background: @white;
+
+            &.ant-table-column-sort {
+                background: @gray-3;
+            }
+        }
+
+        > td {
+            &.ant-table-column-sort {
+                background: @gray-3;
+            }  
+        }
+    }
+    > tr.ant-table-row.even{
+        &:hover > td {
+            background: @gray-2;
+            &.ant-table-column-sort {
+                background: @gray-3;
+            }
+        }
+        > td {
+            background: @gray-2;
+            &.ant-table-column-sort {
+                background: @gray-3;
+            }
+        }
+    }
+}
+
+// Menu
+.ant-dropdown-menu-item:hover, .ant-dropdown-menu-submenu-title:hover {
+    background: @gray-3;
 }

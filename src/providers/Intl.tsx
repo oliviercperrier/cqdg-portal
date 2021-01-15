@@ -5,7 +5,15 @@ import translations from 'locales';
 import { IProvider } from 'providers';
 import { GET_LOCALE } from 'store/queries/locales';
 
+import { IS_DEV_ENV } from 'config/constants';
+
 export const defaultLocale = 'en';
+
+const intlErrorHandler = (error: any) => {
+    if (IS_DEV_ENV) {
+        //console.log(error);
+    }
+};
 
 export default ({ children }: IProvider): ReactElement => {
     const {
@@ -14,7 +22,12 @@ export default ({ children }: IProvider): ReactElement => {
 
     const selectedTranslation = translations[locale];
     return (
-        <IntlProvider defaultLocale={defaultLocale} locale={locale} messages={selectedTranslation}>
+        <IntlProvider
+            defaultLocale={defaultLocale}
+            locale={locale}
+            messages={selectedTranslation}
+            onError={intlErrorHandler}
+        >
             {children}
         </IntlProvider>
     );

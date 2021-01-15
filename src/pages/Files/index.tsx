@@ -11,7 +11,7 @@ import { FILE_PAGE_METADATA } from 'store/queries/files';
 
 import QueryBuilder from 'components/functionnal/QueryBuilder';
 import StackLayout from 'components/layouts/StackLayout';
-import { readQuery, updateQuery } from 'utils/query';
+import { readQueryParam, updateQueryParam } from 'utils/url/query';
 
 import './Files.scss';
 
@@ -23,7 +23,7 @@ const FileRepo = () => {
     //console.log(data, error, loading);
 
     const onTabChange = (activeKey: string) => {
-        updateQuery(tabKey, activeKey, history);
+        updateQueryParam(tabKey, activeKey, history);
     };
 
     const filesTotal = get(data, 'File.hits.total', 0);
@@ -34,12 +34,12 @@ const FileRepo = () => {
             className="file-repo"
             filters={{ donors: <div>donor filters</div>, files: <div>file filters</div> }}
         >
-            <StackLayout grow vertical>
+            <StackLayout grow noScroll vertical>
                 <QueryBuilder />
-                <StackLayout grow vertical>
-                    <StackLayout grow vertical>
+                <StackLayout grow noScroll vertical>
+                    <StackLayout grow noScroll vertical>
                         <Tabs
-                            activeKey={readQuery(tabKey, 'files')}
+                            activeKey={readQueryParam(tabKey, 'files')}
                             className="tabs-container"
                             onChange={onTabChange}
                             type="card"
@@ -54,7 +54,7 @@ const FileRepo = () => {
                                     </div>
                                 }
                             >
-                                <StackLayout grow vertical>
+                                <StackLayout grow noScroll vertical>
                                     <FilesTable />
                                 </StackLayout>
                             </TabPane>

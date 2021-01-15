@@ -8,6 +8,7 @@
         height: 100%;
 
         &__panes {
+            display: flex;
             padding: 2.4rem;
             background: $white;
             border-left: 1px solid $gray-4;

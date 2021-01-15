@@ -4,15 +4,15 @@ import { IChildrenProp } from 'types/generic';
 
 import StackLayout from 'components/layouts/StackLayout';
 
-import './ContentSeparator.scss';
+import styles from './ContentSeparator.module.scss';
 const ContentSeparator = ({ children }: IChildrenProp): React.ReactElement => {
     const total = React.Children.count(children);
     return (
-        <StackLayout center className="separator-container">
+        <StackLayout center className={styles.container}>
             {React.Children.map(children, (child, i) =>
                 total - 1 > i ? (
                     <>
-                        {child} <Divider className="divider" type="vertical" />
+                        {child} <Divider className={styles.divider} type="vertical" />
                     </>
                 ) : (
                     child

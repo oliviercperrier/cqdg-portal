@@ -11,9 +11,9 @@ interface QueryLayoutProps extends IBasicProp {
 }
 
 const Layout = ({ children, className = '', filters }: QueryLayoutProps): React.ReactElement => (
-    <StackLayout className={`layout-query ${className}`}>
+    <StackLayout className={`layout-query ${className}`} noScroll>
         <SideBar filters={filters} />
-        <StackLayout className="layout-query__content" grow vertical>
+        <StackLayout className="layout-query__content" grow noScroll vertical>
             {children}
         </StackLayout>
     </StackLayout>

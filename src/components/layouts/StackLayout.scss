@@ -15,4 +15,8 @@
     &.center {
         align-items: center;
     }
+
+    &.noScroll {
+        overflow: hidden;
+    }
 }

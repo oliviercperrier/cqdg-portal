@@ -11,7 +11,7 @@ interface ICountWithIconProps extends IClassNameProp {
     iconClassName?: string;
     type?: CountWithIconTypeEnum;
     label: string;
-    total: number;
+    total: number | string;
 }
 
 const CountWithIcon = ({

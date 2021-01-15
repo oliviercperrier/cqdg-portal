@@ -7,7 +7,7 @@ import StackLayout from 'components/layouts/StackLayout';
 import './Layout.scss';
 
 const Layout = ({ children }: IChildrenProp): React.ReactElement => (
-    <StackLayout className="layout-app" grow vertical>
+    <StackLayout className="layout-app" grow noScroll vertical>
         <Header />
         <div className="layout-app__content">{children}</div>
     </StackLayout>

@@ -2,9 +2,9 @@ import { gql } from '@apollo/client';
 import { FILE_DATA } from 'store/queries/files';
 
 export const FILE_PAGE_DATA = gql`
-    query GetFilePageData($hitsOffset: Int, $hitsSort: [Sort], $hitsFirst: Int, $hitsFilters: JSON) {
+    query GetFilePageData($offset: Int, $sort: [Sort], $first: Int, $filters: JSON) {
         File {
-            hits(offset: $hitsOffset, sort: $hitsSort, first: $hitsFirst, filters: $hitsFilters) {
+            hits(offset: $offset, sort: $sort, first: $first, filters: $filters) {
                 total
                 edges {
                     node {
@@ -23,6 +23,13 @@ export const FILE_PAGE_DATA = gql`
                             }
                         }
                         ...FileFragment
+                    }
+                }
+            }
+            aggregations(filters: $filters) {
+                file_size {
+                    stats {
+                        sum
                     }
                 }
             }
