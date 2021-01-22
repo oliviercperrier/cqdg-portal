@@ -3,14 +3,16 @@ import { MdInsertDriveFile, MdPeople } from 'react-icons/md';
 import { useHistory } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import { Tabs } from 'antd';
-import QueryLayout from 'layouts/Query';
-import { t } from 'locales/utils';
 import get from 'lodash/get';
-import FilesTable from 'pages/Files/table/FilesTable';
-import { FILE_PAGE_METADATA } from 'store/queries/files';
 
 import QueryBuilder from 'components/functionnal/QueryBuilder';
 import StackLayout from 'components/layouts/StackLayout';
+import QueryLayout from 'layouts/Query';
+import { t } from 'locales/utils';
+import DonorsTable from 'pages/Files/tabs/DonorsTable';
+import FilesTable from 'pages/Files/tabs/FilesTable';
+import Summary from 'pages/Files/tabs/Summary';
+import { FILE_PAGE_METADATA } from 'store/queries/files/page';
 import { readQueryParam, updateQueryParam } from 'utils/url/query';
 
 import './Files.scss';
@@ -20,7 +22,6 @@ const tabKey = 'searchTableTab';
 const FileRepo = () => {
     const history = useHistory();
     const { data, error, loading } = useQuery<any>(FILE_PAGE_METADATA);
-    //console.log(data, error, loading);
 
     const onTabChange = (activeKey: string) => {
         updateQueryParam(tabKey, activeKey, history);
@@ -50,7 +51,7 @@ const FileRepo = () => {
                                 tab={
                                     <div className="tabs-container__panes__tab">
                                         <MdInsertDriveFile className="icon" />
-                                        {t('repo.tabs.files', { count: filesTotal })}
+                                        {t('repo.tabs.files', { count: filesTotal.toLocaleString() })}
                                     </div>
                                 }
                             >
@@ -64,12 +65,12 @@ const FileRepo = () => {
                                 tab={
                                     <div className="tabs-container__panes__tab">
                                         <MdPeople className="icon" />
-                                        {t('repo.tabs.donors', { count: donorsTotal })}
+                                        {t('repo.tabs.donors', { count: donorsTotal.toLocaleString() })}
                                     </div>
                                 }
                             >
                                 <StackLayout grow vertical>
-                                    content 2
+                                    <DonorsTable />
                                 </StackLayout>
                             </TabPane>
                             <TabPane
@@ -78,7 +79,7 @@ const FileRepo = () => {
                                 tab={<div className="tabs-container__panes__tab">{t('repo.tabs.summary')}</div>}
                             >
                                 <StackLayout grow vertical>
-                                    content 3
+                                    <Summary />
                                 </StackLayout>
                             </TabPane>
                         </Tabs>

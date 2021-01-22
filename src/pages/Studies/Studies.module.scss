@@ -1,0 +1,14 @@
+@import '../../style/themes/default/mixins';
+
+.container {
+    .graphs {
+        margin-bottom:1.6rem;
+    }
+
+    .layoutActions{
+
+        .buttons {
+            @include default-action-button;
+        }
+    }
+}

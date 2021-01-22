@@ -163,6 +163,8 @@
         "ethnicity": "Ethnicity"
     },
     "facet": {
+        "domain": "Domain",
+        "population": "Population",
         "study.study_id": "Study ID",
         "study.name": "Study Name",
         "study.domain": "Study Domain",

@@ -1,8 +1,9 @@
 import { gql } from '@apollo/client';
-import { FILE_DATA } from 'store/queries/files';
 
-export const FILE_PAGE_DATA = gql`
-    query GetFilePageData($offset: Int, $sort: [Sort], $first: Int, $filters: JSON) {
+import { FILE_DATA } from 'store/queries/fragments/file';
+
+export const FILE_TAB_DATA = gql`
+    query GetFileTabData($offset: Int, $sort: [Sort], $first: Int, $filters: JSON) {
         File {
             hits(offset: $offset, sort: $sort, first: $first, filters: $filters) {
                 total

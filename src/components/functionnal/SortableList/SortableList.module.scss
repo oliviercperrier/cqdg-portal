@@ -1,0 +1,28 @@
+@import '../../../style/themes/default/colors';
+
+.sortable {
+    .sortable-item {
+        display: grid;
+        grid-template-columns: [drag] auto [label] 1fr;
+        grid-gap: .5rem;
+        align-items: center;
+        margin-bottom: .4rem;
+
+
+        &:hover {
+            background: $gray-3;
+        }
+
+        .icon {
+            fill: $gray-6;
+            vertical-align: middle;
+            cursor: move;
+        }
+    }
+
+    .dragged {
+        background: $gray-3;
+        cursor: move;
+    }
+
+}

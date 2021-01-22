@@ -1,7 +1,7 @@
 import React from 'react';
-import { IChildrenProp } from 'types/generic';
 
 import Header from 'components/interface/Header';
+import { IChildrenProp } from 'types/generic';
 
 import './Layout.scss';
 

@@ -44,7 +44,7 @@ module.exports = {
                 // Packages. `react` related packages come first.
                 ['^react', '^@?\\w'],
                 // Internal packages.
-                ['^(@|@company|@ui|components|utils|config|vendored-lib)(/.*|$)'],
+                ['^(@|@company|@ui|components|utils|config|vendored-lib|layouts|pages|providers|routes|assets|locales|services|store|style|types)(/.*|$)'],
                 // Parent imports. Put `..` last.
                 ['^\\.\\.(?!/?$)', '^\\.\\./?$'],
                 // Other relative imports. Put same-folder imports and `.` last.

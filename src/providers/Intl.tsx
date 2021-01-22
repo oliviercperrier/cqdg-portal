@@ -1,11 +1,11 @@
 import React, { ReactElement } from 'react';
 import { IntlProvider } from 'react-intl';
 import { useQuery } from '@apollo/client';
+
+import { IS_DEV_ENV } from 'config/constants';
 import translations from 'locales';
 import { IProvider } from 'providers';
 import { GET_LOCALE } from 'store/queries/locales';
-
-import { IS_DEV_ENV } from 'config/constants';
 
 export const defaultLocale = 'en';
 

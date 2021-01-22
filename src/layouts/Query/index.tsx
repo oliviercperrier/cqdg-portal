@@ -1,8 +1,8 @@
 import React from 'react';
-import { IBasicProp } from 'types/generic';
 
 import SideBar, { FiltersProp } from 'components/layouts/Sidebar';
 import StackLayout from 'components/layouts/StackLayout';
+import { IBasicProp } from 'types/generic';
 
 import './Layout.scss';
 

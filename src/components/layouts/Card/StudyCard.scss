@@ -1,0 +1,51 @@
+@import '../../../style/themes/default/colors';
+.card-container {
+    h2, p {
+        color: $gray-8;
+        line-height: 2.2rem;
+        font-size: 1.4rem;
+    }
+    .action-bar {
+        margin-bottom: 1.6rem;
+    }
+
+    .card-padding {
+        padding: 0 1.6rem;
+    }
+
+    header .card-padding {
+        display: flex;
+        justify-content: space-between;
+        transform: translateY(-50%);
+    }
+
+    .header-title {
+        font-weight: 600;
+        margin: 0;
+    }
+
+    .card-footer {
+        display: flex;
+
+        > * {
+            border: 1px solid $gray-5;
+            border-radius: 2px;
+            background: $white;
+            padding: .4rem .8rem;
+
+            &:not(:last-child) {
+                margin-right: 1.6rem;
+            }
+        }
+
+        .label, .count {
+            text-transform: capitalize;
+            font-size: 1.2rem;
+        }
+
+        svg {
+            width: 36px;
+            height: 40px;
+        }
+    }
+}

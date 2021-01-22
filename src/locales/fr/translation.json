@@ -39,7 +39,7 @@
                 "sort": "Ordonner",
                 "arrange.columns": "Modifier les colonnes",
                 "filter.columns": "Filtrer les colonnes",
-                "restore.defaults": "---"
+                "restore.defaults": "Restaurer"
             },
             "columns": {}
         },
@@ -164,6 +164,8 @@
         "ethnicity": "Ethnicité"
     },
     "facet": {
+        "domain": "Domaine",
+        "population": "Population",
         "study.study_id": "ID de l'étude",
         "study.name": "Nom de l'étude",
         "study.domain": "Domaine d'étude",

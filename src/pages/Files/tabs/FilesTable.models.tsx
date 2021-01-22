@@ -1,10 +1,14 @@
 import { MdLock, MdLockOpen, MdLockOutline } from 'react-icons/md';
-import { t } from 'locales/utils';
 
+import { t } from 'locales/utils';
 import { EFileInputType, formatFileSize } from 'utils/formatFileSize';
 
 export const FilesModel = [
     {
+        hidden: false,
+        id: 'data_access',
+        initialOrder: 0,
+        movable: false,
         render: ({ node }: any) =>
             node.data_access.toLowerCase() === 'controled' ? (
                 <MdLockOutline className="files-table-locks files-table-lock" />
@@ -21,6 +25,10 @@ export const FilesModel = [
     },
     {
         dataIndex: ['node', 'study', 'hits', 'edges', '0', 'node', 'name'],
+        hidden: false,
+        id: 'study_name',
+        initialOrder: 1,
+        movable: true,
         sortDirection: ['ascend', 'descend'],
         sorter: {
             compare: (a: Record<string, any>, b: Record<string, any>): number =>
@@ -31,6 +39,10 @@ export const FilesModel = [
     },
     {
         dataIndex: ['node', 'file_name_keyword'],
+        hidden: true,
+        id: 'file_name_keyword',
+        initialOrder: 2,
+        movable: true,
         sortDirection: ['ascend', 'descend'],
         sorter: {
             compare: (a: Record<string, any>, b: Record<string, any>): number =>
@@ -41,6 +53,10 @@ export const FilesModel = [
     },
     {
         dataIndex: ['node', 'data_category'],
+        hidden: false,
+        id: 'data_category',
+        initialOrder: 3,
+        movable: true,
         sortDirection: ['ascend', 'descend'],
         sorter: {
             compare: (a: Record<string, any>, b: Record<string, any>): number =>
@@ -51,6 +67,10 @@ export const FilesModel = [
     },
     {
         dataIndex: ['node', 'file_format'],
+        hidden: false,
+        id: 'file_format',
+        initialOrder: 4,
+        movable: true,
         sortDirection: ['ascend', 'descend'],
         sorter: {
             compare: (a: Record<string, any>, b: Record<string, any>): number =>
@@ -60,28 +80,52 @@ export const FilesModel = [
         title: t('facet.file_format'),
     },
     {
+        hidden: true,
+        id: 'is_harmonized',
+        initialOrder: 5,
+        movable: true,
         render: ({ node }: any) => (!!node.is_harmonized ? 'yes' : 'no'),
         title: t('facet.is_harmonized'),
     },
     {
         dataIndex: ['node', 'data_type'],
+        hidden: true,
+        id: 'data_type',
+        initialOrder: 6,
+        movable: true,
         title: t('facet.data_type'),
     },
     {
         dataIndex: ['node', 'experimental_strategy'],
+        hidden: true,
+        id: 'experimental_strategy',
+        initialOrder: 7,
+        movable: true,
         title: t('facet.experimental_strategy'),
     },
     {
         dataIndex: ['node', 'platform'],
+        hidden: true,
+        id: 'platform',
+        initialOrder: 8,
+        movable: true,
         title: t('facet.platform'),
     },
     {
         className: 'numerical',
         dataIndex: ['node', 'donors', 'hits', 'total'],
+        hidden: false,
+        id: 'number_of_donors',
+        initialOrder: 9,
+        movable: true,
         title: t('facet.donors'),
     },
     {
         className: 'numerical',
+        hidden: false,
+        id: 'file_size',
+        initialOrder: 10,
+        movable: true,
         render: ({ node }: any) => formatFileSize(node.file_size, {}, EFileInputType.MB),
         sortDirection: ['ascend', 'descend'],
         sorter: {

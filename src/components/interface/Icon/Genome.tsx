@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { IClassNameProp } from 'types/generic';
 
 const Genome = ({ className }: IClassNameProp): React.ReactElement => (

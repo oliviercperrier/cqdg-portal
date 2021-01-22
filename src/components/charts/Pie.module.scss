@@ -1,0 +1,10 @@
+@import '../../style/themes/default/colors';
+
+.container {
+    align-items: center;
+
+    .title {
+        color: $gray-8;
+        font-size: 1.2rem;
+    }
+}

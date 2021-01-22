@@ -1,31 +1,23 @@
-@import '../../../style/themes/default/colors';
+@import '../../../style/themes/default/mixins';
 
 .container {
     .button {
-        padding: 0;
-        height: 2.4rem;
-        width: 2.4rem;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        background: $white;
+        @include default-action-button;
+    }
 
-        &:hover {
-            border-color: $blue-8;
-            color: $blue-8;
-        }
-        &:focus {
-            border-color: $blue-9;
-            color: $blue-9;
-        }
+}
 
-        > svg {
-            width: 1.6rem;
-            height: 1.6rem;
-        }
+.restoreDefault[type=button] {
+    text-decoration: underline;
+    font-size: 1.2rem;
+    color: $blue-7;
 
-        &:not(:last-child) {
-            margin-right: .4rem;
-        }
+    &:hover {
+        color: $blue-7;
+    }
+    &:active, &:focus {
+        color: $blue-7;
     }
 }
+
+

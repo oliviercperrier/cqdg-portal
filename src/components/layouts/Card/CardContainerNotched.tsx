@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { IBasicProp } from 'types/generic';
 
 import './CardContainerNotched.scss';

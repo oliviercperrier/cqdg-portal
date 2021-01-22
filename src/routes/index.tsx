@@ -1,11 +1,11 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+
+import Head from 'components/seo/Head';
 import FilesPage from 'pages/Files';
 import HomePage from 'pages/Home';
 import LoginPage from 'pages/Login';
 import StudiesPage from 'pages/Studies';
-
-import Head from 'components/seo/Head';
 
 import AuthRoute from './AuthRoute';
 import PublicRoute from './PublicRoute';

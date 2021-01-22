@@ -1,6 +1,7 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
 import { Button } from 'antd';
+
 import { defaultLocale } from 'providers/Intl';
 import { setlocale } from 'store/cache/locales';
 import { GET_LOCALE } from 'store/queries/locales';

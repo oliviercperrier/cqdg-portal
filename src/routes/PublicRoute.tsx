@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, RouteProps } from 'react-router-dom';
+
 import PublicLayout from 'layouts/Public';
 
 const PublicRoute = ({ children, ...rest }: RouteProps): React.ReactElement => (

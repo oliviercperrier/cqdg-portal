@@ -39,3 +39,21 @@
         text-decoration: underline;
     }
 }
+
+@mixin default-action-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.4rem;
+    height: 2.4rem;
+    padding: 0;
+
+    &:not(:last-child) {
+        margin-right: .4rem;
+    }
+
+    > svg {
+        width: 1.6rem;
+        height: 1.6rem;
+    }
+}

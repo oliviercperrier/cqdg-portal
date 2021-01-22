@@ -5,9 +5,6 @@ import { Bar } from '@nivo/bar';
 import { Pie } from '@nivo/pie';
 import { useKeycloak } from '@react-keycloak/web';
 import { Button } from 'antd';
-import { t } from 'locales/utils';
-import { isAuthenticated } from 'providers/Keycloak/keycloak';
-import { getHomeStats } from 'services/api';
 
 import Footer from 'components/interface/Footer';
 import CloudIcon from 'components/interface/Icon/Cloud';
@@ -24,6 +21,9 @@ import StudyIcon from 'components/interface/Icon/Study';
 import CardContainerNotched from 'components/layouts/Card/CardContainerNotched';
 import CardContent from 'components/layouts/Card/CardContent';
 import CountWithIcon from 'components/layouts/CountWithIcon';
+import { t } from 'locales/utils';
+import { isAuthenticated } from 'providers/Keycloak/keycloak';
+import { getHomeStats } from 'services/api';
 
 import './Home.scss';
 
@@ -51,10 +51,12 @@ const Home = (): React.ReactElement => {
                             <div className="buttons">
                                 {!isAuthenticated(keycloak) ? (
                                     <>
-                                        <Button className="buttons__login" type="primary">
-                                            {t('home.hero.buttons.connection')}{' '}
-                                            <AiOutlineArrowRight className="buttons__login__icon" />
-                                        </Button>
+                                        <Link to="/login">
+                                            <Button className="buttons__login" type="primary">
+                                                {t('home.hero.buttons.connection')}{' '}
+                                                <AiOutlineArrowRight className="buttons__login__icon" />
+                                            </Button>
+                                        </Link>
                                         <Button className="buttons__create" type="ghost">
                                             {t('home.hero.buttons.account')}
                                         </Button>

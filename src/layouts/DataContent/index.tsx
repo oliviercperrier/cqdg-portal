@@ -1,7 +1,7 @@
 import React from 'react';
-import { IChildrenProp } from 'types/generic';
 
 import StackLayout from 'components/layouts/StackLayout';
+import { IChildrenProp } from 'types/generic';
 
 import './DataContent.scss';
 

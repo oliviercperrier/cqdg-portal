@@ -1,5 +1,6 @@
 import React from 'react';
 import debounce from 'lodash/debounce';
+
 import { IBasicProp } from 'types/generic';
 
 import './ScrollableTable.scss';

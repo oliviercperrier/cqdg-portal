@@ -6,9 +6,9 @@ import { useHistory } from 'react-router-dom';
 import { Button, Divider } from 'antd';
 import { Tabs } from 'antd';
 import classNames from 'classnames/bind';
-import { t } from 'locales/utils';
 
 import ScrollView from 'components/layouts/ScrollView';
+import { t } from 'locales/utils';
 import { readQueryParam, updateQueryParam } from 'utils/url/query';
 
 import './SideBar.scss';

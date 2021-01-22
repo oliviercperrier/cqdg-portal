@@ -2,14 +2,16 @@ import React from 'react';
 import { MdInsertDriveFile, MdSave } from 'react-icons/md';
 import { useQuery } from '@apollo/client';
 import { Table } from 'antd';
-import DataLayout from 'layouts/DataContent';
 import get from 'lodash/get';
-import { FILE_PAGE_DATA } from 'store/queries/files/table';
 
 import ScrollableTable from 'components/functionnal/ScrollableTable';
 import TableActions from 'components/functionnal/TableActions';
 import ContentSeparator from 'components/layouts/ContentSeparator';
 import CountWithIcon from 'components/layouts/CountWithIcon';
+import DataLayout from 'layouts/DataContent';
+import { setTableColumn } from 'store/cache/tableColumns';
+import { FILE_TAB_DATA } from 'store/queries/files/fileTabs';
+import { GET_TABLE_COLUMNS } from 'store/queries/tables';
 import { EFileInputType, formatFileSize } from 'utils/formatFileSize';
 import { Hits } from 'utils/graphql/query';
 
@@ -17,10 +19,24 @@ import { FilesModel } from './FilesTable.models';
 
 import './FilesTable.scss';
 
-const FilesTable = () => {
-    const { data, error, loading } = useQuery<any>(FILE_PAGE_DATA, {
+export interface ITableColumnItem {
+    hidden: boolean;
+    id: string;
+    initialOrder: number;
+    movable: boolean;
+    title: React.ReactNode;
+}
+
+const tableKey = 'files-tabs-file';
+const FilesTable = (): React.ReactElement => {
+    const { data, loading } = useQuery<any>(FILE_TAB_DATA, {
         variables: { first: 20, offset: 0 },
     });
+
+    const { data: tablesData } = useQuery<any>(GET_TABLE_COLUMNS, {
+        variables: { default: FilesModel, key: tableKey },
+    });
+
     const filesData = get(data, `File.${Hits.COLLECTION}`, []);
     const dataSource = filesData.map((data: any) => ({
         ...data,
@@ -31,7 +47,18 @@ const FilesTable = () => {
     const fileSizes = formatFileSize(totalSizes, { output: 'object' }, EFileInputType.MB) as Record<string, any>;
     return (
         <DataLayout
-            actions={<TableActions />}
+            actions={
+                <TableActions
+                    onCheckBoxChange={(items) => {
+                        setTableColumn(tableKey, items);
+                    }}
+                    onSortingChange={(items) => {
+                        setTableColumn(tableKey, items);
+                    }}
+                    restoreDefault={() => setTableColumn(tableKey, FilesModel)}
+                    sortableList={tablesData.tableColumns}
+                />
+            }
             summary={
                 <ContentSeparator>
                     <CountWithIcon
@@ -47,12 +74,13 @@ const FilesTable = () => {
             <ScrollableTable>
                 <Table
                     className="files-table"
-                    columns={FilesModel}
+                    columns={tablesData.tableColumns.filter((item: ITableColumnItem) => !item.hidden)}
                     dataSource={dataSource}
                     loading={loading}
                     onHeaderRow={() => ({ className: 'table-header' })}
                     pagination={false}
                     rowClassName={(_, index) => (index % 2 === 0 ? 'odd' : 'even')}
+                    size="small"
                 />
             </ScrollableTable>
         </DataLayout>

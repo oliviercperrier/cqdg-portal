@@ -1,22 +1,103 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { MdAssignment, MdBorderAll, MdDashboard, MdPeople } from 'react-icons/md';
 import { useQuery } from '@apollo/client';
-import QueryLayout from 'layouts/Query';
+import { Button } from 'antd';
+import get from 'lodash/get';
 
-//import { GET_FILES } from 'store/queries/files';
 import BorderedContainer from 'components/container/BorderedContainer';
 import QueryBuilder from 'components/functionnal/QueryBuilder';
+import TableActions from 'components/functionnal/TableActions';
+import ContentSeparator from 'components/layouts/ContentSeparator';
+import CountWithIcon from 'components/layouts/CountWithIcon';
 import StackLayout from 'components/layouts/StackLayout';
+import DataLayout from 'layouts/DataContent';
+import QueryLayout from 'layouts/Query';
+import CardsContent from 'pages/Studies/content/Cards';
+import TableContent from 'pages/Studies/content/Table';
+import { presetModel } from 'pages/Studies/content/Table.models';
+import { setTableColumn } from 'store/cache/tableColumns';
+import { STUDIES_PAGE_DATA } from 'store/queries/studies/content';
+import { GET_TABLE_COLUMNS } from 'store/queries/tables';
+import { Hits } from 'utils/graphql/query';
 
-import './Studies.scss';
+import styles from './Studies.module.scss';
 
-const Study = (): React.ReactElement => (
-    //const { data, error, loading } = useQuery<any>(GET_FILES);
-    <QueryLayout className="study-repo" filters={{ donors: <div>donor filters</div>, files: <div>file filters</div> }}>
-        <QueryBuilder />
-        <StackLayout grow vertical>
-            <BorderedContainer className="study-repo__graphs">graphs</BorderedContainer>
-            <BorderedContainer grow>content</BorderedContainer>
-        </StackLayout>
-    </QueryLayout>
-);
+const tableKey = 'study-content';
+const Study = (): React.ReactElement => {
+    const [showCards, setShowCards] = useState(false);
+    const { data: tablesData } = useQuery<any>(GET_TABLE_COLUMNS, {
+        variables: { default: presetModel, key: tableKey },
+    });
+
+    const { data, loading } = useQuery<any>(STUDIES_PAGE_DATA);
+    const totalDonors = get(data, `Donor.${Hits.ITEM}.total`, 0);
+    const totalStudies = get(data, `Study.${Hits.ITEM}.total`, 0);
+    const studyData = get(data, `Study.${Hits.COLLECTION}`, []);
+    const dataSource = studyData.map((data: any) => ({
+        ...data,
+        key: data.node.id,
+    }));
+
+    return (
+        <QueryLayout
+            className={styles.container}
+            filters={{ donors: <div>donor filters</div>, files: <div>file filters</div> }}
+        >
+            <QueryBuilder />
+            <StackLayout grow vertical>
+                <BorderedContainer className={styles.graphs}>graphs</BorderedContainer>
+                <BorderedContainer grow>
+                    <DataLayout
+                        actions={
+                            <ContentSeparator>
+                                <StackLayout className={styles.layoutActions}>
+                                    <Button className={styles.buttons} onClick={() => setShowCards(false)}>
+                                        <MdBorderAll />
+                                    </Button>
+                                    <Button className={styles.buttons} onClick={() => setShowCards(true)}>
+                                        <MdDashboard />
+                                    </Button>
+                                </StackLayout>
+                                {!showCards && (
+                                    <TableActions
+                                        onCheckBoxChange={(items) => {
+                                            setTableColumn(tableKey, items);
+                                        }}
+                                        onSortingChange={(items) => {
+                                            setTableColumn(tableKey, items);
+                                        }}
+                                        restoreDefault={() => setTableColumn(tableKey, presetModel)}
+                                        sortableList={tablesData.tableColumns}
+                                    />
+                                )}
+                            </ContentSeparator>
+                        }
+                        summary={
+                            <ContentSeparator>
+                                <CountWithIcon
+                                    Icon={MdPeople}
+                                    label="global.donors"
+                                    total={totalDonors.toLocaleString()}
+                                    type="inline"
+                                />
+                                <CountWithIcon
+                                    Icon={MdAssignment}
+                                    label="global.studies"
+                                    total={totalStudies.toLocaleString()}
+                                    type="inline"
+                                />
+                            </ContentSeparator>
+                        }
+                    >
+                        {showCards ? (
+                            <CardsContent data={dataSource} />
+                        ) : (
+                            <TableContent columns={tablesData.tableColumns} data={dataSource} loading={loading} />
+                        )}
+                    </DataLayout>
+                </BorderedContainer>
+            </StackLayout>
+        </QueryLayout>
+    );
+};
 export default Study;
