@@ -9,5 +9,5 @@ const instance = axios.create({
 export const getHomeStats = async () => {
     const response = await instance.get(`/stats`);
 
-    return get(response, 'data.viewer.File.aggregations.data_type.buckets', []);
+    return get(response, 'data.viewer', []);
 };

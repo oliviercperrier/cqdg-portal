@@ -1,0 +1,26 @@
+.fui-filters-container-header {
+    align-items: center;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+
+    .fui-search-icon-wrapper {
+        /*padding: .8rem 1.4rem;*/
+        display: flex;
+        .fui-search-icon {
+            width: 16px;
+            height: 16px;
+        }
+    }
+}
+
+/*.fui-filters-container-header .title {
+  width: 100%;
+}
+
+.fui-filters-container-header > .fui-stack-layout:first-child { 
+  width: 100%;
+}
+.fui-filters-container-header.collapsed {
+  border-bottom: none;
+} */

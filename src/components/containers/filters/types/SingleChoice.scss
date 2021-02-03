@@ -1,0 +1,16 @@
+.fui-filter-sc {
+    justify-content: space-between;
+    align-items: center;
+
+    .fui-filter-sc-button {
+        padding: 0;
+        color: #008FC7;
+        > * {
+            text-decoration: underline;
+        }
+
+        &:hover > * {
+            text-decoration: none;
+        }
+    }
+}

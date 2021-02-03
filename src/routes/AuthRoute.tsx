@@ -24,7 +24,7 @@ export default ({ component: Component, ...rest }: AuthRouteProps): React.ReactE
                 ) : !initialized ? (
                     <Spin spinning />
                 ) : (
-                    !isAuthorized && <Redirect to={{ pathname: '/login', state: { from: props.location } }} />
+                    !isAuthorized && <Redirect to={{ pathname: '/login', state: { from: props.location.pathname } }} />
                 )
             }
         />

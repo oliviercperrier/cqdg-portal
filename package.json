@@ -41,10 +41,7 @@
         "test": "react-scripts test",
         "lint&fix": "eslint --fix --rule 'no-console: 2'",
         "eject": "react-scripts eject",
-        "theme": "npm run theme:antd;",
-        "theme:antd": "npm run theme:antd:colors && npm run theme:antd:main",
-        "theme:antd:main": "lessc --js src/style/themes/default/antd/antd.less src/style/dist/themes/default/antd.css",
-        "theme:antd:colors": "less2sass ./src/style/themes/default/antd/_colors.less && mv -f ./src/style/themes/default/antd/_colors.scss ./src/style/dist/themes/default/_colors.scss "
+        "compile:theme": "ferlabui-script compile -t cqdg"
     },
     "husky": {
         "hooks": {

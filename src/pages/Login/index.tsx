@@ -12,7 +12,7 @@ interface ILocation {
 const Login = (): React.ReactElement => {
     const location = useLocation<{ [key: string]: any }>();
     const currentLocationState: ILocation = (location.state as ILocation) || {
-        from: { pathname: '/' },
+        from: '/',
     };
 
     const { initialized, keycloak } = useKeycloak();
@@ -21,7 +21,7 @@ const Login = (): React.ReactElement => {
     useEffect(() => {
         if (initialized && keycloak && !isAuthenticated) {
             keycloak.login({
-                redirectUri: `${window.location.origin}${currentLocationState.from.pathname}`,
+                redirectUri: `${window.location.origin}${currentLocationState.from}`,
             });
         }
     }, [initialized]);

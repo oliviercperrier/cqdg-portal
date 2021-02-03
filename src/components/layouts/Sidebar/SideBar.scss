@@ -1,4 +1,4 @@
-@import '../../../style/themes/default/mixins';
+@import '~@ferlab-ui/core-style/themes/cqdg/mixins';
 
 .side-panel {
     background-color: $gray-3;
@@ -28,27 +28,6 @@
         }
     }
 
-    .side-panel-content {
-        flex-grow: 1;
-        font-size: 1.2rem;
-        overflow: hidden;
-        padding: 0 1.7rem;
-    
-        &__panes {
-            &__tab {
-                display: flex;
-                align-items: center;
-
-                .icon {
-                    margin-right: 1rem;
-                }    
-            }
-
-            &__content {
-                margin-top: 2.4rem;
-            }
-        }
-    }
     
     .side-panel-footer {
         align-items: center;
@@ -85,21 +64,3 @@
         display: none;
     }
 }
-
-/*.side-panel .fui-filters-container-header button {
-  padding: 0;
-}
-
-.side-panel .fui-filters-container-header {
-  flex-grow: 0;
-  display: flex;
-  justify-content: start;
-  align-items: center;
-  background-color: white;
-  color: #003457; 
-  font-size: 14px;
-  font-weight: 600;
-  border-bottom: thin solid #D8E1EB; 
-  padding: 5px 14px;
-}*/
-

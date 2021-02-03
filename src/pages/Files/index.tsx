@@ -9,6 +9,7 @@ import QueryBuilder from 'components/functionnal/QueryBuilder';
 import StackLayout from 'components/layouts/StackLayout';
 import QueryLayout from 'layouts/Query';
 import { t } from 'locales/utils';
+import SideBarContent from 'pages/Files/filters/SideBarContent';
 import DonorsTable from 'pages/Files/tabs/DonorsTable';
 import FilesTable from 'pages/Files/tabs/FilesTable';
 import Summary from 'pages/Files/tabs/Summary';
@@ -31,10 +32,7 @@ const FileRepo = () => {
     const donorsTotal = get(data, 'Donor.hits.total', 0);
 
     return (
-        <QueryLayout
-            className="file-repo"
-            filters={{ donors: <div>donor filters</div>, files: <div>file filters</div> }}
-        >
+        <QueryLayout className="file-repo" sidebar={<SideBarContent />}>
             <StackLayout grow noScroll vertical>
                 <QueryBuilder />
                 <StackLayout grow noScroll vertical>

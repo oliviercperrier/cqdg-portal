@@ -124,13 +124,13 @@
         },
         "graphs": {
             "graph1": {
-                "title": "Donors per Disease Type"
+                "title": "Donors by disease type"
             },
             "graph2": {
-                "title": "Population Distribution"
+                "title": "Studies by research domains"
             },
             "graph3": {
-                "title": "Donors per Phenotype Category"
+                "title": "Donors by type of abnormality"
             }
         },
         "cards": {

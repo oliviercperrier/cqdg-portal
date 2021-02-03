@@ -1,18 +1,18 @@
 import React from 'react';
 
-import SideBar, { FiltersProp } from 'components/layouts/Sidebar';
+import SideBar from 'components/layouts/Sidebar';
 import StackLayout from 'components/layouts/StackLayout';
 import { IBasicProp } from 'types/generic';
 
 import './Layout.scss';
 
 interface QueryLayoutProps extends IBasicProp {
-    filters: FiltersProp;
+    sidebar: React.ReactNode;
 }
 
-const Layout = ({ children, className = '', filters }: QueryLayoutProps): React.ReactElement => (
+const Layout = ({ children, className = '', sidebar }: QueryLayoutProps): React.ReactElement => (
     <StackLayout className={`layout-query ${className}`} noScroll>
-        <SideBar filters={filters} />
+        <SideBar>{sidebar}</SideBar>
         <StackLayout className="layout-query__content" grow noScroll vertical>
             {children}
         </StackLayout>

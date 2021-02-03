@@ -4,7 +4,7 @@ import { useQuery } from '@apollo/client';
 import { Button } from 'antd';
 import get from 'lodash/get';
 
-import BorderedContainer from 'components/container/BorderedContainer';
+import BorderedContainer from 'components/containers/BorderedContainer';
 import QueryBuilder from 'components/functionnal/QueryBuilder';
 import TableActions from 'components/functionnal/TableActions';
 import ContentSeparator from 'components/layouts/ContentSeparator';
@@ -39,10 +39,7 @@ const Study = (): React.ReactElement => {
     }));
 
     return (
-        <QueryLayout
-            className={styles.container}
-            filters={{ donors: <div>donor filters</div>, files: <div>file filters</div> }}
-        >
+        <QueryLayout className={styles.container} sidebar={<div>filters</div>}>
             <QueryBuilder />
             <StackLayout grow vertical>
                 <BorderedContainer className={styles.graphs}>graphs</BorderedContainer>

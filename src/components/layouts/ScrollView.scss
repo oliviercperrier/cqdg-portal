@@ -1,14 +1,14 @@
 .fui-scroll-view {
-  display: flex;
-  overflow: auto;
+    display: flex;
+    overflow: auto;
 
-  .vertical {
-    flex-direction: column;
-    overflow-x: hidden;
-  }
+    &.vertical {
+        flex-direction: column;
+        overflow-x: hidden;
+    }
 
-  .horizontal {
-    flex-direction: row;
-    overflow-y: hidden;
-  }
+    &.horizontal {
+        flex-direction: row;
+        overflow-y: hidden;
+    }
 }

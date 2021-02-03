@@ -7,7 +7,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 import 'style/dist/themes/default/antd.css';
-import 'style/themes/default/main.scss';
+import '@ferlab-ui/core-style/themes/cqdg/main.scss';
 
 ReactDOM.render(
     <React.StrictMode>
