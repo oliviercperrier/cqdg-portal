@@ -1,6 +1,6 @@
 import get from 'lodash/get';
 
-import { t } from 'locales/utils';
+import { t } from 'locales/translate';
 
 const DonorsModel = [
     {

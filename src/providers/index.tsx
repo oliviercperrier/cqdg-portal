@@ -1,6 +1,7 @@
 import React from 'react';
 
 import ApolloProvider from './Apollo';
+import FilterProvider from './Filter';
 import IntlProvider from './Intl';
 import KeycloakProvider from './Keycloak';
 
@@ -11,7 +12,9 @@ export interface IProvider {
 export default ({ children }: IProvider): React.ReactElement => (
     <KeycloakProvider>
         <ApolloProvider>
-            <IntlProvider>{children}</IntlProvider>
+            <FilterProvider>
+                <IntlProvider>{children}</IntlProvider>
+            </FilterProvider>
         </ApolloProvider>
     </KeycloakProvider>
 );

@@ -4,7 +4,7 @@ import { useIntl } from 'react-intl';
 import { Button, Divider } from 'antd';
 import classNames from 'classnames/bind';
 
-import { t } from 'locales/utils';
+import { t } from 'locales/translate';
 
 import './SideBar.scss';
 

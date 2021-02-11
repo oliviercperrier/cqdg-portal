@@ -8,7 +8,7 @@ import Locale from 'components/functionnal/Locale';
 import DatabaseIcon from 'components/interface/Icon/Database';
 import ExternalIcon from 'components/interface/Icon/ExternalLink';
 import StorageIcon from 'components/interface/Icon/Storage';
-import { t } from 'locales/utils';
+import { t } from 'locales/translate';
 import { isAuthenticated } from 'providers/Keycloak/keycloak';
 import { IClassNameProp } from 'types/generic';
 

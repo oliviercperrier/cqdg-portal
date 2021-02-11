@@ -1,4 +1,4 @@
-import { t } from 'locales/utils';
+import { t } from 'locales/translate';
 
 const StudyModel = [
     {

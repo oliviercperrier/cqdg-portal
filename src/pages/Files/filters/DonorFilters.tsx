@@ -4,17 +4,17 @@ import { useQuery } from '@apollo/client';
 import get from 'lodash/get';
 
 import FilterContainer from 'components/containers/filters/FilterContainer';
-import { FILE_TAB_FILTERS } from 'store/queries/files/filters';
+import { DONOR_TAB_FILTERS } from 'store/queries/files/filters';
 import { enhanceFilters, getSelectedFilters } from 'utils/filters';
 import { updateFilters } from 'utils/filters';
 import { useFilters } from 'utils/filters/useFilters';
 
-import presetFilters from './FileFilter.model';
+import presetFilters from './DonorFilter.model';
 
 const FileFilters: React.FC = () => {
     const history = useHistory();
     const filters = useFilters();
-    const { data, loading, previousData } = useQuery<any>(FILE_TAB_FILTERS, {
+    const { data, loading, previousData } = useQuery<any>(DONOR_TAB_FILTERS, {
         variables: filters,
     });
 
@@ -26,13 +26,14 @@ const FileFilters: React.FC = () => {
     if (data) {
         result = data;
     }
-    const aggregations = get(result, 'File.aggregations', []);
+    const aggregations = get(result, 'Donor.aggregations', []);
 
     return (
         <>
             {presetFilters.map((filter) => {
                 const enhancedFilters = enhanceFilters(aggregations, filter.field);
                 const selectedFilters = getSelectedFilters(enhancedFilters, filter);
+
                 return (
                     <FilterContainer
                         filterGroup={filter}

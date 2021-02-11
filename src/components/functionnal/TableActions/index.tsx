@@ -4,7 +4,7 @@ import { Button, Checkbox, Dropdown, Menu, Popover } from 'antd';
 
 import SortableList, { TSortableItem } from 'components/functionnal/SortableList';
 import StackLayout from 'components/layouts/StackLayout';
-import { t } from 'locales/utils';
+import { t } from 'locales/translate';
 
 import styles from './TableActions.module.scss';
 

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { t } from 'locales/utils';
+import { t } from 'locales/translate';
 import { IClassNameProp } from 'types/generic';
 
 import './CountWithIcon.scss';

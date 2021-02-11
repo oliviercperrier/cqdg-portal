@@ -1,3 +1,5 @@
+import { ReactNode } from 'react';
+
 import { IDictionary } from './dictionary';
 
 export enum VisualType {
@@ -11,45 +13,44 @@ export interface IFiltersOnChange {
     filterGroup: IFilterGroup;
 }
 
-export type onChangeType = (fg: IFilterGroup, f: IFilter[] | IRangeFilterState) => void;
+export type onChangeType = (fg: IFilterGroup, f: IFilter[]) => void;
 
-export interface IRangeFilterTypes {
+export interface IFilterRangeTypes {
     key: string;
-    name: string | React.ReactElement;
+    name: string | React.ReactNode;
 }
 
-export interface IRangeFilterState {
+export interface IFilterRange {
     max: number | undefined;
     min: number | undefined;
     rangeType: string | undefined;
 }
 
-export interface IRangeFilter {
-    max: number | undefined;
-    min: number | undefined;
-    rangeTypes: IRangeFilterTypes[];
+export interface IFilterRangeConfig {
+    max?: number | undefined;
+    min?: number | undefined;
+    rangeTypes: IFilterRangeTypes[];
 }
 
-export const createDefaultRange = (max = 0, min = 0, rangeTypes = []) => ({
-    max,
-    min,
-    rangeTypes,
-});
+export type TFilterGroupConfig = IFilterRangeConfig;
 
 export interface IFilterGroup {
-    //docType: string;
-    //description?: string;
     field: string;
-    placeholder?: string;
-    range?: IRangeFilter;
-    title: string;
+    config?: TFilterGroupConfig;
+    title: string | ReactNode;
     type: VisualType;
 }
 
-export interface IFilter {
-    doc_count: number;
+export interface IFilterCount {
+    count: number;
     key: string;
-    name: string; // use for translated/todisplay string
+}
+
+export type TFilterData = IFilterCount | IFilterRange;
+
+export interface IFilter<T extends TFilterData = any> {
+    data: T;
+    name: string | ReactNode;
     id: string; //  dash (-) separated key
 }
 
@@ -57,5 +58,5 @@ export interface IFilterProps {
     dictionary?: IDictionary | Record<string, never>;
     filterGroup: IFilterGroup;
     onChange: onChangeType;
-    selectedFilters?: any;
+    selectedFilters?: IFilter[];
 }

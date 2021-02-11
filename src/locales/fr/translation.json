@@ -215,8 +215,8 @@
         "no.result": "Aucune valeur pour cette requête"
     },
     "aggregation": {
-        "0": "Faux",
-        "1": "Vrai",
+        "0": "Non",
+        "1": "Oui",
         "true": "Oui",
         "false": "Non",
         "data_category": "Catégorie de données",

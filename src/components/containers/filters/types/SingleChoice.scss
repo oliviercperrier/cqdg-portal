@@ -12,5 +12,9 @@
         &:hover > * {
             text-decoration: none;
         }
+
+        &-disabled {
+            display: none;
+        }
     }
 }

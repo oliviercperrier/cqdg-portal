@@ -1,6 +1,6 @@
 import en from './en/translation.json';
 import fr from './fr/translation.json';
-import { flatLocale } from './utils';
+import { flatLocale } from './translate';
 
 type TTranslation = Record<string, Record<string, string>>;
 

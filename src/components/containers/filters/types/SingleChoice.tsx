@@ -1,15 +1,17 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Radio } from 'antd';
+import cx from 'classnames';
 import get from 'lodash/get';
+import isEmpty from 'lodash/isEmpty';
 
 import StackLayout from 'components/layouts/StackLayout';
 
-import { IFilter, IFilterProps } from '../Filters';
+import { IFilter, IFilterCount, IFilterProps } from '../Filters';
 
 import './SingleChoice.scss';
 
 interface ISingleChoiceProps extends IFilterProps {
-    filters: IFilter[];
+    filters: IFilter<IFilterCount>[];
 }
 
 const SingleChoice: React.FC<ISingleChoiceProps> = ({
@@ -19,21 +21,31 @@ const SingleChoice: React.FC<ISingleChoiceProps> = ({
     onChange,
     selectedFilters = [],
 }) => {
-    const selectedFilter = selectedFilters ? selectedFilters[0] : '';
+    const selectedFilter = selectedFilters.length > 0 ? selectedFilters[0].data.key : '';
+    const [selected, setSelected] = useState(selectedFilter);
+
+    useEffect(() => {
+        setSelected(selectedFilter);
+    }, [selectedFilters]);
     const options = filters.map((filter) => ({
         label: filter.name,
-        value: filter.key,
+        value: filter.data.key,
     }));
+    const classNames = cx('fui-filter-sc-button', { 'fui-filter-sc-button-disabled': isEmpty(selectedFilter) });
+
     return (
         <StackLayout className="fui-filter-sc" horizontal>
             <Radio.Group
-                defaultValue={selectedFilter}
-                onChange={() => onChange(filterGroup, selectedFilter)}
+                onChange={(e) => {
+                    const newSelection = filters.filter((f) => f.data.key === e.target.value);
+                    onChange(filterGroup, newSelection);
+                }}
                 optionType="button"
                 options={options}
+                value={selected}
             />
             <Button
-                className="fui-filter-sc-button"
+                className={classNames}
                 onClick={() => onChange(filterGroup, [])}
                 onKeyPress={() => onChange(filterGroup, [])}
                 tabIndex={0}

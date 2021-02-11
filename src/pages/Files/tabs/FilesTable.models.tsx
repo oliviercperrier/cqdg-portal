@@ -1,6 +1,6 @@
 import { MdLock, MdLockOpen, MdLockOutline } from 'react-icons/md';
 
-import { t } from 'locales/utils';
+import { t } from 'locales/translate';
 import { EFileInputType, formatFileSize } from 'utils/formatFileSize';
 
 export const FilesModel = [

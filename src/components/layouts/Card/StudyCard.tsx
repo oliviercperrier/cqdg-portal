@@ -7,7 +7,7 @@ import CardContainerNotched from 'components/layouts/Card/CardContainerNotched';
 import CardContent from 'components/layouts/Card/CardContent';
 import CountWithIcon from 'components/layouts/CountWithIcon';
 import StackLayout from 'components/layouts/StackLayout';
-import { t } from 'locales/utils';
+import { t } from 'locales/translate';
 
 import './StudyCard.scss';
 

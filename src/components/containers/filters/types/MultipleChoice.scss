@@ -4,6 +4,7 @@
         padding: 0;
         text-align: left;
         height: auto;
+        font-size: 1.2rem;
         text-transform: capitalize;
         > * {
             text-decoration: underline;
@@ -12,7 +13,22 @@
         &:hover > * {
             text-decoration: none;
         }
-    }    
+    }  
+    
+    .fui-mc-item-checkbox {
+        font-size: 1.2rem;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+
+        & > span + span {
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+            width: 176px;
+            display: inline-block;
+            vertical-align: middle;
+        }
+    }
 }
 .fui-search-wrapper {
     margin-bottom: .8rem;
@@ -40,24 +56,7 @@
   margin-bottom: 0px;
 }
 
-.fui-mc-item .fui-mv-item-checkbox {
-  align-items: center;    
-  overflow: hidden;
-  text-overflow: ellipsis;
-  overflow: hidden;
-}
 
-.fui-mc-item input {
-  flex-shrink: 0;
-  margin-right: '5px';
-  pointer-events: 'none';
-  vertical-align: 'middle';
-}
-
-.fui-mc-item .tooltip {
-  margin-left: 0.3rem;
-  vertical-align: middle;
-}
 
 .fui-filters-actions {
   margin-bottom: 1.5rem;

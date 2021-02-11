@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { Collapse } from 'antd';
-
-import StackLayout from 'components/layouts/StackLayout';
+import isEmpty from 'lodash/isEmpty';
 
 import { IDictionary } from './dictionary';
 import FilterContainerHeader from './FilterContainerHeader';
 import { FilterComponent } from './FilterContainerSelector';
-import { IFilter, IFilterGroup, onChangeType } from './Filters';
+import { IFilter, IFilterGroup, onChangeType, VisualType } from './Filters';
 
 import styles from './FilterContainer.module.scss';
 
@@ -15,29 +14,29 @@ const { Panel } = Collapse;
 interface IFilterContainerProps {
     filterGroup: IFilterGroup;
     dictionary?: IDictionary;
-    title: string;
-    filters?: IFilter[];
-    selectedFilters?: any;
+    filters: IFilter[];
+    selectedFilters?: IFilter[];
     onChange: onChangeType;
     maxShowing?: number;
-    searchEnabled?: boolean;
+    isOpen?: boolean;
 }
 const FilterContainer: React.FC<IFilterContainerProps> = ({
     filterGroup,
     dictionary = {},
-    title,
     filters = [],
     maxShowing = 5,
     onChange,
-    searchEnabled = false,
     selectedFilters,
+    isOpen = true,
 }) => {
     const [hasSearchInput, setSearchInputVisible] = useState(false);
-    const [isCollapsed, setIsCollapsed] = useState(true);
+    const [isCollapsed, setIsCollapsed] = useState(!isOpen);
 
+    const defaultActiveKey = isCollapsed ? {} : { defaultActiveKey: '1' };
     return (
         <div className={styles['filter-container']}>
             <Collapse
+                {...defaultActiveKey}
                 onChange={(panels) => {
                     setIsCollapsed(panels.length === 0);
                 }}
@@ -48,12 +47,12 @@ const FilterContainer: React.FC<IFilterContainerProps> = ({
                         <FilterContainerHeader
                             isCollapsed={isCollapsed}
                             onSearchClick={setSearchInputVisible}
-                            searchEnabled={searchEnabled}
+                            searchEnabled={filterGroup.type === VisualType.Checkbox}
                             searchInputVisibled={hasSearchInput}
-                            title={title}
+                            title={filterGroup.title}
                         />
                     }
-                    key={`${title}-1`}
+                    key={`1`}
                 >
                     <FilterComponent
                         dictionary={dictionary}
@@ -63,7 +62,6 @@ const FilterContainer: React.FC<IFilterContainerProps> = ({
                         onChange={onChange}
                         searchInputVisible={hasSearchInput}
                         selectedFilters={selectedFilters}
-                        title={title}
                     />
                 </Panel>
             </Collapse>

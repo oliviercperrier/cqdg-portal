@@ -9,7 +9,7 @@ interface IFilterContainerHeaderProps {
     searchEnabled?: boolean;
     onSearchClick: (v: boolean) => void;
     searchInputVisibled: boolean;
-    title: string;
+    title: string | React.ReactNode;
     isCollapsed: boolean;
 }
 

@@ -214,8 +214,8 @@
         "no.result": "No value for this request"
     },
     "aggregation": {
-        "0": "False",
-        "1": "True",
+        "0": "No",
+        "1": "Yes",
         "true": "Yes",
         "false": "No",
         "data_category": "Data Category",

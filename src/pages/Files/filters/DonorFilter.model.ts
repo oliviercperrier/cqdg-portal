@@ -1,0 +1,87 @@
+import { IFilterGroup, VisualType } from 'components/containers/filters/Filters';
+import { t } from 'locales/translate';
+import { IFilterModel } from 'types/interface/filters';
+
+const filters: IFilterModel[] = [
+    {
+        field: 'study.short_name_keyword',
+        title: 'facet.study.name',
+        type: VisualType.Checkbox,
+    },
+    {
+        field: 'study.domain',
+        title: 'facet.study.domain',
+        type: VisualType.Checkbox,
+    },
+    {
+        field: 'gender',
+        type: VisualType.Checkbox,
+    },
+    {
+        field: 'ethnicity',
+        type: VisualType.Checkbox,
+    },
+    {
+        config: {
+            rangeTypes: [
+                {
+                    key: 'years',
+                    name: t('facet.range.years'),
+                },
+                {
+                    key: 'days',
+                    name: t('facet.range.days'),
+                },
+            ],
+        },
+        field: 'age_at_recruitment',
+        type: VisualType.Range,
+    },
+    {
+        config: {
+            rangeTypes: [
+                {
+                    key: 'years',
+                    name: t('facet.range.years'),
+                },
+                {
+                    key: 'days',
+                    name: t('facet.range.days'),
+                },
+            ],
+        },
+        field: 'diagnoses.age_at_diagnosis',
+        type: VisualType.Range,
+    },
+    {
+        field: 'vital_status',
+        type: VisualType.Checkbox,
+    },
+    {
+        field: 'diagnoses.icd_category_keyword',
+        title: 'facet.diagnoses.icd_term',
+        type: VisualType.Checkbox,
+    },
+    {
+        field: 'diagnoses.mondo_term_keyword',
+        title: 'facet.mondo.term',
+        type: VisualType.Checkbox,
+    },
+    {
+        field: 'phenotypes.hpo_category_keyword',
+        title: 'facet.hpo.category',
+        type: VisualType.Checkbox,
+    },
+    {
+        field: 'phenotypes.hpo_term_keyword',
+        title: 'facet.hpo.term',
+        type: VisualType.Checkbox,
+    },
+];
+
+const presetFacets: IFilterGroup[] = filters.map((filter) => ({
+    ...filter,
+    title: filter.title ? t(filter.title) : t(`facet.${filter.field}`),
+}));
+
+export default presetFacets;

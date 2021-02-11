@@ -1,9 +1,9 @@
 import { gql } from '@apollo/client';
 
 export const DONOR_TAB_DATA = gql`
-    query GetFilePageData($offset: Int, $sort: [Sort], $first: Int, $filters: JSON) {
+    query GetFilePageData($offset: Int, $sort: [Sort], $first: Int, $donorFilters: JSON) {
         Donor {
-            hits(first: $first, offset: $offset, sort: $sort, filters: $filters) {
+            hits(first: $first, offset: $offset, sort: $sort, filters: $donorFilters) {
                 total
                 edges {
                     node {

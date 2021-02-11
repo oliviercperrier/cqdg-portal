@@ -7,8 +7,7 @@ import SingleChoice from './types/SingleChoice';
 import { IFilter, IFilterProps, VisualType } from './Filters';
 
 interface IFiltersProps extends IFilterProps {
-    title: string;
-    selectedFilters?: any;
+    selectedFilters?: IFilter[];
     searchInputVisible: boolean;
     maxShowing: number;
     filters: IFilter[];
@@ -22,20 +21,18 @@ export const FilterComponent: React.FC<IFiltersProps> = ({
     onChange,
     searchInputVisible,
     selectedFilters,
-    title,
-}: IFiltersProps) => {
+}) => {
     const commonProps = {
         dictionary,
         filterGroup,
         onChange,
         selectedFilters,
-        title,
     };
     switch (filterGroup.type) {
         case VisualType.Toggle:
             return <SingleChoice {...commonProps} filters={filters} />;
         case VisualType.Range:
-            return <RangeFilter {...commonProps} />;
+            return <RangeFilter {...commonProps} filters={filters} />;
         case VisualType.Checkbox:
         default:
             return (

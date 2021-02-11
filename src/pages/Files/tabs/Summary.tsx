@@ -4,7 +4,7 @@ import { Spin } from 'antd';
 import get from 'lodash/get';
 
 import PieChart from 'components/charts/Pie';
-import { t } from 'locales/utils';
+import { t } from 'locales/translate';
 import { FILE_SUMMARY_DATA } from 'store/queries/files/summary';
 import { formatPieChart } from 'utils/formatChartData';
 

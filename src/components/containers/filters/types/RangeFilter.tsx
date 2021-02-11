@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Divider, InputNumber, Select } from 'antd';
+import { filter } from 'lodash';
 import get from 'lodash/get';
 import isNumber from 'lodash/isNumber';
 
 import StackLayout from 'components/layouts/StackLayout';
 
-import { IFilterProps, IRangeFilterState } from '../Filters';
+import { IFilter, IFilterProps, IFilterRange } from '../Filters';
 
 import './RangeFilter.scss';
 
@@ -15,25 +16,25 @@ interface IRangeFilterProps extends IFilterProps {
     handleFromChanged?: () => void;
     handleToChanged?: () => void;
     handleUnitChanged?: () => void;
-    title: string;
-    selectedFilters: IRangeFilterState;
-    maxPossibleValue?: number;
-    minPossibleValue?: number;
+    filters: IFilter<IFilterRange>[];
 }
 
-const RangeFilter: React.FC<IRangeFilterProps> = ({
-    dictionary,
-    filterGroup,
-    maxPossibleValue = 0,
-    minPossibleValue = 0,
-    onChange,
-    selectedFilters,
-}) => {
-    const [rangeFilter, setRangeFilter] = useState({
-        max: get(selectedFilters, 'max', undefined),
-        min: get(selectedFilters, 'min', undefined),
-        rangeType: get(selectedFilters, 'rangeType', filterGroup.range!.rangeTypes[0].key),
-    });
+const RangeFilter: React.FC<IRangeFilterProps> = ({ dictionary, filterGroup, filters, onChange, selectedFilters }) => {
+    const defaultStateValue = {
+        max: get(selectedFilters, '[0].data.max', undefined),
+        min: get(selectedFilters, '[0].data.min', undefined),
+        rangeType: get(selectedFilters, '[0].data.rangeType', filterGroup.config!.rangeTypes[0].key),
+    };
+
+    const currentFilter: IFilter<IFilterRange> = filters[0];
+    const maxPossibleValue = get(filterGroup, 'config.max', 0);
+    const minPossibleValue = get(filterGroup, 'config.min', 0);
+
+    const [rangeFilter, setRangeFilter] = useState<IFilterRange>(defaultStateValue);
+
+    useEffect(() => {
+        setRangeFilter(defaultStateValue);
+    }, [selectedFilters]);
 
     const onRangeTypeChanged = (value: string) => {
         setRangeFilter((prevState) => ({
@@ -61,7 +62,7 @@ const RangeFilter: React.FC<IRangeFilterProps> = ({
     };
 
     const { max, min, rangeType } = rangeFilter;
-    const { range } = filterGroup;
+    const { config: range } = filterGroup;
 
     if (!range) {
         return null;
@@ -112,24 +113,14 @@ const RangeFilter: React.FC<IRangeFilterProps> = ({
             </StackLayout>
 
             <StackLayout className="fui-rf-actions" horizontal>
-                <Button
-                    disabled={buttonActionDisabled}
-                    onClick={() =>
-                        onChange(filterGroup, {
-                            max: undefined,
-                            min: undefined,
-                            rangeType: undefined,
-                        })
-                    }
-                    type="text"
-                >
+                <Button disabled={buttonActionDisabled} onClick={() => onChange(filterGroup, [])} type="text">
                     {get(dictionary, 'actions.none', 'clear')}
                 </Button>
                 <Button
                     className="fui-rf-actions-apply"
                     disabled={buttonActionDisabled}
                     onClick={() => {
-                        onChange(filterGroup, rangeFilter);
+                        onChange(filterGroup, [{ ...currentFilter, data: rangeFilter }]);
                     }}
                 >
                     {get(dictionary, 'actions.apply', 'apply')}

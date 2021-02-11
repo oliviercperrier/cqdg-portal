@@ -12,6 +12,7 @@ import DataLayout from 'layouts/DataContent';
 import { setTableColumn } from 'store/cache/tableColumns';
 import { FILE_TAB_DATA } from 'store/queries/files/fileTabs';
 import { GET_TABLE_COLUMNS } from 'store/queries/tables';
+import { useFilters } from 'utils/filters/useFilters';
 import { EFileInputType, formatFileSize } from 'utils/formatFileSize';
 import { Hits } from 'utils/graphql/query';
 
@@ -29,8 +30,9 @@ export interface ITableColumnItem {
 
 const tableKey = 'files-tabs-file';
 const FilesTable = (): React.ReactElement => {
+    const filters = useFilters();
     const { data, loading } = useQuery<any>(FILE_TAB_DATA, {
-        variables: { first: 20, offset: 0 },
+        variables: { first: 20, offset: 0, ...filters },
     });
 
     const { data: tablesData } = useQuery<any>(GET_TABLE_COLUMNS, {

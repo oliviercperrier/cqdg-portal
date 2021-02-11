@@ -4,9 +4,10 @@ import { useHistory } from 'react-router-dom';
 import { Tabs } from 'antd';
 
 import ScrollView from 'components/layouts/ScrollView';
-import { t } from 'locales/utils';
+import { t } from 'locales/translate';
 import { readQueryParam, updateQueryParam } from 'utils/url/query';
 
+import DonorFilters from './DonorFilters';
 import FileFilters from './FileFilters';
 
 import './SideBarContent.scss';
@@ -18,7 +19,7 @@ const SideBar: React.FC = () => {
     const history = useHistory();
 
     const onTabChange = (activeKey: string) => {
-        updateQueryParam(tabKey, activeKey, history);
+        updateQueryParam(history, tabKey, activeKey);
     };
 
     return (
@@ -46,7 +47,7 @@ const SideBar: React.FC = () => {
                 }
             >
                 <ScrollView className="side-panel-content__panes__content" vertical>
-                    <div>donors filter</div>
+                    <DonorFilters />
                 </ScrollView>
             </TabPane>
         </Tabs>

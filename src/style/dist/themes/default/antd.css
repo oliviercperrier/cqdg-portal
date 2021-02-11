@@ -24887,6 +24887,9 @@ div.ant-typography-edit-content.ant-typography-rtl {
 .ant-btn-link:disabled,
 .ant-btn-text:disabled {
   background-color: transparent;
+}
+.ant-btn-link:disabled,
+.ant-btn-text:disabled {
   color: #90A9C1;
 }
 .ant-btn-text[disabled]:hover {
@@ -24898,11 +24901,11 @@ div.ant-typography-edit-content.ant-typography-rtl {
 .ant-tabs-top .ant-tabs-nav .ant-tabs-tab:hover {
   color: #008FC7;
 }
+.ant-tabs-content {
+  height: 100%;
+}
 .ant-tabs-card .ant-tabs-nav .ant-tabs-tab {
   border: 1px solid #D8E1EB;
-}
-.ant-tabs-card .ant-tabs-content {
-  height: 100%;
 }
 .ant-table-thead tr th {
   font-weight: 600;

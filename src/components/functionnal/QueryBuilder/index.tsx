@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react';
 import { AiOutlineCloseCircle, AiOutlineLeft } from 'react-icons/ai';
 
-import { t } from 'locales/utils';
+import { t } from 'locales/translate';
 
 import './QueryBuilder.scss';
 

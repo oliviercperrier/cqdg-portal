@@ -3,9 +3,9 @@ import { gql } from '@apollo/client';
 import { FILE_DATA } from 'store/queries/fragments/file';
 
 export const FILE_TAB_DATA = gql`
-    query GetFileTabData($offset: Int, $sort: [Sort], $first: Int, $filters: JSON) {
+    query GetFileTabData($offset: Int, $sort: [Sort], $first: Int, $fileFilters: JSON) {
         File {
-            hits(offset: $offset, sort: $sort, first: $first, filters: $filters) {
+            hits(offset: $offset, sort: $sort, first: $first, filters: $fileFilters) {
                 total
                 edges {
                     node {
@@ -27,7 +27,7 @@ export const FILE_TAB_DATA = gql`
                     }
                 }
             }
-            aggregations(filters: $filters) {
+            aggregations(filters: $fileFilters) {
                 file_size {
                     stats {
                         sum

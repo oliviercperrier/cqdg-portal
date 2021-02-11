@@ -4,15 +4,14 @@ import get from 'lodash/get';
 
 import StackLayout from 'components/layouts/StackLayout';
 
-import { IFilter, IFilterProps } from '../Filters';
+import { IFilter, IFilterCount, IFilterProps } from '../Filters';
 
 import './MultipleChoice.scss';
 
 interface IMultipleChoice extends IFilterProps {
     maxShowing: number;
     hasSearchInput: boolean;
-    title: string;
-    filters: IFilter[];
+    filters: IFilter<IFilterCount>[];
 }
 
 const MultipleChoice: React.FC<IMultipleChoice> = ({
@@ -23,16 +22,16 @@ const MultipleChoice: React.FC<IMultipleChoice> = ({
     maxShowing,
     onChange,
     selectedFilters = [],
-    title,
 }) => {
     const [isShowingMore, setShowingMore] = useState(false);
     const [search, setSearch] = useState('');
     const [filteredFilters, setFilteredFilters] = useState(filters);
-
     useEffect(() => {
-        const newFilters = filters.filter((b) => b.name.toLowerCase().includes(search.toLowerCase()));
+        const newFilters = filters.filter(({ data }) => data.key.toLowerCase().includes(search.toLowerCase()));
+
         setFilteredFilters(newFilters);
     }, [filters, search]);
+
     return (
         <Fragment>
             {hasSearchInput && (
@@ -49,7 +48,7 @@ const MultipleChoice: React.FC<IMultipleChoice> = ({
                                 setSearch('');
                             }
                         }}
-                        options={filteredFilters.map((filter) => ({ value: filter.name }))}
+                        options={filteredFilters.map((filter) => ({ label: filter.name, value: filter.data.key }))}
                         placeholder={get(dictionary, 'multiChoice.searchPlaceholder', 'search...')}
                         value={search}
                     />
@@ -72,24 +71,34 @@ const MultipleChoice: React.FC<IMultipleChoice> = ({
                         </Button>
                     </StackLayout>
                     {filteredFilters
-                        .sort((a, b) => b.doc_count - a.doc_count)
+                        .sort((a, b) => b.data.count - a.data.count)
                         .slice(0, isShowingMore ? Infinity : maxShowing)
-                        .map((filter) => (
+                        .map((filter, i) => (
                             <StackLayout
                                 className="fui-mc-item"
                                 horizontal
-                                key={`${filterGroup.field}-${filter.id}-${filter.doc_count}`}
+                                key={`${filterGroup.field}-${filter.id}-${filter.data.count}-${selectedFilters.length}-${i}`}
                             >
                                 <Checkbox
-                                    defaultChecked={selectedFilters.indexOf(filter.key) >= 0}
-                                    id={`input-${title}-${filter.key}`}
-                                    name={`input-${title}-${filter.id}`}
-                                    onChange={() => onChange(filterGroup, [filter])}
+                                    className="fui-mc-item-checkbox"
+                                    defaultChecked={selectedFilters.some((f) => f.data.key === filter.data.key)}
+                                    id={`input-${filter.data.key}`}
+                                    name={`input-${filter.id}`}
+                                    onChange={(e) => {
+                                        const { checked } = e.target;
+                                        let newFilter: IFilter[];
+                                        if (checked) {
+                                            newFilter = [...selectedFilters, filter];
+                                        } else {
+                                            newFilter = selectedFilters.filter((f) => f != filter);
+                                        }
+                                        onChange(filterGroup, newFilter);
+                                    }}
                                     type="checkbox"
                                 >
                                     {filter.name}
                                 </Checkbox>
-                                <Tag>{filter.doc_count.toLocaleString()}</Tag>
+                                <Tag>{filter.data.count.toLocaleString()}</Tag>
                             </StackLayout>
                         ))}
                     {filteredFilters.length > maxShowing && (

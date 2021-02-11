@@ -13,6 +13,7 @@ import { setTableColumn } from 'store/cache/tableColumns';
 import { DONOR_TAB_DATA } from 'store/queries/files/donorTabs';
 import { GET_TABLE_COLUMNS } from 'store/queries/tables';
 import { ITableColumnItem } from 'types/interface';
+import { useFilters } from 'utils/filters/useFilters';
 import { Hits } from 'utils/graphql/query';
 
 import { presetDonorsModel } from './DonorsTable.models';
@@ -21,8 +22,9 @@ import './DonorsTable.scss';
 
 const tableKey = 'files-tabs-donor';
 const DonorsTable = (): React.ReactElement => {
+    const filters = useFilters();
     const { data, loading } = useQuery<any>(DONOR_TAB_DATA, {
-        variables: { first: 20, offset: 0 },
+        variables: { first: 20, offset: 0, ...filters },
     });
     const { data: tablesData } = useQuery<any>(GET_TABLE_COLUMNS, {
         variables: { default: presetDonorsModel, key: tableKey },

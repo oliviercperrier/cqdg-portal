@@ -1,10 +1,9 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 import { IntlProvider } from 'react-intl';
 import { useQuery } from '@apollo/client';
 
 import { IS_DEV_ENV } from 'config/constants';
 import translations from 'locales';
-import { IProvider } from 'providers';
 import { GET_LOCALE } from 'store/queries/locales';
 
 export const defaultLocale = 'en';
@@ -15,7 +14,7 @@ const intlErrorHandler = (error: any) => {
     }
 };
 
-export default ({ children }: IProvider): ReactElement => {
+const intl: React.FC = ({ children }) => {
     const {
         data: { locale },
     } = useQuery<any>(GET_LOCALE);
@@ -32,3 +31,5 @@ export default ({ children }: IProvider): ReactElement => {
         </IntlProvider>
     );
 };
+
+export default intl;

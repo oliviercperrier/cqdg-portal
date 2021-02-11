@@ -22,7 +22,7 @@ import StudyIcon from 'components/interface/Icon/Study';
 import CardContainerNotched from 'components/layouts/Card/CardContainerNotched';
 import CardContent from 'components/layouts/Card/CardContent';
 import CountWithIcon from 'components/layouts/CountWithIcon';
-import { t } from 'locales/utils';
+import { t } from 'locales/translate';
 import { isAuthenticated } from 'providers/Keycloak/keycloak';
 import { getHomeStats } from 'services/api';
 import { formatPieChart } from 'utils/formatChartData';

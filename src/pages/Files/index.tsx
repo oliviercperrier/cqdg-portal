@@ -8,24 +8,29 @@ import get from 'lodash/get';
 import QueryBuilder from 'components/functionnal/QueryBuilder';
 import StackLayout from 'components/layouts/StackLayout';
 import QueryLayout from 'layouts/Query';
-import { t } from 'locales/utils';
+import { t } from 'locales/translate';
 import SideBarContent from 'pages/Files/filters/SideBarContent';
 import DonorsTable from 'pages/Files/tabs/DonorsTable';
 import FilesTable from 'pages/Files/tabs/FilesTable';
 import Summary from 'pages/Files/tabs/Summary';
 import { FILE_PAGE_METADATA } from 'store/queries/files/page';
+import { useFilters } from 'utils/filters/useFilters';
 import { readQueryParam, updateQueryParam } from 'utils/url/query';
 
 import './Files.scss';
 
 const { TabPane } = Tabs;
 const tabKey = 'searchTableTab';
-const FileRepo = () => {
+const FileRepo: React.FC = () => {
     const history = useHistory();
-    const { data, error, loading } = useQuery<any>(FILE_PAGE_METADATA);
+
+    const filters = useFilters();
+    const { data, error, loading } = useQuery<any>(FILE_PAGE_METADATA, {
+        variables: filters,
+    });
 
     const onTabChange = (activeKey: string) => {
-        updateQueryParam(tabKey, activeKey, history);
+        updateQueryParam(history, tabKey, activeKey);
     };
 
     const filesTotal = get(data, 'File.hits.total', 0);
