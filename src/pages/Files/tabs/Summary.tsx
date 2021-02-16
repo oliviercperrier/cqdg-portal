@@ -21,22 +21,27 @@ const Summary = (): React.ReactElement => {
             <PieChart
                 data={formatPieChart(get(data, 'File.pies.data_category.buckets'), 'key', 'doc_count')}
                 title={t('charts.data_category')}
+                titleClassName={styles.title}
             />
             <PieChart
                 data={formatPieChart(get(data, 'File.pies.data_type.buckets'), 'key', 'doc_count')}
                 title={t('charts.data_type')}
+                titleClassName={styles.title}
             />
             <PieChart
                 data={formatPieChart(get(data, 'File.pies.file_format.buckets'), 'key', 'doc_count')}
                 title={t('charts.file_format')}
+                titleClassName={styles.title}
             />
             <PieChart
                 data={formatPieChart(get(data, 'Donor.pies.diagnoses__mondo_term_keyword.buckets'), 'key', 'doc_count')}
                 title={t('charts.data_category')}
+                titleClassName={styles.title}
             />
             <PieChart
                 data={formatPieChart(get(data, 'Donor.pies.ethnicity.buckets'), 'key', 'doc_count')}
                 title={t('charts.data_type')}
+                titleClassName={styles.title}
             />
             <PieChart
                 data={formatPieChart(
@@ -45,10 +50,12 @@ const Summary = (): React.ReactElement => {
                     'doc_count'
                 )}
                 title={t('charts.file_format')}
+                titleClassName={styles.title}
             />
             <PieChart
                 data={formatPieChart(get(data, 'Donor.pies.study__short_name_keyword.buckets'), 'key', 'doc_count')}
                 title={t('charts.study')}
+                titleClassName={styles.title}
             />
         </div>
     );

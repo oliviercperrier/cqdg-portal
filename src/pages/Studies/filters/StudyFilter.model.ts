@@ -4,31 +4,34 @@ import { presetModels } from 'utils/filters/model';
 
 const filters: IFilterModel[] = [
     {
-        field: 'data_category',
+        field: 'short_name_keyword',
+        title: 'facet.study.name',
         type: VisualType.Checkbox,
     },
     {
-        field: 'data_type',
+        field: 'domain',
+        title: 'facet.study.domain',
         type: VisualType.Checkbox,
     },
     {
-        field: 'is_harmonized',
-        type: VisualType.Toggle,
-    },
-    {
-        field: 'experimental_strategy',
+        field: 'population',
         type: VisualType.Checkbox,
     },
     {
-        field: 'file_format',
+        field: 'donors.diagnoses.icd_category_keyword',
         type: VisualType.Checkbox,
     },
     {
-        field: 'platform',
+        field: 'donors.diagnoses.mondo_term_keyword',
+        title: 'facet.mondo.term',
         type: VisualType.Checkbox,
     },
     {
-        field: 'data_access',
+        field: 'donors.phenotypes.hpo_category_keyword',
+        type: VisualType.Checkbox,
+    },
+    {
+        field: 'files.data_category',
         type: VisualType.Checkbox,
     },
 ];

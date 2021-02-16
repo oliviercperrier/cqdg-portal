@@ -1,6 +1,7 @@
 import { IFilterGroup, VisualType } from 'components/containers/filters/Filters';
 import { t } from 'locales/translate';
 import { IFilterModel } from 'types/interface/filters';
+import { presetModels } from 'utils/filters/model';
 
 const filters: IFilterModel[] = [
     {
@@ -79,9 +80,6 @@ const filters: IFilterModel[] = [
     },
 ];
 
-const presetFacets: IFilterGroup[] = filters.map((filter) => ({
-    ...filter,
-    title: filter.title ? t(filter.title) : t(`facet.${filter.field}`),
-}));
+const presetFacets: IFilterGroup[] = presetModels(filters);
 
 export default presetFacets;

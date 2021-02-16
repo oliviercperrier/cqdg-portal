@@ -1,10 +1,9 @@
-@import '~@ferlab-ui/core-style/themes/cqdg/colors';
+@import '~@ferlab/style/themes/cqdg/colors';
 
 .container {
-    align-items: center;
+    height: 100%;
 
     .title {
         color: $gray-8;
-        font-size: 1.2rem;
     }
 }

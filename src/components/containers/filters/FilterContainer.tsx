@@ -47,7 +47,7 @@ const FilterContainer: React.FC<IFilterContainerProps> = ({
                         <FilterContainerHeader
                             isCollapsed={isCollapsed}
                             onSearchClick={setSearchInputVisible}
-                            searchEnabled={filterGroup.type === VisualType.Checkbox}
+                            searchEnabled={filterGroup.type === VisualType.Checkbox && filters.length > maxShowing}
                             searchInputVisibled={hasSearchInput}
                             title={filterGroup.title}
                         />

@@ -1,9 +1,9 @@
 import { gql } from '@apollo/client';
 
 export const STUDIES_PAGE_DATA = gql`
-    query GetStudiesData($offset: Int, $sort: [Sort], $first: Int, $filters: JSON) {
+    query GetStudiesData($offset: Int, $sort: [Sort], $first: Int, $studyFilters: JSON, $donorFilters: JSON) {
         Study {
-            hits(offset: $offset, sort: $sort, first: $first, filters: $filters) {
+            hits(offset: $offset, sort: $sort, first: $first, filters: $studyFilters) {
                 total
                 edges {
                     node {
@@ -28,7 +28,7 @@ export const STUDIES_PAGE_DATA = gql`
             }
         }
         Donor {
-            hits(offset: $offset, sort: $sort, filters: $filters, first: $first) {
+            hits(offset: $offset, sort: $sort, filters: $donorFilters, first: $first) {
                 total
             }
         }

@@ -21,7 +21,7 @@ const FilterContainerHeader: React.FC<IFilterContainerHeaderProps> = ({
     isCollapsed,
 }) => (
     <StackLayout className={styles['fui-filters-container-header']}>
-        <span>{title}</span>
+        <span className={styles.title}>{title}</span>
         {searchEnabled && !isCollapsed && (
             <div className={`${styles['fui-search-icon-wrapper']}`}>
                 <AiOutlineSearch

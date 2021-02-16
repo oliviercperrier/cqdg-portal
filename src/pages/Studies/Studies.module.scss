@@ -1,4 +1,4 @@
-@import '~@ferlab-ui/core-style/themes/cqdg/mixins';
+@import '~@ferlab/style/themes/cqdg/mixins';
 
 .container {
     .graphs {
@@ -9,6 +9,16 @@
 
         .buttons {
             @include default-action-button;
+        }
+    }
+
+    .filters {
+        height: 100%;
+
+        padding: 2.4rem 0;
+
+        > *:not(:last-child) {
+            margin-bottom: 1.6rem;
         }
     }
 }

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { MdAssignment, MdBorderAll, MdDashboard, MdPeople } from 'react-icons/md';
-import { useQuery } from '@apollo/client';
+import { useLazyQuery, useQuery } from '@apollo/client';
 import { Button } from 'antd';
 import get from 'lodash/get';
 
@@ -9,6 +9,7 @@ import QueryBuilder from 'components/functionnal/QueryBuilder';
 import TableActions from 'components/functionnal/TableActions';
 import ContentSeparator from 'components/layouts/ContentSeparator';
 import CountWithIcon from 'components/layouts/CountWithIcon';
+import ScrollView from 'components/layouts/ScrollView';
 import StackLayout from 'components/layouts/StackLayout';
 import DataLayout from 'layouts/DataContent';
 import QueryLayout from 'layouts/Query';
@@ -18,28 +19,42 @@ import { presetModel } from 'pages/Studies/content/Table.models';
 import { setTableColumn } from 'store/cache/tableColumns';
 import { STUDIES_PAGE_DATA } from 'store/queries/studies/content';
 import { GET_TABLE_COLUMNS } from 'store/queries/tables';
-import { Hits } from 'utils/graphql/query';
+import { useFilters } from 'utils/filters/useFilters';
+import { Hits, useLazyResultQuery } from 'utils/graphql/query';
+
+import Filters from './filters/StudyFilters';
 
 import styles from './Studies.module.scss';
 
 const tableKey = 'study-content';
-const Study = (): React.ReactElement => {
+const Study: React.FC = () => {
     const [showCards, setShowCards] = useState(false);
+    const filters = useFilters();
+
     const { data: tablesData } = useQuery<any>(GET_TABLE_COLUMNS, {
         variables: { default: presetModel, key: tableKey },
     });
 
-    const { data, loading } = useQuery<any>(STUDIES_PAGE_DATA);
-    const totalDonors = get(data, `Donor.${Hits.ITEM}.total`, 0);
-    const totalStudies = get(data, `Study.${Hits.ITEM}.total`, 0);
-    const studyData = get(data, `Study.${Hits.COLLECTION}`, []);
+    const { loading, result } = useLazyResultQuery<any>(STUDIES_PAGE_DATA, {
+        variables: filters,
+    });
+    const totalDonors = get(result, `Donor.${Hits.ITEM}.total`, 0);
+    const totalStudies = get(result, `Study.${Hits.ITEM}.total`, 0);
+    const studyData = get(result, `Study.${Hits.COLLECTION}`, []);
     const dataSource = studyData.map((data: any) => ({
         ...data,
         key: data.node.id,
     }));
 
     return (
-        <QueryLayout className={styles.container} sidebar={<div>filters</div>}>
+        <QueryLayout
+            className={styles.container}
+            sidebar={
+                <ScrollView className={styles.filters}>
+                    <Filters />
+                </ScrollView>
+            }
+        >
             <QueryBuilder />
             <StackLayout grow vertical>
                 <BorderedContainer className={styles.graphs}>graphs</BorderedContainer>

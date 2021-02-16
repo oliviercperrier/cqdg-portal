@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { AiOutlineArrowRight } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
-import { Bar } from '@nivo/bar';
-import { Pie } from '@nivo/pie';
 import { useKeycloak } from '@react-keycloak/web';
 import { Button } from 'antd';
 import get from 'lodash/get';
 
+import ResponsiveBar from 'components/charts/Bar';
+import ResponsivePie from 'components/charts/Pie';
 import Footer from 'components/interface/Footer';
 import CloudIcon from 'components/interface/Icon/Cloud';
 import CloudStorageIcon from 'components/interface/Icon/CloudStorage';
@@ -136,99 +136,99 @@ const Home = (): React.ReactElement => {
                     <section className="home__contentWrapper__graphs">
                         <CardContainerNotched className="graph" type="hovered">
                             <CardContent cardType="stack">
-                                <h3>{t('home.graphs.graph1.title')}</h3>
-                                <Bar
-                                    colors={({ data }) => data.color}
-                                    data={formatPieChart(
-                                        get(data, 'Donor.aggregations.diagnoses__icd_category_keyword.buckets', []),
-                                        'key',
-                                        'doc_count',
-                                        [
-                                            '#D06D5E',
-                                            '#36CFC9',
-                                            '#F759AB',
-                                            '#FFB600',
-                                            '#FF7A45',
-                                            '#ADC6FF',
-                                            '#08979C',
-                                            '#00AEEF',
-                                            '#FF9C6E',
-                                            '#FF85C0',
-                                        ]
-                                    )}
-                                    enableGridX
-                                    enableGridY
-                                    enableLabel={false}
-                                    height={240}
-                                    layout="horizontal"
-                                    margin={{ bottom: 20, left: 150, right: 10, top: 0 }}
-                                    padding={0.3}
-                                    theme={{
-                                        fontSize: 10,
-                                        textColor: '#486F90',
-                                    }}
-                                    width={430}
-                                />
+                                <div className="graph-content">
+                                    <ResponsiveBar
+                                        axisLeft={null}
+                                        data={formatPieChart(
+                                            get(data, 'Donor.aggregations.diagnoses__icd_category_keyword.buckets', []),
+                                            'key',
+                                            'doc_count',
+                                            [
+                                                '#D06D5E',
+                                                '#36CFC9',
+                                                '#F759AB',
+                                                '#FFB600',
+                                                '#FF7A45',
+                                                '#ADC6FF',
+                                                '#08979C',
+                                                '#00AEEF',
+                                                '#FF9C6E',
+                                                '#FF85C0',
+                                            ]
+                                        )}
+                                        enableLabel={false}
+                                        layout="horizontal"
+                                        margin={{ bottom: 40, left: 5, right: 20, top: 0 }}
+                                        padding={0.3}
+                                        theme={{
+                                            fontSize: 10,
+                                            textColor: '#486F90',
+                                        }}
+                                        title={t('home.graphs.graph1.title')}
+                                        titleClassName="graph-title"
+                                    />
+                                </div>
                             </CardContent>
                         </CardContainerNotched>
                         <CardContainerNotched className="graph" type="hovered">
                             <CardContent cardType="stack">
-                                <h3>{t('home.graphs.graph2.title')}</h3>
-                                <Pie
-                                    colors={['#FFB600', '#D06D5E', '#B9BD31']}
-                                    data={formatPieChart(
-                                        get(data, 'Study.aggregations.domain.buckets', []),
-                                        'key',
-                                        'doc_count'
-                                    )}
-                                    enableRadialLabels={false}
-                                    enableSliceLabels={false}
-                                    height={240}
-                                    legends={[{ anchor: 'right', direction: 'column', itemHeight: 18, itemWidth: 50 }]}
-                                    margin={{ bottom: 0, left: -80, right: 110, top: 0 }}
-                                    theme={{
-                                        fontSize: 10,
-                                        textColor: '#486F90',
-                                    }}
-                                    width={430}
-                                />
+                                <div className="graph-content">
+                                    <ResponsivePie
+                                        data={formatPieChart(
+                                            get(data, 'Study.aggregations.domain.buckets', []),
+                                            'key',
+                                            'doc_count'
+                                        )}
+                                        enableRadialLabels={false}
+                                        enableSliceLabels={false}
+                                        legends={[
+                                            { anchor: 'right', direction: 'column', itemHeight: 18, itemWidth: 50 },
+                                        ]}
+                                        margin={{ bottom: 20, left: -100, right: 100, top: 10 }}
+                                        theme={{
+                                            fontSize: 10,
+                                            textColor: '#486F90',
+                                        }}
+                                        title={t('home.graphs.graph2.title')}
+                                        titleClassName="graph-title"
+                                    />
+                                </div>
                             </CardContent>
                         </CardContainerNotched>
                         <CardContainerNotched className="graph" type="hovered">
                             <CardContent cardType="stack">
-                                <h3>{t('home.graphs.graph3.title')}</h3>
-                                <Bar
-                                    colors={({ data }) => data.color}
-                                    data={formatPieChart(
-                                        get(data, 'Donor.aggregations.phenotypes__hpo_category_keyword.buckets', []),
-                                        'key',
-                                        'doc_count',
-                                        [
-                                            '#D06D5E',
-                                            '#36CFC9',
-                                            '#F759AB',
-                                            '#FFB600',
-                                            '#FF7A45',
-                                            '#ADC6FF',
-                                            '#08979C',
-                                            '#00AEEF',
-                                            '#FF9C6E',
-                                            '#FF85C0',
-                                        ]
-                                    )}
-                                    enableGridX
-                                    enableGridY
-                                    enableLabel={false}
-                                    height={240}
-                                    layout="horizontal"
-                                    margin={{ bottom: 20, left: 125, right: 10, top: 0 }}
-                                    padding={0.3}
-                                    theme={{
-                                        fontSize: 10,
-                                        textColor: '#486F90',
-                                    }}
-                                    width={430}
-                                />
+                                <div className="graph-content">
+                                    <ResponsiveBar
+                                        axisLeft={null}
+                                        data={formatPieChart(
+                                            get(
+                                                data,
+                                                'Donor.aggregations.phenotypes__hpo_category_keyword.buckets',
+                                                []
+                                            ),
+                                            'key',
+                                            'doc_count',
+                                            [
+                                                '#D06D5E',
+                                                '#36CFC9',
+                                                '#F759AB',
+                                                '#FFB600',
+                                                '#FF7A45',
+                                                '#ADC6FF',
+                                                '#08979C',
+                                                '#00AEEF',
+                                                '#FF9C6E',
+                                                '#FF85C0',
+                                            ]
+                                        )}
+                                        enableLabel={false}
+                                        layout="horizontal"
+                                        margin={{ bottom: 40, left: 5, right: 20, top: 10 }}
+                                        padding={0.3}
+                                        title={t('home.graphs.graph3.title')}
+                                        titleClassName="graph-title"
+                                    />
+                                </div>
                             </CardContent>
                         </CardContainerNotched>
                     </section>

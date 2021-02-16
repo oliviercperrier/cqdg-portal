@@ -1,5 +1,5 @@
-@import '~@ferlab-ui/core-style/themes/cqdg/mixins';
-@import '~@ferlab-ui/core-style/themes/cqdg/variables';
+@import '~@ferlab/style/themes/cqdg/mixins';
+@import '~@ferlab/style/themes/cqdg/variables';
 body {
     overflow-x: hidden;
 }
@@ -100,8 +100,13 @@ body {
             justify-content: space-evenly;
             margin-top: -17.0rem;
 
-            h3 {
-                @include h3-primary-16px;
+            .graph-content {
+                width: 430px;
+                height: 230px;
+
+                .graph-title {
+                    @include h3-primary-16px;
+                }    
             }
         }
 

@@ -31,7 +31,6 @@ const MultipleChoice: React.FC<IMultipleChoice> = ({
 
         setFilteredFilters(newFilters);
     }, [filters, search]);
-
     return (
         <Fragment>
             {hasSearchInput && (

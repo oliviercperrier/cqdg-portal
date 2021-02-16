@@ -3,7 +3,7 @@ import React from 'react';
 import { ISqonGroupFilter } from 'types/interface/filters';
 import { mapFilter } from 'utils/filters';
 
-import { donorToFileMapping, fileToDonorMapping } from './mapper';
+import { donorMapping, fileMapping, studyMapping } from './mapper';
 
 export const FilterContext = React.createContext<IFilterTypes[]>([]);
 
@@ -25,8 +25,9 @@ const FilterProvider: React.FC<IFilterProviderProps> = ({ children, types }) => 
 const FilterProviderConfigured: React.FC = ({ children }) => (
     <FilterProvider
         types={[
-            { remapValues: (filters) => mapFilter(filters, donorToFileMapping), type: 'fileFilters' },
-            { remapValues: (filters) => mapFilter(filters, fileToDonorMapping), type: 'donorFilters' },
+            { remapValues: (filters) => mapFilter(filters, fileMapping), type: 'fileFilters' },
+            { remapValues: (filters) => mapFilter(filters, donorMapping), type: 'donorFilters' },
+            { remapValues: (filters) => mapFilter(filters, studyMapping), type: 'studyFilters' },
         ]}
     >
         {children}

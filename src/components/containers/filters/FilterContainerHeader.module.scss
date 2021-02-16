@@ -4,6 +4,12 @@
     display: flex;
     justify-content: space-between;
 
+    .title {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        margin-right: .5rem;
+    }
+
     .fui-search-icon-wrapper {
         /*padding: .8rem 1.4rem;*/
         display: flex;
@@ -13,14 +19,3 @@
         }
     }
 }
-
-/*.fui-filters-container-header .title {
-  width: 100%;
-}
-
-.fui-filters-container-header > .fui-stack-layout:first-child { 
-  width: 100%;
-}
-.fui-filters-container-header.collapsed {
-  border-bottom: none;
-} */

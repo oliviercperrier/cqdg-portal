@@ -1,12 +1,16 @@
 import React from 'react';
-import { ResponsivePie } from '@nivo/pie';
+import { PieSvgProps, ResponsivePie } from '@nivo/pie';
 
 import StackLayout from 'components/layouts/StackLayout';
 
+import { IChartProps } from './types';
+
 import styles from './Pie.module.scss';
-const PieChart = ({ data, legends = [], margin = {}, title }: any): React.ReactElement => (
+
+interface IPieChartProps extends IChartProps, Omit<PieSvgProps<any>, 'height' | 'width'> {}
+const PieChart: React.FC<IPieChartProps> = ({ title, titleClassName = '', ...rest }): React.ReactElement => (
     <StackLayout className={styles.container} vertical>
-        <h3 className={styles.title}>{title}</h3>
+        <h3 className={`${styles.title} ${titleClassName}`}>{title}</h3>
         <ResponsivePie
             colors={[
                 '#A6CEE3',
@@ -22,15 +26,13 @@ const PieChart = ({ data, legends = [], margin = {}, title }: any): React.ReactE
                 '#FFFF99',
                 '#B15928',
             ]}
-            data={data}
             enableRadialLabels={false}
             enableSliceLabels={false}
-            legends={legends}
-            margin={margin}
             theme={{
                 fontSize: 10,
                 textColor: '#486F90',
             }}
+            {...rest}
         />
     </StackLayout>
 );
