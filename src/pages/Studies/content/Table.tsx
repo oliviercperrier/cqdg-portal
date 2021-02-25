@@ -1,7 +1,6 @@
 import React from 'react';
+import ScrollableTable from '@ferlab/ui/core/dist/components/tables/ScrollableTable';
 import { Table } from 'antd';
-
-import ScrollableTable from 'components/functionnal/ScrollableTable';
 
 const TableContent = ({ columns, data, loading }: any): React.ReactElement => (
     <ScrollableTable>

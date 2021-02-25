@@ -2,10 +2,10 @@ import React from 'react';
 import { MdInsertDriveFile, MdSave } from 'react-icons/md';
 import { useQuery } from '@apollo/client';
 import CountWithIcon from '@ferlab/ui/core/dist/components/labels/CountWithIcon';
+import ScrollableTable from '@ferlab/ui/core/dist/components/tables/ScrollableTable';
 import { Table } from 'antd';
 import get from 'lodash/get';
 
-import ScrollableTable from 'components/functionnal/ScrollableTable';
 import TableActions from 'components/functionnal/TableActions';
 import ContentSeparator from 'components/layouts/ContentSeparator';
 import DataLayout from 'layouts/DataContent';
