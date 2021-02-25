@@ -13,6 +13,7 @@ import ScrollView from 'components/layouts/ScrollView';
 import StackLayout from 'components/layouts/StackLayout';
 import DataLayout from 'layouts/DataContent';
 import QueryLayout from 'layouts/Query';
+import { t } from 'locales/translate';
 import CardsContent from 'pages/Studies/content/Cards';
 import TableContent from 'pages/Studies/content/Table';
 import { presetModel } from 'pages/Studies/content/Table.models';
@@ -21,8 +22,6 @@ import { STUDIES_PAGE_DATA } from 'store/queries/studies/content';
 import { GET_TABLE_COLUMNS } from 'store/queries/tables';
 import { useFilters } from 'utils/filters/useFilters';
 import { Hits, useLazyResultQuery } from 'utils/graphql/query';
-
-import { labelDisplayName } from '../../utils/labelDisplayName';
 
 import Filters from './filters/StudyFilters';
 
@@ -90,13 +89,13 @@ const Study: React.FC = () => {
                             <ContentSeparator>
                                 <CountWithIcon
                                     Icon={<MdPeople />}
-                                    label={labelDisplayName('global.donors')}
+                                    label={t('global.donors')}
                                     total={totalDonors.toLocaleString()}
                                     type="inline"
                                 />
                                 <CountWithIcon
                                     Icon={<MdAssignment />}
-                                    label={labelDisplayName('global.studies')}
+                                    label={t('global.studies')}
                                     total={totalStudies.toLocaleString()}
                                     type="inline"
                                 />

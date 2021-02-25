@@ -9,14 +9,13 @@ import get from 'lodash/get';
 import TableActions from 'components/functionnal/TableActions';
 import ContentSeparator from 'components/layouts/ContentSeparator';
 import DataLayout from 'layouts/DataContent';
+import { t } from 'locales/translate';
 import { setTableColumn } from 'store/cache/tableColumns';
 import { DONOR_TAB_DATA } from 'store/queries/files/donorTabs';
 import { GET_TABLE_COLUMNS } from 'store/queries/tables';
 import { ITableColumnItem } from 'types/interface';
 import { useFilters } from 'utils/filters/useFilters';
 import { Hits } from 'utils/graphql/query';
-
-import { labelDisplayName } from '../../../utils/labelDisplayName';
 
 import { presetDonorsModel } from './DonorsTable.models';
 
@@ -55,7 +54,7 @@ const DonorsTable = (): React.ReactElement => {
                 <ContentSeparator>
                     <CountWithIcon
                         Icon={<MdPeople />}
-                        label={labelDisplayName('global.donors')}
+                        label={t('global.donors')}
                         total={totalDonors.toLocaleString()}
                         type="inline"
                     />

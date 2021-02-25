@@ -29,8 +29,6 @@ import { formatPieChart } from 'utils/formatChartData';
 import { EFileInputType, formatFileSize } from 'utils/formatFileSize';
 import { Hits } from 'utils/graphql/query';
 
-import { labelDisplayName } from '../../utils/labelDisplayName';
-
 import './Home.scss';
 
 const Home = (): React.ReactElement => {
@@ -107,27 +105,27 @@ const Home = (): React.ReactElement => {
                                     </div>
                                     <CountWithIcon
                                         Icon={<StudyIcon />}
-                                        label={labelDisplayName('home.hero.data.groups.study')}
+                                        label={t('home.hero.data.groups.study')}
                                         total={totalStudies}
                                     />
                                     <CountWithIcon
                                         Icon={<DonorIcon />}
-                                        label={labelDisplayName('home.hero.data.groups.donor')}
+                                        label={t('home.hero.data.groups.donor')}
                                         total={totalDonors}
                                     />
                                     <CountWithIcon
                                         Icon={<GenomeIcon />}
-                                        label={labelDisplayName('home.hero.data.groups.genome')}
+                                        label={t('home.hero.data.groups.genome')}
                                         total={102}
                                     />
                                     <CountWithIcon
                                         Icon={<ExomeIcon />}
-                                        label={labelDisplayName('home.hero.data.groups.exome')}
+                                        label={t('home.hero.data.groups.exome')}
                                         total={800}
                                     />
                                     <CountWithIcon
                                         Icon={<FileIcon />}
-                                        label={labelDisplayName('home.hero.data.groups.file')}
+                                        label={t('home.hero.data.groups.file')}
                                         total={totalFiles}
                                     />
                                     <CountWithIcon

@@ -8,8 +8,6 @@ import CardContainerNotched from 'components/layouts/Card/CardContainerNotched';
 import CardContent from 'components/layouts/Card/CardContent';
 import { t } from 'locales/translate';
 
-import { labelDisplayName } from '../../../utils/labelDisplayName';
-
 import './StudyCard.scss';
 
 interface IStudyCardProp {
@@ -35,16 +33,8 @@ const StudyCard = ({ description, title, totalDonors, totalFiles }: IStudyCardPr
                 <p>{description}</p>
             </div>
             <div className="card-footer card-padding">
-                <CountWithIcon
-                    Icon={<DonorIcon />}
-                    label={labelDisplayName('global.donors')}
-                    total={totalFiles.toLocaleString()}
-                />
-                <CountWithIcon
-                    Icon={<FileIcon />}
-                    label={labelDisplayName('global.files')}
-                    total={totalDonors.toLocaleString()}
-                />
+                <CountWithIcon Icon={<DonorIcon />} label={t('global.donors')} total={totalFiles.toLocaleString()} />
+                <CountWithIcon Icon={<FileIcon />} label={t('global.files')} total={totalDonors.toLocaleString()} />
             </div>
         </CardContent>
     </CardContainerNotched>

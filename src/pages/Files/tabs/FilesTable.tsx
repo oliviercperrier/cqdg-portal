@@ -9,14 +9,13 @@ import get from 'lodash/get';
 import TableActions from 'components/functionnal/TableActions';
 import ContentSeparator from 'components/layouts/ContentSeparator';
 import DataLayout from 'layouts/DataContent';
+import { t } from 'locales/translate';
 import { setTableColumn } from 'store/cache/tableColumns';
 import { FILE_TAB_DATA } from 'store/queries/files/fileTabs';
 import { GET_TABLE_COLUMNS } from 'store/queries/tables';
 import { useFilters } from 'utils/filters/useFilters';
 import { EFileInputType, formatFileSize } from 'utils/formatFileSize';
 import { Hits } from 'utils/graphql/query';
-
-import { labelDisplayName } from '../../../utils/labelDisplayName';
 
 import { FilesModel } from './FilesTable.models';
 
@@ -67,7 +66,7 @@ const FilesTable = (): React.ReactElement => {
                 <ContentSeparator>
                     <CountWithIcon
                         Icon={<MdInsertDriveFile />}
-                        label={labelDisplayName('global.files')}
+                        label={t('global.files')}
                         total={totalFiles.toLocaleString()}
                         type="inline"
                     />
