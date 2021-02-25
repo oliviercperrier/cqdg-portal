@@ -1,14 +1,15 @@
 import React from 'react';
 import { MdPeople } from 'react-icons/md';
 import { useQuery } from '@apollo/client';
+import CountWithIcon from '@ferlab/ui/core/dist/components/labels/CountWithIcon';
+import ScrollableTable from '@ferlab/ui/core/dist/components/tables/ScrollableTable';
 import { Table } from 'antd';
 import get from 'lodash/get';
 
-import ScrollableTable from 'components/functionnal/ScrollableTable';
 import TableActions from 'components/functionnal/TableActions';
 import ContentSeparator from 'components/layouts/ContentSeparator';
-import CountWithIcon from 'components/layouts/CountWithIcon';
 import DataLayout from 'layouts/DataContent';
+import { t } from 'locales/translate';
 import { setTableColumn } from 'store/cache/tableColumns';
 import { DONOR_TAB_DATA } from 'store/queries/files/donorTabs';
 import { GET_TABLE_COLUMNS } from 'store/queries/tables';
@@ -52,8 +53,8 @@ const DonorsTable = (): React.ReactElement => {
             summary={
                 <ContentSeparator>
                     <CountWithIcon
-                        Icon={MdPeople}
-                        label="global.donors"
+                        Icon={<MdPeople />}
+                        label={t('global.donors')}
                         total={totalDonors.toLocaleString()}
                         type="inline"
                     />

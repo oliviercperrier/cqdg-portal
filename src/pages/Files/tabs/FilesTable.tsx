@@ -1,14 +1,15 @@
 import React from 'react';
 import { MdInsertDriveFile, MdSave } from 'react-icons/md';
 import { useQuery } from '@apollo/client';
+import CountWithIcon from '@ferlab/ui/core/dist/components/labels/CountWithIcon';
+import ScrollableTable from '@ferlab/ui/core/dist/components/tables/ScrollableTable';
 import { Table } from 'antd';
 import get from 'lodash/get';
 
-import ScrollableTable from 'components/functionnal/ScrollableTable';
 import TableActions from 'components/functionnal/TableActions';
 import ContentSeparator from 'components/layouts/ContentSeparator';
-import CountWithIcon from 'components/layouts/CountWithIcon';
 import DataLayout from 'layouts/DataContent';
+import { t } from 'locales/translate';
 import { setTableColumn } from 'store/cache/tableColumns';
 import { FILE_TAB_DATA } from 'store/queries/files/fileTabs';
 import { GET_TABLE_COLUMNS } from 'store/queries/tables';
@@ -64,12 +65,12 @@ const FilesTable = (): React.ReactElement => {
             summary={
                 <ContentSeparator>
                     <CountWithIcon
-                        Icon={MdInsertDriveFile}
-                        label="global.files"
+                        Icon={<MdInsertDriveFile />}
+                        label={t('global.files')}
                         total={totalFiles.toLocaleString()}
                         type="inline"
                     />
-                    <CountWithIcon Icon={MdSave} label={fileSizes.symbol} total={fileSizes.value} type="inline" />
+                    <CountWithIcon Icon={<MdSave />} label={fileSizes.symbol} total={fileSizes.value} type="inline" />
                 </ContentSeparator>
             }
         >

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { AiOutlineArrowRight } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
+import CountWithIcon from '@ferlab/ui/core/dist/components/labels/CountWithIcon';
 import { useKeycloak } from '@react-keycloak/web';
 import { Button } from 'antd';
 import get from 'lodash/get';
@@ -21,7 +22,6 @@ import StorageIcon from 'components/interface/Icon/Storage';
 import StudyIcon from 'components/interface/Icon/Study';
 import CardContainerNotched from 'components/layouts/Card/CardContainerNotched';
 import CardContent from 'components/layouts/Card/CardContent';
-import CountWithIcon from 'components/layouts/CountWithIcon';
 import { t } from 'locales/translate';
 import { isAuthenticated } from 'providers/Keycloak/keycloak';
 import { getHomeStats } from 'services/api';
@@ -104,28 +104,32 @@ const Home = (): React.ReactElement => {
                                         <span>{t('home.hero.data.subtitle')}</span>
                                     </div>
                                     <CountWithIcon
-                                        Icon={StudyIcon}
-                                        label={'home.hero.data.groups.study'}
+                                        Icon={<StudyIcon />}
+                                        label={t('home.hero.data.groups.study')}
                                         total={totalStudies}
                                     />
                                     <CountWithIcon
-                                        Icon={DonorIcon}
-                                        label={'home.hero.data.groups.donor'}
+                                        Icon={<DonorIcon />}
+                                        label={t('home.hero.data.groups.donor')}
                                         total={totalDonors}
                                     />
                                     <CountWithIcon
-                                        Icon={GenomeIcon}
-                                        label={'home.hero.data.groups.genome'}
+                                        Icon={<GenomeIcon />}
+                                        label={t('home.hero.data.groups.genome')}
                                         total={102}
                                     />
-                                    <CountWithIcon Icon={ExomeIcon} label={'home.hero.data.groups.exome'} total={800} />
                                     <CountWithIcon
-                                        Icon={FileIcon}
-                                        label={'home.hero.data.groups.file'}
+                                        Icon={<ExomeIcon />}
+                                        label={t('home.hero.data.groups.exome')}
+                                        total={800}
+                                    />
+                                    <CountWithIcon
+                                        Icon={<FileIcon />}
+                                        label={t('home.hero.data.groups.file')}
                                         total={totalFiles}
                                     />
                                     <CountWithIcon
-                                        Icon={CloudStorageIcon}
+                                        Icon={<CloudStorageIcon />}
                                         label={fileSizes.symbol}
                                         total={fileSizes.value}
                                     />

@@ -1,12 +1,11 @@
 import React from 'react';
+import CountWithIcon from '@ferlab/ui/core/dist/components/labels/CountWithIcon';
 
 import DonorIcon from 'components/interface/Icon/Donor';
 import ExternalLink from 'components/interface/Icon/ExternalLink';
 import FileIcon from 'components/interface/Icon/File';
 import CardContainerNotched from 'components/layouts/Card/CardContainerNotched';
 import CardContent from 'components/layouts/Card/CardContent';
-import CountWithIcon from 'components/layouts/CountWithIcon';
-import StackLayout from 'components/layouts/StackLayout';
 import { t } from 'locales/translate';
 
 import './StudyCard.scss';
@@ -34,8 +33,8 @@ const StudyCard = ({ description, title, totalDonors, totalFiles }: IStudyCardPr
                 <p>{description}</p>
             </div>
             <div className="card-footer card-padding">
-                <CountWithIcon Icon={DonorIcon} label="global.donors" total={totalFiles.toLocaleString()} />
-                <CountWithIcon Icon={FileIcon} label="global.files" total={totalDonors.toLocaleString()} />
+                <CountWithIcon Icon={<DonorIcon />} label={t('global.donors')} total={totalFiles.toLocaleString()} />
+                <CountWithIcon Icon={<FileIcon />} label={t('global.files')} total={totalDonors.toLocaleString()} />
             </div>
         </CardContent>
     </CardContainerNotched>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { MdAssignment, MdBorderAll, MdDashboard, MdPeople } from 'react-icons/md';
-import { useLazyQuery, useQuery } from '@apollo/client';
+import { useQuery } from '@apollo/client';
+import CountWithIcon from '@ferlab/ui/core/dist/components/labels/CountWithIcon';
 import { Button } from 'antd';
 import get from 'lodash/get';
 
@@ -8,11 +9,11 @@ import BorderedContainer from 'components/containers/BorderedContainer';
 import QueryBuilder from 'components/functionnal/QueryBuilder';
 import TableActions from 'components/functionnal/TableActions';
 import ContentSeparator from 'components/layouts/ContentSeparator';
-import CountWithIcon from 'components/layouts/CountWithIcon';
 import ScrollView from 'components/layouts/ScrollView';
 import StackLayout from 'components/layouts/StackLayout';
 import DataLayout from 'layouts/DataContent';
 import QueryLayout from 'layouts/Query';
+import { t } from 'locales/translate';
 import CardsContent from 'pages/Studies/content/Cards';
 import TableContent from 'pages/Studies/content/Table';
 import { presetModel } from 'pages/Studies/content/Table.models';
@@ -87,14 +88,14 @@ const Study: React.FC = () => {
                         summary={
                             <ContentSeparator>
                                 <CountWithIcon
-                                    Icon={MdPeople}
-                                    label="global.donors"
+                                    Icon={<MdPeople />}
+                                    label={t('global.donors')}
                                     total={totalDonors.toLocaleString()}
                                     type="inline"
                                 />
                                 <CountWithIcon
-                                    Icon={MdAssignment}
-                                    label="global.studies"
+                                    Icon={<MdAssignment />}
+                                    label={t('global.studies')}
                                     total={totalStudies.toLocaleString()}
                                     type="inline"
                                 />
