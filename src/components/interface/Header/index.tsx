@@ -12,7 +12,7 @@ import { t } from 'locales/translate';
 import { isAuthenticated } from 'providers/Keycloak/keycloak';
 import { IClassNameProp } from 'types/generic';
 
-import './Header.scss';
+import '@ferlab/style/themes/cqdg/components/header.scss';
 
 const Header = ({ className = '' }: IClassNameProp): React.ReactElement => {
     const location = useLocation();

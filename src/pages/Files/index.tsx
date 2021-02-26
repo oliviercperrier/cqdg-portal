@@ -1,11 +1,10 @@
 import React from 'react';
 import { MdInsertDriveFile, MdPeople } from 'react-icons/md';
 import { useHistory } from 'react-router-dom';
-import { useQuery } from '@apollo/client';
 import { Tabs } from 'antd';
 import get from 'lodash/get';
 
-import QueryBuilder from 'components/functionnal/QueryBuilder';
+import QueryBuilder from 'components/containers/QueryBuilder';
 import StackLayout from 'components/layouts/StackLayout';
 import QueryLayout from 'layouts/Query';
 import { t } from 'locales/translate';
@@ -14,7 +13,9 @@ import DonorsTable from 'pages/Files/tabs/DonorsTable';
 import FilesTable from 'pages/Files/tabs/FilesTable';
 import Summary from 'pages/Files/tabs/Summary';
 import { FILE_PAGE_METADATA } from 'store/queries/files/page';
+import { updateQueryFilters } from 'utils/filters';
 import { useFilters } from 'utils/filters/useFilters';
+import { useLazyResultQuery } from 'utils/graphql/query';
 import { readQueryParam, updateQueryParam } from 'utils/url/query';
 
 import './Files.scss';
@@ -24,22 +25,30 @@ const tabKey = 'searchTableTab';
 const FileRepo: React.FC = () => {
     const history = useHistory();
 
-    const filters = useFilters();
-    const { data, error, loading } = useQuery<any>(FILE_PAGE_METADATA, {
-        variables: filters,
+    const { filters, mappedFilters } = useFilters();
+    const { error, loading, result } = useLazyResultQuery<any>(FILE_PAGE_METADATA, {
+        variables: mappedFilters,
     });
 
     const onTabChange = (activeKey: string) => {
         updateQueryParam(history, tabKey, activeKey);
     };
 
-    const filesTotal = get(data, 'File.hits.total', 0);
-    const donorsTotal = get(data, 'Donor.hits.total', 0);
+    const filesTotal = get(result, 'File.hits.total', 0);
+    const donorsTotal = get(result, 'Donor.hits.total', 0);
 
     return (
         <QueryLayout className="file-repo" sidebar={<SideBarContent />}>
             <StackLayout grow noScroll vertical>
-                <QueryBuilder />
+                <QueryBuilder
+                    className="file-repo__query-builder"
+                    currentQuery={filters}
+                    dictionary={{ query: { facet: (key) => t(`facet.${key}`) } }}
+                    loading={loading}
+                    onChangeQuery={(_, query) => updateQueryParam(history, 'filters', query)}
+                    onRemoveFacet={(query) => updateQueryFilters(history, query.content.field, [])}
+                    total={filesTotal}
+                />
                 <StackLayout grow noScroll vertical>
                     <StackLayout grow noScroll vertical>
                         <Tabs

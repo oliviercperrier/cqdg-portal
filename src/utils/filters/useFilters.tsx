@@ -1,21 +1,26 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import { FilterContext } from 'providers/Filter';
 import { ISqonGroupFilter } from 'types/interface/filters';
-import { getFilters } from 'utils/filters';
+import { getFiltersQuery } from 'utils/filters';
+
+interface IMapFilters {
+    [key: string]: ISqonGroupFilter | null;
+}
 
 interface IFilters {
-    [key: string]: ISqonGroupFilter | null;
+    filters: ISqonGroupFilter;
+    mappedFilters: IMapFilters;
 }
 
 export const useFilters = (): IFilters => {
     const { search } = useLocation();
     const filterTypes = useContext(FilterContext);
-    const filters = getFilters(search);
-    const remapedFilters: IFilters = {};
+    const filters = getFiltersQuery(search);
+    const mappedFilters: IMapFilters = {};
     filterTypes.forEach((filter) => {
-        remapedFilters[filter.type] = filter.remapValues(filters);
+        mappedFilters[filter.type] = filter.remapValues(filters);
     });
-    return remapedFilters;
+    return { filters, mappedFilters };
 };

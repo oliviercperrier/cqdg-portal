@@ -2,7 +2,7 @@ import React from 'react';
 import { useIntl } from 'react-intl';
 import { Button } from 'antd';
 
-import './Footer.scss';
+import '@ferlab/style/themes/cqdg/components/footer.scss';
 
 const Footer = (): React.ReactElement => {
     const intl = useIntl();

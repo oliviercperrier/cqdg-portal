@@ -35,17 +35,24 @@ const createRangeFilter = (field: string, filters: IFilter<IFilterRange>[]) => {
     }
 
     const selectedRange = filters[0];
-    if (selectedRange.data.min) {
+    if (selectedRange.data.min && selectedRange.data.max) {
         selectedFilters.push({
-            content: { field, value: [selectedRange.data.min] },
-            op: '>=',
+            content: { field, value: [selectedRange.data.min, selectedRange.data.max] },
+            op: 'between',
         });
-    }
-    if (selectedRange.data.max) {
-        selectedFilters.push({
-            content: { field, value: [selectedRange.data.max] },
-            op: '<=',
-        });
+    } else {
+        if (selectedRange.data.max) {
+            selectedFilters.push({
+                content: { field, value: [selectedRange.data.max] },
+                op: '<=',
+            });
+        }
+        if (selectedRange.data.min) {
+            selectedFilters.push({
+                content: { field, value: [selectedRange.data.min] },
+                op: '>=',
+            });
+        }
     }
 
     return selectedFilters;
@@ -63,7 +70,7 @@ const createInlineFilters = (field: string, filters: IFilter<IFilterCount>[]): T
         : [];
 };
 
-const prepareSelectedFilters = (filterGroup: IFilterGroup, selectedFilters: IFilter[]): TSqonGroupContent => {
+const createSQONFromFilters = (filterGroup: IFilterGroup, selectedFilters: IFilter[]): TSqonGroupContent => {
     switch (filterGroup.type) {
         case VisualType.Range:
             return createRangeFilter(filterGroup.field, selectedFilters);
@@ -73,18 +80,23 @@ const prepareSelectedFilters = (filterGroup: IFilterGroup, selectedFilters: IFil
 };
 
 export const updateFilters = (history: any, filterGroup: IFilterGroup, selected: IFilter[]): void => {
-    const currentFilter = getFilters();
-    const newSelectedFilters: TSqonGroupContent = prepareSelectedFilters(filterGroup, selected);
+    const newSelectedFilters: TSqonGroupContent = createSQONFromFilters(filterGroup, selected);
 
-    let newFilters: ISqonGroupFilter | Record<string, never> = { content: newSelectedFilters, op: 'and' };
+    updateQueryFilters(history, filterGroup.field, newSelectedFilters);
+};
+
+export const updateQueryFilters = (history: any, field: string, filters: TSqonGroupContent): void => {
+    const currentFilter = getFiltersQuery();
+
+    let newFilters: ISqonGroupFilter | Record<string, never> = { content: filters, op: 'and' };
     if (!isEmpty(currentFilter)) {
-        const filterWithoutSelection = getFilterWithNoSelection(currentFilter, filterGroup.field);
-        if (isEmpty(filterWithoutSelection.content) && isEmpty(selected)) {
+        const filterWithoutSelection = getFilterWithNoSelection(currentFilter, field);
+        if (isEmpty(filterWithoutSelection.content) && isEmpty(filters)) {
             newFilters = {};
         } else {
             newFilters = {
                 ...filterWithoutSelection,
-                content: [...filterWithoutSelection.content, ...newSelectedFilters],
+                content: [...filterWithoutSelection.content, ...filters],
             };
         }
     }
@@ -121,8 +133,16 @@ const getRangeSelection = (filters: ISqonGroupFilter, filterGroup: IFilterGroup)
     let rangeSelection: IFilterRange = { max: undefined, min: undefined, rangeType: undefined };
     for (const filter of filters.content) {
         if (filter.content.field === filterGroup.field) {
-            const op = filter.op === '>=' ? 'min' : 'max';
-            rangeSelection = { ...rangeSelection, [op]: filter.content.value[0] };
+            if (filter.op === 'between') {
+                rangeSelection = {
+                    ...rangeSelection,
+                    max: filter.content.value[1] as number,
+                    min: filter.content.value[0] as number,
+                };
+            } else {
+                const op = filter.op === '>=' ? 'min' : 'max';
+                rangeSelection = { ...rangeSelection, [op]: filter.content.value[0] };
+            }
         }
     }
 
@@ -130,7 +150,7 @@ const getRangeSelection = (filters: ISqonGroupFilter, filterGroup: IFilterGroup)
 };
 
 export const getSelectedFilters = (filters: IFilter[], filterGroup: IFilterGroup): IFilter[] => {
-    const selectedFilters = getFilters();
+    const selectedFilters = getFiltersQuery();
     if (isEmpty(selectedFilters)) {
         return [];
     }
@@ -179,7 +199,7 @@ export const mapFilter = (filters: ISqonGroupFilter, mapping: Map<string, string
     };
 };
 
-export const getFilters = (search: any = null): ISqonGroupFilter => {
+export const getFiltersQuery = (search: any = null): ISqonGroupFilter => {
     const filters = readQueryParam('filters', JSON.stringify({}), search);
 
     return JSON.parse(filters);

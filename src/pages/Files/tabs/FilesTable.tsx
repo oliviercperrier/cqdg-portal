@@ -31,9 +31,9 @@ export interface ITableColumnItem {
 
 const tableKey = 'files-tabs-file';
 const FilesTable = (): React.ReactElement => {
-    const filters = useFilters();
+    const { mappedFilters } = useFilters();
     const { data, loading } = useQuery<any>(FILE_TAB_DATA, {
-        variables: { first: 20, offset: 0, ...filters },
+        variables: { first: 20, offset: 0, ...mappedFilters },
     });
 
     const { data: tablesData } = useQuery<any>(GET_TABLE_COLUMNS, {

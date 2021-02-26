@@ -30,14 +30,14 @@ import styles from './Studies.module.scss';
 const tableKey = 'study-content';
 const Study: React.FC = () => {
     const [showCards, setShowCards] = useState(false);
-    const filters = useFilters();
+    const { mappedFilters } = useFilters();
 
     const { data: tablesData } = useQuery<any>(GET_TABLE_COLUMNS, {
         variables: { default: presetModel, key: tableKey },
     });
 
     const { loading, result } = useLazyResultQuery<any>(STUDIES_PAGE_DATA, {
-        variables: filters,
+        variables: mappedFilters,
     });
     const totalDonors = get(result, `Donor.${Hits.ITEM}.total`, 0);
     const totalStudies = get(result, `Study.${Hits.ITEM}.total`, 0);

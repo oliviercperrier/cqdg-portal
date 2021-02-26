@@ -5,14 +5,14 @@ export interface IValueContent {
     value: TFilterValue;
 }
 
-export type TValueOp = 'in' | '>=' | '<=';
+export type TValueOp = 'in' | '>=' | '<=' | 'not in' | 'all' | 'between';
 export interface IValueFilter {
     content: IValueContent;
     op: TValueOp;
 }
 
 export type TSqonGroupContent = IValueFilter[];
-export type TSqonGroupOp = 'and';
+export type TSqonGroupOp = 'and' | 'or';
 export interface ISqonGroupFilter {
     content: TSqonGroupContent;
     op: TSqonGroupOp;

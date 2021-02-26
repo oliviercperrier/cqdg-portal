@@ -2,7 +2,7 @@ import React from 'react';
 
 import { IBasicProp } from 'types/generic';
 
-import './CardContainerNotched.scss';
+import '@ferlab/style/themes/cqdg/components/cardContainerNotched.scss';
 
 type ContainerTypeEnum = 'none' | 'header' | 'hover' | 'hovered';
 

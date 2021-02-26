@@ -4,6 +4,9 @@ import qs from 'query-string';
 
 export const updateQueryParam = (history: any, key: string, value: any): void => {
     const query = getQueryParams();
+    if (isEmpty(value) && !query[key]) {
+        return;
+    }
     if (isEmpty(value) && query[key]) {
         delete query[key];
     } else {
@@ -13,11 +16,6 @@ export const updateQueryParam = (history: any, key: string, value: any): void =>
         search: `?${qs.stringify(query)}`,
     });
 };
-
-/*type IQueryParams<T> = {
-    key: string;
-    defaultValue: T;
-};*/
 
 export const readQueryParam = <T = ''>(key: string, defaultValue: T, search: any = null): any => {
     const query = getQueryParams(search);

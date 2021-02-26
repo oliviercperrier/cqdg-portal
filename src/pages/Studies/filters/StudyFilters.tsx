@@ -13,9 +13,9 @@ import presetFilters from './StudyFilter.model';
 
 const StudyFilters: React.FC = () => {
     const history = useHistory();
-    const filters = useFilters();
+    const { mappedFilters } = useFilters();
     const { data, loading, previousData } = useQuery<any>(STUDY_FILTERS, {
-        variables: filters,
+        variables: mappedFilters,
     });
 
     let result = previousData;

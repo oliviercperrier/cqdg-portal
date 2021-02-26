@@ -13,9 +13,9 @@ import presetFilters from './DonorFilter.model';
 
 const FileFilters: React.FC = () => {
     const history = useHistory();
-    const filters = useFilters();
+    const { mappedFilters } = useFilters();
     const { data, loading, previousData } = useQuery<any>(DONOR_TAB_FILTERS, {
-        variables: filters,
+        variables: mappedFilters,
     });
 
     let result = previousData;

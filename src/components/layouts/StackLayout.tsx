@@ -10,8 +10,8 @@ export enum StackOrientation {
 }
 
 interface IExtraProps {
-    onClick?: (e: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>) => null;
-    onKeyDown?: (e: React.KeyboardEvent<HTMLElement>) => null;
+    onClick?: (e: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>) => void;
+    onKeyDown?: (e: React.KeyboardEvent<HTMLElement>) => void;
 }
 
 interface IStackLayout extends IExtraProps {
