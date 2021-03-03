@@ -1289,8 +1289,8 @@ html {
   color: #52c41a;
 }
 .ant-alert-info {
-  background-color: #e6fcff;
-  border: 1px solid #7ae9ff;
+  background-color: #C2ECFB;
+  border: 1px solid #61CDF5;
 }
 .ant-alert-info .ant-alert-icon {
   color: #00AEEF;
@@ -24813,8 +24813,12 @@ div.ant-typography-edit-content.ant-typography-rtl {
 .ant-btn {
   padding: 0.5rem 0.8rem;
   color: #18486B;
+  border-color: #B5C6D8;
 }
-.ant-btn:hover,
+.ant-btn:hover {
+  color: #0075A2;
+  border-color: #D8E1EB;
+}
 .ant-btn:focus {
   color: #0075A2;
   border-color: #0075A2;
@@ -24874,22 +24878,31 @@ div.ant-typography-edit-content.ant-typography-rtl {
   color: #90A9C1;
   border-color: #B5C6D8;
 }
-.ant-btn-link,
 .ant-btn-text {
   border: none;
 }
-.ant-btn-link:hover,
 .ant-btn-text:hover,
-.ant-btn-link:focus,
 .ant-btn-text:focus,
-.ant-btn-link:active,
 .ant-btn-text:active,
-.ant-btn-link:disabled,
 .ant-btn-text:disabled {
   background-color: transparent;
 }
-.ant-btn-link:disabled,
 .ant-btn-text:disabled {
+  color: #90A9C1;
+}
+.ant-btn-link {
+  border: none;
+  text-decoration: underline;
+  color: #0075A2;
+}
+.ant-btn-link:hover,
+.ant-btn-link:focus,
+.ant-btn-link:active,
+.ant-btn-link:disabled {
+  background-color: transparent;
+  text-decoration: none;
+}
+.ant-btn-link:disabled {
   color: #90A9C1;
 }
 .ant-btn-text[disabled]:hover {

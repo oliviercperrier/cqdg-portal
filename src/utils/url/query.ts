@@ -17,6 +17,23 @@ export const updateQueryParam = (history: any, key: string, value: any): void =>
     });
 };
 
+interface IQueryParams {
+    [key: string]: string | any;
+}
+
+export const createQueryParams = (queryParams: IQueryParams): string => {
+    const query: Record<string, string> = {};
+    for (const queryKey in queryParams) {
+        if (typeof queryParams[queryKey] === 'object') {
+            query[queryKey] = JSON.stringify(queryParams[queryKey]);
+        } else {
+            query[queryKey] = queryParams[queryKey] as string;
+        }
+    }
+
+    return `?${qs.stringify(query)}`;
+};
+
 export const readQueryParam = <T = ''>(key: string, defaultValue: T, search: any = null): any => {
     const query = getQueryParams(search);
     return get(query, key, defaultValue);

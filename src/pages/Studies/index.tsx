@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { MdAssignment, MdBorderAll, MdDashboard, MdPeople } from 'react-icons/md';
+import { useHistory } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
-import CountWithIcon from '@ferlab/ui/core/dist/components/labels/CountWithIcon';
+import CountWithIcon, { CountWithIconTypeEnum } from '@ferlab/ui/core/components/labels/CountWithIcon';
+import QueryBuilder from '@ferlab/ui/core/components/QueryBuilder';
 import { Button } from 'antd';
 import get from 'lodash/get';
 
 import BorderedContainer from 'components/containers/BorderedContainer';
-import QueryBuilder from 'components/functionnal/QueryBuilder';
 import TableActions from 'components/functionnal/TableActions';
 import ContentSeparator from 'components/layouts/ContentSeparator';
 import ScrollView from 'components/layouts/ScrollView';
@@ -17,11 +18,14 @@ import { t } from 'locales/translate';
 import CardsContent from 'pages/Studies/content/Cards';
 import TableContent from 'pages/Studies/content/Table';
 import { presetModel } from 'pages/Studies/content/Table.models';
+import { getQueryBuilderCache, setQueryBuilderCache } from 'store/cache/queryBuilder';
 import { setTableColumn } from 'store/cache/tableColumns';
 import { STUDIES_PAGE_DATA } from 'store/queries/studies/content';
 import { GET_TABLE_COLUMNS } from 'store/queries/tables';
+import { updateQueryFilters } from 'utils/filters';
 import { useFilters } from 'utils/filters/useFilters';
 import { Hits, useLazyResultQuery } from 'utils/graphql/query';
+import { updateQueryParam } from 'utils/url/query';
 
 import Filters from './filters/StudyFilters';
 
@@ -29,8 +33,10 @@ import styles from './Studies.module.scss';
 
 const tableKey = 'study-content';
 const Study: React.FC = () => {
+    const history = useHistory();
+
     const [showCards, setShowCards] = useState(false);
-    const { mappedFilters } = useFilters();
+    const { filters, mappedFilters } = useFilters();
 
     const { data: tablesData } = useQuery<any>(GET_TABLE_COLUMNS, {
         variables: { default: presetModel, key: tableKey },
@@ -46,7 +52,6 @@ const Study: React.FC = () => {
         ...data,
         key: data.node.id,
     }));
-
     return (
         <QueryLayout
             className={styles.container}
@@ -56,7 +61,18 @@ const Study: React.FC = () => {
                 </ScrollView>
             }
         >
-            <QueryBuilder />
+            <QueryBuilder
+                IconTotal={<MdAssignment />}
+                className="file-repo__query-builder"
+                currentQuery={filters}
+                dictionary={{ query: { facet: (key) => t(`facet.${key}`) } }}
+                initialState={getQueryBuilderCache('study-repo')}
+                loading={loading}
+                onChangeQuery={(_, query) => updateQueryParam(history, 'filters', query)}
+                onRemoveFacet={(query) => updateQueryFilters(history, query.content.field, [])}
+                onUpdate={(state) => setQueryBuilderCache('study-repo', state)}
+                total={totalStudies}
+            />
             <StackLayout grow vertical>
                 <BorderedContainer className={styles.graphs}>graphs</BorderedContainer>
                 <BorderedContainer grow>
@@ -91,13 +107,13 @@ const Study: React.FC = () => {
                                     Icon={<MdPeople />}
                                     label={t('global.donors')}
                                     total={totalDonors.toLocaleString()}
-                                    type="inline"
+                                    type={CountWithIconTypeEnum.Inline}
                                 />
                                 <CountWithIcon
                                     Icon={<MdAssignment />}
                                     label={t('global.studies')}
                                     total={totalStudies.toLocaleString()}
-                                    type="inline"
+                                    type={CountWithIconTypeEnum.Inline}
                                 />
                             </ContentSeparator>
                         }

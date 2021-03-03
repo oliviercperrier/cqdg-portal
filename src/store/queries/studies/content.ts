@@ -11,6 +11,7 @@ export const STUDIES_PAGE_DATA = gql`
                         website
                         id
                         name
+                        short_name_keyword
                         population
                         description
                         donors {

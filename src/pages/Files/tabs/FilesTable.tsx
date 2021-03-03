@@ -1,8 +1,8 @@
 import React from 'react';
 import { MdInsertDriveFile, MdSave } from 'react-icons/md';
 import { useQuery } from '@apollo/client';
-import CountWithIcon from '@ferlab/ui/core/dist/components/labels/CountWithIcon';
-import ScrollableTable from '@ferlab/ui/core/dist/components/tables/ScrollableTable';
+import CountWithIcon, { CountWithIconTypeEnum } from '@ferlab/ui/core/components/labels/CountWithIcon';
+import ScrollableTable from '@ferlab/ui/core/components/tables/ScrollableTable';
 import { Table } from 'antd';
 import get from 'lodash/get';
 
@@ -16,6 +16,7 @@ import { GET_TABLE_COLUMNS } from 'store/queries/tables';
 import { useFilters } from 'utils/filters/useFilters';
 import { EFileInputType, formatFileSize } from 'utils/formatFileSize';
 import { Hits } from 'utils/graphql/query';
+import { useLazyResultQuery } from 'utils/graphql/query';
 
 import { FilesModel } from './FilesTable.models';
 
@@ -32,7 +33,7 @@ export interface ITableColumnItem {
 const tableKey = 'files-tabs-file';
 const FilesTable = (): React.ReactElement => {
     const { mappedFilters } = useFilters();
-    const { data, loading } = useQuery<any>(FILE_TAB_DATA, {
+    const { loading, result } = useLazyResultQuery<any>(FILE_TAB_DATA, {
         variables: { first: 20, offset: 0, ...mappedFilters },
     });
 
@@ -40,13 +41,13 @@ const FilesTable = (): React.ReactElement => {
         variables: { default: FilesModel, key: tableKey },
     });
 
-    const filesData = get(data, `File.${Hits.COLLECTION}`, []);
+    const filesData = get(result, `File.${Hits.COLLECTION}`, []);
     const dataSource = filesData.map((data: any) => ({
         ...data,
         key: data.node.id,
     }));
-    const totalFiles = get(data, `File.${Hits.ITEM}.total`, 0);
-    const totalSizes = get(data, `File.aggregations.file_size.stats.sum`, 0);
+    const totalFiles = get(result, `File.${Hits.ITEM}.total`, 0);
+    const totalSizes = get(result, `File.aggregations.file_size.stats.sum`, 0);
     const fileSizes = formatFileSize(totalSizes, { output: 'object' }, EFileInputType.MB) as Record<string, any>;
     return (
         <DataLayout
@@ -68,9 +69,14 @@ const FilesTable = (): React.ReactElement => {
                         Icon={<MdInsertDriveFile />}
                         label={t('global.files')}
                         total={totalFiles.toLocaleString()}
-                        type="inline"
+                        type={CountWithIconTypeEnum.Inline}
                     />
-                    <CountWithIcon Icon={<MdSave />} label={fileSizes.symbol} total={fileSizes.value} type="inline" />
+                    <CountWithIcon
+                        Icon={<MdSave />}
+                        label={fileSizes.symbol}
+                        total={fileSizes.value}
+                        type={CountWithIconTypeEnum.Inline}
+                    />
                 </ContentSeparator>
             }
         >

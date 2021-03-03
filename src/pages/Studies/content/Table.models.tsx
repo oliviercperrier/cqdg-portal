@@ -1,4 +1,6 @@
+import InternalLink from 'components/functionnal/InternalLink';
 import { t } from 'locales/translate';
+import { Routes } from 'routes';
 
 const StudyModel = [
     {
@@ -47,10 +49,23 @@ const StudyModel = [
         title: t('global.donors.title'),
     },
     {
-        dataIndex: ['node', 'files', 'hits', 'total'],
         hidden: false,
         id: 'files',
         movable: true,
+        render: ({ node }: any) => (
+            <InternalLink
+                filters={{
+                    content: {
+                        field: 'short_name_keyword',
+                        value: [node.short_name_keyword],
+                    },
+                }}
+                path={Routes.FILES}
+                query={{ searchTableTab: 'files' }}
+            >
+                {node.files.hits.total}
+            </InternalLink>
+        ),
         title: t('global.files.title'),
     },
 ];

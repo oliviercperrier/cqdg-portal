@@ -1,6 +1,8 @@
 import { MdLock, MdLockOpen, MdLockOutline } from 'react-icons/md';
 
+import InternalLink from 'components/functionnal/InternalLink';
 import { t } from 'locales/translate';
+import { Routes } from 'routes';
 import { EFileInputType, formatFileSize } from 'utils/formatFileSize';
 
 export const FilesModel = [
@@ -24,11 +26,24 @@ export const FilesModel = [
         title: <MdLock className="files-table-locks" />,
     },
     {
-        dataIndex: ['node', 'study', 'hits', 'edges', '0', 'node', 'name'],
         hidden: false,
         id: 'study_name',
         initialOrder: 1,
         movable: true,
+        render: ({ node }: any) => (
+            <InternalLink
+                filters={{
+                    content: {
+                        field: 'short_name_keyword',
+                        value: [node.study.hits.edges[0].node.short_name_keyword],
+                    },
+                }}
+                path={Routes.STUDIES}
+                query={{}}
+            >
+                {node.study.hits.edges[0].node.name}
+            </InternalLink>
+        ),
         sortDirection: ['ascend', 'descend'],
         sorter: {
             compare: (a: Record<string, any>, b: Record<string, any>): number =>
@@ -113,11 +128,24 @@ export const FilesModel = [
     },
     {
         className: 'numerical',
-        dataIndex: ['node', 'donors', 'hits', 'total'],
         hidden: false,
         id: 'number_of_donors',
         initialOrder: 9,
         movable: true,
+        render: ({ node }: any) => (
+            <InternalLink
+                filters={{
+                    content: {
+                        field: 'submitter_donor_id',
+                        value: [node.donors.hits.edges[0].node.submitter_donor_id],
+                    },
+                }}
+                path={Routes.FILES}
+                query={{ searchTableTab: 'donors' }}
+            >
+                {node.donors.hits.total}
+            </InternalLink>
+        ),
         title: t('facet.donors'),
     },
     {

@@ -5,6 +5,7 @@ export const fileMapping: Map<string, string> = new Map([
     ['vital_status', 'donors.vital_status'],
     ['files.file_id', 'file_id'],
     ['submitter_donor_id', 'donors.submitter_donor_id'],
+    ['short_name_keyword', 'study.short_name_keyword'],
 ]);
 
 export const donorMapping: Map<string, string> = new Map([

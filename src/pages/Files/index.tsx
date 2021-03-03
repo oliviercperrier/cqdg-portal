@@ -1,10 +1,10 @@
 import React from 'react';
 import { MdInsertDriveFile, MdPeople } from 'react-icons/md';
 import { useHistory } from 'react-router-dom';
+import QueryBuilder from '@ferlab/ui/core/components/QueryBuilder';
 import { Tabs } from 'antd';
 import get from 'lodash/get';
 
-import QueryBuilder from 'components/containers/QueryBuilder';
 import StackLayout from 'components/layouts/StackLayout';
 import QueryLayout from 'layouts/Query';
 import { t } from 'locales/translate';
@@ -12,6 +12,7 @@ import SideBarContent from 'pages/Files/filters/SideBarContent';
 import DonorsTable from 'pages/Files/tabs/DonorsTable';
 import FilesTable from 'pages/Files/tabs/FilesTable';
 import Summary from 'pages/Files/tabs/Summary';
+import { getQueryBuilderCache, setQueryBuilderCache } from 'store/cache/queryBuilder';
 import { FILE_PAGE_METADATA } from 'store/queries/files/page';
 import { updateQueryFilters } from 'utils/filters';
 import { useFilters } from 'utils/filters/useFilters';
@@ -41,12 +42,15 @@ const FileRepo: React.FC = () => {
         <QueryLayout className="file-repo" sidebar={<SideBarContent />}>
             <StackLayout grow noScroll vertical>
                 <QueryBuilder
+                    IconTotal={<MdInsertDriveFile />}
                     className="file-repo__query-builder"
                     currentQuery={filters}
                     dictionary={{ query: { facet: (key) => t(`facet.${key}`) } }}
+                    initialState={getQueryBuilderCache('file-repo')}
                     loading={loading}
                     onChangeQuery={(_, query) => updateQueryParam(history, 'filters', query)}
                     onRemoveFacet={(query) => updateQueryFilters(history, query.content.field, [])}
+                    onUpdate={(state) => setQueryBuilderCache('file-repo', state)}
                     total={filesTotal}
                 />
                 <StackLayout grow noScroll vertical>

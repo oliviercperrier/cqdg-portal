@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { AiOutlineArrowRight } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
-import CountWithIcon from '@ferlab/ui/core/dist/components/labels/CountWithIcon';
+import CountWithIcon from '@ferlab/ui/core/components/labels/CountWithIcon';
 import { useKeycloak } from '@react-keycloak/web';
 import { Button } from 'antd';
 import get from 'lodash/get';

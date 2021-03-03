@@ -1,5 +1,5 @@
 import React from 'react';
-import CountWithIcon from '@ferlab/ui/core/dist/components/labels/CountWithIcon';
+import CountWithIcon from '@ferlab/ui/core/components/labels/CountWithIcon';
 
 import DonorIcon from 'components/interface/Icon/Donor';
 import ExternalLink from 'components/interface/Icon/ExternalLink';

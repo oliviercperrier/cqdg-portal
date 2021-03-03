@@ -10,18 +10,25 @@ import StudiesPage from 'pages/Studies';
 import AuthRoute from './AuthRoute';
 import PublicRoute from './PublicRoute';
 
+export enum Routes {
+    ROOT = '/',
+    FILES = '/files',
+    STUDIES = '/studies',
+    LOGIN = '/login',
+}
+
 export default (): React.ReactElement => (
     <Router>
         <Route>{({ location: { pathname } }) => <Head pageName={pathname.split('/')[1]} />}</Route>
         <Switch>
-            <PublicRoute exact path="/">
+            <PublicRoute exact path={Routes.ROOT}>
                 <HomePage />
             </PublicRoute>
-            <Route exact path="/login">
+            <Route exact path={Routes.LOGIN}>
                 <LoginPage />
             </Route>
-            <AuthRoute component={FilesPage} exact path="/files" />
-            <AuthRoute component={StudiesPage} exact path="/studies" />
+            <AuthRoute component={FilesPage} exact path={Routes.FILES} />
+            <AuthRoute component={StudiesPage} exact path={Routes.STUDIES} />
         </Switch>
     </Router>
 );

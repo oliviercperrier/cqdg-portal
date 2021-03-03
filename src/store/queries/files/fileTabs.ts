@@ -12,6 +12,11 @@ export const FILE_TAB_DATA = gql`
                         donors {
                             hits {
                                 total
+                                edges {
+                                    node {
+                                        submitter_donor_id
+                                    }
+                                }
                             }
                         }
                         study {
@@ -19,6 +24,7 @@ export const FILE_TAB_DATA = gql`
                                 edges {
                                     node {
                                         name
+                                        short_name_keyword
                                     }
                                 }
                             }
