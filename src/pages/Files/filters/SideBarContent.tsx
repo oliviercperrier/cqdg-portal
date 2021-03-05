@@ -1,9 +1,9 @@
 import React from 'react';
 import { MdInsertDriveFile, MdPeople } from 'react-icons/md';
 import { useHistory } from 'react-router-dom';
+import ScrollView from '@ferlab/ui/core/layout/ScrollView';
 import { Tabs } from 'antd';
 
-import ScrollView from 'components/layouts/ScrollView';
 import { t } from 'locales/translate';
 import { readQueryParam, updateQueryParam } from 'utils/url/query';
 

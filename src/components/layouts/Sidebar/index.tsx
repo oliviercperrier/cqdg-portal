@@ -8,13 +8,17 @@ import { t } from 'locales/translate';
 
 import './SideBar.scss';
 
-const SideBar: React.FC = ({ children }) => {
+interface ISidebar {
+    className?: string;
+}
+
+const SideBar: React.FC<ISidebar> = ({ children, className = '' }) => {
     const [isCollapsed, setIsCollapsed] = useState(false);
     const intl = useIntl();
 
     const isCollapsedClassName = classNames({ 'side-panel-collapsed': isCollapsed });
     return (
-        <div className={`side-panel ${isCollapsedClassName}`}>
+        <div className={`side-panel ${isCollapsedClassName} ${className}`}>
             <div className="side-panel-header">
                 <Button onClick={() => setIsCollapsed(!isCollapsed)} type="text">
                     {isCollapsed ? <AiOutlineMenu /> : <AiOutlineMenuFold />}

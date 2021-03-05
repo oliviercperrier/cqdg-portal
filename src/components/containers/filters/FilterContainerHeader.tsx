@@ -1,7 +1,6 @@
 import React from 'react';
 import { AiOutlineSearch } from 'react-icons/ai';
-
-import StackLayout from 'components/layouts/StackLayout';
+import StackLayout from '@ferlab/ui/core/layout/StackLayout';
 
 import styles from './FilterContainerHeader.module.scss';
 

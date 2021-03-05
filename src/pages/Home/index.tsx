@@ -162,7 +162,7 @@ const Home = (): React.ReactElement => {
                                         )}
                                         enableLabel={false}
                                         layout="horizontal"
-                                        margin={{ bottom: 40, left: 5, right: 20, top: 0 }}
+                                        margin={{ bottom: 50, left: 5, right: 20, top: 0 }}
                                         padding={0.3}
                                         theme={{
                                             fontSize: 10,
@@ -188,7 +188,7 @@ const Home = (): React.ReactElement => {
                                         legends={[
                                             { anchor: 'right', direction: 'column', itemHeight: 18, itemWidth: 50 },
                                         ]}
-                                        margin={{ bottom: 20, left: -100, right: 100, top: 10 }}
+                                        margin={{ bottom: 30, left: -100, right: 100, top: 10 }}
                                         theme={{
                                             fontSize: 10,
                                             textColor: '#486F90',
@@ -227,7 +227,7 @@ const Home = (): React.ReactElement => {
                                         )}
                                         enableLabel={false}
                                         layout="horizontal"
-                                        margin={{ bottom: 40, left: 5, right: 20, top: 10 }}
+                                        margin={{ bottom: 50, left: 5, right: 20, top: 10 }}
                                         padding={0.3}
                                         title={t('home.graphs.graph3.title')}
                                         titleClassName="graph-title"

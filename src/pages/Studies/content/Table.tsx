@@ -10,7 +10,7 @@ const TableContent = ({ columns, data, loading }: any): React.ReactElement => (
             dataSource={data}
             loading={loading}
             onHeaderRow={() => ({ className: 'table-header' })}
-            pagination={false}
+            pagination={{ hideOnSinglePage: true, showQuickJumper: true, showSizeChanger: true, size: 'small' }}
             rowClassName={(_, index) => (index % 2 === 0 ? 'odd' : 'even')}
             size="small"
         />

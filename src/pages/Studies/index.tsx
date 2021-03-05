@@ -4,14 +4,14 @@ import { useHistory } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import CountWithIcon, { CountWithIconTypeEnum } from '@ferlab/ui/core/components/labels/CountWithIcon';
 import QueryBuilder from '@ferlab/ui/core/components/QueryBuilder';
+import ScrollView from '@ferlab/ui/core/layout/ScrollView';
+import StackLayout from '@ferlab/ui/core/layout/StackLayout';
 import { Button } from 'antd';
 import get from 'lodash/get';
 
 import BorderedContainer from 'components/containers/BorderedContainer';
 import TableActions from 'components/functionnal/TableActions';
 import ContentSeparator from 'components/layouts/ContentSeparator';
-import ScrollView from 'components/layouts/ScrollView';
-import StackLayout from 'components/layouts/StackLayout';
 import DataLayout from 'layouts/DataContent';
 import QueryLayout from 'layouts/Query';
 import { t } from 'locales/translate';
@@ -73,7 +73,7 @@ const Study: React.FC = () => {
                 onUpdate={(state) => setQueryBuilderCache('study-repo', state)}
                 total={totalStudies}
             />
-            <StackLayout grow vertical>
+            <StackLayout flexContent vertical>
                 <BorderedContainer className={styles.graphs}>graphs</BorderedContainer>
                 <BorderedContainer grow>
                     <DataLayout

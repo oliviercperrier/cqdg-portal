@@ -1,9 +1,9 @@
 import React from 'react';
 import { MdFileDownload, MdFormatLineSpacing } from 'react-icons/md';
+import StackLayout from '@ferlab/ui/core/layout/StackLayout';
 import { Button, Checkbox, Dropdown, Menu, Popover } from 'antd';
 
 import SortableList, { TSortableItem } from 'components/functionnal/SortableList';
-import StackLayout from 'components/layouts/StackLayout';
 import { t } from 'locales/translate';
 
 import styles from './TableActions.module.scss';

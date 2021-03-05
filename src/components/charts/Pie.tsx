@@ -1,7 +1,6 @@
 import React from 'react';
+import StackLayout from '@ferlab/ui/core/layout/StackLayout';
 import { PieSvgProps, ResponsivePie } from '@nivo/pie';
-
-import StackLayout from 'components/layouts/StackLayout';
 
 import { IChartProps } from './types';
 

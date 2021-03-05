@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { MdInsertDriveFile, MdSave } from 'react-icons/md';
 import { useQuery } from '@apollo/client';
 import CountWithIcon, { CountWithIconTypeEnum } from '@ferlab/ui/core/components/labels/CountWithIcon';
-import ScrollableTable from '@ferlab/ui/core/components/tables/ScrollableTable';
 import { Table } from 'antd';
 import get from 'lodash/get';
 
@@ -17,6 +16,7 @@ import { useFilters } from 'utils/filters/useFilters';
 import { EFileInputType, formatFileSize } from 'utils/formatFileSize';
 import { Hits } from 'utils/graphql/query';
 import { useLazyResultQuery } from 'utils/graphql/query';
+import { usePagination } from 'utils/pagination/usePagination';
 
 import { FilesModel } from './FilesTable.models';
 
@@ -33,10 +33,10 @@ export interface ITableColumnItem {
 const tableKey = 'files-tabs-file';
 const FilesTable = (): React.ReactElement => {
     const { mappedFilters } = useFilters();
+    const { currentPage, pageFilter, pageSize, setCurrentPageFilter } = usePagination(mappedFilters);
     const { loading, result } = useLazyResultQuery<any>(FILE_TAB_DATA, {
-        variables: { first: 20, offset: 0, ...mappedFilters },
+        variables: { ...pageFilter, ...mappedFilters },
     });
-
     const { data: tablesData } = useQuery<any>(GET_TABLE_COLUMNS, {
         variables: { default: FilesModel, key: tableKey },
     });
@@ -80,18 +80,25 @@ const FilesTable = (): React.ReactElement => {
                 </ContentSeparator>
             }
         >
-            <ScrollableTable>
-                <Table
-                    className="files-table"
-                    columns={tablesData.tableColumns.filter((item: ITableColumnItem) => !item.hidden)}
-                    dataSource={dataSource}
-                    loading={loading}
-                    onHeaderRow={() => ({ className: 'table-header' })}
-                    pagination={false}
-                    rowClassName={(_, index) => (index % 2 === 0 ? 'odd' : 'even')}
-                    size="small"
-                />
-            </ScrollableTable>
+            <Table
+                className="files-table"
+                columns={tablesData.tableColumns.filter((item: ITableColumnItem) => !item.hidden)}
+                dataSource={dataSource}
+                loading={loading}
+                onHeaderRow={() => ({ className: 'table-header' })}
+                pagination={{
+                    current: currentPage,
+                    defaultPageSize: 25,
+                    onChange: (page, pageSize = 25) => setCurrentPageFilter(page, pageSize),
+                    pageSize,
+                    showQuickJumper: true,
+                    showSizeChanger: true,
+                    size: 'small',
+                    total: totalFiles,
+                }}
+                rowClassName={(_, index) => (index % 2 === 0 ? 'odd' : 'even')}
+                size="small"
+            />
         </DataLayout>
     );
 };

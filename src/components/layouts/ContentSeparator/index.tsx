@@ -1,7 +1,7 @@
 import React from 'react';
+import StackLayout from '@ferlab/ui/core/layout/StackLayout';
 import { Divider } from 'antd';
 
-import StackLayout from 'components/layouts/StackLayout';
 import { IChildrenProp } from 'types/generic';
 
 import styles from './ContentSeparator.module.scss';

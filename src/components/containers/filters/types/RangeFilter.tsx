@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import StackLayout from '@ferlab/ui/core/layout/StackLayout';
 import { Button, Divider, InputNumber, Select } from 'antd';
-import { filter } from 'lodash';
 import get from 'lodash/get';
 import isNumber from 'lodash/isNumber';
-
-import StackLayout from 'components/layouts/StackLayout';
 
 import { IFilter, IFilterProps, IFilterRange } from '../Filters';
 

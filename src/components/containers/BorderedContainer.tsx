@@ -1,6 +1,6 @@
 import React from 'react';
+import StackLayout from '@ferlab/ui/core/layout/StackLayout';
 
-import StackLayout from 'components/layouts/StackLayout';
 import { IBasicProp } from 'types/generic';
 
 import './BorderedContainer.scss';
@@ -14,7 +14,7 @@ export const BorderedContainer = ({
     className = '',
     grow = false,
 }: IBorderedContainerProps): React.ReactElement => (
-    <StackLayout className={`bordered-container ${className}`} grow={grow} vertical>
+    <StackLayout className={`bordered-container ${className}`} flexContent={grow} vertical>
         {children}
     </StackLayout>
 );

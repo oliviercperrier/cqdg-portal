@@ -1,7 +1,7 @@
 import React from 'react';
+import StackLayout from '@ferlab/ui/core/layout/StackLayout';
 
 import SideBar from 'components/layouts/Sidebar';
-import StackLayout from 'components/layouts/StackLayout';
 import { IBasicProp } from 'types/generic';
 
 import './Layout.scss';
@@ -11,9 +11,9 @@ interface QueryLayoutProps extends IBasicProp {
 }
 
 const Layout = ({ children, className = '', sidebar }: QueryLayoutProps): React.ReactElement => (
-    <StackLayout className={`layout-query ${className}`} noScroll>
+    <StackLayout className={`layout-query ${className}`}>
         <SideBar>{sidebar}</SideBar>
-        <StackLayout className="layout-query__content" grow noScroll vertical>
+        <StackLayout className="layout-query__content" fitContent flexContent vertical>
             {children}
         </StackLayout>
     </StackLayout>

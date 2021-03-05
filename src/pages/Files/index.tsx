@@ -2,10 +2,10 @@ import React from 'react';
 import { MdInsertDriveFile, MdPeople } from 'react-icons/md';
 import { useHistory } from 'react-router-dom';
 import QueryBuilder from '@ferlab/ui/core/components/QueryBuilder';
+import StackLayout from '@ferlab/ui/core/layout/StackLayout';
 import { Tabs } from 'antd';
 import get from 'lodash/get';
 
-import StackLayout from 'components/layouts/StackLayout';
 import QueryLayout from 'layouts/Query';
 import { t } from 'locales/translate';
 import SideBarContent from 'pages/Files/filters/SideBarContent';
@@ -40,7 +40,7 @@ const FileRepo: React.FC = () => {
 
     return (
         <QueryLayout className="file-repo" sidebar={<SideBarContent />}>
-            <StackLayout grow noScroll vertical>
+            <StackLayout className="file-repo__wrapper" fitContent flexContent vertical>
                 <QueryBuilder
                     IconTotal={<MdInsertDriveFile />}
                     className="file-repo__query-builder"
@@ -53,8 +53,8 @@ const FileRepo: React.FC = () => {
                     onUpdate={(state) => setQueryBuilderCache('file-repo', state)}
                     total={filesTotal}
                 />
-                <StackLayout grow noScroll vertical>
-                    <StackLayout grow noScroll vertical>
+                <StackLayout fitContent flexContent vertical>
+                    <StackLayout fitContent flexContent vertical>
                         <Tabs
                             activeKey={readQueryParam(tabKey, 'files')}
                             className="tabs-container"
@@ -71,7 +71,7 @@ const FileRepo: React.FC = () => {
                                     </div>
                                 }
                             >
-                                <StackLayout grow noScroll vertical>
+                                <StackLayout fitContent flexContent vertical>
                                     <FilesTable />
                                 </StackLayout>
                             </TabPane>
@@ -85,7 +85,7 @@ const FileRepo: React.FC = () => {
                                     </div>
                                 }
                             >
-                                <StackLayout grow vertical>
+                                <StackLayout fitContent flexContent vertical>
                                     <DonorsTable />
                                 </StackLayout>
                             </TabPane>
@@ -94,7 +94,7 @@ const FileRepo: React.FC = () => {
                                 key="summary"
                                 tab={<div className="tabs-container__panes__tab">{t('repo.tabs.summary')}</div>}
                             >
-                                <StackLayout grow vertical>
+                                <StackLayout fitContent flexContent vertical>
                                     <Summary />
                                 </StackLayout>
                             </TabPane>

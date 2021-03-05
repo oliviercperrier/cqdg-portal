@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import StackLayout from '@ferlab/ui/core/layout/StackLayout';
 import { Button, Radio } from 'antd';
 import cx from 'classnames';
 import get from 'lodash/get';
 import isEmpty from 'lodash/isEmpty';
-
-import StackLayout from 'components/layouts/StackLayout';
 
 import { IFilter, IFilterCount, IFilterProps } from '../Filters';
 

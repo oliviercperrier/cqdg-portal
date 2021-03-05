@@ -1,8 +1,7 @@
 import React, { Fragment, useEffect, useState } from 'react';
+import StackLayout from '@ferlab/ui/core/layout/StackLayout';
 import { AutoComplete, Button, Checkbox, Divider, Tag } from 'antd';
 import get from 'lodash/get';
-
-import StackLayout from 'components/layouts/StackLayout';
 
 import { IFilter, IFilterCount, IFilterProps } from '../Filters';
 
