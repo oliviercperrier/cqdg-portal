@@ -1,9 +1,10 @@
 import axios from 'axios';
 import get from 'lodash/get';
 
-const API_URL = process.env.REACT_APP_API_URL;
+import { GRAPHQL_API } from 'config/constants';
+
 const instance = axios.create({
-    baseURL: API_URL,
+    baseURL: GRAPHQL_API,
 });
 
 export const getHomeStats = async () => {
