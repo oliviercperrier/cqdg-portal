@@ -20,6 +20,9 @@ FROM nginx:stable-alpine as runtime
 
 COPY --from=build /code/build /usr/share/nginx/html
 COPY nginx/nginx.conf /etc/nginx/conf.d/default.conf
+COPY entrypoint.sh /opt/entrypoint.sh
+RUN chmod +x /opt/entrypoint.sh
 
 EXPOSE 80
+ENTRYPOINT ["/opt/entrypoint.sh"]
 CMD ["nginx", "-g", "daemon off;"]
