@@ -11,12 +11,12 @@ import get from 'lodash/get';
 
 import BorderedContainer from 'components/containers/BorderedContainer';
 import TableActions from 'components/functionnal/TableActions';
+import { TableContent } from 'components/functionnal/TableContent';
 import ContentSeparator from 'components/layouts/ContentSeparator';
 import DataLayout from 'layouts/DataContent';
 import QueryLayout from 'layouts/Query';
 import { t } from 'locales/translate';
 import CardsContent from 'pages/Studies/content/Cards';
-import TableContent from 'pages/Studies/content/Table';
 import { presetModel } from 'pages/Studies/content/Table.models';
 import { getQueryBuilderCache, setQueryBuilderCache } from 'store/cache/queryBuilder';
 import { setTableColumn } from 'store/cache/tableColumns';
@@ -25,6 +25,7 @@ import { GET_TABLE_COLUMNS } from 'store/queries/tables';
 import { updateQueryFilters } from 'utils/filters';
 import { useFilters } from 'utils/filters/useFilters';
 import { Hits, useLazyResultQuery } from 'utils/graphql/query';
+import { usePagination } from 'utils/pagination/usePagination';
 import { updateQueryParam } from 'utils/url/query';
 
 import Filters from './filters/StudyFilters';
@@ -42,6 +43,7 @@ const Study: React.FC = () => {
         variables: { default: presetModel, key: tableKey },
     });
 
+    const { currentPage, pageFilter, pageSize, setCurrentPageFilter } = usePagination(mappedFilters);
     const { loading, result } = useLazyResultQuery<any>(STUDIES_PAGE_DATA, {
         variables: mappedFilters,
     });
@@ -121,7 +123,17 @@ const Study: React.FC = () => {
                         {showCards ? (
                             <CardsContent data={dataSource} />
                         ) : (
-                            <TableContent columns={tablesData.tableColumns} data={dataSource} loading={loading} />
+                            <TableContent
+                                columns={tablesData.tableColumns}
+                                dataSource={dataSource}
+                                loading={loading}
+                                pagination={{
+                                    current: currentPage,
+                                    onChange: (page, pageSize = 25) => setCurrentPageFilter(page, pageSize),
+                                    pageSize,
+                                    total: totalStudies,
+                                }}
+                            />
                         )}
                     </DataLayout>
                 </BorderedContainer>

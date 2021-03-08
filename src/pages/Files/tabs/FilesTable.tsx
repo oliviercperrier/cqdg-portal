@@ -6,6 +6,7 @@ import { Table } from 'antd';
 import get from 'lodash/get';
 
 import TableActions from 'components/functionnal/TableActions';
+import { TableContent } from 'components/functionnal/TableContent';
 import ContentSeparator from 'components/layouts/ContentSeparator';
 import DataLayout from 'layouts/DataContent';
 import { t } from 'locales/translate';
@@ -80,24 +81,17 @@ const FilesTable = (): React.ReactElement => {
                 </ContentSeparator>
             }
         >
-            <Table
+            <TableContent
                 className="files-table"
                 columns={tablesData.tableColumns.filter((item: ITableColumnItem) => !item.hidden)}
                 dataSource={dataSource}
                 loading={loading}
-                onHeaderRow={() => ({ className: 'table-header' })}
                 pagination={{
                     current: currentPage,
-                    defaultPageSize: 25,
                     onChange: (page, pageSize = 25) => setCurrentPageFilter(page, pageSize),
                     pageSize,
-                    showQuickJumper: true,
-                    showSizeChanger: true,
-                    size: 'small',
                     total: totalFiles,
                 }}
-                rowClassName={(_, index) => (index % 2 === 0 ? 'odd' : 'even')}
-                size="small"
             />
         </DataLayout>
     );

@@ -2,11 +2,10 @@ import React from 'react';
 import { MdPeople } from 'react-icons/md';
 import { useQuery } from '@apollo/client';
 import CountWithIcon, { CountWithIconTypeEnum } from '@ferlab/ui/core/components/labels/CountWithIcon';
-import ScrollableTable from '@ferlab/ui/core/components/tables/ScrollableTable';
-import { Table } from 'antd';
 import get from 'lodash/get';
 
 import TableActions from 'components/functionnal/TableActions';
+import { TableContent } from 'components/functionnal/TableContent';
 import ContentSeparator from 'components/layouts/ContentSeparator';
 import DataLayout from 'layouts/DataContent';
 import { t } from 'locales/translate';
@@ -17,6 +16,7 @@ import { ITableColumnItem } from 'types/interface';
 import { useFilters } from 'utils/filters/useFilters';
 import { Hits } from 'utils/graphql/query';
 import { useLazyResultQuery } from 'utils/graphql/query';
+import { usePagination } from 'utils/pagination/usePagination';
 
 import { presetDonorsModel } from './DonorsTable.models';
 
@@ -25,8 +25,9 @@ import './DonorsTable.scss';
 const tableKey = 'files-tabs-donor';
 const DonorsTable = (): React.ReactElement => {
     const { mappedFilters } = useFilters();
+    const { currentPage, pageFilter, pageSize, setCurrentPageFilter } = usePagination(mappedFilters);
     const { loading, result } = useLazyResultQuery<any>(DONOR_TAB_DATA, {
-        variables: { first: 20, offset: 0, ...mappedFilters },
+        variables: { ...pageFilter, ...mappedFilters },
     });
     const { data: tablesData } = useQuery<any>(GET_TABLE_COLUMNS, {
         variables: { default: presetDonorsModel, key: tableKey },
@@ -62,18 +63,18 @@ const DonorsTable = (): React.ReactElement => {
                 </ContentSeparator>
             }
         >
-            <ScrollableTable>
-                <Table
-                    className="files-table"
-                    columns={tablesData.tableColumns.filter((item: ITableColumnItem) => !item.hidden)}
-                    dataSource={dataSource}
-                    loading={loading}
-                    onHeaderRow={() => ({ className: 'table-header' })}
-                    pagination={false}
-                    rowClassName={(_, index) => (index % 2 === 0 ? 'odd' : 'even')}
-                    size="small"
-                />
-            </ScrollableTable>
+            <TableContent
+                className="donors-table"
+                columns={tablesData.tableColumns.filter((item: ITableColumnItem) => !item.hidden)}
+                dataSource={dataSource}
+                loading={loading}
+                pagination={{
+                    current: currentPage,
+                    onChange: (page, pageSize = 25) => setCurrentPageFilter(page, pageSize),
+                    pageSize,
+                    total: totalDonors,
+                }}
+            />
         </DataLayout>
     );
 };

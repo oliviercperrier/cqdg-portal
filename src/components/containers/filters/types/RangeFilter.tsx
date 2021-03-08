@@ -41,7 +41,7 @@ const RangeFilter: React.FC<IRangeFilterProps> = ({ dictionary, filterGroup, fil
         }));
     };
 
-    const onMinChanged = (value: string | number | undefined) => {
+    const onMinChanged = (value: string | number | null | undefined) => {
         if (!value) return;
         const min = typeof value === 'string' ? parseInt(value, 10) : value;
 
@@ -50,7 +50,7 @@ const RangeFilter: React.FC<IRangeFilterProps> = ({ dictionary, filterGroup, fil
         }
     };
 
-    const onMaxChanged = (value: string | number | undefined) => {
+    const onMaxChanged = (value: string | number | null | undefined) => {
         if (!value) return;
         const max = typeof value === 'string' ? parseInt(value, 10) : value;
 
