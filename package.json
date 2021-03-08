@@ -13,10 +13,6 @@
         "@testing-library/jest-dom": "^5.11.9",
         "@testing-library/react": "^11.2.5",
         "@testing-library/user-event": "^12.8.1",
-        "@types/jest": "^26.0.20",
-        "@types/node": "^12.20.4",
-        "@types/react": "^16.14.4",
-        "@types/react-dom": "^16.9.11",
         "antd": "^4.13.0",
         "axios": "^0.21.1",
         "classnames": "^2.2.6",
@@ -52,14 +48,8 @@
         }
     },
     "lint-staged": {
-        "src/**/*.{js,jsx,ts,tsx}": [
+        "src/**/*.{ts,tsx}": [
             "npm run lint&fix"
-        ]
-    },
-    "eslintConfig": {
-        "extends": [
-            "react-app",
-            "react-app/jest"
         ]
     },
     "browserslist": {
@@ -75,6 +65,10 @@
         ]
     },
     "devDependencies": {
+        "@types/jest": "^26.0.20",
+        "@types/node": "^12.20.4",
+        "@types/react": "^16.14.4",
+        "@types/react-dom": "^16.9.11",
         "@types/classnames": "^2.2.11",
         "@types/graphql": "^14.5.0",
         "@types/lodash": "^4.14.168",

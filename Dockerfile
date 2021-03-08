@@ -10,8 +10,11 @@ ENV REACT_APP_KEYCLOAK_CONFIG="{\"realm\": \"CQDG\", \"url\": \"https://auth.qa.
 
 ADD . /code
 WORKDIR /code
-RUN npm install --only=prod
+RUN npm install
 RUN npm run build
+
+RUN rm -rf node_modules
+RUN npm install --only=prod
 
 FROM nginx:stable-alpine as runtime
 
