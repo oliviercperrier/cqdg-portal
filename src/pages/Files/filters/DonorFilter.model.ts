@@ -1,4 +1,5 @@
-import { IFilterGroup, VisualType } from 'components/containers/filters/Filters';
+import { IFilterGroup, VisualType } from '@ferlab/ui/core/components/filters/types';
+
 import { t } from 'locales/translate';
 import { IFilterModel } from 'types/interface/filters';
 import { presetModels } from 'utils/filters/model';
@@ -24,6 +25,8 @@ const filters: IFilterModel[] = [
     },
     {
         config: {
+            max: 0,
+            min: 0,
             rangeTypes: [
                 {
                     key: 'years',
@@ -40,6 +43,8 @@ const filters: IFilterModel[] = [
     },
     {
         config: {
+            max: 0,
+            min: 0,
             rangeTypes: [
                 {
                     key: 'years',

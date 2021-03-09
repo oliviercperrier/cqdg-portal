@@ -1,7 +1,13 @@
+import {
+    IFilter,
+    IFilterCount,
+    IFilterGroup,
+    IFilterRange,
+    VisualType,
+} from '@ferlab/ui/core/components/filters/types';
 import get from 'lodash/get';
 import isEmpty from 'lodash/isEmpty';
 
-import { IFilter, IFilterCount, IFilterGroup, IFilterRange, VisualType } from 'components/containers/filters/Filters';
 import { t } from 'locales/translate';
 import { ISqonGroupFilter, IValueFilter, TSqonGroupContent } from 'types/interface/filters';
 import { readQueryParam } from 'utils/url/query';

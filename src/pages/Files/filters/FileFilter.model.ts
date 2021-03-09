@@ -1,4 +1,5 @@
-import { IFilterGroup, VisualType } from 'components/containers/filters/Filters';
+import { IFilterGroup, VisualType } from '@ferlab/ui/core/components/filters/types';
+
 import { IFilterModel } from 'types/interface/filters';
 import { presetModels } from 'utils/filters/model';
 

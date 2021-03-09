@@ -1,4 +1,4 @@
-import { TFilterGroupConfig, VisualType } from 'components/containers/filters/Filters';
+import { TFilterGroupConfig, VisualType } from '@ferlab/ui/core/components/filters/types';
 export type TFilterValue = Array<string | number | boolean>;
 export interface IValueContent {
     field: string;

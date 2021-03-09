@@ -1,9 +1,9 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
+import FilterContainer from '@ferlab/ui/core/components/filters/FilterContainer';
 import get from 'lodash/get';
 
-import FilterContainer from 'components/containers/filters/FilterContainer';
 import { STUDY_FILTERS } from 'store/queries/studies/filters';
 import { enhanceFilters, getSelectedFilters } from 'utils/filters';
 import { updateFilters } from 'utils/filters';
