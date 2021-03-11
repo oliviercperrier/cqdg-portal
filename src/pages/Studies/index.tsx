@@ -22,6 +22,7 @@ import { getQueryBuilderCache, setQueryBuilderCache } from 'store/cache/queryBui
 import { setTableColumn } from 'store/cache/tableColumns';
 import { STUDIES_PAGE_DATA } from 'store/queries/studies/content';
 import { GET_TABLE_COLUMNS } from 'store/queries/tables';
+import { ITableColumnItem } from 'types/interface';
 import { updateQueryFilters } from 'utils/filters';
 import { useFilters } from 'utils/filters/useFilters';
 import { Hits, useLazyResultQuery } from 'utils/graphql/query';
@@ -45,7 +46,7 @@ const Study: React.FC = () => {
 
     const { currentPage, pageFilter, pageSize, setCurrentPageFilter } = usePagination(mappedFilters);
     const { loading, result } = useLazyResultQuery<any>(STUDIES_PAGE_DATA, {
-        variables: mappedFilters,
+        variables: { ...pageFilter, ...mappedFilters },
     });
     const totalDonors = get(result, `Donor.${Hits.ITEM}.total`, 0);
     const totalStudies = get(result, `Study.${Hits.ITEM}.total`, 0);
@@ -124,7 +125,7 @@ const Study: React.FC = () => {
                             <CardsContent data={dataSource} />
                         ) : (
                             <TableContent
-                                columns={tablesData.tableColumns}
+                                columns={tablesData.tableColumns.filter((item: ITableColumnItem) => !item.hidden)}
                                 dataSource={dataSource}
                                 loading={loading}
                                 pagination={{

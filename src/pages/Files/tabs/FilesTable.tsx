@@ -13,6 +13,7 @@ import { t } from 'locales/translate';
 import { setTableColumn } from 'store/cache/tableColumns';
 import { FILE_TAB_DATA } from 'store/queries/files/fileTabs';
 import { GET_TABLE_COLUMNS } from 'store/queries/tables';
+import { ITableColumnItem } from 'types/interface';
 import { useFilters } from 'utils/filters/useFilters';
 import { EFileInputType, formatFileSize } from 'utils/formatFileSize';
 import { Hits } from 'utils/graphql/query';
@@ -22,14 +23,6 @@ import { usePagination } from 'utils/pagination/usePagination';
 import { FilesModel } from './FilesTable.models';
 
 import './FilesTable.scss';
-
-export interface ITableColumnItem {
-    hidden: boolean;
-    id: string;
-    initialOrder: number;
-    movable: boolean;
-    title: React.ReactNode;
-}
 
 const tableKey = 'files-tabs-file';
 const FilesTable = (): React.ReactElement => {
