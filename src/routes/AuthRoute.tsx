@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { Redirect, Route, RouteComponentProps, RouteProps } from 'react-router-dom';
 import { useKeycloak } from '@react-keycloak/web';
 import { Spin } from 'antd';
@@ -13,6 +13,7 @@ interface AuthRouteProps extends RouteProps {
 export default ({ component: Component, ...rest }: AuthRouteProps): React.ReactElement => {
     const { initialized, keycloak } = useKeycloak();
     const isAuthorized = isAuthenticated(keycloak);
+
     return (
         <Route
             {...rest}

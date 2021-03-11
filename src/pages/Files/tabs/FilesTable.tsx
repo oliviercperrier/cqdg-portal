@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { MdInsertDriveFile, MdSave } from 'react-icons/md';
 import { useQuery } from '@apollo/client';
 import CountWithIcon, { CountWithIconTypeEnum } from '@ferlab/ui/core/components/labels/CountWithIcon';
-import { Table } from 'antd';
 import get from 'lodash/get';
 
 import TableActions from 'components/functionnal/TableActions';
