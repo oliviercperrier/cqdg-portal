@@ -16,7 +16,12 @@ const tokenHandler = (tokens: any) => {
 };
 
 export default ({ children }: IProvider): ReactElement => (
-    <KeycloakProvider authClient={keycloak} initOptions={getTokens()} onEvent={eventLogger} onTokens={tokenHandler}>
+    <KeycloakProvider
+        authClient={keycloak}
+        initOptions={{ ...getTokens(), timeSkew: 5 }}
+        onEvent={eventLogger}
+        onTokens={tokenHandler}
+    >
         {children}
     </KeycloakProvider>
 );
