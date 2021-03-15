@@ -189,7 +189,7 @@
         "file_format": "Data Format",
         "file_size": "Size",
         "search": "Search",
-        "search_suggest_tooltip_files": "Search by File UUID and File name",
+        "search_suggest_tooltip_files": "Search by File name",
         "search_suggest_tooltip_donors": "Search by donor ID",
         "is_harmonized": "Harmonized",
         "data_type": "Data Type",

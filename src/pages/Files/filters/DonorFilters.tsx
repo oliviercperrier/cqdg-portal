@@ -1,35 +1,53 @@
 import React from 'react';
+import { MdPeople } from 'react-icons/md';
 import { useHistory } from 'react-router-dom';
-import { useQuery } from '@apollo/client';
 import FilterContainer from '@ferlab/ui/core/components/filters/FilterContainer';
 import get from 'lodash/get';
 
-import { DONOR_TAB_FILTERS } from 'store/queries/files/filters';
+import GlobalSearch from 'components/containers/GlobalSearch';
+import { t } from 'locales/translate';
+import { DONOR_GLOBAL_SEARCH, DONOR_TAB_FILTERS } from 'store/queries/files/filters';
 import { enhanceFilters, getSelectedFilters } from 'utils/filters';
-import { updateFilters } from 'utils/filters';
+import { updateFilters, updateQueryFilters } from 'utils/filters';
+import { createSubFilter } from 'utils/filters/manipulator';
 import { useFilters } from 'utils/filters/useFilters';
+import { Hits, useLazyResultQuery } from 'utils/graphql/query';
 
 import presetFilters from './DonorFilter.model';
 
 const FileFilters: React.FC = () => {
     const history = useHistory();
-    const { mappedFilters } = useFilters();
-    const { data, loading, previousData } = useQuery<any>(DONOR_TAB_FILTERS, {
-        variables: mappedFilters,
+    const {
+        mappedFilters: { donorFilters },
+    } = useFilters();
+    const { result } = useLazyResultQuery<any>(DONOR_TAB_FILTERS, {
+        variables: { donorFilters },
     });
 
-    let result = previousData;
-    if (!previousData && loading) {
-        return null;
-    }
-
-    if (data) {
-        result = data;
-    }
     const aggregations = get(result, 'Donor.aggregations', []);
-
     return (
         <>
+            <GlobalSearch
+                filterKey="donorFilters"
+                filters={donorFilters}
+                onSelect={(value, key) => updateQueryFilters(history, key, createSubFilter(key, [value]))}
+                query={DONOR_GLOBAL_SEARCH}
+                searchKey="submitter_donor_id"
+                setCurrentOptions={(options) => {
+                    const globalSearchOptions = get(options, `Donor.${Hits.COLLECTION}`, []);
+
+                    return globalSearchOptions.map(({ node }: any) => ({
+                        label: (
+                            <div>
+                                <MdPeople /> {node.submitter_donor_id}
+                            </div>
+                        ),
+                        value: node.submitter_donor_id,
+                    }));
+                }}
+                tooltipText={t('facet.search_suggest_tooltip_donors')}
+            />
+
             {presetFilters.map((filter) => {
                 const enhancedFilters = enhanceFilters(aggregations, filter.field);
                 const selectedFilters = getSelectedFilters(enhancedFilters, filter);
