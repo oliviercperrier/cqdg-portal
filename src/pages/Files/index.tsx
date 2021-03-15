@@ -27,7 +27,7 @@ const FileRepo: React.FC = () => {
     const history = useHistory();
 
     const { filters, mappedFilters } = useFilters();
-    const { error, loading, result } = useLazyResultQuery<any>(FILE_PAGE_METADATA, {
+    const { loading, result } = useLazyResultQuery<any>(FILE_PAGE_METADATA, {
         variables: mappedFilters,
     });
 
