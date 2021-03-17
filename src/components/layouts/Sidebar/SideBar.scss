@@ -9,9 +9,12 @@
     transition: width 0.2s;
     width: 312px;
     z-index: 1;
+    transition: .5s; 
 
-    > :first-child {
-        margin-bottom: 1.7rem;
+    &:not(&-collapsed) {
+        > :first-child {
+            margin-bottom: 1.6rem;
+        }    
     }
 
     .side-panel-header {
@@ -19,12 +22,11 @@
         display: flex;
         justify-content: start;
         align-items: center;
-        padding: 1.2rem 1.7rem;
-        transition: 2s; 
 
         > button {
-            padding: 0;
+            padding: 1.2rem;
             height: auto;
+            color: $gray-7;
         }
     }
 
