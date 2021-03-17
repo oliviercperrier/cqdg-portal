@@ -14,7 +14,7 @@ import { IClassNameProp } from 'types/generic';
 
 import '@ferlab/style/themes/cqdg/components/header.scss';
 
-const Header = ({ className = '' }: IClassNameProp): React.ReactElement => {
+const Header: React.FC<IClassNameProp> = ({ className = '' }) => {
     const location = useLocation();
     const { keycloak } = useKeycloak();
     return (
@@ -30,6 +30,7 @@ const Header = ({ className = '' }: IClassNameProp): React.ReactElement => {
                     <Button
                         className={`menu-item ${location.pathname.includes('/files') ? '--active' : ''}`}
                         icon={<DatabaseIcon className="menu-item-icon" />}
+                        tabIndex={-1}
                     >
                         {t('nav.file.repo')}
                     </Button>
@@ -38,6 +39,7 @@ const Header = ({ className = '' }: IClassNameProp): React.ReactElement => {
                     <Button
                         className={`menu-item ${location.pathname.includes('/studies') ? '--active' : ''}`}
                         icon={<StorageIcon className="menu-item-icon" />}
+                        tabIndex={-1}
                     >
                         {t('nav.studies')}
                     </Button>
@@ -59,8 +61,8 @@ const Header = ({ className = '' }: IClassNameProp): React.ReactElement => {
                         {t('nav.logout')}
                     </Button>
                 ) : (
-                    <Link to={{ pathname: '/login', state: { from: location.pathname } }}>
-                        <Button className="login" type="text">
+                    <Link to={{ pathname: '/login', state: { from: '/files' } }}>
+                        <Button className="login" tabIndex={-1} type="text">
                             <AiOutlineLogin className="icon" />
                             {t('nav.login')}
                         </Button>

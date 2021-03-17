@@ -97,7 +97,7 @@ const Home = (): React.ReactElement => {
                             </div>
                         </div>
                         <div className="data">
-                            <CardContainerNotched>
+                            <CardContainerNotched contentClassName="data__card-content">
                                 <CardContent cardType="header2Column">
                                     <div className="header2Column__header">
                                         <h2>{t('home.hero.data.header')}</h2>
@@ -138,7 +138,7 @@ const Home = (): React.ReactElement => {
                         </div>
                     </section>
                     <section className="home__contentWrapper__graphs">
-                        <CardContainerNotched className="graph" type="hovered">
+                        <CardContainerNotched className="graph" contentClassName="card-content" type="hovered">
                             <CardContent cardType="stack">
                                 <div className="graph-content">
                                     <ResponsiveBar
@@ -174,7 +174,7 @@ const Home = (): React.ReactElement => {
                                 </div>
                             </CardContent>
                         </CardContainerNotched>
-                        <CardContainerNotched className="graph" type="hovered">
+                        <CardContainerNotched className="graph" contentClassName="card-content" type="hovered">
                             <CardContent cardType="stack">
                                 <div className="graph-content">
                                     <ResponsivePie
@@ -199,7 +199,7 @@ const Home = (): React.ReactElement => {
                                 </div>
                             </CardContent>
                         </CardContainerNotched>
-                        <CardContainerNotched className="graph" type="hovered">
+                        <CardContainerNotched className="graph" contentClassName="card-content" type="hovered">
                             <CardContent cardType="stack">
                                 <div className="graph-content">
                                     <ResponsiveBar
