@@ -24834,6 +24834,9 @@ div.ant-typography-edit-content.ant-typography-rtl {
   margin: 8px 0 0;
   padding: 0;
 }
+a.ant-btn {
+  padding: 0.5rem 0.8rem;
+}
 .ant-btn {
   padding: 0.5rem 0.8rem;
   color: #18486B;

@@ -26,23 +26,18 @@ const Header: React.FC<IClassNameProp> = ({ className = '' }) => {
             </div>
 
             <div className="header__nav">
-                <Link to="/files">
-                    <Button
-                        className={`menu-item ${location.pathname.includes('/files') ? '--active' : ''}`}
-                        icon={<DatabaseIcon className="menu-item-icon" />}
-                        tabIndex={-1}
-                    >
-                        {t('nav.file.repo')}
-                    </Button>
+                <Link
+                    className={`ant-btn menu-item ${location.pathname.includes('/files') ? '--active' : ''}`}
+                    to="/files"
+                >
+                    <DatabaseIcon className="menu-item-icon" /> {t('nav.file.repo')}
                 </Link>
-                <Link to="/studies">
-                    <Button
-                        className={`menu-item ${location.pathname.includes('/studies') ? '--active' : ''}`}
-                        icon={<StorageIcon className="menu-item-icon" />}
-                        tabIndex={-1}
-                    >
-                        {t('nav.studies')}
-                    </Button>
+                <Link
+                    className={`ant-btn menu-item ${location.pathname.includes('/studies') ? '--active' : ''}`}
+                    to="/studies"
+                >
+                    <StorageIcon className="menu-item-icon" />
+                    {t('nav.studies')}
                 </Link>
             </div>
 
@@ -61,11 +56,9 @@ const Header: React.FC<IClassNameProp> = ({ className = '' }) => {
                         {t('nav.logout')}
                     </Button>
                 ) : (
-                    <Link to={{ pathname: '/login', state: { from: '/files' } }}>
-                        <Button className="login" tabIndex={-1} type="text">
-                            <AiOutlineLogin className="icon" />
-                            {t('nav.login')}
-                        </Button>
+                    <Link className="ant-btn ant-btn-text login" to={{ pathname: '/login', state: { from: '/files' } }}>
+                        <AiOutlineLogin className="icon" />
+                        {t('nav.login')}
                     </Link>
                 )}
                 <Divider className="separator" type="vertical" />
