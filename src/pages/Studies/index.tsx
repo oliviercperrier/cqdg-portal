@@ -65,7 +65,7 @@ const Study: React.FC = () => {
             }
         >
             <QueryBuilder
-                IconTotal={<MdAssignment />}
+                IconTotal={<MdAssignment size={18} />}
                 className="file-repo__query-builder"
                 currentQuery={filters}
                 dictionary={{ query: { facet: (key) => t(`facet.${key}`) } }}

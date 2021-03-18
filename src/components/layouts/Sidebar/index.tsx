@@ -13,7 +13,7 @@ interface ISidebar {
 }
 
 const SideBar: React.FC<ISidebar> = ({ children, className = '' }) => {
-    const [isCollapsed, setIsCollapsed] = useState(true);
+    const [isCollapsed, setIsCollapsed] = useState(false);
     const intl = useIntl();
 
     const isCollapsedClassName = classNames({ 'side-panel-collapsed': isCollapsed });

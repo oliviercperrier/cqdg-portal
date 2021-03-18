@@ -42,11 +42,10 @@ const FileRepo: React.FC = () => {
         <QueryLayout className="file-repo" sidebar={<SideBarContent />}>
             <StackLayout className="file-repo__wrapper" fitContent flexContent vertical>
                 <QueryBuilder
-                    IconTotal={<MdInsertDriveFile />}
+                    IconTotal={<MdInsertDriveFile size={18} />}
                     className="file-repo__query-builder"
                     currentQuery={filters}
                     dictionary={{ query: { facet: (key) => t(`facet.${key}`) } }}
-                    initialState={getQueryBuilderCache('file-repo')}
                     loading={loading}
                     onChangeQuery={(_, query) => updateQueryParam(history, 'filters', query)}
                     onRemoveFacet={(query) => updateQueryFilters(history, query.content.field, [])}
