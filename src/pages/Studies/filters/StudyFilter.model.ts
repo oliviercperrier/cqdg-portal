@@ -23,12 +23,11 @@ const filters: IFilterModel[] = [
         type: VisualType.Checkbox,
     },
     {
-        field: 'donors.diagnoses.mondo_term_keyword',
-        title: 'facet.mondo.term',
+        field: 'donors.phenotypes.hpo_category_keyword',
         type: VisualType.Checkbox,
     },
     {
-        field: 'donors.phenotypes.hpo_category_keyword',
+        field: 'donors.diagnoses.mondo_term_keyword',
         type: VisualType.Checkbox,
     },
     {

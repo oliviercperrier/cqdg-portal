@@ -46,6 +46,7 @@ const FileRepo: React.FC = () => {
                     className="file-repo__query-builder"
                     currentQuery={filters}
                     dictionary={{ query: { facet: (key) => t(`facet.${key}`) } }}
+                    initialState={getQueryBuilderCache('file-repo')}
                     loading={loading}
                     onChangeQuery={(_, query) => updateQueryParam(history, 'filters', query)}
                     onRemoveFacet={(query) => updateQueryFilters(history, query.content.field, [])}

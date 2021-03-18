@@ -7,11 +7,12 @@
     display: flex;
     flex-direction: column;
     transition: width 0.2s;
-    width: 312px;
     z-index: 1;
     transition: .5s; 
 
     &:not(&-collapsed) {
+        max-width: 312px;
+        min-width: 312px;
         > :first-child {
             margin-bottom: 1.6rem;
         }    
