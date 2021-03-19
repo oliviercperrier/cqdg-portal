@@ -8,7 +8,7 @@ import styles from './Pie.module.scss';
 
 interface IPieChartProps extends IChartProps, Omit<PieSvgProps<any>, 'height' | 'width'> {}
 const PieChart: React.FC<IPieChartProps> = ({ title, titleClassName = '', ...rest }): React.ReactElement => (
-    <StackLayout className={styles.container} vertical>
+    <StackLayout className={styles.container} fitContent vertical>
         <h3 className={`${styles.title} ${titleClassName}`}>{title}</h3>
         <ResponsivePie
             colors={[
@@ -30,6 +30,11 @@ const PieChart: React.FC<IPieChartProps> = ({ title, titleClassName = '', ...res
             theme={{
                 fontSize: 10,
                 textColor: '#486F90',
+                tooltip: {
+                    basic: {
+                        zIndex: 10000,
+                    },
+                },
             }}
             {...rest}
         />
