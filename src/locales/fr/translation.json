@@ -3,7 +3,6 @@
         "documentation": "Documentation",
         "files.title": "Fichiers",
         "files": "fichiers",
-        "cases": "donneurs",
         "donors.title": "Donneurs",
         "donors": "donneurs",
         "studies": "études",
@@ -395,7 +394,7 @@
         "tabs": {
             "files": "Fichiers ({count})",
             "donors": "Donneurs ({count})",
-            "summary": "Résumer"
+            "summary": "Sommaire"
         },
         "download": {
             "options.all.json": "Tout en JSON",

@@ -1,4 +1,5 @@
 import React from 'react';
+import { AiFillPieChart } from 'react-icons/ai';
 import { MdInsertDriveFile, MdPeople } from 'react-icons/md';
 import { useHistory } from 'react-router-dom';
 import QueryBuilder from '@ferlab/ui/core/components/QueryBuilder';
@@ -63,6 +64,20 @@ const FileRepo: React.FC = () => {
                         >
                             <TabPane
                                 className="tabs-container__panes"
+                                key="summary"
+                                tab={
+                                    <div className="tabs-container__panes__tab">
+                                        <AiFillPieChart className="icon" /> {t('repo.tabs.summary')}
+                                    </div>
+                                }
+                            >
+                                <StackLayout fitContent flexContent vertical>
+                                    <Summary />
+                                </StackLayout>
+                            </TabPane>
+
+                            <TabPane
+                                className="tabs-container__panes"
                                 key="files"
                                 tab={
                                     <div className="tabs-container__panes__tab">
@@ -87,15 +102,6 @@ const FileRepo: React.FC = () => {
                             >
                                 <StackLayout fitContent flexContent vertical>
                                     <DonorsTable />
-                                </StackLayout>
-                            </TabPane>
-                            <TabPane
-                                className="tabs-container__panes"
-                                key="summary"
-                                tab={<div className="tabs-container__panes__tab">{t('repo.tabs.summary')}</div>}
-                            >
-                                <StackLayout fitContent flexContent vertical>
-                                    <Summary />
                                 </StackLayout>
                             </TabPane>
                         </Tabs>
