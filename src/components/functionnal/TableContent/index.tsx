@@ -7,12 +7,9 @@ interface ITableContent {
 
 type TTableContent = ITableContent & TableProps<any>;
 
-export const TableContent: React.FC<TTableContent> = ({ className = '', columns, dataSource, loading, pagination }) => (
+export const TableContent: React.FC<TTableContent> = ({ className = '', pagination, ...rest }) => (
     <Table
         className={className}
-        columns={columns}
-        dataSource={dataSource}
-        loading={loading}
         onHeaderRow={() => ({ className: 'table-header' })}
         pagination={{
             ...pagination,
@@ -23,5 +20,6 @@ export const TableContent: React.FC<TTableContent> = ({ className = '', columns,
         }}
         rowClassName={(_, index) => (index % 2 === 0 ? 'odd' : 'even')}
         size="small"
+        {...rest}
     />
 );
