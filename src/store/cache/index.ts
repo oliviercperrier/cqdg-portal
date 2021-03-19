@@ -5,6 +5,7 @@ import { locales } from './locales';
 import { configureColumns, tableColumns } from './tableColumns';
 
 export const cache: InMemoryCache = new InMemoryCache({
+    addTypename: false,
     typePolicies: {
         Query: {
             fields: {
