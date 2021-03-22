@@ -14,7 +14,7 @@ import { IClassNameProp } from 'types/generic';
 
 import '@ferlab/style/themes/cqdg/components/header.scss';
 
-const Header = ({ className = '' }: IClassNameProp): React.ReactElement => {
+const Header: React.FC<IClassNameProp> = ({ className = '' }) => {
     const location = useLocation();
     const { keycloak } = useKeycloak();
     return (
@@ -26,21 +26,18 @@ const Header = ({ className = '' }: IClassNameProp): React.ReactElement => {
             </div>
 
             <div className="header__nav">
-                <Link to="/files">
-                    <Button
-                        className={`menu-item ${location.pathname.includes('/files') ? '--active' : ''}`}
-                        icon={<DatabaseIcon className="menu-item-icon" />}
-                    >
-                        {t('nav.file.repo')}
-                    </Button>
+                <Link
+                    className={`ant-btn menu-item ${location.pathname.includes('/files') ? '--active' : ''}`}
+                    to="/files"
+                >
+                    <DatabaseIcon className="menu-item-icon" /> {t('nav.file.repo')}
                 </Link>
-                <Link to="/studies">
-                    <Button
-                        className={`menu-item ${location.pathname.includes('/studies') ? '--active' : ''}`}
-                        icon={<StorageIcon className="menu-item-icon" />}
-                    >
-                        {t('nav.studies')}
-                    </Button>
+                <Link
+                    className={`ant-btn menu-item ${location.pathname.includes('/studies') ? '--active' : ''}`}
+                    to="/studies"
+                >
+                    <StorageIcon className="menu-item-icon" />
+                    {t('nav.studies')}
                 </Link>
             </div>
 
@@ -59,11 +56,9 @@ const Header = ({ className = '' }: IClassNameProp): React.ReactElement => {
                         {t('nav.logout')}
                     </Button>
                 ) : (
-                    <Link to={{ pathname: '/login', state: { from: location.pathname } }}>
-                        <Button className="login" type="text">
-                            <AiOutlineLogin className="icon" />
-                            {t('nav.login')}
-                        </Button>
+                    <Link className="ant-btn ant-btn-text login" to={{ pathname: '/login', state: { from: '/files' } }}>
+                        <AiOutlineLogin className="icon" />
+                        {t('nav.login')}
                     </Link>
                 )}
                 <Divider className="separator" type="vertical" />

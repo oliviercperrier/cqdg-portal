@@ -28,12 +28,13 @@ import { getHomeStats } from 'services/api';
 import { formatPieChart } from 'utils/formatChartData';
 import { EFileInputType, formatFileSize } from 'utils/formatFileSize';
 import { Hits } from 'utils/graphql/query';
+import { getDocsEnvDomain } from 'utils/url/domain';
 
 import './Home.scss';
 
 const Home = (): React.ReactElement => {
     const [data, setData] = useState([]);
-    const { keycloak } = useKeycloak();
+    const { initialized, keycloak } = useKeycloak();
     useEffect(() => {
         const fetchData = async () => {
             const response = await getHomeStats();
@@ -47,7 +48,13 @@ const Home = (): React.ReactElement => {
     const totalFiles = get(data, `File.${Hits.ITEM}.total`, 0);
     const totalSizes = get(data, `File.aggregations.file_size.stats.sum`, 0);
     const fileSizes = formatFileSize(totalSizes, { output: 'object' }, EFileInputType.MB) as Record<string, any>;
-
+    const docsRootUrl = getDocsEnvDomain();
+    let accountUrl = '';
+    if (initialized) {
+        accountUrl = keycloak.createRegisterUrl({
+            redirectUri: window.location.origin + '/files',
+        });
+    }
     return (
         <>
             <main className="home">
@@ -62,42 +69,28 @@ const Home = (): React.ReactElement => {
                             <div className="buttons">
                                 {!isAuthenticated(keycloak) ? (
                                     <>
-                                        <Link to="/login">
-                                            <Button className="buttons__login" type="primary">
-                                                {t('home.hero.buttons.connection')}{' '}
-                                                <AiOutlineArrowRight className="buttons__login__icon" />
-                                            </Button>
+                                        <Link className="ant-btn ant-btn-primary buttons__login" to="/login">
+                                            {t('home.hero.buttons.connection')}{' '}
+                                            <AiOutlineArrowRight className="buttons__login__icon" />
                                         </Link>
-                                        <Button className="buttons__create" type="ghost">
+                                        <Button className="buttons__create" href={accountUrl} type="ghost">
                                             {t('home.hero.buttons.account')}
                                         </Button>
                                     </>
                                 ) : (
                                     <>
-                                        <Link to="/files">
-                                            <Button
-                                                className={`menu-item`}
-                                                icon={<DatabaseIcon className="menu-item-icon" />}
-                                                type="primary"
-                                            >
-                                                {t('nav.file.repo')}
-                                            </Button>
+                                        <Link className="ant-btn ant-btn-primary menu-item" to="/files">
+                                            <DatabaseIcon className="menu-item-icon" /> {t('nav.file.repo')}
                                         </Link>
-                                        <Link to="/studies">
-                                            <Button
-                                                className={`menu-item`}
-                                                icon={<StorageIcon className="menu-item-icon" />}
-                                                type="primary"
-                                            >
-                                                {t('nav.studies')}
-                                            </Button>
+                                        <Link className="ant-btn ant-btn-primary menu-item" to="/studies">
+                                            <StorageIcon className="menu-item-icon" /> {t('nav.studies')}
                                         </Link>
                                     </>
                                 )}
                             </div>
                         </div>
                         <div className="data">
-                            <CardContainerNotched>
+                            <CardContainerNotched contentClassName="data__card-content">
                                 <CardContent cardType="header2Column">
                                     <div className="header2Column__header">
                                         <h2>{t('home.hero.data.header')}</h2>
@@ -138,7 +131,7 @@ const Home = (): React.ReactElement => {
                         </div>
                     </section>
                     <section className="home__contentWrapper__graphs">
-                        <CardContainerNotched className="graph" type="hovered">
+                        <CardContainerNotched className="graph" contentClassName="card-content" type="hovered">
                             <CardContent cardType="stack">
                                 <div className="graph-content">
                                     <ResponsiveBar
@@ -174,7 +167,7 @@ const Home = (): React.ReactElement => {
                                 </div>
                             </CardContent>
                         </CardContainerNotched>
-                        <CardContainerNotched className="graph" type="hovered">
+                        <CardContainerNotched className="graph" contentClassName="card-content" type="hovered">
                             <CardContent cardType="stack">
                                 <div className="graph-content">
                                     <ResponsivePie
@@ -199,7 +192,7 @@ const Home = (): React.ReactElement => {
                                 </div>
                             </CardContent>
                         </CardContainerNotched>
-                        <CardContainerNotched className="graph" type="hovered">
+                        <CardContainerNotched className="graph" contentClassName="card-content" type="hovered">
                             <CardContent cardType="stack">
                                 <div className="graph-content">
                                     <ResponsiveBar
@@ -242,7 +235,7 @@ const Home = (): React.ReactElement => {
                             <p>{t('home.cards.text.block.text')}</p>
                         </div>
                         <div className="home__contentWrapper__links--cards">
-                            <Button href="https://docs.qa.cqdg.ferlab.bio/" target="_blank" type="link">
+                            <Button href={docsRootUrl} target="_blank" type="link">
                                 <CardContainerNotched className="card-container" type="hover">
                                     <CardContent cardType="stackCenter">
                                         <DocIcon />
@@ -251,7 +244,7 @@ const Home = (): React.ReactElement => {
                                     </CardContent>
                                 </CardContainerNotched>
                             </Button>
-                            <Button href="https://docs.qa.cqdg.ferlab.bio/dictionary/" target="_blank" type="link">
+                            <Button href={`${docsRootUrl}/dictionary/`} target="_blank" type="link">
                                 <CardContainerNotched className="card-container" type="hover">
                                     <CardContent cardType="stackCenter">
                                         <DataIcon />
@@ -261,7 +254,7 @@ const Home = (): React.ReactElement => {
                                 </CardContainerNotched>
                             </Button>
                             <Button
-                                href="https://docs.qa.cqdg.ferlab.bio/docs/submission/submitting-clinical-data/"
+                                href={`${docsRootUrl}/submission/submitting-clinical-data/`}
                                 target="_blank"
                                 type="link"
                             >

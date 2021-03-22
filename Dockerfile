@@ -2,9 +2,9 @@ FROM node:14.16.0-alpine as build
 
 ENV SASS_PATH=node_modules/@ferlab/style/themes/cqdg/:src/style/themes/default
 
-ENV REACT_APP_TOKEN_NAME=cqdg-token
-ENV REACT_APP_REFRESH_TOKEN_NAME=cqdg-refresh-token
-ENV REACT_APP_SESSION_TOKEN_NAME=cqdg-session-token
+ENV REACT_APP_TOKEN_NAME=cqdg-token-cache
+ENV REACT_APP_REFRESH_TOKEN_NAME=cqdg-refresh-token-cache
+ENV REACT_APP_SESSION_TOKEN_NAME=cqdg-session-token-cache
 ENV REACT_APP_API_URL=https://portal.qa.cqdg.ferlab.bio/arranger
 ENV REACT_APP_KEYCLOAK_CONFIG="{\"realm\": \"CQDG\", \"url\": \"https://auth.qa.cqdg.ferlab.bio/auth/\", \"clientId\": \"cqdg-client\"}"
 

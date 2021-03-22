@@ -4,8 +4,8 @@
     "private": true,
     "dependencies": {
         "@apollo/client": "^3.3.11",
-        "@ferlab/style": "^1.4.2",
-        "@ferlab/ui": "^1.4.4",
+        "@ferlab/style": "^1.4.3",
+        "@ferlab/ui": "^1.4.5",
         "@nivo/bar": "^0.67.0",
         "@nivo/core": "^0.67.0",
         "@nivo/pie": "^0.67.0",
@@ -18,6 +18,7 @@
         "classnames": "^2.2.6",
         "filesize": "^6.1.0",
         "graphql": "^15.5.0",
+        "jwt-decode": "^3.1.2",
         "keycloak-js": "^11.0.3",
         "lodash": "^4.17.21",
         "node-sass": "^4.14.1",

@@ -1,11 +1,22 @@
 @import '~@ferlab/style/themes/cqdg/colors';
-
-.files-table {
-    .files-table-lock {
-        color: $red-6;
+.files-content {
+    .files-table {
+        .files-table-locks, .files-table-lock {
+            vertical-align: middle;
+        }
+    
+        .files-table-lock {
+            color: $red-6;
+        }
+    
+        .files-table-lock-open {
+            color: $lime-7;
+        }
     }
-
-    .files-table-lock-open {
-        color: $lime-7;
+    
+    .data-summary {
+        .data-label {
+            font-size: 1.2rem;
+        }
     }
 }

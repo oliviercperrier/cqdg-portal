@@ -2,14 +2,16 @@ import React from 'react';
 import StackLayout from '@ferlab/ui/core/layout/StackLayout';
 import { Divider } from 'antd';
 
-import { IChildrenProp } from 'types/generic';
-
 import styles from './ContentSeparator.module.scss';
-const ContentSeparator = ({ children }: IChildrenProp): React.ReactElement => {
+
+interface IContentSeparator {
+    className?: string;
+}
+const ContentSeparator: React.FC<IContentSeparator> = ({ children, className = '' }) => {
     const components = React.Children.toArray(children).filter(Boolean);
     const total = React.Children.count(components);
     return (
-        <StackLayout center className={styles.container}>
+        <StackLayout center className={`${styles.container} ${className}`}>
             {React.Children.map(components, (child, i) =>
                 total - 1 > i ? (
                     <>

@@ -21,7 +21,7 @@ const SideBar: React.FC<ISidebar> = ({ children, className = '' }) => {
         <div className={`side-panel ${isCollapsedClassName} ${className}`}>
             <div className="side-panel-header">
                 <Button onClick={() => setIsCollapsed(!isCollapsed)} type="text">
-                    {isCollapsed ? <AiOutlineMenu /> : <AiOutlineMenuFold />}
+                    {isCollapsed ? <AiOutlineMenu size={24} /> : <AiOutlineMenuFold size={24} />}
                 </Button>
             </div>
             <div className="side-panel-content">{children}</div>

@@ -6,7 +6,8 @@ import Providers from 'providers';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-import 'style/themes/default/main.scss';
+import 'style/dist/themes/default/antd.css';
+import '@ferlab/style/themes/cqdg/main.scss';
 
 ReactDOM.render(
     <React.StrictMode>
