@@ -25,28 +25,32 @@ const Summary = (): React.ReactElement => {
         <Collapse defaultActiveKey={[1, 2]}>
             <Panel header={t('global.files.title')} key={`1`}>
                 <div className={styles.graphContainers}>
-                    {Object.keys(filesGraphData).map((key) => (
-                        <PieChart
-                            className={styles.graph}
-                            data={formatPieChart(get(filesGraphData, `${key}.buckets`), 'key', 'doc_count')}
-                            title={t(`aggregation.${key}`)}
-                            titleClassName={styles.title}
-                            {...pieChartCommonProps}
-                        />
-                    ))}
+                    {Object.keys(filesGraphData)
+                        .filter((key) => key !== '__typename')
+                        .map((key) => (
+                            <PieChart
+                                className={styles.graph}
+                                data={formatPieChart(get(filesGraphData, `${key}.buckets`), 'key', 'doc_count')}
+                                title={t(`aggregation.${key}`)}
+                                titleClassName={styles.title}
+                                {...pieChartCommonProps}
+                            />
+                        ))}
                 </div>
             </Panel>
             <Panel header={t('global.donors.title')} key={`2`}>
                 <div className={styles.graphContainers}>
-                    {Object.keys(donorsGraphData).map((key) => (
-                        <PieChart
-                            className={styles.graph}
-                            data={formatPieChart(get(donorsGraphData, `${key}.buckets`), 'key', 'doc_count')}
-                            title={t(`aggregation.${key}`)}
-                            titleClassName={styles.title}
-                            {...pieChartCommonProps}
-                        />
-                    ))}
+                    {Object.keys(donorsGraphData)
+                        .filter((key) => key !== '__typename')
+                        .map((key) => (
+                            <PieChart
+                                className={styles.graph}
+                                data={formatPieChart(get(donorsGraphData, `${key}.buckets`), 'key', 'doc_count')}
+                                title={t(`aggregation.${key}`)}
+                                titleClassName={styles.title}
+                                {...pieChartCommonProps}
+                            />
+                        ))}
                 </div>
             </Panel>
         </Collapse>
