@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Button } from 'antd';
 
 import { Routes } from 'routes';
 import { createQueryFilters, ISimpleFilters } from 'utils/url/filters';
@@ -20,9 +19,9 @@ const InternalLink: React.FC<IInternalLink> = ({ children, filters, path, query 
     const queryFilters = createQueryFilters(filters);
     const realPath = `${path}${createQueryParams({ ...query, filters: queryFilters })}`;
     return (
-        <Button type="link">
-            <Link to={realPath}>{children}</Link>
-        </Button>
+        <Link className="link" to={realPath}>
+            {children}
+        </Link>
     );
 };
 

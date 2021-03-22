@@ -7,12 +7,10 @@ import { presetModels } from 'utils/filters/model';
 const filters: IFilterModel[] = [
     {
         field: 'study.short_name_keyword',
-        title: 'facet.study.name',
         type: VisualType.Checkbox,
     },
     {
         field: 'study.domain',
-        title: 'facet.study.domain',
         type: VisualType.Checkbox,
     },
     {

@@ -1,13 +1,13 @@
 import React from 'react';
 
-import { IBasicProp } from 'types/generic';
-
 import '@ferlab/style/themes/cqdg/components/cardContainerNotched.scss';
 
 type ContainerTypeEnum = 'none' | 'header' | 'hover' | 'hovered';
 
-interface ICardContainerNotchedProps extends IBasicProp {
+interface ICardContainerNotchedProps {
     type?: ContainerTypeEnum;
+    className?: string;
+    contentClassName?: string;
 }
 
 type ContainerType = {
@@ -21,11 +21,12 @@ const containerType: ContainerType = {
     none: '',
 };
 
-const CardContainerNotched = ({
+const CardContainerNotched: React.FC<ICardContainerNotchedProps> = ({
     children,
     className = '',
+    contentClassName = '',
     type = 'none',
-}: ICardContainerNotchedProps): React.ReactElement => (
+}) => (
     <div className={`card--notched ${containerType[type]} ${className}`}>
         <div aria-hidden="true" className="notch-top">
             <svg className="notch notch--top" height="24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -40,7 +41,7 @@ const CardContainerNotched = ({
                 </defs>
             </svg>
         </div>
-        <div className="notch-content">{children}</div>
+        <div className={`notch-content ${contentClassName}`}>{children}</div>
         <div aria-hidden="true" className="notch-btm">
             <svg className="notch notch--btm" height="24" width="24" xmlns="http://www.w3.org/2000/svg">
                 <g clipPath="url(#clip0)">

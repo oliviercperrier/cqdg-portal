@@ -43,7 +43,7 @@ const FileRepo: React.FC = () => {
         <QueryLayout className="file-repo" sidebar={<SideBarContent />}>
             <StackLayout className="file-repo__wrapper" fitContent flexContent vertical>
                 <QueryBuilder
-                    IconTotal={<MdInsertDriveFile />}
+                    IconTotal={<MdInsertDriveFile size={18} />}
                     className="file-repo__query-builder"
                     currentQuery={filters}
                     dictionary={{ query: { facet: (key) => t(`facet.${key}`) } }}

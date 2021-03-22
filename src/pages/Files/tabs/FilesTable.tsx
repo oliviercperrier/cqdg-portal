@@ -56,17 +56,20 @@ const FilesTable = (): React.ReactElement => {
                     sortableList={tablesData.tableColumns}
                 />
             }
+            className="files-content"
             summary={
-                <ContentSeparator>
+                <ContentSeparator className="data-summary">
                     <CountWithIcon
                         Icon={<MdInsertDriveFile />}
                         label={t('global.files')}
+                        labelClassName="data-label"
                         total={totalFiles.toLocaleString()}
                         type={CountWithIconTypeEnum.Inline}
                     />
                     <CountWithIcon
                         Icon={<MdSave />}
                         label={fileSizes.symbol}
+                        labelClassName="data-label"
                         total={fileSizes.value}
                         type={CountWithIconTypeEnum.Inline}
                     />

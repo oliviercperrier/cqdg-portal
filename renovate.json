@@ -3,5 +3,6 @@
     "config:base",
     ":preserveSemverRanges"
   ],
-  "schedule": ["after 7am and before 6pm every weekday"]
+  "schedule": ["after 7am and before 6pm every weekday"],
+  "timezone": "Canada/Eastern"
 }
