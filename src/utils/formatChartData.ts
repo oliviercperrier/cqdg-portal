@@ -1,3 +1,4 @@
+import isEmpty from 'lodash/isEmpty';
 interface IChart {
     id: string;
     value: string;
@@ -5,7 +6,7 @@ interface IChart {
 }
 
 export const formatPieChart = (data: any, key: string, value: string, colors: string[] = []) => {
-    if (data.length === 0) return [];
+    if (isEmpty(data)) return [];
     return data
         .filter((item: any) => item[key] !== '__missing__')
         .map((item: any, i: number) => {

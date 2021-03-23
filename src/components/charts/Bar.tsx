@@ -9,7 +9,7 @@ import styles from './Bar.module.scss';
 interface IBarChartProps extends IChartProps, BarSvgProps {}
 
 const BarChart: React.FC<IBarChartProps> = ({ title, titleClassName = '', ...rest }: any): React.ReactElement => (
-    <StackLayout className={styles.container} vertical>
+    <StackLayout className={styles.container} fitContent vertical>
         <h3 className={`${styles.title} ${titleClassName}`}>{title}</h3>
         <ResponsiveBar
             colors={({ data }) => data.color}
