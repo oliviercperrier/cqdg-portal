@@ -69,6 +69,7 @@ const Study: React.FC = () => {
                 className="file-repo__query-builder"
                 currentQuery={filters}
                 dictionary={{ query: { facet: (key) => t(`facet.${key}`) } }}
+                enableSingleQuery
                 initialState={getQueryBuilderCache('study-repo')}
                 loading={loading}
                 onChangeQuery={(_, query) => updateQueryParam(history, 'filters', query)}
@@ -77,7 +78,6 @@ const Study: React.FC = () => {
                 total={totalStudies}
             />
             <StackLayout flexContent vertical>
-                <BorderedContainer className={styles.graphs}>graphs</BorderedContainer>
                 <BorderedContainer grow>
                     <DataLayout
                         actions={

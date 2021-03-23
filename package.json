@@ -5,7 +5,7 @@
     "dependencies": {
         "@apollo/client": "^3.3.11",
         "@ferlab/style": "^1.4.3",
-        "@ferlab/ui": "^1.4.5",
+        "@ferlab/ui": "^1.4.6",
         "@nivo/bar": "^0.67.0",
         "@nivo/core": "^0.67.0",
         "@nivo/pie": "^0.67.0",
