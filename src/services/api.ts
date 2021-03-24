@@ -1,14 +1,27 @@
 import axios from 'axios';
 import get from 'lodash/get';
 
-import { GRAPHQL_API } from 'config/constants';
+import { CLINICAL_DATA_API, GRAPHQL_API } from 'config/constants';
+import { getTokens } from 'providers/Keycloak/tokens';
 
-const instance = axios.create({
+const appRestAPI = axios.create({
     baseURL: GRAPHQL_API,
 });
+const clinicalRestAPI = axios.create({
+    baseURL: CLINICAL_DATA_API,
+});
 
-export const getHomeStats = async () => {
-    const response = await instance.get(`/stats`);
+export const getHomeStats = async (): Promise<Record<string, any>> => {
+    const response = await appRestAPI.get(`/stats`);
 
     return get(response, 'data.viewer', []);
+};
+
+export const getClinicalData = async (filters: any = { content: [], op: 'and' }) => {
+    const { token } = getTokens();
+    const response = await clinicalRestAPI.post(`/download/clinical`, filters, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    });
 };
