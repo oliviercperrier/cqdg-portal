@@ -57,7 +57,10 @@ const FileRepo: React.FC = () => {
                 <StackLayout fitContent flexContent vertical>
                     <StackLayout fitContent flexContent vertical>
                         <Tabs
-                            activeKey={readQueryParam(tabKey, 'files')}
+                            activeKey={readQueryParam(tabKey, {
+                                defaultValue: 'files',
+                                whiteList: ['files', 'donors', 'summary'],
+                            })}
                             className="tabs-container"
                             onChange={onTabChange}
                             type="card"

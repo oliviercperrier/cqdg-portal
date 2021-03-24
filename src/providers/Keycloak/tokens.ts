@@ -3,12 +3,12 @@ import jwt_decode, { JwtPayload } from 'jwt-decode';
 import { REFRESH_TOKEN_NAME, SESSION_TOKEN_NAME, TOKEN_NAME } from 'config/constants';
 import { getWithExpiry, setWithExpiry } from 'utils/storage';
 
-interface ITOKEN {
+interface ITokens {
     idToken: string;
     token: string;
     refreshToken: string;
 }
-export const setTokens = ({ idToken = '', refreshToken = '', token = '' }: ITOKEN): void => {
+export const setTokens = ({ idToken = '', refreshToken = '', token = '' }: ITokens): void => {
     if (!idToken && !refreshToken && !token) {
         return;
     }
@@ -23,12 +23,6 @@ export const setTokens = ({ idToken = '', refreshToken = '', token = '' }: ITOKE
         setWithExpiry(REFRESH_TOKEN_NAME, refreshToken, refreshTokenDecoded.exp!);
     }
 };
-
-interface ITokens {
-    idToken: string;
-    token: string;
-    refreshToken: string;
-}
 
 export const getTokens = (): ITokens => ({
     idToken: getWithExpiry(SESSION_TOKEN_NAME) || '',

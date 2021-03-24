@@ -21,9 +21,12 @@ const SideBar: React.FC = () => {
     const onTabChange = (activeKey: string) => {
         updateQueryParam(history, tabKey, activeKey);
     };
-
     return (
-        <Tabs activeKey={readQueryParam(tabKey, 'files')} className="side-panel-content__panes" onChange={onTabChange}>
+        <Tabs
+            activeKey={readQueryParam(tabKey, { defaultValue: 'files', whiteList: ['files', 'donors'] })}
+            className="side-panel-content__panes"
+            onChange={onTabChange}
+        >
             <TabPane
                 key="files"
                 tab={

@@ -206,7 +206,7 @@ export const mapFilter = (filters: ISqonGroupFilter, mapping: Map<string, string
 };
 
 export const getFiltersQuery = (search: any = null): ISqonGroupFilter => {
-    const filters = readQueryParam('filters', JSON.stringify({}), search);
+    const filters = readQueryParam('filters', { defaultValue: JSON.stringify({}) }, search);
 
     return JSON.parse(filters);
 };

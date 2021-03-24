@@ -33,7 +33,7 @@ import { getDocsEnvDomain } from 'utils/url/domain';
 import './Home.scss';
 
 const Home = (): React.ReactElement => {
-    const [data, setData] = useState([]);
+    const [data, setData] = useState<Record<string, any>>({});
     const { initialized, keycloak } = useKeycloak();
     useEffect(() => {
         const fetchData = async () => {
