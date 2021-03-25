@@ -6,6 +6,7 @@ import Providers from 'providers';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+import '@ferlab/style/themes/cqdg/font.scss';
 import 'style/themes/default/main.scss';
 
 ReactDOM.render(
