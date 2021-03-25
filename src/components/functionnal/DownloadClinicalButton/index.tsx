@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from 'antd';
 
 import { getClinicalData } from 'services/api';
@@ -9,12 +9,24 @@ import styles from './DownloadClinicalButton.module.scss';
 interface IDownloadClinicalButton {
     filters: any;
 }
-const DownloadClinicalButton: React.FC<IDownloadClinicalButton> = ({ children, filters }) => (
-    <div className={styles.container}>
-        <Button className={styles.button} onClick={() => getClinicalData(filters)}>
-            {children}
-        </Button>
-    </div>
-);
+const DownloadClinicalButton: React.FC<IDownloadClinicalButton> = ({ children, filters }) => {
+    const [loading, setLoading] = useState(false);
+    return (
+        <div className={styles.container}>
+            <Button
+                className={styles.button}
+                disabled={loading}
+                loading={loading}
+                onClick={async () => {
+                    setLoading(true);
+                    await getClinicalData(filters);
+                    setLoading(false);
+                }}
+            >
+                {children}
+            </Button>
+        </div>
+    );
+};
 
 export default DownloadClinicalButton;

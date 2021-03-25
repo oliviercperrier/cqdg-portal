@@ -1,8 +1,13 @@
 import axios from 'axios';
+import dateformat from 'dateformat';
 import get from 'lodash/get';
+import isEmpty from 'lodash/isEmpty';
 
 import { CLINICAL_DATA_API, GRAPHQL_API } from 'config/constants';
 import { getTokens } from 'providers/Keycloak/tokens';
+import { ISqonGroupFilter } from 'types/interface/filters';
+import { getDefaultFilters } from 'utils/filters';
+import { downloadFile } from 'utils/url/download';
 
 const appRestAPI = axios.create({
     baseURL: GRAPHQL_API,
@@ -17,18 +22,21 @@ export const getHomeStats = async (): Promise<Record<string, any>> => {
     return get(response, 'data.viewer', []);
 };
 
-export const getClinicalData = async (filters: any = { content: [], op: 'and' }) => {
+export const getClinicalData = async (filters: ISqonGroupFilter): Promise<boolean> => {
     const { token } = getTokens();
-    const response = await clinicalRestAPI.post(`/download/clinical`, filters, {
+    const data = isEmpty(filters) ? getDefaultFilters() : filters;
+    const response = await clinicalRestAPI.post(`/download/clinical`, data, {
         headers: {
             Authorization: `Bearer ${token}`,
         },
+        responseType: 'blob',
     });
 
-    const url = window.URL.createObjectURL(new Blob([response.data]));
-    const link = document.createElement('a');
-    link.href = url;
-    link.setAttribute('download', 'file.zip');
-    document.body.appendChild(link);
-    link.click();
+    if (response.status === 200) {
+        const now = new Date();
+        const dateFormatted = dateformat(now, 'yyyy-mm-dd-HH:MM:ss');
+        downloadFile(response.data, `clinical-data-${dateFormatted}.zip`);
+    }
+
+    return true;
 };
