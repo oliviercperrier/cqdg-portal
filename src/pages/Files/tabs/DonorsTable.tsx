@@ -1,9 +1,10 @@
 import React from 'react';
-import { MdPeople } from 'react-icons/md';
+import { MdFileDownload, MdPeople } from 'react-icons/md';
 import { useQuery } from '@apollo/client';
 import CountWithIcon, { CountWithIconTypeEnum } from '@ferlab/ui/core/components/labels/CountWithIcon';
 import get from 'lodash/get';
 
+import DownloadClinicalButton from 'components/functionnal/DownloadClinicalButton';
 import TableActions from 'components/functionnal/TableActions';
 import { TableContent } from 'components/functionnal/TableContent';
 import ContentSeparator from 'components/layouts/ContentSeparator';
@@ -24,7 +25,7 @@ import './DonorsTable.scss';
 
 const tableKey = 'files-tabs-donor';
 const DonorsTable = (): React.ReactElement => {
-    const { mappedFilters } = useFilters();
+    const { filters, mappedFilters } = useFilters();
     const { currentPage, pageFilter, pageSize, setCurrentPageFilter } = usePagination(mappedFilters);
     const { loading, result } = useLazyResultQuery<any>(DONOR_TAB_DATA, {
         variables: { ...pageFilter, ...mappedFilters },
@@ -41,16 +42,22 @@ const DonorsTable = (): React.ReactElement => {
     return (
         <DataLayout
             actions={
-                <TableActions
-                    onCheckBoxChange={(items) => {
-                        setTableColumn(tableKey, items);
-                    }}
-                    onSortingChange={(items) => {
-                        setTableColumn(tableKey, items);
-                    }}
-                    restoreDefault={() => setTableColumn(tableKey, presetDonorsModel)}
-                    sortableList={tablesData.tableColumns}
-                />
+                <ContentSeparator>
+                    <DownloadClinicalButton filters={filters}>
+                        <MdFileDownload size={16} />
+                        {t('global.tables.actions.clinical.data')}
+                    </DownloadClinicalButton>
+                    <TableActions
+                        onCheckBoxChange={(items) => {
+                            setTableColumn(tableKey, items);
+                        }}
+                        onSortingChange={(items) => {
+                            setTableColumn(tableKey, items);
+                        }}
+                        restoreDefault={() => setTableColumn(tableKey, presetDonorsModel)}
+                        sortableList={tablesData.tableColumns}
+                    />
+                </ContentSeparator>
             }
             summary={
                 <ContentSeparator>

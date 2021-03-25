@@ -210,3 +210,5 @@ export const getFiltersQuery = (search: any = null): ISqonGroupFilter => {
 
     return JSON.parse(filters);
 };
+
+export const getDefaultFilters = (): ISqonGroupFilter => ({ content: [], op: 'and' });
