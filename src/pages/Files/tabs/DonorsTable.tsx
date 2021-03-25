@@ -25,7 +25,7 @@ import './DonorsTable.scss';
 
 const tableKey = 'files-tabs-donor';
 const DonorsTable = (): React.ReactElement => {
-    const { mappedFilters } = useFilters();
+    const { filters, mappedFilters } = useFilters();
     const { currentPage, pageFilter, pageSize, setCurrentPageFilter } = usePagination(mappedFilters);
     const { loading, result } = useLazyResultQuery<any>(DONOR_TAB_DATA, {
         variables: { ...pageFilter, ...mappedFilters },
@@ -43,7 +43,7 @@ const DonorsTable = (): React.ReactElement => {
         <DataLayout
             actions={
                 <ContentSeparator>
-                    <DownloadClinicalButton>
+                    <DownloadClinicalButton filters={filters}>
                         <MdFileDownload size={16} />
                         {t('global.tables.actions.clinical.data')}
                     </DownloadClinicalButton>
