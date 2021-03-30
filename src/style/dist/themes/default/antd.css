@@ -24863,29 +24863,24 @@ a.ant-btn {
   border-color: #B5C6D8;
 }
 .ant-btn-primary {
-  font-size: 1.6rem;
-  display: flex;
-  align-items: center;
-  padding: 0.8rem 1.6rem;
-  height: 4rem;
-  color: #18486B;
-  background: #FFD261;
-  border-color: #FFD261;
+  color: #fff;
+  background: #0075A2;
+  border-color: #0075A2;
 }
 .ant-btn-primary:hover {
-  background-color: #FFC431;
-  border-color: #FFC431;
-  color: #18486B;
+  color: #fff;
+  background: #008FC7;
+  border-color: #008FC7;
 }
 .ant-btn-primary:focus {
-  background-color: #fff;
-  border-color: #FFC431;
-  color: #18486B;
+  color: #fff;
+  background: #005673;
+  border-color: #005673;
 }
 .ant-btn-primary:disabled {
-  color: #D8E1EB;
-  background-color: #90A9C1;
-  border-color: #90A9C1;
+  color: #90A9C1;
+  background: #F0F3F8;
+  border-color: #F0F3F8;
 }
 .ant-btn-ghost {
   font-size: 1.6rem;

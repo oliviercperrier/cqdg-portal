@@ -10,6 +10,7 @@ import ExternalIcon from 'components/interface/Icon/ExternalLink';
 import StorageIcon from 'components/interface/Icon/Storage';
 import { t } from 'locales/translate';
 import { isAuthenticated } from 'providers/Keycloak/keycloak';
+import { destroyTokens } from 'providers/Keycloak/tokens';
 import { IClassNameProp } from 'types/generic';
 
 import '@ferlab/style/themes/cqdg/components/header.scss';
@@ -45,11 +46,12 @@ const Header: React.FC<IClassNameProp> = ({ className = '' }) => {
                 {isAuthenticated(keycloak) ? (
                     <Button
                         className="logout"
-                        onClick={() =>
+                        onClick={() => {
+                            destroyTokens();
                             keycloak.logout({
                                 redirectUri: window.location.origin,
-                            })
-                        }
+                            });
+                        }}
                         type="text"
                     >
                         <AiOutlineLogout className="icon" />

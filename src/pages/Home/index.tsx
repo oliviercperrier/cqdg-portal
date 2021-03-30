@@ -69,7 +69,7 @@ const Home = (): React.ReactElement => {
                             <div className="buttons">
                                 {!isAuthenticated(keycloak) ? (
                                     <>
-                                        <Link className="ant-btn ant-btn-primary buttons__login" to="/login">
+                                        <Link className="ant-btn buttons__main buttons__login" to="/login">
                                             {t('home.hero.buttons.connection')}{' '}
                                             <AiOutlineArrowRight className="buttons__login__icon" />
                                         </Link>
@@ -79,10 +79,10 @@ const Home = (): React.ReactElement => {
                                     </>
                                 ) : (
                                     <>
-                                        <Link className="ant-btn ant-btn-primary menu-item" to="/files">
+                                        <Link className="ant-btn buttons__main menu-item" to="/files">
                                             <DatabaseIcon className="menu-item-icon" /> {t('nav.file.repo')}
                                         </Link>
-                                        <Link className="ant-btn ant-btn-primary menu-item" to="/studies">
+                                        <Link className="ant-btn buttons__main menu-item" to="/studies">
                                             <StorageIcon className="menu-item-icon" /> {t('nav.studies')}
                                         </Link>
                                     </>
