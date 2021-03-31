@@ -25068,3 +25068,27 @@ a.ant-btn {
   font-weight: 600;
   color: #003457;
 }
+.ant-notification-notice.ant-notification-notice-success {
+  color: #575A00;
+  background: #EAEBC2;
+}
+.ant-notification-notice.ant-notification-notice-success .ant-notification-notice-message {
+  color: #575A00;
+  font-weight: 600;
+}
+.ant-notification-notice.ant-notification-notice-success .ant-notification-notice-icon-success,
+.ant-notification-notice.ant-notification-notice-success .ant-notification-close-icon {
+  color: #575A00;
+}
+.ant-notification-notice.ant-notification-notice-error {
+  color: #86291B;
+  background: #F1D4CF;
+}
+.ant-notification-notice.ant-notification-notice-error .ant-notification-notice-message {
+  color: #86291B;
+  font-weight: 600;
+}
+.ant-notification-notice.ant-notification-notice-error .ant-notification-notice-icon-error,
+.ant-notification-notice.ant-notification-notice-error .ant-notification-close-icon {
+  color: #86291B;
+}

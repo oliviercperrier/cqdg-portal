@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { AiFillFolder, AiOutlineDown, AiOutlineInfoCircle, AiOutlinePlus } from 'react-icons/ai';
 import { CgPlayListAdd, CgPlayListRemove } from 'react-icons/cg';
+import { useIntl } from 'react-intl';
 import { ApolloClient, useApolloClient } from '@apollo/client';
 import StackLayout from '@ferlab/ui/core/layout/StackLayout';
-import { Button, Dropdown, Input, Menu, Modal, Select, Tooltip } from 'antd';
+import { Button, Dropdown, Input, Menu, Modal, notification, Select, Tooltip } from 'antd';
 import cx from 'classnames';
 import get from 'lodash/get';
 
@@ -41,6 +42,8 @@ const getIds = async (clientApollo: ApolloClient<object>, type = 'File', filters
 };
 
 const SaveSets: React.FunctionComponent<SaveSets> = ({ Icon, total, type }) => {
+    const intl = useIntl();
+
     const [loading, setLoading] = useState(false);
     const [isCreateModalVisible, setIsCreateModalVisible] = useState(false);
     const [hasInputError, setHasInputError] = useState(false);
@@ -76,17 +79,28 @@ const SaveSets: React.FunctionComponent<SaveSets> = ({ Icon, total, type }) => {
     const handleSaveNewSet = async () => {
         setLoading(true);
         const arrayIds = await getIds(clientApollo, 'File', mappedFilters);
-        await clientApollo.mutate({
-            mutation: SET_SAVE_SET,
-            variables: {
-                content: {
-                    ids: arrayIds,
-                    name: inputText,
+        try {
+            await clientApollo.mutate({
+                mutation: SET_SAVE_SET,
+                variables: {
+                    content: {
+                        ids: arrayIds,
+                        name: inputText,
+                    },
+                    type: 'save_sets_file',
                 },
-                type: 'save_sets_file',
-            },
-        });
-        await refetchAllSaveSets();
+            });
+            await refetchAllSaveSets();
+            notification.success({
+                description: intl.formatMessage({ id: 'global.savesets.create.success.description' }),
+                message: intl.formatMessage({ id: 'global.savesets.create.success.title' }),
+            });
+        } catch (e) {
+            notification.error({
+                description: intl.formatMessage({ id: 'global.savesets.create.error.description' }),
+                message: intl.formatMessage({ id: 'global.savesets.create.error.title' }),
+            });
+        }
         setLoading(false);
         setInputText('');
         setIsCreateModalVisible(false);
@@ -105,17 +119,28 @@ const SaveSets: React.FunctionComponent<SaveSets> = ({ Icon, total, type }) => {
         } else {
             newContent = oldContent.content.ids.filter((id: string) => !currentFilterIds.includes(id));
         }
-        await clientApollo.mutate({
-            mutation: UPDATE_SAVE_SET,
-            variables: {
-                content: {
-                    ids: newContent,
-                    name: saveSetName,
+        try {
+            await clientApollo.mutate({
+                mutation: UPDATE_SAVE_SET,
+                variables: {
+                    content: {
+                        ids: newContent,
+                        name: saveSetName,
+                    },
+                    id: oldContent.id,
                 },
-                id: oldContent.id,
-            },
-        });
-        await refetchAllSaveSets();
+            });
+            await refetchAllSaveSets();
+            notification.success({
+                description: t('global.savesets.update.success.description'),
+                message: t('global.savesets.update.success.title'),
+            });
+        } catch (e) {
+            notification.error({
+                description: t('global.savesets.update.error.description'),
+                message: t('global.savesets.update.error.title'),
+            });
+        }
         setLoading(false);
         setUpdateDeleteModalContent({ ...updateDeleteModalContent, selectedSet: undefined, show: false });
     };
