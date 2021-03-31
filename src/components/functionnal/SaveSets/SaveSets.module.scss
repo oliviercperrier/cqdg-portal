@@ -1,4 +1,4 @@
-@import '~@ferlab/style/themes/cqdg/colors';
+@import '~@ferlab/style/themes/cqdg/mixins';
 
 .menu {
     .totalContainer {
@@ -25,11 +25,20 @@
     .button {
         display: flex;
         align-items: center;
+        height: 2.4rem;
     
         .text {
             margin: 0 .5rem;
         }
     }
+}
+
+.inputError {
+    @include input-error;
+}
+
+.labelError {
+    color: $red-6;
 }
 
 .select {

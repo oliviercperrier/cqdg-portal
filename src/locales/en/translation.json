@@ -48,11 +48,15 @@
             "create": "Create a new set",
             "create.title": "Save a new set",
             "create.label": "Set Name",
+            "create.label.error": "A set with this name already exists",
             "update": "Add to an existing set",
             "update.title": "Add to {type} set",
             "update.label": "{type} Set",
             "update.confirm": "Add to set",
             "delete": "Remove from an existing set",
+            "delete.title": "Remove from {type} set",
+            "delete.label": "{type} Set",
+            "delete.confirm": "Remove from set",
             "warning": "Max. 10 000 items each times. The first 10 000 items will be used."
         },
         "cards": {

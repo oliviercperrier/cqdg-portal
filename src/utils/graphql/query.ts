@@ -1,8 +1,8 @@
 import {
-    ApolloError,
     DocumentNode,
     OperationVariables,
     QueryHookOptions,
+    QueryResult,
     TypedDocumentNode,
     useQuery,
 } from '@apollo/client';
@@ -13,17 +13,15 @@ export enum Hits {
     ITEM = 'hits',
 }
 
-interface IBaseQueryResults<TData> {
-    error: ApolloError | undefined;
+interface IBaseQueryResults<TData, TVariables> extends Omit<QueryResult<TData, TVariables>, 'data'> {
     result: TData | undefined;
-    loading: boolean;
 }
 
 export const useLazyResultQuery = <TData = any, TVariables = OperationVariables>(
     query: DocumentNode | TypedDocumentNode<TData, TVariables>,
     options?: QueryHookOptions<TData, TVariables>
-): IBaseQueryResults<TData> => {
-    const { data, error, loading, previousData } = useQuery<TData, TVariables>(query, options);
+): IBaseQueryResults<TData, TVariables> => {
+    const { data, previousData, ...rest } = useQuery<TData, TVariables>(query, options);
 
     let result = previousData;
 
@@ -31,5 +29,5 @@ export const useLazyResultQuery = <TData = any, TVariables = OperationVariables>
         result = data;
     }
 
-    return { error, loading, result };
+    return { result, ...rest };
 };
