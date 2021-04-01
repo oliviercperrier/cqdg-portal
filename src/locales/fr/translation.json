@@ -1,5 +1,6 @@
 {
     "global": {
+        "empty": "Aucune Données",
         "documentation": "Documentation",
         "files.title": "Fichiers",
         "files": "fichiers",

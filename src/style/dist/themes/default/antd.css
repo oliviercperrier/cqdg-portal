@@ -25092,3 +25092,9 @@ a.ant-btn {
 .ant-notification-notice.ant-notification-notice-error .ant-notification-close-icon {
   color: #86291B;
 }
+.ant-select .ant-select-selection-overflow-item-rest {
+  font-size: 1.2rem;
+}
+.ant-select .ant-select-selection-overflow-item-rest .ant-select-selection-item {
+  background: #F0F3F8;
+}

@@ -8,6 +8,7 @@ import { Button, Dropdown, Input, Menu, Modal, notification, Select, Tooltip } f
 import cx from 'classnames';
 import get from 'lodash/get';
 
+import ListItem from 'components/functionnal/SaveSets/ListItem';
 import { t } from 'locales/translate';
 import { GET_ALL_SAVE_SETS, GET_FILE_FILTER_IDS, SET_SAVE_SET, UPDATE_SAVE_SET } from 'store/queries/files/saveSets';
 import { useFilters } from 'utils/filters/useFilters';
@@ -60,19 +61,11 @@ const SaveSets: React.FunctionComponent<SaveSets> = ({ Icon, total, type }) => {
     const clientApollo = useApolloClient();
     const { mappedFilters } = useFilters();
     // TODO manage cache and update only 1 entry instead
-    const { refetch: refetchAllSaveSets, result } = useLazyResultQuery<any>(GET_ALL_SAVE_SETS);
+    const { result } = useLazyResultQuery<any>(GET_ALL_SAVE_SETS);
     const saveSetOptions =
         result && result[type]
             ? result[type].map((item: any) => ({
-                  label: (
-                      <span className={styles.listItem}>
-                          {item.content.name}
-                          <span className={styles.listTotal}>
-                              {Icon}
-                              {item.content.ids.length}
-                          </span>
-                      </span>
-                  ),
+                  label: <ListItem Icon={Icon} label={item.content.name} total={item.content.ids.length} />,
                   value: item.content.name,
               }))
             : [];
@@ -82,6 +75,7 @@ const SaveSets: React.FunctionComponent<SaveSets> = ({ Icon, total, type }) => {
         try {
             await clientApollo.mutate({
                 mutation: SET_SAVE_SET,
+                refetchQueries: [{ query: GET_ALL_SAVE_SETS }],
                 variables: {
                     content: {
                         ids: arrayIds,
@@ -90,7 +84,6 @@ const SaveSets: React.FunctionComponent<SaveSets> = ({ Icon, total, type }) => {
                     type: 'save_sets_file',
                 },
             });
-            await refetchAllSaveSets();
             notification.success({
                 description: intl.formatMessage({ id: 'global.savesets.create.success.description' }),
                 message: intl.formatMessage({ id: 'global.savesets.create.success.title' }),
@@ -122,6 +115,7 @@ const SaveSets: React.FunctionComponent<SaveSets> = ({ Icon, total, type }) => {
         try {
             await clientApollo.mutate({
                 mutation: UPDATE_SAVE_SET,
+                refetchQueries: [{ query: GET_ALL_SAVE_SETS }],
                 variables: {
                     content: {
                         ids: newContent,
@@ -130,7 +124,6 @@ const SaveSets: React.FunctionComponent<SaveSets> = ({ Icon, total, type }) => {
                     id: oldContent.id,
                 },
             });
-            await refetchAllSaveSets();
             notification.success({
                 description: t('global.savesets.update.success.description'),
                 message: t('global.savesets.update.success.title'),

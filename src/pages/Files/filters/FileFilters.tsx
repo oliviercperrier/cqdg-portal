@@ -5,6 +5,7 @@ import FilterContainer from '@ferlab/ui/core/components/filters/FilterContainer'
 import get from 'lodash/get';
 
 import GlobalSearch from 'components/containers/GlobalSearch';
+import SelectSets from 'components/functionnal/SaveSets/SelectSets';
 import { t } from 'locales/translate';
 import { FILE_GLOBAL_SEARCH, FILE_TAB_FILTERS } from 'store/queries/files/filters';
 import { enhanceFilters, getSelectedFilters } from 'utils/filters';
@@ -50,6 +51,7 @@ const FileFilters: React.FC = () => {
                 }}
                 tooltipText={t('facet.search_suggest_tooltip_files')}
             />
+            <SelectSets />
             {presetFilters.map((filter) => {
                 const enhancedFilters = enhanceFilters(aggregations, filter.field);
                 const selectedFilters = getSelectedFilters(enhancedFilters, filter);
