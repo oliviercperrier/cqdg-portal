@@ -43,6 +43,7 @@
             }
         },
         "savesets": {
+            "title": "My Save Sets",
             "choose": "Choose a set",
             "save": "Save a set",
             "saveset": "Save set",
@@ -245,7 +246,9 @@
             "apply": "Apply",
             "reset": "Reset"
         },
-        "no.result": "No value for this request"
+        "no.result": "No value for this request",
+        "savesets.donor": "Donor IDS",
+        "savesets.file": "File IDS"
     },
     "aggregation": {
         "0": "No",

@@ -19,7 +19,21 @@ export const GET_FILE_FILTER_IDS = gql`
             hits(filters: $fileFilters, first: 10000) {
                 edges {
                     node {
-                        id
+                        id: file_id
+                    }
+                }
+            }
+        }
+    }
+`;
+
+export const GET_DONOR_FILTER_IDS = gql`
+    query GetFileIdsFilter($donorFilters: JSON) {
+        Donor {
+            hits(filters: $donorFilters, first: 10000) {
+                edges {
+                    node {
+                        id: submitter_donor_id
                     }
                 }
             }

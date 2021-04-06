@@ -47,7 +47,12 @@ const FilesTable = (): React.ReactElement => {
         <DataLayout
             actions={
                 <ContentSeparator>
-                    <SaveSets Icon={<MdInsertDriveFile />} total={totalFiles} type="saveSetsFile" />
+                    <SaveSets
+                        Icon={<MdInsertDriveFile />}
+                        dictionary={{ labelType: t('global.files') }}
+                        total={totalFiles}
+                        type="saveSetsFile"
+                    />
                     <TableActions
                         onCheckBoxChange={(items) => {
                             setTableColumn(tableKey, items);

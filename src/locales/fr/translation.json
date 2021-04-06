@@ -44,6 +44,7 @@
             "columns": {}
         },
         "savesets": {
+            "title": "Mes ensembles de données",
             "choose": "Choisir un ensemble",
             "save": "Sauvegarder un ensemble",
             "saveset": "Sauvegarder l'ensemble",
@@ -246,7 +247,9 @@
             "apply": "Appliquer",
             "reset": "Effacer"
         },
-        "no.result": "Aucune valeur pour cette requête"
+        "no.result": "Aucune valeur pour cette requête",
+        "savesets.donor": "Identifiant de donneurs",
+        "savesets.file": "Identifiant de fichiers"
     },
     "aggregation": {
         "0": "Non",

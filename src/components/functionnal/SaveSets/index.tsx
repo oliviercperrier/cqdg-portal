@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/ban-types */
 import React, { useState } from 'react';
 import { AiFillFolder, AiOutlineDown, AiOutlineInfoCircle, AiOutlinePlus } from 'react-icons/ai';
 import { CgPlayListAdd, CgPlayListRemove } from 'react-icons/cg';
 import { useIntl } from 'react-intl';
-import { ApolloClient, useApolloClient } from '@apollo/client';
+import { ApolloClient, DocumentNode, useApolloClient } from '@apollo/client';
 import StackLayout from '@ferlab/ui/core/layout/StackLayout';
 import { Button, Dropdown, Input, Menu, Modal, notification, Select, Tooltip } from 'antd';
 import cx from 'classnames';
@@ -10,16 +11,28 @@ import get from 'lodash/get';
 
 import ListItem from 'components/functionnal/SaveSets/ListItem';
 import { t } from 'locales/translate';
-import { GET_ALL_SAVE_SETS, GET_FILE_FILTER_IDS, SET_SAVE_SET, UPDATE_SAVE_SET } from 'store/queries/files/saveSets';
+import {
+    GET_ALL_SAVE_SETS,
+    GET_DONOR_FILTER_IDS,
+    GET_FILE_FILTER_IDS,
+    SET_SAVE_SET,
+    UPDATE_SAVE_SET,
+} from 'store/queries/files/saveSets';
+import { noDuplicate } from 'utils/duplicate';
 import { useFilters } from 'utils/filters/useFilters';
 import { Hits, useLazyResultQuery } from 'utils/graphql/query';
 
 import styles from './SaveSets.module.scss';
 
+type TType = 'saveSetsFile' | 'saveSetsDonor';
+
 type SaveSets = {
     total: number;
-    type: 'saveSetsFile' | 'saveSetsDonor';
+    type: TType;
     Icon: React.ReactNode;
+    dictionary: {
+        labelType: React.ReactNode;
+    };
 };
 
 enum EType {
@@ -35,14 +48,40 @@ interface IUpdateDeleteContentState {
     selectedSet: string | undefined;
     type: EType;
 }
-// eslint-disable-next-line @typescript-eslint/ban-types
-const getIds = async (clientApollo: ApolloClient<object>, type = 'File', filters: any): Promise<string[]> => {
-    const { data } = await clientApollo.query({ query: GET_FILE_FILTER_IDS, variables: filters });
-    const fileIds = get(data, `${type}.${Hits.COLLECTION}`, []);
+
+type ITypeMapping = {
+    [key in TType]: ITypeMappingData;
+};
+
+interface ITypeMappingData {
+    idsQuery: DocumentNode;
+    type: string;
+    endpointType: string;
+}
+
+const typeMapping: ITypeMapping = {
+    saveSetsDonor: {
+        endpointType: 'save_sets_donor',
+        idsQuery: GET_DONOR_FILTER_IDS,
+        type: 'Donor',
+    },
+    saveSetsFile: {
+        endpointType: 'save_sets_file',
+        idsQuery: GET_FILE_FILTER_IDS,
+        type: 'File',
+    },
+};
+const getIds = async (
+    clientApollo: ApolloClient<object>,
+    mapping: ITypeMappingData,
+    filters: any
+): Promise<string[]> => {
+    const { data } = await clientApollo.query({ query: mapping.idsQuery, variables: filters });
+    const fileIds = get(data, `${mapping.type}.${Hits.COLLECTION}`, []);
     return fileIds.map((item: any) => item.node.id);
 };
 
-const SaveSets: React.FunctionComponent<SaveSets> = ({ Icon, total, type }) => {
+const SaveSets: React.FunctionComponent<SaveSets> = ({ dictionary, Icon, total, type }) => {
     const intl = useIntl();
 
     const [loading, setLoading] = useState(false);
@@ -58,6 +97,7 @@ const SaveSets: React.FunctionComponent<SaveSets> = ({ Icon, total, type }) => {
         title: '',
         type: EType.ADD,
     });
+    const mappedType = typeMapping[type];
     const clientApollo = useApolloClient();
     const { mappedFilters } = useFilters();
     // TODO manage cache and update only 1 entry instead
@@ -71,7 +111,7 @@ const SaveSets: React.FunctionComponent<SaveSets> = ({ Icon, total, type }) => {
             : [];
     const handleSaveNewSet = async () => {
         setLoading(true);
-        const arrayIds = await getIds(clientApollo, 'File', mappedFilters);
+        const arrayIds = await getIds(clientApollo, mappedType, mappedFilters);
         try {
             await clientApollo.mutate({
                 mutation: SET_SAVE_SET,
@@ -81,7 +121,7 @@ const SaveSets: React.FunctionComponent<SaveSets> = ({ Icon, total, type }) => {
                         ids: arrayIds,
                         name: inputText,
                     },
-                    type: 'save_sets_file',
+                    type: mappedType.endpointType,
                 },
             });
             notification.success({
@@ -104,11 +144,11 @@ const SaveSets: React.FunctionComponent<SaveSets> = ({ Icon, total, type }) => {
 
         const saveSetName = updateDeleteModalContent.selectedSet;
         const actionType = updateDeleteModalContent.type;
-        const currentFilterIds = await getIds(clientApollo, 'File', mappedFilters);
+        const currentFilterIds = await getIds(clientApollo, mappedType, mappedFilters);
         const oldContent = result[type].filter((item: any) => item.content.name === saveSetName)[0];
         let newContent = [];
         if (actionType === EType.ADD) {
-            newContent = [...new Set<string[]>([...currentFilterIds, ...oldContent.content.ids])];
+            newContent = noDuplicate(currentFilterIds, oldContent.content.ids);
         } else {
             newContent = oldContent.content.ids.filter((id: string) => !currentFilterIds.includes(id));
         }
@@ -125,13 +165,13 @@ const SaveSets: React.FunctionComponent<SaveSets> = ({ Icon, total, type }) => {
                 },
             });
             notification.success({
-                description: t('global.savesets.update.success.description'),
-                message: t('global.savesets.update.success.title'),
+                description: intl.formatMessage({ id: 'global.savesets.update.success.description' }),
+                message: intl.formatMessage({ id: 'global.savesets.update.success.title' }),
             });
         } catch (e) {
             notification.error({
-                description: t('global.savesets.update.error.description'),
-                message: t('global.savesets.update.error.title'),
+                description: intl.formatMessage({ id: 'global.savesets.update.error.description' }),
+                message: intl.formatMessage({ id: 'global.savesets.update.error.title' }),
             });
         }
         setLoading(false);
@@ -147,7 +187,7 @@ const SaveSets: React.FunctionComponent<SaveSets> = ({ Icon, total, type }) => {
                         <Menu.Item>
                             <StackLayout className={styles.totalContainer}>
                                 <div className={styles.text}>
-                                    {total} {t('global.files')}
+                                    {total} {dictionary.labelType}
                                 </div>
                                 <Tooltip overlay={t('global.savesets.warning')}>
                                     <AiOutlineInfoCircle />
@@ -170,10 +210,10 @@ const SaveSets: React.FunctionComponent<SaveSets> = ({ Icon, total, type }) => {
                             onClick={() =>
                                 setUpdateDeleteModalContent({
                                     ...updateDeleteModalContent,
-                                    label: t('global.savesets.update.label', { type: t('global.files') }),
+                                    label: t('global.savesets.update.label', { type: dictionary.labelType }),
                                     okText: t('global.savesets.update.confirm'),
                                     show: true,
-                                    title: t('global.savesets.update.title', { type: t('global.files') }),
+                                    title: t('global.savesets.update.title', { type: dictionary.labelType }),
                                     type: EType.ADD,
                                 })
                             }
@@ -187,10 +227,10 @@ const SaveSets: React.FunctionComponent<SaveSets> = ({ Icon, total, type }) => {
                             onClick={() =>
                                 setUpdateDeleteModalContent({
                                     ...updateDeleteModalContent,
-                                    label: t('global.savesets.delete.label', { type: t('global.files') }),
+                                    label: t('global.savesets.delete.label', { type: dictionary.labelType }),
                                     okText: t('global.savesets.delete.confirm'),
                                     show: true,
-                                    title: t('global.savesets.delete.title', { type: t('global.files') }),
+                                    title: t('global.savesets.delete.title', { type: dictionary.labelType }),
                                     type: EType.REMOVE,
                                 })
                             }
