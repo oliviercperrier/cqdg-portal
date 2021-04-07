@@ -4,6 +4,7 @@ import { ReactKeycloakProvider as KeycloakProvider } from '@react-keycloak/web';
 import { IProvider } from 'providers';
 
 import keycloak from './keycloak';
+import { setPermissions } from './permissions';
 import { getTokens, setTokens } from './tokens';
 
 const eventLogger = (event: unknown, error: unknown) => {
@@ -13,6 +14,7 @@ const eventLogger = (event: unknown, error: unknown) => {
 
 const tokenHandler = (tokens: any) => {
     setTokens(tokens);
+    setPermissions(tokens);
 };
 
 export default ({ children }: IProvider): ReactElement => (
