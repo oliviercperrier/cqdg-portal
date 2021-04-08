@@ -2,7 +2,6 @@ import isEmpty from 'lodash/isEmpty';
 
 import { ISqonGroupFilter, TFilterValue, TSqonGroupContent, TValueOp } from 'types/interface/filters';
 
-
 export const addFilter = (filters: ISqonGroupFilter | null, field: string, value: string[]): ISqonGroupFilter => {
     if (!filters) {
         return { content: [{ content: { field, value }, op: 'in' }], op: 'or' };
@@ -23,7 +22,7 @@ export const getSubFilter = (field: string, filters: ISqonGroupFilter): TFilterV
     if (isEmpty(filters)) {
         return [];
     }
-  
+
     const newField = field.replace('__', '.');
     for (const filter of filters.content) {
         if (filter.content.field === newField) {
