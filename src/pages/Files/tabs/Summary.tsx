@@ -1,26 +1,35 @@
 import React from 'react';
-import { useQuery } from '@apollo/client';
-import { Collapse, Spin } from 'antd';
+import { useHistory } from 'react-router-dom';
+import { Collapse } from 'antd';
 import get from 'lodash/get';
 
 import PieChart from 'components/charts/Pie';
 import { t } from 'locales/translate';
 import { FILE_SUMMARY_DATA } from 'store/queries/files/summary';
+import { updateQueryFilters } from 'utils/filters';
+import { createSubFilter } from 'utils/filters/manipulator';
+import { useFilters } from 'utils/filters/useFilters';
 import { formatPieChart } from 'utils/formatChartData';
+import { useLazyResultQuery } from 'utils/graphql/query';
 
 const { Panel } = Collapse;
 
 import styles from './Summary.module.scss';
 const Summary = (): React.ReactElement => {
-    const { data, loading } = useQuery(FILE_SUMMARY_DATA);
-    const pieChartCommonProps = { height: 160, width: 160 };
+    const history = useHistory();
 
-    if (loading) {
-        return <Spin />;
-    }
+    const { mappedFilters } = useFilters();
+    const { result } = useLazyResultQuery(FILE_SUMMARY_DATA, {
+        variables: mappedFilters,
+    });
+    const pieChartCommonProps = {
+        height: 160,
+        onMouseMove: (_: any, event: any) => (event.target.style.cursor = 'pointer'),
+        width: 160,
+    };
 
-    const filesGraphData = get(data, 'File.pies', {});
-    const donorsGraphData = get(data, 'Donor.pies', {});
+    const filesGraphData = get(result, 'File.pies', {});
+    const donorsGraphData = get(result, 'Donor.pies', {});
     return (
         <Collapse defaultActiveKey={[1, 2]}>
             <Panel header={t('global.files.title')} key={`1`}>
@@ -31,6 +40,9 @@ const Summary = (): React.ReactElement => {
                             <PieChart
                                 className={styles.graph}
                                 data={formatPieChart(get(filesGraphData, `${key}.buckets`), 'key', 'doc_count')}
+                                onClick={(datum) =>
+                                    updateQueryFilters(history, key, createSubFilter(key, [datum.id as string]))
+                                }
                                 title={t(`aggregation.${key}`)}
                                 titleClassName={styles.title}
                                 {...pieChartCommonProps}
@@ -46,6 +58,9 @@ const Summary = (): React.ReactElement => {
                             <PieChart
                                 className={styles.graph}
                                 data={formatPieChart(get(donorsGraphData, `${key}.buckets`), 'key', 'doc_count')}
+                                onClick={(datum) =>
+                                    updateQueryFilters(history, key, createSubFilter(key, [datum.id as string]))
+                                }
                                 title={t(`aggregation.${key}`)}
                                 titleClassName={styles.title}
                                 {...pieChartCommonProps}

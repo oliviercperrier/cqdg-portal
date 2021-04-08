@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client';
 export const FILE_SUMMARY_DATA = gql`
-    query GetSummaryData($filters: JSON) {
+    query GetSummaryData($fileFilters: JSON, $donorFilters: JSON) {
         File {
-            pies: aggregations(filters: $filters, aggregations_filter_themselves: true) {
+            pies: aggregations(filters: $fileFilters, aggregations_filter_themselves: true) {
                 study__short_name_keyword {
                     buckets {
                         doc_count
@@ -30,7 +30,7 @@ export const FILE_SUMMARY_DATA = gql`
             }
         }
         Donor {
-            pies: aggregations(filters: $filters, aggregations_filter_themselves: true) {
+            pies: aggregations(filters: $donorFilters, aggregations_filter_themselves: true) {
                 study__short_name_keyword {
                     buckets {
                         doc_count

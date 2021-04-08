@@ -93,10 +93,11 @@ export const updateFilters = (history: any, filterGroup: IFilterGroup, selected:
 
 export const updateQueryFilters = (history: any, field: string, filters: TSqonGroupContent): void => {
     const currentFilter = getFiltersQuery();
+    const newField = field.replace('__', '.');
 
     let newFilters: ISqonGroupFilter | Record<string, never> = { content: filters, op: 'and' };
     if (!isEmpty(currentFilter)) {
-        const filterWithoutSelection = getFilterWithNoSelection(currentFilter, field);
+        const filterWithoutSelection = getFilterWithNoSelection(currentFilter, newField);
         if (isEmpty(filterWithoutSelection.content) && isEmpty(filters)) {
             newFilters = {};
         } else {
