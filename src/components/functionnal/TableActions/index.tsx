@@ -46,7 +46,7 @@ const TableActions = ({
                         }}
                         renderItem={(item) => (
                             <Checkbox
-                                defaultChecked={!item.hidden}
+                                checked={!item.hidden}
                                 onChange={(e) => {
                                     const newItem = { ...item, hidden: !e.target.checked };
                                     const newItems = [...sortableList];

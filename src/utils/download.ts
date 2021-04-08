@@ -1,6 +1,8 @@
-/*import { saveAs } from 'file-saver';*/
+import { saveAs } from 'file-saver';
 import get from 'lodash/get';
-/*import { json2tsv } from 'tsv-json';
+import { json2tsv } from 'tsv-json';
+
+import { translate } from 'locales/translate';
 
 interface IDownloadType {
     [key: string]: string;
@@ -21,14 +23,19 @@ export const download = (body: string, format: string, filename: string): void =
 };
 
 export const formatToTSV = (columns: any, data: any): string => {
-    const dataColumns = columns.map((columnData: any) => columnData.id);
-    const formatedData = data.map((datum: any) => {
+    const headerColumns = columns.map((columnData: any) => translate(columnData.translate));
+    const formatedData: string[][] = data.map((datum: any) => {
         const aggData: any = [];
-        dataColumns.forEach((dataColumn: any) => {
-            aggData.push(String(get(datum.node, dataColumn, '')));
+        columns.forEach((dataColumn: any) => {
+            let dataToUse = String(get(datum.node, dataColumn.id, ''));
+            if (dataColumn.download) {
+                dataToUse = String(dataColumn.download(datum));
+            }
+            aggData.push(dataToUse);
         });
 
         return aggData;
     });
+    formatedData.unshift(headerColumns);
     return json2tsv(formatedData);
-};*/
+};

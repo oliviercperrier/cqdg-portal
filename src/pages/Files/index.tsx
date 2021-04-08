@@ -38,7 +38,6 @@ const FileRepo: React.FC = () => {
 
     const filesTotal = get(result, 'File.hits.total', 0);
     const donorsTotal = get(result, 'Donor.hits.total', 0);
-
     return (
         <QueryLayout className="file-repo" sidebar={<SideBarContent />}>
             <StackLayout className="file-repo__wrapper" fitContent flexContent vertical>

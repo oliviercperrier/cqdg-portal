@@ -15,11 +15,12 @@ const DonorsModel = [
             multiple: 3,
         },
         title: t('facet.submitter_donor_id'),
+        translate: 'facet.submitter_donor_id',
     },
     {
         dataIndex: ['node', 'study', 'hits', 'edges', '0', 'node', 'name'],
         hidden: false,
-        id: 'study_name',
+        id: 'study.hits.edges[0].node.name',
         movable: true,
         sortDirection: ['ascend', 'descend'],
         sorter: {
@@ -28,6 +29,7 @@ const DonorsModel = [
             multiple: 1,
         },
         title: t('facet.study.name'),
+        translate: 'facet.study.name',
     },
     {
         dataIndex: ['node', 'gender'],
@@ -41,6 +43,7 @@ const DonorsModel = [
             multiple: 4,
         },
         title: t('facet.gender'),
+        translate: 'facet.gender',
     },
     {
         dataIndex: ['node', 'ethnicity'],
@@ -54,6 +57,7 @@ const DonorsModel = [
             multiple: 5,
         },
         title: t('facet.ethnicity'),
+        translate: 'facet.ethnicity',
     },
     {
         dataIndex: ['node', 'vital_status'],
@@ -61,6 +65,7 @@ const DonorsModel = [
         id: 'vital_status',
         movable: true,
         title: t('facet.vital_status'),
+        translate: 'facet.vital_status',
     },
     {
         dataIndex: ['node', 'age_at_recruitment'],
@@ -68,17 +73,29 @@ const DonorsModel = [
         id: 'age_at_recruitment',
         movable: true,
         title: t('facet.age_at_recruitment'),
+        translate: 'facet.age_at_recruitment',
     },
     {
+        download: ({ node }: any) => Math.min(node.diagnoses.hits.edges.map((item: any) => item.node.age_at_diagnosis)),
         hidden: true,
         id: 'age_at_diagnosis',
         movable: true,
         render: ({ node }: any) => Math.min(node.diagnoses.hits.edges.map((item: any) => item.node.age_at_diagnosis)),
         title: t('facet.diagnoses.age_at_diagnosis'),
+        translate: 'facet.diagnoses.age_at_diagnosis',
     },
     {
+        download: ({ node }: any) => {
+            if (!node) {
+                return '--';
+            }
+
+            const age = Math.min(node.diagnoses.hits.edges.map((item: any) => item.node.age_at_diagnosis));
+            const result = node.diagnoses.hits.edges.find((item: any) => item.node.age_at_diagnosis === age);
+            return get(result, 'node.icd_term', '--');
+        },
         hidden: true,
-        id: 'icd_term',
+        id: 'diagnoses.icd_term',
         movable: true,
         render: ({ node }: any) => {
             if (!node) {
@@ -90,19 +107,21 @@ const DonorsModel = [
             return get(result, 'node.icd_term', '--');
         },
         title: t('facet.diagnoses.icd_term'),
+        translate: 'facet.diagnoses.icd_term',
     },
     {
         dataIndex: ['node', 'phenotypes', 'hits', 'edges', '0', 'node', 'hpo_term'],
         hidden: true,
-        id: 'hpo_term',
+        id: 'phenotypes.hits.edges[0].node.hpo_term',
         movable: true,
         title: t('facet.phenotypes.hpo_term'),
+        translate: 'facet.phenotypes.hpo_term',
     },
     {
         className: 'numerical',
         dataIndex: ['node', 'files', 'hits', 'total'],
         hidden: false,
-        id: 'total_files',
+        id: 'files.hits.total',
         movable: true,
         sortDirection: ['ascend', 'descend'],
         sorter: {
@@ -110,6 +129,7 @@ const DonorsModel = [
             multiple: 6,
         },
         title: t('facet.files.count'),
+        translate: 'facet.files.count',
     },
 ];
 
