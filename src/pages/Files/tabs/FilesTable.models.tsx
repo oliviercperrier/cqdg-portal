@@ -27,7 +27,7 @@ export const FilesModel = [
     },
     {
         hidden: false,
-        id: 'study_name',
+        id: 'study.hits.edges[0].node.short_name_keyword',
         initialOrder: 1,
         movable: true,
         render: ({ node }: any) => (
@@ -129,7 +129,7 @@ export const FilesModel = [
     {
         className: 'numerical',
         hidden: false,
-        id: 'number_of_donors',
+        id: 'donors.hits.edges[0].node.submitter_donor_id',
         initialOrder: 9,
         movable: true,
         render: ({ node }: any) => (
