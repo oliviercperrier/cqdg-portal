@@ -2,6 +2,9 @@ import React from 'react';
 import StackLayout from '@ferlab/ui/core/layout/StackLayout';
 import { Pie, PieSvgProps, ResponsivePie } from '@nivo/pie';
 
+import ChartsIcon from 'components/interface/Icon/Charts';
+import { t } from 'locales/translate';
+
 import { IChartProps } from './types';
 
 import styles from './Pie.module.scss';
@@ -13,6 +16,7 @@ interface IPieChartProps extends IChartProps, Omit<PieSvgProps<any>, 'height' | 
 }
 const PieChart: React.FC<IPieChartProps> = ({
     className = '',
+    data,
     height = 0,
     title,
     titleClassName = '',
@@ -44,10 +48,17 @@ const PieChart: React.FC<IPieChartProps> = ({
     return (
         <StackLayout className={`${styles.container} ${className}`} fitContent vertical>
             <h3 className={`${styles.title} ${titleClassName}`}>{title}</h3>
-            {width > 0 && height > 0 ? (
-                <Pie height={height} width={width} {...commonProps} {...rest} />
+            {data.length > 0 ? (
+                width > 0 && height > 0 ? (
+                    <Pie data={data} height={height} width={width} {...commonProps} {...rest} />
+                ) : (
+                    <ResponsivePie data={data} {...commonProps} {...rest} />
+                )
             ) : (
-                <ResponsivePie {...commonProps} {...rest} />
+                <StackLayout className={styles.noData} flexContent vertical>
+                    <ChartsIcon className={styles.icon} />
+                    <span>{t('global.empty')}</span>
+                </StackLayout>
             )}
         </StackLayout>
     );
