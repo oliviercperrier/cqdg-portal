@@ -2,9 +2,8 @@ import axios from 'axios';
 import jwt_decode, { JwtPayload } from 'jwt-decode';
 import qs from 'query-string';
 
+import { KEYCLOAK_CONFIGS, RESOURCE_SERVER_CLIENT } from 'config/constants';
 import { getWithExpiry, setWithExpiry } from 'utils/storage';
-
-import { KEYCLOAK_CONFIGS, RESOURCE_SERVER_CLIENT } from '../../config/constants';
 
 import { ITokens } from './tokens';
 
