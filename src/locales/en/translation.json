@@ -42,6 +42,33 @@
                 "restore.defaults": "Restore Defaults"
             }
         },
+        "savesets": {
+            "title": "My Save Sets",
+            "choose": "Choose a set",
+            "save": "Save a set",
+            "saveset": "Save set",
+            "create": "Create a new set",
+            "create.title": "Save a new set",
+            "create.label": "Set Name",
+            "create.label.error": "A set with this name already exists",
+            "create.success.title": "Your Set has been created",
+            "create.success.description": "You can use your Set from the filter bar",
+            "create.error.title": "An error occured",
+            "create.error.description": "It was impossible to create your Set. Please try again.",
+            "update": "Add to an existing set",
+            "update.title": "Add to {type} set",
+            "update.label": "{type} Set",
+            "update.confirm": "Add to set",
+            "update.success.title": "Your Set has been saved",
+            "update.success.description": "You can use your Set from the filter bar",
+            "update.error.title": "An error has occured",
+            "update.error.description": "It was impossible to update your Set. Please try again",
+            "delete": "Remove from an existing set",
+            "delete.title": "Remove from {type} set",
+            "delete.label": "{type} Set",
+            "delete.confirm": "Remove from set",
+            "warning": "Max. 10 000 items each times. The first 10 000 items will be used."
+        },
         "cards": {
             "details": "Details"
         },
@@ -219,7 +246,9 @@
             "apply": "Apply",
             "reset": "Reset"
         },
-        "no.result": "No value for this request"
+        "no.result": "No value for this request",
+        "savesets.donor": "Donor IDS",
+        "savesets.file": "File IDS"
     },
     "aggregation": {
         "0": "No",

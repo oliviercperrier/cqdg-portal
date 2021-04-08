@@ -43,6 +43,33 @@
             },
             "columns": {}
         },
+        "savesets": {
+            "title": "Mes ensembles de données",
+            "choose": "Choisir un ensemble",
+            "save": "Sauvegarder un ensemble",
+            "saveset": "Sauvegarder l'ensemble",
+            "create": "Créer un nouvel ensemble",
+            "create.title": "Sauvegarder un nouvel ensemble",
+            "create.label": "Nom de l'ensemble",
+            "create.label.error": "Un ensemble avec ce nom exist déjà",
+            "create.success.title": "Votre enesemble à été créer",
+            "create.success.description": "Vous pouvez rappeler vos ensembles à partir de la barre de facettes.",
+            "create.error.title": "Un erreur est survenue",
+            "create.error.description": "Il n'a pas été possible de créer votre ensemble. Veuillez réessayer.",
+            "update": "Ajouter à un ensemble",
+            "update.title": "Ajouter a l'ensemble de {type}",
+            "update.label": "Ensemble de {type}",
+            "update.confirm": "Ajouter à l'ensemble",
+            "update.success.title": "Votre ensemble a été mis à jour",
+            "update.success.description": "Vous pouvez rappeler vos ensembles à partir de la barre de facettes.",
+            "update.error.title": "Un erreur est survenue",
+            "update.error.description": "Il n'a pas été possible de mettre à jour votre ensemble. Veuillez réessayer.",
+            "delete": "Supprimer d'un ensemble",
+            "delete.title": "Retirer de l'ensemble de {type}",
+            "delete.label": "Ensemble de {type}",
+            "delete.confirm": "Retirer de l'ensemble",
+            "warning": "Max. 10 000 items à la fois. Les 10 000 items seront traités."
+        },
         "cards": {
             "details": "Détails"
         },
@@ -220,7 +247,9 @@
             "apply": "Appliquer",
             "reset": "Effacer"
         },
-        "no.result": "Aucune valeur pour cette requête"
+        "no.result": "Aucune valeur pour cette requête",
+        "savesets.donor": "Identifiant de donneurs",
+        "savesets.file": "Identifiant de fichiers"
     },
     "aggregation": {
         "0": "Non",
