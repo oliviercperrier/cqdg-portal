@@ -1,0 +1,19 @@
+@import '~@ferlab/style/themes/cqdg/colors';
+
+.listItem {
+    display: flex;
+    align-items: center;
+    .listTotal {
+        display: flex;
+        align-items: center;
+        margin-left: 1.6rem;
+    
+        color: $gray-7;
+        font-size: 1.2rem;
+
+        > svg {
+            color: $gray-6;
+            margin-right: .4rem;
+        }
+    }
+}

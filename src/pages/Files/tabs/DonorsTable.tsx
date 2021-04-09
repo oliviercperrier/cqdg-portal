@@ -5,6 +5,7 @@ import CountWithIcon, { CountWithIconTypeEnum } from '@ferlab/ui/core/components
 import get from 'lodash/get';
 
 import DownloadClinicalButton from 'components/functionnal/DownloadClinicalButton';
+import SaveSets from 'components/functionnal/SaveSets';
 import TableActions from 'components/functionnal/TableActions';
 import { TableContent } from 'components/functionnal/TableContent';
 import ContentSeparator from 'components/layouts/ContentSeparator';
@@ -22,7 +23,7 @@ import { usePagination } from 'utils/pagination/usePagination';
 
 import { presetDonorsModel } from './DonorsTable.models';
 
-import './DonorsTable.scss';
+import styles from './DonorsTable.module.scss';
 
 const tableKey = 'files-tabs-donor';
 const DonorsTable = (): React.ReactElement => {
@@ -45,10 +46,18 @@ const DonorsTable = (): React.ReactElement => {
         <DataLayout
             actions={
                 <ContentSeparator>
-                    <DownloadClinicalButton filters={filters}>
-                        <MdFileDownload size={16} />
-                        {t('global.tables.actions.clinical.data')}
-                    </DownloadClinicalButton>
+                    <>
+                        <DownloadClinicalButton className={styles.btnDownload} filters={filters}>
+                            <MdFileDownload size={16} />
+                            {t('global.tables.actions.clinical.data')}
+                        </DownloadClinicalButton>
+                        <SaveSets
+                            Icon={<MdPeople />}
+                            dictionary={{ labelType: t('global.donors') }}
+                            total={totalDonors}
+                            type="saveSetsDonor"
+                        />
+                    </>
                     <TableActions
                         downloadData={formatToTSV(filteredColumns, dataSource)}
                         onCheckBoxChange={(items) => {
