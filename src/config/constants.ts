@@ -16,5 +16,6 @@ export const RESOURCE_SERVER_CLIENT =
     (process.env.REACT_APP_KEYCLOAK_RESOURCE_SERVER_CLIENT as string);
 export const GRAPHQL_API = window.env.REACT_APP_API_URL || process.env.REACT_APP_API_URL;
 export const CLINICAL_DATA_API = window.env.REACT_APP_CLINICAL_DATA_API || process.env.REACT_APP_CLINICAL_DATA_API;
+export const DATA_STORAGE_API = window.env.REACT_APP_DATA_STORAGE_API || process.env.REACT_APP_DATA_STORAGE_API;
 export const IS_DEV_ENV = window.location.hostname.includes('localhost');
 export const IS_QA_ENV = window.location.hostname.includes('.qa.');

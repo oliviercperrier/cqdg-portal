@@ -6989,7 +6989,7 @@ _:-ms-fullscreen .ant-picker-range-wrapper .ant-picker-year-panel .ant-picker-ce
   z-index: 10;
   display: block;
   padding: 20px;
-  color: rgba(0, 0, 0, 0.45);
+  color: #003457;
   font-weight: 700;
   font-size: 16px;
   font-style: normal;
@@ -7052,7 +7052,7 @@ _:-ms-fullscreen .ant-picker-range-wrapper .ant-picker-year-panel .ant-picker-ce
   left: 0;
   width: 100%;
   height: 0;
-  background-color: rgba(0, 0, 0, 0.45);
+  background-color: rgba(0, 37, 61, 0.45);
   opacity: 0;
   filter: alpha(opacity=45);
   transition: opacity 0.3s linear, height 0s ease 0.3s;
@@ -13630,7 +13630,7 @@ _:-ms-fullscreen .ant-picker-range-wrapper .ant-picker-year-panel .ant-picker-ce
   left: 0;
   z-index: 1000;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.45);
+  background-color: rgba(0, 37, 61, 0.45);
 }
 .ant-image-preview-mask-hidden {
   display: none;
@@ -13706,7 +13706,7 @@ _:-ms-fullscreen .ant-picker-range-wrapper .ant-picker-year-panel .ant-picker-ce
   width: 100%;
   color: rgba(255, 255, 255, 0.85);
   list-style: none;
-  background: rgba(0, 0, 0, 0.1);
+  background: rgba(0, 37, 61, 0.1);
   pointer-events: auto;
 }
 .ant-image-preview-operations-operation {
@@ -13737,7 +13737,7 @@ _:-ms-fullscreen .ant-picker-range-wrapper .ant-picker-year-panel .ant-picker-ce
   height: 44px;
   margin-top: -22px;
   color: rgba(255, 255, 255, 0.85);
-  background: rgba(0, 0, 0, 0.1);
+  background: rgba(0, 37, 61, 0.1);
   border-radius: 50%;
   cursor: pointer;
   pointer-events: auto;
@@ -16458,7 +16458,7 @@ textarea.ant-mentions {
   left: 0;
   z-index: 1000;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.45);
+  background-color: rgba(0, 37, 61, 0.45);
 }
 .ant-modal-mask-hidden {
   display: none;
@@ -16499,7 +16499,7 @@ textarea.ant-mentions {
   right: 0;
   z-index: 10;
   padding: 0;
-  color: rgba(0, 0, 0, 0.45);
+  color: #003457;
   font-weight: 700;
   line-height: 1;
   text-decoration: none;
@@ -24862,30 +24862,28 @@ a.ant-btn {
   background-color: #F0F3F8;
   border-color: #B5C6D8;
 }
+.ant-btn > .ant-btn-loading-icon {
+  margin-right: 0.8rem;
+}
 .ant-btn-primary {
-  font-size: 1.6rem;
-  display: flex;
-  align-items: center;
-  padding: 0.8rem 1.6rem;
-  height: 4rem;
-  color: #18486B;
-  background: #FFD261;
-  border-color: #FFD261;
+  color: #fff;
+  background: #0075A2;
+  border-color: #0075A2;
 }
 .ant-btn-primary:hover {
-  background-color: #FFC431;
-  border-color: #FFC431;
-  color: #18486B;
+  color: #fff;
+  background: #008FC7;
+  border-color: #008FC7;
 }
 .ant-btn-primary:focus {
-  background-color: #fff;
-  border-color: #FFC431;
-  color: #18486B;
+  color: #fff;
+  background: #005673;
+  border-color: #005673;
 }
 .ant-btn-primary:disabled {
-  color: #D8E1EB;
-  background-color: #90A9C1;
-  border-color: #90A9C1;
+  color: #90A9C1;
+  background: #F0F3F8;
+  border-color: #F0F3F8;
 }
 .ant-btn-ghost {
   font-size: 1.6rem;
@@ -25065,4 +25063,38 @@ a.ant-btn {
 }
 .ant-pagination.mini .ant-pagination-disabled .ant-pagination-item-link {
   color: #90A9C1;
+}
+.ant-modal-title {
+  font-weight: 600;
+  color: #003457;
+}
+.ant-notification-notice.ant-notification-notice-success {
+  color: #575A00;
+  background: #EAEBC2;
+}
+.ant-notification-notice.ant-notification-notice-success .ant-notification-notice-message {
+  color: #575A00;
+  font-weight: 600;
+}
+.ant-notification-notice.ant-notification-notice-success .ant-notification-notice-icon-success,
+.ant-notification-notice.ant-notification-notice-success .ant-notification-close-icon {
+  color: #575A00;
+}
+.ant-notification-notice.ant-notification-notice-error {
+  color: #86291B;
+  background: #F1D4CF;
+}
+.ant-notification-notice.ant-notification-notice-error .ant-notification-notice-message {
+  color: #86291B;
+  font-weight: 600;
+}
+.ant-notification-notice.ant-notification-notice-error .ant-notification-notice-icon-error,
+.ant-notification-notice.ant-notification-notice-error .ant-notification-close-icon {
+  color: #86291B;
+}
+.ant-select .ant-select-selection-overflow-item-rest {
+  font-size: 1.2rem;
+}
+.ant-select .ant-select-selection-overflow-item-rest .ant-select-selection-item {
+  background: #F0F3F8;
 }

@@ -1,0 +1,64 @@
+@import '~@ferlab/style/themes/cqdg/mixins';
+
+.menu {
+    .totalContainer {
+        justify-content: space-between;
+        align-items: center;
+        .text {
+            font-size: 1.2rem;
+        }
+    }
+    .divider {
+        background: $gray-4;
+    }
+
+    .actions {
+        display: flex;
+        align-items: center;
+
+        .icons {
+            margin-right: .8rem;
+        }
+    }
+}
+.buttonContainer {
+    .button {
+        display: flex;
+        align-items: center;
+        height: 2.4rem;
+    
+        .text {
+            margin: 0 .5rem;
+        }
+    }
+}
+
+.inputError {
+    @include input-error;
+}
+
+.labelError {
+    color: $red-6;
+}
+
+.select {
+    width: 100%;
+}
+
+.listItem {
+    display: flex;
+    align-items: center;
+    .listTotal {
+        display: flex;
+        align-items: center;
+        margin-left: 1.6rem;
+    
+        color: $gray-7;
+        font-size: 1.2rem;
+
+        > svg {
+            color: $gray-6;
+            margin-right: .4rem;
+        }
+    }
+}

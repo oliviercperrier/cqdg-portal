@@ -1,4 +1,6 @@
 export const fileMapping: Map<string, string> = new Map([
+    ['savesets.file', 'file_id'],
+    ['savesets.donor', 'donors.submitter_donor_id'],
     ['gender', 'donors.gender'],
     ['ethnicity', 'donors.ethnicity'],
     ['age_at_recruitment', 'donors.age_at_recruitment'],
@@ -9,6 +11,8 @@ export const fileMapping: Map<string, string> = new Map([
 ]);
 
 export const donorMapping: Map<string, string> = new Map([
+    ['savesets.donor', 'submitter_donor_id'],
+    ['savesets.file', 'files.file_id'],
     ['data_category', 'files.data_category'],
     ['data_type', 'files.data_type'],
     ['file_format', 'files.file_format'],

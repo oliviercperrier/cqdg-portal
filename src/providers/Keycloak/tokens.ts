@@ -24,6 +24,12 @@ export const setTokens = ({ idToken = '', refreshToken = '', token = '' }: IToke
     }
 };
 
+export const destroyTokens = (): void => {
+    localStorage.removeItem(SESSION_TOKEN_NAME);
+    localStorage.removeItem(TOKEN_NAME);
+    localStorage.removeItem(REFRESH_TOKEN_NAME);
+};
+
 export const getTokens = (): ITokens => ({
     idToken: getWithExpiry(SESSION_TOKEN_NAME) || '',
     refreshToken: getWithExpiry(REFRESH_TOKEN_NAME) || '',

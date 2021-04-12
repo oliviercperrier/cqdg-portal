@@ -1,14 +1,21 @@
-import React, { ReactElement } from 'react';
+import { ReactElement } from 'react';
 import { ApolloClient, ApolloProvider, createHttpLink, gql, NormalizedCacheObject } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
+import { RestLink } from 'apollo-link-rest';
 
-import { GRAPHQL_API } from 'config/constants';
+import { DATA_STORAGE_API, GRAPHQL_API } from 'config/constants';
 import { IProvider } from 'providers';
 import { getTokens } from 'providers/Keycloak/tokens';
 import { cache } from 'store/cache';
 
 const httpLink = createHttpLink({
     uri: `${GRAPHQL_API}/cqdg/graphql`,
+});
+
+const restEndpoints = new RestLink({
+    endpoints: {
+        dataStorage: DATA_STORAGE_API,
+    },
 });
 
 const authLink = setContext((_, { headers }) => {
@@ -36,7 +43,7 @@ const typeDefs = gql`
 
 const client: ApolloClient<NormalizedCacheObject> = new ApolloClient({
     cache,
-    link: authLink.concat(httpLink),
+    link: authLink.concat(restEndpoints).concat(httpLink),
     typeDefs,
 });
 
