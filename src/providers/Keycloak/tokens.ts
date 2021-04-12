@@ -3,7 +3,7 @@ import jwt_decode, { JwtPayload } from 'jwt-decode';
 import { REFRESH_TOKEN_NAME, SESSION_TOKEN_NAME, TOKEN_NAME } from 'config/constants';
 import { getWithExpiry, setWithExpiry } from 'utils/storage';
 
-interface ITokens {
+export interface ITokens {
     idToken: string;
     token: string;
     refreshToken: string;

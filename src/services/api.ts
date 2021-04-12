@@ -12,6 +12,7 @@ import { downloadFile } from 'utils/url/download';
 const appRestAPI = axios.create({
     baseURL: GRAPHQL_API,
 });
+
 const clinicalRestAPI = axios.create({
     baseURL: CLINICAL_DATA_API,
 });
