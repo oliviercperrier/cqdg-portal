@@ -14,6 +14,7 @@ import { setTableColumn } from 'store/cache/tableColumns';
 import { FILE_TAB_DATA } from 'store/queries/files/fileTabs';
 import { GET_TABLE_COLUMNS } from 'store/queries/tables';
 import { ITableColumnItem } from 'types/interface';
+import { formatToTSV } from 'utils/download';
 import { useFilters } from 'utils/filters/useFilters';
 import { EFileInputType, formatFileSize } from 'utils/formatFileSize';
 import { Hits } from 'utils/graphql/query';
@@ -43,6 +44,7 @@ const FilesTable = (): React.ReactElement => {
     const totalFiles = get(result, `File.${Hits.ITEM}.total`, 0);
     const totalSizes = get(result, `File.aggregations.file_size.stats.sum`, 0);
     const fileSizes = formatFileSize(totalSizes, { output: 'object' }, EFileInputType.MB) as Record<string, any>;
+    const filteredColumns = tablesData.tableColumns.filter((item: ITableColumnItem) => !item.hidden);
     return (
         <DataLayout
             actions={
@@ -54,6 +56,7 @@ const FilesTable = (): React.ReactElement => {
                         type="saveSetsFile"
                     />
                     <TableActions
+                        downloadData={formatToTSV(filteredColumns, dataSource)}
                         onCheckBoxChange={(items) => {
                             setTableColumn(tableKey, items);
                         }}
@@ -87,7 +90,7 @@ const FilesTable = (): React.ReactElement => {
         >
             <TableContent
                 className="files-table"
-                columns={tablesData.tableColumns.filter((item: ITableColumnItem) => !item.hidden)}
+                columns={filteredColumns}
                 dataSource={dataSource}
                 loading={loading}
                 pagination={{

@@ -24,10 +24,11 @@ export const FilesModel = [
             multiple: 1,
         },
         title: <MdLock className="files-table-locks" />,
+        translate: 'Controlled',
     },
     {
         hidden: false,
-        id: 'study_name',
+        id: 'study.hits.edges[0].node.short_name_keyword',
         initialOrder: 1,
         movable: true,
         render: ({ node }: any) => (
@@ -51,6 +52,7 @@ export const FilesModel = [
             multiple: 2,
         },
         title: t('facet.study.name'),
+        translate: 'facet.study.name',
     },
     {
         dataIndex: ['node', 'file_name_keyword'],
@@ -65,6 +67,7 @@ export const FilesModel = [
             multiple: 3,
         },
         title: t('facet.file_name_keyword'),
+        translate: 'facet.file_name_keyword',
     },
     {
         dataIndex: ['node', 'data_category'],
@@ -79,6 +82,7 @@ export const FilesModel = [
             multiple: 4,
         },
         title: t('facet.data_category'),
+        translate: 'facet.data_category',
     },
     {
         dataIndex: ['node', 'file_format'],
@@ -93,6 +97,7 @@ export const FilesModel = [
             multiple: 5,
         },
         title: t('facet.file_format'),
+        translate: 'facet.file_format',
     },
     {
         hidden: true,
@@ -101,6 +106,7 @@ export const FilesModel = [
         movable: true,
         render: ({ node }: any) => (!!node.is_harmonized ? 'yes' : 'no'),
         title: t('facet.is_harmonized'),
+        translate: 'facet.is_harmonized',
     },
     {
         dataIndex: ['node', 'data_type'],
@@ -109,6 +115,7 @@ export const FilesModel = [
         initialOrder: 6,
         movable: true,
         title: t('facet.data_type'),
+        translate: 'facet.data_type',
     },
     {
         dataIndex: ['node', 'experimental_strategy'],
@@ -117,6 +124,7 @@ export const FilesModel = [
         initialOrder: 7,
         movable: true,
         title: t('facet.experimental_strategy'),
+        translate: 'facet.experimental_strategy',
     },
     {
         dataIndex: ['node', 'platform'],
@@ -125,11 +133,12 @@ export const FilesModel = [
         initialOrder: 8,
         movable: true,
         title: t('facet.platform'),
+        translate: 'facet.platform',
     },
     {
         className: 'numerical',
         hidden: false,
-        id: 'number_of_donors',
+        id: 'donors.hits.edges[0].node.submitter_donor_id',
         initialOrder: 9,
         movable: true,
         render: ({ node }: any) => (
@@ -147,6 +156,7 @@ export const FilesModel = [
             </InternalLink>
         ),
         title: t('facet.donors'),
+        translate: 'facet.donors',
     },
     {
         className: 'numerical',
@@ -161,5 +171,6 @@ export const FilesModel = [
             multiple: 6,
         },
         title: t('facet.file_size'),
+        translate: 'facet.file_size',
     },
 ];

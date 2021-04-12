@@ -5,17 +5,20 @@ import { Button, Checkbox, Dropdown, Menu, Popover } from 'antd';
 
 import SortableList, { TSortableItem } from 'components/functionnal/SortableList';
 import { t } from 'locales/translate';
+import { download } from 'utils/download';
 
 import styles from './TableActions.module.scss';
 
 interface ITableActionsProps {
     sortableList: Array<TSortableItem>;
+    downloadData?: string;
     onSortingChange: (items: Array<TSortableItem>) => void;
     onCheckBoxChange: (items: Array<TSortableItem>) => void;
     restoreDefault: () => void;
 }
 
 const TableActions = ({
+    downloadData = '',
     onCheckBoxChange,
     onSortingChange,
     restoreDefault,
@@ -43,7 +46,7 @@ const TableActions = ({
                         }}
                         renderItem={(item) => (
                             <Checkbox
-                                defaultChecked={!item.hidden}
+                                checked={!item.hidden}
                                 onChange={(e) => {
                                     const newItem = { ...item, hidden: !e.target.checked };
                                     const newItems = [...sortableList];
@@ -69,7 +72,9 @@ const TableActions = ({
         <Dropdown
             overlay={
                 <Menu>
-                    <Menu.Item>{t('repo.download.options.all.tsv')}</Menu.Item>
+                    <Menu.Item onClick={() => download(downloadData, 'TSV', 'data.tsv')}>
+                        {t('repo.download.options.all.tsv')}
+                    </Menu.Item>
                 </Menu>
             }
             placement="bottomRight"

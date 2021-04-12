@@ -15,6 +15,7 @@ import { setTableColumn } from 'store/cache/tableColumns';
 import { DONOR_TAB_DATA } from 'store/queries/files/donorTabs';
 import { GET_TABLE_COLUMNS } from 'store/queries/tables';
 import { ITableColumnItem } from 'types/interface';
+import { formatToTSV } from 'utils/download';
 import { useFilters } from 'utils/filters/useFilters';
 import { Hits } from 'utils/graphql/query';
 import { useLazyResultQuery } from 'utils/graphql/query';
@@ -40,6 +41,7 @@ const DonorsTable = (): React.ReactElement => {
         key: data.node.id,
     }));
     const totalDonors = get(result, `Donor.${Hits.ITEM}.total`, 0);
+    const filteredColumns = tablesData.tableColumns.filter((item: ITableColumnItem) => !item.hidden);
     return (
         <DataLayout
             actions={
@@ -57,6 +59,7 @@ const DonorsTable = (): React.ReactElement => {
                         />
                     </>
                     <TableActions
+                        downloadData={formatToTSV(filteredColumns, dataSource)}
                         onCheckBoxChange={(items) => {
                             setTableColumn(tableKey, items);
                         }}
@@ -81,7 +84,7 @@ const DonorsTable = (): React.ReactElement => {
         >
             <TableContent
                 className="donors-table"
-                columns={tablesData.tableColumns.filter((item: ITableColumnItem) => !item.hidden)}
+                columns={filteredColumns}
                 dataSource={dataSource}
                 loading={loading}
                 pagination={{
