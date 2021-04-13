@@ -21,7 +21,7 @@ const Login = (): React.ReactElement => {
     useEffect(() => {
         if (initialized && keycloak && !isAuthenticated) {
             keycloak.login({
-                redirectUri: `${window.location.origin}${currentLocationState.from}`,
+                redirectUri: `${window.location.origin}/terms?redirectAfter=${currentLocationState.from}`,
             });
         }
     }, [initialized]);
