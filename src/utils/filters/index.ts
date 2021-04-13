@@ -26,6 +26,7 @@ interface IAggregations {
     [key: string]: IAggregation;
 }
 
+// TODO Multi Query: Change here to search through multi-query
 const getFilterWithNoSelection = (filters: ISqonGroupFilter, field: string): ISqonGroupFilter => {
     const filtered = filters.content.filter((filter) => filter.content.field !== field);
     return {
@@ -91,6 +92,7 @@ export const updateFilters = (history: any, filterGroup: IFilterGroup, selected:
     updateQueryFilters(history, filterGroup.field, newSelectedFilters);
 };
 
+// TODO Multi Query: Change here to search through multi-query
 export const updateQueryFilters = (history: any, field: string, filters: TSqonGroupContent): void => {
     const currentFilter = getFiltersQuery();
     const newField = field.replace('__', '.');
@@ -126,6 +128,7 @@ export const enhanceFilters = (aggregations: IAggregations, key: string): IFilte
         : [{ data: {}, id: key, name: key }];
 };
 
+// TODO Multi Query: Change here to search through multi-query
 const isFilterSelected = (filters: ISqonGroupFilter, filterGroup: IFilterGroup, key: string) => {
     for (const filter of filters.content) {
         if (filter.content.value.includes(key) && filter.content.field === filterGroup.field) {
@@ -179,6 +182,7 @@ export const getSelectedFilters = (filters: IFilter[], filterGroup: IFilterGroup
     }
 };
 
+// TODO Multi Query: Change here to search through multi-query
 export const mapFilter = (filters: ISqonGroupFilter, mapping: Map<string, string>): ISqonGroupFilter | null => {
     const filtersContent = get(filters, 'content', [] as IValueFilter[]);
     const remapedFilterContent: IValueFilter[] = filtersContent.map((filter: IValueFilter) => {
