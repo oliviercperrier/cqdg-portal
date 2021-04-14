@@ -34,7 +34,7 @@ const Terms: React.FC = () => {
                     <CardContent className={styles.modalContent}>
                         <div className={styles.heading}>
                             <h1 className={styles.title}>{t('nav.terms')}</h1>
-                            <span>{t('global.last.updated.date')}: 13/04/2020</span>
+                            <span>{t('global.last.updated.date')}: 13/04/2021</span>
                         </div>
                         <ScrollView className={styles.termContent} vertical>
                             <ol>{getText()}</ol>
