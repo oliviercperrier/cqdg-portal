@@ -11,9 +11,11 @@
 
     .content {
         background: url(/assets/pills_bg.svg) no-repeat, linear-gradient(268deg,#28aae2,#006095 98%);
+        background-size: cover;
         padding: 8rem 0;
+
         .modal {
-            max-width: 960px;
+            max-width: 800px;
             margin: 0 auto;
             .modalContent {
                 padding: 0 2rem;
@@ -27,6 +29,10 @@
     
                 .termContent {
                     margin-top: 2rem;
+
+                    > ol li {
+                        margin-bottom: 1.4rem;
+                    }
                 }    
 
                 .actions {
