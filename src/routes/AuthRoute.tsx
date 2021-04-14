@@ -3,14 +3,21 @@ import { Redirect, Route, RouteComponentProps, RouteProps } from 'react-router-d
 import { useKeycloak } from '@react-keycloak/web';
 import { Spin } from 'antd';
 
-import AppLayout from 'layouts/App';
 import { isAuthenticated } from 'providers/Keycloak/keycloak';
+import RedirectTerms from 'utils/routes/RedirectTerms';
 
 interface AuthRouteProps extends RouteProps {
+    layout?: React.FC<any>;
     component: React.ComponentType<RouteComponentProps<any>>;
+    hasToAcceptTerms?: boolean;
 }
 
-export default ({ component: Component, ...rest }: AuthRouteProps): React.ReactElement => {
+export default ({
+    component: Component,
+    hasToAcceptTerms = true,
+    layout: Layout = ({ children }) => children,
+    ...rest
+}: AuthRouteProps): React.ReactElement => {
     const { initialized, keycloak } = useKeycloak();
     const isAuthorized = isAuthenticated(keycloak);
 
@@ -19,9 +26,17 @@ export default ({ component: Component, ...rest }: AuthRouteProps): React.ReactE
             {...rest}
             render={(props) =>
                 isAuthorized ? (
-                    <AppLayout>
-                        <Component {...props} />
-                    </AppLayout>
+                    hasToAcceptTerms ? (
+                        <RedirectTerms redirectAfter={props.location.pathname}>
+                            <Layout>
+                                <Component {...props} />
+                            </Layout>
+                        </RedirectTerms>
+                    ) : (
+                        <Layout>
+                            <Component {...props} />
+                        </Layout>
+                    )
                 ) : !initialized ? (
                     <Spin spinning />
                 ) : (

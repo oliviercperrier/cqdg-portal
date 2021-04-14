@@ -10,12 +10,14 @@ import ExternalIcon from 'components/interface/Icon/ExternalLink';
 import StorageIcon from 'components/interface/Icon/Storage';
 import { t } from 'locales/translate';
 import { isAuthenticated } from 'providers/Keycloak/keycloak';
-import { destroyTokens } from 'providers/Keycloak/tokens';
-import { IClassNameProp } from 'types/generic';
 
 import '@ferlab/style/themes/cqdg/components/header.scss';
 
-const Header: React.FC<IClassNameProp> = ({ className = '' }) => {
+interface IHeader {
+    className?: string;
+    isNavActive?: boolean;
+}
+const Header: React.FC<IHeader> = ({ className = '', isNavActive = true }) => {
     const location = useLocation();
     const { keycloak } = useKeycloak();
     return (
@@ -25,45 +27,42 @@ const Header: React.FC<IClassNameProp> = ({ className = '' }) => {
                     <img src="/assets/img/logo.svg" />
                 </Link>
             </div>
-
             <div className="header__nav">
-                <Link
-                    className={`ant-btn menu-item ${location.pathname.includes('/files') ? '--active' : ''}`}
-                    to="/files"
-                >
-                    <DatabaseIcon className="menu-item-icon" /> {t('nav.file.repo')}
-                </Link>
-                <Link
-                    className={`ant-btn menu-item ${location.pathname.includes('/studies') ? '--active' : ''}`}
-                    to="/studies"
-                >
-                    <StorageIcon className="menu-item-icon" />
-                    {t('nav.studies')}
-                </Link>
-            </div>
-
-            <div className="header__actions">
-                {isAuthenticated(keycloak) ? (
-                    <Button
-                        className="logout"
-                        onClick={() => {
-                            destroyTokens();
-                            keycloak.logout({
-                                redirectUri: window.location.origin,
-                            });
-                        }}
-                        type="text"
-                    >
-                        <AiOutlineLogout className="icon" />
-                        {t('nav.logout')}
-                    </Button>
-                ) : (
-                    <Link className="ant-btn ant-btn-text login" to={{ pathname: '/login', state: { from: '/files' } }}>
-                        <AiOutlineLogin className="icon" />
-                        {t('nav.login')}
-                    </Link>
+                {isNavActive && (
+                    <>
+                        <Link
+                            className={`ant-btn menu-item ${location.pathname.includes('/files') ? '--active' : ''}`}
+                            to="/files"
+                        >
+                            <DatabaseIcon className="menu-item-icon" /> {t('nav.file.repo')}
+                        </Link>
+                        <Link
+                            className={`ant-btn menu-item ${location.pathname.includes('/studies') ? '--active' : ''}`}
+                            to="/studies"
+                        >
+                            <StorageIcon className="menu-item-icon" />
+                            {t('nav.studies')}
+                        </Link>
+                    </>
                 )}
-                <Divider className="separator" type="vertical" />
+            </div>
+            <div className="header__actions">
+                {isNavActive &&
+                    (isAuthenticated(keycloak) ? (
+                        <Link className="ant-btn ant-btn-text logout" to="/logout">
+                            <AiOutlineLogout className="icon" />
+                            {t('nav.logout')}
+                        </Link>
+                    ) : (
+                        <Link
+                            className="ant-btn ant-btn-text login"
+                            to={{ pathname: '/login', state: { from: '/files' } }}
+                        >
+                            <AiOutlineLogin className="icon" />
+                            {t('nav.login')}
+                        </Link>
+                    ))}
+                {isNavActive && <Divider className="separator" type="vertical" />}
                 <Button className="link" href="https://docs.qa.cqdg.ferlab.bio/" target="_blank" type="link">
                     {t('nav.documentation')}
                     <ExternalIcon className="link--icon" />

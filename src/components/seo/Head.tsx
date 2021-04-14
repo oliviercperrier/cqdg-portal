@@ -11,7 +11,9 @@ const PageTranslation: PageNameType = {
     files: 'nav.file.repo',
     home: 'nav.home',
     login: 'nav.login',
+    logout: 'nav.login',
     studies: 'nav.studies',
+    terms: 'nav.terms',
 };
 
 interface IHeadProps {
