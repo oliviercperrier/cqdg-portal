@@ -1,23 +1,33 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import isEmpty from 'lodash/isEmpty';
 
-import { Routes } from 'routes';
-import { createQueryFilters, ISimpleFilters } from 'utils/url/filters';
+import { ISqonGroupFilter } from 'types/interface/filters';
 import { createQueryParams } from 'utils/url/query';
 
 interface IQueryProp {
     [key: string]: string;
 }
 
+type IParamProp = IQueryProp;
+
 interface IInternalLink {
-    path: Routes;
+    path: string;
+    params?: IParamProp;
     query?: IQueryProp;
-    filters: ISimpleFilters;
+    filters?: ISqonGroupFilter;
 }
 
-const InternalLink: React.FC<IInternalLink> = ({ children, filters, path, query = {} }) => {
-    const queryFilters = createQueryFilters(filters);
-    const realPath = `${path}${createQueryParams({ ...query, filters: queryFilters })}`;
+const InternalLink: React.FC<IInternalLink> = ({ children, filters = {}, path, params = {}, query = {} }) => {
+    let realPath = path;
+    if (!isEmpty(params)) {
+        Object.keys(params).forEach((key) => {
+            realPath = realPath.replace(`:${key}`, params[key]);
+        });
+    }
+    if (!isEmpty(filters)) {
+        realPath = `${realPath}${createQueryParams({ ...query, filters })}`;
+    }
     return (
         <Link className="link" to={realPath}>
             {children}

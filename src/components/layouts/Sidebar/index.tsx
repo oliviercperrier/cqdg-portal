@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import { AiOutlineMenu, AiOutlineMenuFold } from 'react-icons/ai';
-import { useIntl } from 'react-intl';
-import { Button, Divider } from 'antd';
+import { Button } from 'antd';
 import classNames from 'classnames/bind';
 
-import { t } from 'locales/translate';
+import FooterCompact from 'components/interface/Footer/Compact';
 
 import './SideBar.scss';
 
@@ -14,7 +13,6 @@ interface ISidebar {
 
 const SideBar: React.FC<ISidebar> = ({ children, className = '' }) => {
     const [isCollapsed, setIsCollapsed] = useState(false);
-    const intl = useIntl();
 
     const isCollapsedClassName = classNames({ 'side-panel-collapsed': isCollapsed });
     return (
@@ -25,29 +23,7 @@ const SideBar: React.FC<ISidebar> = ({ children, className = '' }) => {
                 </Button>
             </div>
             <div className="side-panel-content">{children}</div>
-            <div className="side-panel-footer">
-                <Button className="link" href="mailto:support@cqdg.ca" type="link">
-                    {t('short_footer.info')}
-                </Button>
-                <Divider className="spacer" type="vertical" />
-                <Button
-                    className="link"
-                    href={intl.formatMessage({ id: 'footer.logo.genome.link' })}
-                    target="_blank"
-                    type="link"
-                >
-                    Génome Québec
-                </Button>
-                <Divider className="spacer" type="vertical" />
-                <Button
-                    className="link"
-                    href={intl.formatMessage({ id: 'footer.logo.chusj.link' })}
-                    target="_blank"
-                    type="link"
-                >
-                    CHU Sainte-Justine
-                </Button>
-            </div>
+            <FooterCompact />
         </div>
     );
 };

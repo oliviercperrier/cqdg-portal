@@ -4259,7 +4259,7 @@ a.ant-btn-sm {
   min-height: 48px;
   margin-bottom: -1px;
   padding: 0 24px;
-  color: rgba(0, 0, 0, 0.85);
+  color: #003457;
   font-weight: 500;
   font-size: 16px;
   background: transparent;
@@ -4506,7 +4506,7 @@ a.ant-btn-sm {
 }
 .ant-card-meta-title {
   overflow: hidden;
-  color: rgba(0, 0, 0, 0.85);
+  color: #003457;
   font-weight: 500;
   font-size: 16px;
   white-space: nowrap;
@@ -6659,7 +6659,7 @@ _:-ms-fullscreen .ant-picker-range-wrapper .ant-picker-year-panel .ant-picker-ce
 }
 .ant-descriptions-row > th,
 .ant-descriptions-row > td {
-  padding-bottom: 16px;
+  padding-bottom: 0;
 }
 .ant-descriptions-row:last-child {
   border-bottom: none;
@@ -16900,7 +16900,7 @@ textarea.ant-mentions {
   list-style: none;
   font-feature-settings: 'tnum';
   position: relative;
-  padding: 16px 24px;
+  padding: 16px 2.4rem;
   background-color: #fff;
 }
 .ant-page-header-ghost {
@@ -25097,4 +25097,32 @@ a.ant-btn {
 }
 .ant-select .ant-select-selection-overflow-item-rest .ant-select-selection-item {
   background: #F0F3F8;
+}
+.ant-page-header-heading-title {
+  color: #003457;
+}
+.ant-page-header-heading-extra {
+  display: flex;
+}
+.ant-card-head {
+  padding: 0;
+  margin: 0 2.4rem;
+}
+.ant-card-head-title {
+  font-weight: 600;
+}
+.ant-card-body-small .ant-card-body {
+  padding: 1.6rem 0.8rem;
+}
+.ant-descriptions.ant-descriptions-small .ant-descriptions-item-label {
+  padding: 0.8rem 1.6rem;
+}
+.ant-descriptions.ant-descriptions-small .ant-descriptions-item-content {
+  padding: 0.8rem 1.6rem;
+}
+.ant-descriptions .ant-descriptions-item-label {
+  padding: 1.6rem 2.4rem;
+}
+.ant-descriptions .ant-descriptions-item-content {
+  padding: 1.6rem 2.4rem;
 }

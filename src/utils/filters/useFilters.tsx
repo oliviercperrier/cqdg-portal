@@ -17,19 +17,19 @@ interface IFilters {
     mappedFilters: IMapFilters;
 }
 
-export const useFilters = (): IFilters => {
+export const useFilters = (filters: ISqonGroupFilter | null = null): IFilters => {
     const { search } = useLocation();
     const filterTypes = useContext(FilterContext);
     const { result } = useLazyResultQuery<any>(GET_ALL_SAVE_SETS);
-    const filters = getFiltersQuery(search);
+    const currentFilters = filters || getFiltersQuery(search);
     const mappedFilters: IMapFilters = {};
     filterTypes.forEach((filter) => {
         const filtersWithSaveSetIds = remapFilterToSaveSets(
             { donor: result?.saveSetsDonor || [], file: result?.saveSetsFile || [] },
-            filters
+            currentFilters
         );
         const remapedFilter = filter.remapValues(filtersWithSaveSetIds);
         mappedFilters[filter.type] = remapedFilter;
     });
-    return { filters, mappedFilters };
+    return { filters: currentFilters, mappedFilters };
 };

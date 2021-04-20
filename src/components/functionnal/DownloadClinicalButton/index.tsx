@@ -13,20 +13,18 @@ interface IDownloadClinicalButton {
 const DownloadClinicalButton: React.FC<IDownloadClinicalButton> = ({ children, className = '', filters }) => {
     const [loading, setLoading] = useState(false);
     return (
-        <div className={`${styles.container} ${className}`}>
-            <Button
-                className={styles.button}
-                disabled={loading}
-                loading={loading}
-                onClick={async () => {
-                    setLoading(true);
-                    await getClinicalData(filters);
-                    setLoading(false);
-                }}
-            >
-                {children}
-            </Button>
-        </div>
+        <Button
+            className={`${styles.button} ${className}`}
+            disabled={loading}
+            loading={loading}
+            onClick={async () => {
+                setLoading(true);
+                await getClinicalData(filters);
+                setLoading(false);
+            }}
+        >
+            {children}
+        </Button>
     );
 };
 

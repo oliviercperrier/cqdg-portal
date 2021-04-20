@@ -1,0 +1,18 @@
+@import '~@ferlab/style/themes/cqdg/colors';
+
+.container {
+    display: grid;
+    grid-template-columns: auto 1fr;
+
+    .label, .desc {
+        padding: .8rem 1.6rem;
+        line-height: 2.2rem;
+    }
+
+    .label {
+        color: $gray-7;
+    }
+    .desc {
+        color: $gray-8;
+    }
+}

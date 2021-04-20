@@ -1,0 +1,23 @@
+@import '~@ferlab/style/themes/cqdg/mixins';
+
+.container {
+    align-items: center;
+    border-top: thin solid $gray-4;
+    color: $gray-7;
+    display: flex;
+    flex-grow: 0;
+    flex-shrink: 0;
+    padding: 1.2rem 1.8rem 1.2rem 2.4rem;
+    justify-content: flex-start;
+  
+    .link {
+        text-decoration: underline;
+        font-size: 1.2rem;
+        @include default-link-action;
+        height: auto;
+        line-height: 2rem;
+        > span {
+            text-decoration: underline;
+        }
+    }
+}

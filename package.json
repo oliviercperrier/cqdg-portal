@@ -48,7 +48,7 @@
         "test": "react-scripts test",
         "lint&fix": "eslint --fix --rule 'no-console: 2'",
         "eject": "react-scripts eject",
-        "compile:theme": "ferlabui-script compile -t cqdg"
+        "compile:theme": "ferlabui-script compile -t cqdg -d public/assets/css"
     },
     "husky": {
         "hooks": {

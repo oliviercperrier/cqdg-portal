@@ -19,6 +19,10 @@
         "none": "aucun",
         "manifest": "Manifest",
         "download": "Téléchargement",
+        "data": "Données",
+        "strategy": "Stratégie",
+        "category": "Catégorie",
+        "access_authority": "Access authority",
         "query": {
             "IN": "DANS",
             "IS": "EST",
@@ -111,35 +115,26 @@
     "short_footer": {
         "info": "Info"
     },
-    "cart": {
-        "title": "Panier",
-        "partial": "{nbFilesInCart} fichier sur {nbFilesInSearchResult} déjà dans votre panier. Cliquer pour tout ajouter ou tout supprimer.",
-        "messages": {
-            "max_items": "Le panier est limité à {max} fichiers.",
-            "max_items.desc": "Veuillez affiner les critères de recherche ou supprimer certains fichiers du panier pour en ajouter d'autres."
-        },
+    "study": {
         "actions": {
-            "add": "ajoutés au panier",
-            "remove": "supprimés du panier",
-            "undo": "annuler"
+            "manifest": "Manifeste",
+            "access": "Demande d'accès",
+            "link.summary": "Voir cette étude dans le répertoire"
         },
-        "details": {
-            "empty": "Aucun item dans votre panier.",
-            "summary": {
-                "file_size": "Taille totale",
-                "count_per_study": "Répartition par étude"
-            },
-            "how_to_download": {
-                "title": "Comment télécharger les fichiers de mon panier?",
-                "manifest": {
-                    "title": "Télécharger le Manifest",
-                    "description": "Télécharger le manifest à utiliser avec l'outils de téléchargement du CQDG.  Nous recommandons d'utiliser l'outils de téléchargement du CQDG pour tranférer de gros volumes de données."
-                },
-                "cart": {
-                    "title": "Télécharger le Panier",
-                    "description": "Télécharger les fichiers de votre panier directement à partir de votre navigateur."
-                }
-            }
+        "title": {
+            "summary": "Résumé",
+            "access": "Accès aux données",
+            "clinical": "Données cliniques disponibles",
+            "categories": "Nombre par catégorie de données",
+            "strategy": "Nombre par stratégie Experimentale"
+        },
+        "modal": {
+            "access.title": "Demande d'accès",
+            "access.desc": "Téléchargez les documents fournissant des instructions pour demander l'accès aux données d'études sélectionnées",
+            "manifest.title": "Manifeste",
+            "manifest.desc": "Téléchargez les documents fournissant des instructions pour demander l'accès aux données d'études sélectionnées",
+            "actions.cancel": "Annuler",
+            "actions.download": "Télécharger"
         }
     },
     "home": {
@@ -205,9 +200,16 @@
         "ethnicity": "Ethnicité"
     },
     "facet": {
+        "access_limitations": "Restrictions d'accès",
+        "access_requirements": "Condition d'utilisation",
         "domain": "Domaine",
         "population": "Population",
+        "abbreviation": "Abbréviation",
+        "keywords": "Mots clés",
+        "study_id": "ID de l'étude",
+        "study_id_keyword": "ID de l'étude",
         "study.study_id": "ID de l'étude",
+        "study.study_id_keyword": "ID de l'étude",
         "study.short_name_keyword": "Nom de l'étude",
         "short_name_keyword": "Nom de l'étude",
         "study.name": "Nom de l'étude",
@@ -246,6 +248,7 @@
         "experimental_strategy": "Stratégie expérimentale",
         "platform": "Platforme",
         "files.count": "Nombre de fichiers",
+        "files": "Nombre de fichiers",
         "donors": "Nombre de donneurs",
         "submitter_donor_id": "ID du donneur",
         "file": "Fichier",

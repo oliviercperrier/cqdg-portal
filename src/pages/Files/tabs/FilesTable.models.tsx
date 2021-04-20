@@ -3,6 +3,7 @@ import { MdLock, MdLockOpen, MdLockOutline } from 'react-icons/md';
 import InternalLink from 'components/functionnal/InternalLink';
 import { t } from 'locales/translate';
 import { Routes } from 'routes';
+import { addFilter } from 'utils/filters/manipulator';
 import { EFileInputType, formatFileSize } from 'utils/formatFileSize';
 
 export const FilesModel = [
@@ -32,16 +33,7 @@ export const FilesModel = [
         initialOrder: 1,
         movable: true,
         render: ({ node }: any) => (
-            <InternalLink
-                filters={{
-                    content: {
-                        field: 'short_name_keyword',
-                        value: [node.study.hits.edges[0].node.short_name_keyword],
-                    },
-                }}
-                path={Routes.STUDIES}
-                query={{}}
-            >
+            <InternalLink params={{ id: node.study.hits.edges[0].node.study_id_keyword }} path={Routes.STUDY}>
                 {node.study.hits.edges[0].node.name}
             </InternalLink>
         ),
@@ -143,12 +135,7 @@ export const FilesModel = [
         movable: true,
         render: ({ node }: any) => (
             <InternalLink
-                filters={{
-                    content: {
-                        field: 'submitter_donor_id',
-                        value: [node.donors.hits.edges[0].node.submitter_donor_id],
-                    },
-                }}
+                filters={addFilter(null, 'submitter_donor_id', [node.donors.hits.edges[0].node.submitter_donor_id])}
                 path={Routes.FILES}
                 query={{ searchTableTab: 'donors' }}
             >
