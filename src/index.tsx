@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { ErrorBoundary, FallbackProps } from 'react-error-boundary';
+import { Button, Result } from 'antd';
 
 import Providers from 'providers';
 
@@ -9,11 +11,26 @@ import reportWebVitals from './reportWebVitals';
 import '@ferlab/style/themes/cqdg/font.scss';
 import 'style/themes/default/main.scss';
 
+const ErrorFallback: React.FC<FallbackProps> = ({ error, resetErrorBoundary }) => (
+    <Result
+        extra={
+            <Button onClick={resetErrorBoundary} type="primary">
+                Reload
+            </Button>
+        }
+        status="500"
+        subTitle={error.message}
+        title="Error"
+    />
+);
+
 ReactDOM.render(
     <React.StrictMode>
-        <Providers>
-            <App />
-        </Providers>
+        <ErrorBoundary FallbackComponent={ErrorFallback}>
+            <Providers>
+                <App />
+            </Providers>
+        </ErrorBoundary>
     </React.StrictMode>,
     document.getElementById('root')
 );
