@@ -8,6 +8,7 @@ import RedirectTerms from 'utils/routes/RedirectTerms';
 
 interface AuthRouteProps extends RouteProps {
     layout?: React.FC<any>;
+    layoutProps?: Record<string, any>;
     component: React.ComponentType<RouteComponentProps<any>>;
     hasToAcceptTerms?: boolean;
 }
@@ -16,6 +17,7 @@ export default ({
     component: Component,
     hasToAcceptTerms = true,
     layout: Layout = ({ children }) => children,
+    layoutProps = {},
     ...rest
 }: AuthRouteProps): React.ReactElement => {
     const { initialized, keycloak } = useKeycloak();
@@ -28,12 +30,12 @@ export default ({
                 isAuthorized ? (
                     hasToAcceptTerms ? (
                         <RedirectTerms redirectAfter={props.location.pathname}>
-                            <Layout>
+                            <Layout {...layoutProps}>
                                 <Component {...props} />
                             </Layout>
                         </RedirectTerms>
                     ) : (
-                        <Layout>
+                        <Layout {...layoutProps}>
                             <Component {...props} />
                         </Layout>
                     )

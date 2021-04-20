@@ -1,6 +1,7 @@
 import InternalLink from 'components/functionnal/InternalLink';
 import { t } from 'locales/translate';
 import { Routes } from 'routes';
+import { addFilter } from 'utils/filters/manipulator';
 
 const StudyModel = [
     {
@@ -54,12 +55,7 @@ const StudyModel = [
         movable: true,
         render: ({ node }: any) => (
             <InternalLink
-                filters={{
-                    content: {
-                        field: 'short_name_keyword',
-                        value: [node.short_name_keyword],
-                    },
-                }}
+                filters={addFilter(null, 'short_name_keyword', [node.short_name_keyword])}
                 path={Routes.FILES}
                 query={{ searchTableTab: 'files' }}
             >

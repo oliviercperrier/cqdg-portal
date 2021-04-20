@@ -1,0 +1,15 @@
+@import  '~@ferlab/style/themes/cqdg/mixins';
+
+.layout {
+    display: grid;
+    grid-template-areas:
+        "header"
+        "content"
+        "footer";
+    grid-template-rows: auto 1fr auto;
+    height: 100vh;
+
+    .content {
+        background-color: $gray-3;
+    }
+}

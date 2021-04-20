@@ -13,6 +13,7 @@ const PageTranslation: PageNameType = {
     login: 'nav.login',
     logout: 'nav.login',
     studies: 'nav.studies',
+    study: 'nav.studies',
     terms: 'nav.terms',
 };
 
@@ -26,7 +27,7 @@ const Head = ({ pageName }: IHeadProps): React.ReactElement => {
     return (
         <Helmet>
             <meta content={intl.formatMessage({ id: 'global.app.description' })} name="description" />
-            <title>{intl.formatMessage({ id: PageTranslation[selectedPage] })}</title>
+            <title>{intl.formatMessage({ id: PageTranslation[selectedPage] || 'CQDG' })}</title>
         </Helmet>
     );
 };
