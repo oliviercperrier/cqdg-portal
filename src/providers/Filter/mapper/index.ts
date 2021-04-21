@@ -1,5 +1,6 @@
 export const fileMapping: Map<string, string> = new Map([
     ['savesets.file', 'file_id'],
+    ['study_id_keyword', 'study.study_id_keyword'],
     ['savesets.donor', 'donors.submitter_donor_id'],
     ['gender', 'donors.gender'],
     ['ethnicity', 'donors.ethnicity'],
@@ -11,6 +12,7 @@ export const fileMapping: Map<string, string> = new Map([
 ]);
 
 export const donorMapping: Map<string, string> = new Map([
+    ['study_id_keyword', 'study.study_id_keyword'],
     ['savesets.donor', 'submitter_donor_id'],
     ['savesets.file', 'files.file_id'],
     ['data_category', 'files.data_category'],

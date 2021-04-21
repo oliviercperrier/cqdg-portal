@@ -1,5 +1,6 @@
 {
     "global": {
+        "last.updated.date": "Dernière mise à jour",
         "empty": "Aucune Données",
         "documentation": "Documentation",
         "files.title": "Fichiers",
@@ -18,6 +19,10 @@
         "none": "aucun",
         "manifest": "Manifest",
         "download": "Téléchargement",
+        "data": "Données",
+        "strategy": "Stratégie",
+        "category": "Catégorie",
+        "access_authority": "Access authority",
         "query": {
             "IN": "DANS",
             "IS": "EST",
@@ -81,10 +86,23 @@
         "home": "Accueil",
         "file.repo": "Répertoire de fichiers",
         "studies": "Études",
+        "terms": "Termes et Conditions",
         "login": "Connexion",
         "logout": "Déconnexion",
         "documentation": "Documentation",
         "website": "Site Web"
+    },
+    "terms": {
+        "decline": "Refuser",
+        "accept": "Accepter",
+        "1": "Vous êtes responsable du maintien de la confidentialité de votre compte et de toutes les activités qui se déroulent par suite de l’utilisation de votre compte.",
+        "2": "Vous devez être âgé de plus de 13 ans pour utiliser le portail Web.",
+        "3": "Vous êtes responsable de tout le matériel que vous soumettez sur ce site. Vous ne devez pas transmettre du contenu ou des documents qui contiennent des fichiers corrompus, des virus ou tout autre fichier logiciel similaire qui puissent endommager le fonctionnement d’un système informatique. Vous devez vous assurer qu’aucuns renseignements personnels soient inclus dans les données soumises au CQDG.",
+        "4": "En conformité avec les politiques d’accès aux données des études fiduciaires, vous devez prendre les mesures appropriées pour protéger les données contre tout vol, perte, interception, utilisation ou divulgation non autorisée",
+        "5": "Vous utiliserez les ensembles de données à accès contrôlé uniquement en relation avec le projet de recherche décrit dans une demande d'accès aux données approuvée pour chaque ensemble de données;",
+        "6": "Vous adhérez aux clauses concernant la propriété intellectuelle (le cas échéant) telles que spécifiées dans les politiques d’accès et utilisation des données des études fiduciaires",
+        "7": "Vous ne ferez aucune tentative d’identifier ou de contacter des participants ou des groupes de participants auprès desquels les données ont été collectées, ou de générer des informations qui pourraient permettre de déterminer facilement l’identité des participants;",
+        "8": "Vous rapporterez toute divulgation non autorisée de données, violation de la sécurité des données ou autres incidents de gestion de données contraires aux conditions d'accès aux données."
     },
     "footer": {
         "title": "Vous ne trouvez pas ce que vous chercher?",
@@ -97,35 +115,26 @@
     "short_footer": {
         "info": "Info"
     },
-    "cart": {
-        "title": "Panier",
-        "partial": "{nbFilesInCart} fichier sur {nbFilesInSearchResult} déjà dans votre panier. Cliquer pour tout ajouter ou tout supprimer.",
-        "messages": {
-            "max_items": "Le panier est limité à {max} fichiers.",
-            "max_items.desc": "Veuillez affiner les critères de recherche ou supprimer certains fichiers du panier pour en ajouter d'autres."
-        },
+    "study": {
         "actions": {
-            "add": "ajoutés au panier",
-            "remove": "supprimés du panier",
-            "undo": "annuler"
+            "manifest": "Manifeste",
+            "access": "Demande d'accès",
+            "link.summary": "Voir cette étude dans le répertoire"
         },
-        "details": {
-            "empty": "Aucun item dans votre panier.",
-            "summary": {
-                "file_size": "Taille totale",
-                "count_per_study": "Répartition par étude"
-            },
-            "how_to_download": {
-                "title": "Comment télécharger les fichiers de mon panier?",
-                "manifest": {
-                    "title": "Télécharger le Manifest",
-                    "description": "Télécharger le manifest à utiliser avec l'outils de téléchargement du CQDG.  Nous recommandons d'utiliser l'outils de téléchargement du CQDG pour tranférer de gros volumes de données."
-                },
-                "cart": {
-                    "title": "Télécharger le Panier",
-                    "description": "Télécharger les fichiers de votre panier directement à partir de votre navigateur."
-                }
-            }
+        "title": {
+            "summary": "Résumé",
+            "access": "Accès aux données",
+            "clinical": "Données cliniques disponibles",
+            "categories": "Nombre par catégorie de données",
+            "strategy": "Nombre par stratégie Experimentale"
+        },
+        "modal": {
+            "access.title": "Demande d'accès",
+            "access.desc": "Téléchargez les documents fournissant des instructions pour demander l'accès aux données d'études sélectionnées",
+            "manifest.title": "Manifeste",
+            "manifest.desc": "Téléchargez les documents fournissant des instructions pour demander l'accès aux données d'études sélectionnées",
+            "actions.cancel": "Annuler",
+            "actions.download": "Télécharger"
         }
     },
     "home": {
@@ -191,9 +200,16 @@
         "ethnicity": "Ethnicité"
     },
     "facet": {
+        "access_limitations": "Restrictions d'accès",
+        "access_requirements": "Condition d'utilisation",
         "domain": "Domaine",
         "population": "Population",
+        "abbreviation": "Abbréviation",
+        "keywords": "Mots clés",
+        "study_id": "ID de l'étude",
+        "study_id_keyword": "ID de l'étude",
         "study.study_id": "ID de l'étude",
+        "study.study_id_keyword": "ID de l'étude",
         "study.short_name_keyword": "Nom de l'étude",
         "short_name_keyword": "Nom de l'étude",
         "study.name": "Nom de l'étude",
@@ -232,6 +248,7 @@
         "experimental_strategy": "Stratégie expérimentale",
         "platform": "Platforme",
         "files.count": "Nombre de fichiers",
+        "files": "Nombre de fichiers",
         "donors": "Nombre de donneurs",
         "submitter_donor_id": "ID du donneur",
         "file": "Fichier",

@@ -77,8 +77,8 @@ const SelectSets: React.FunctionComponent<ISelectSets> = ({ data, dictionary, on
                 )}
                 value={currentValues}
             >
-                {data.map((dataSaveSet) => (
-                    <OptGroup label={dataSaveSet.dictionary?.groupTitle || 'Group Title'}>
+                {data.map((dataSaveSet, i) => (
+                    <OptGroup key={i} label={dataSaveSet.dictionary?.groupTitle || 'Group Title'}>
                         {dataSaveSet.values.length > 0 ? (
                             dataSaveSet.values.map((item: any) => (
                                 <Option value={item.name}>

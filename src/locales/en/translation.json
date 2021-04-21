@@ -1,5 +1,6 @@
 {
     "global": {
+        "last.updated.date": "Last Updated Date",
         "empty": "No Data",
         "documentation": "Documentation",
         "files.title": "Files",
@@ -18,6 +19,10 @@
         "download": "Download",
         "select.all": "select all",
         "none": "none",
+        "data": "Data",
+        "strategy": "Strategy",
+        "category": "Category",
+        "access_authority": "Access authority",
         "query": {
             "IN": "IN",
             "IS": "IS",
@@ -81,9 +86,22 @@
         "file.repo": "Files Repository",
         "studies": "Studies",
         "login": "Login",
+        "terms": "Terms & Conditions",
         "logout": "Logout",
         "documentation": "Documentation",
         "website": "Website"
+    },
+    "terms": {
+        "decline": "Decline",
+        "accept": "Accept",
+        "1": "Vous êtes responsable du maintien de la confidentialité de votre compte et de toutes les activités qui se déroulent par suite de l’utilisation de votre compte.",
+        "2": "Vous devez être âgé de plus de 13 ans pour utiliser le portail Web.",
+        "3": "Vous êtes responsable de tout le matériel que vous soumettez sur ce site. Vous ne devez pas transmettre du contenu ou des documents qui contiennent des fichiers corrompus, des virus ou tout autre fichier logiciel similaire qui puissent endommager le fonctionnement d’un système informatique. Vous devez vous assurer qu’aucuns renseignements personnels soient inclus dans les données soumises au CQDG.",
+        "4": "En conformité avec les politiques d’accès aux données des études fiduciaires, vous devez prendre les mesures appropriées pour protéger les données contre tout vol, perte, interception, utilisation ou divulgation non autorisée",
+        "5": "Vous utiliserez les ensembles de données à accès contrôlé uniquement en relation avec le projet de recherche décrit dans une demande d'accès aux données approuvée pour chaque ensemble de données;",
+        "6": "Vous adhérez aux clauses concernant la propriété intellectuelle (le cas échéant) telles que spécifiées dans les politiques d’accès et utilisation des données des études fiduciaires",
+        "7": "Vous ne ferez aucune tentative d’identifier ou de contacter des participants ou des groupes de participants auprès desquels les données ont été collectées, ou de générer des informations qui pourraient permettre de déterminer facilement l’identité des participants;",
+        "8": "Vous rapporterez toute divulgation non autorisée de données, violation de la sécurité des données ou autres incidents de gestion de données contraires aux conditions d'accès aux données."
     },
     "footer": {
         "title": "Can't find what you are looking for?",
@@ -96,35 +114,26 @@
     "short_footer": {
         "info": "Info"
     },
-    "cart": {
-        "title": "Cart",
-        "partial": "{nbFilesInCart} out of {nbFilesInSearchResult} files already in your cart. Click to add or remove all the files.",
-        "messages": {
-            "max_items": "The cart is limited to {max} files.",
-            "max_items.desc": "Please narrow the search criteria or remove some files from the cart to add more."
-        },
+    "study": {
         "actions": {
-            "add": "added to the cart",
-            "remove": "removed from the cart",
-            "undo": "undo"
+            "manifest": "Manifest",
+            "access": "Request access",
+            "link.summary": "See this study in the repository"
         },
-        "details": {
-            "empty": "Your cart is empty.",
-            "summary": {
-                "file_size": "Total Size",
-                "count_per_study": "Distribution per study"
-            },
-            "how_to_download": {
-                "title": "How to download files in my cart?",
-                "manifest": {
-                    "title": "Download Manifest",
-                    "description": "Download a manifest for use with the CQDG Download Tool. The CQDG Download Tool is recommended for transferring large volumes of data."
-                },
-                "cart": {
-                    "title": "Download Cart",
-                    "description": "Download files in your cart directly from your web browser."
-                }
-            }
+        "title": {
+            "summary": "Summary",
+            "access": "Data Access",
+            "clinical": "Clinical Data Availables",
+            "categories": "Numbers by Data Category",
+            "strategy": "Numbers by Experimental Strategy"
+        },
+        "modal": {
+            "access.title": "Request Access",
+            "access.desc": "Download documents providing instructions for requesting access to selected study data",
+            "manifest.title": "Manifest",
+            "manifest.desc": "Download documents providing instructions for requesting access to selected study data",
+            "actions.cancel": "Cancel",
+            "actions.download": "Download"
         }
     },
     "home": {
@@ -190,9 +199,16 @@
         "ethnicity": "Ethnicity"
     },
     "facet": {
+        "access_limitations": "Access Limitations",
+        "access_requirements": "Access Requirements",
         "domain": "Domain",
         "population": "Population",
+        "abbreviation": "Abbreviation",
+        "keywords": "Keywords",
+        "study_id": "Study ID",
+        "study_id_keyword": "Study ID",
         "study.study_id": "Study ID",
+        "study.study_id_keyword": "Study ID",
         "study.short_name_keyword": "Study Name",
         "short_name_keyword": "Study Name",
         "study.name": "Study Name",
@@ -231,6 +247,7 @@
         "experimental_strategy": "Experimental Strategy",
         "platform": "Platform",
         "files.count": "Number of files",
+        "files": "Number of files",
         "donors": "Number of donors",
         "submitter_donor_id": "Donor ID",
         "file": "File",

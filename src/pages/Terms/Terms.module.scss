@@ -1,0 +1,49 @@
+@import '~@ferlab/style/themes/cqdg/colors';
+
+.container {
+    display: grid;
+    grid-template-areas:
+        "header"
+        "content"
+        "footer";
+    grid-template-rows: auto 1fr auto;
+    height: 100vh;
+
+    .content {
+        background: url(/assets/pills_bg.svg) no-repeat, linear-gradient(268deg,#28aae2,#006095 98%);
+        background-size: cover;
+        padding: 8rem 0;
+
+        .modal {
+            max-width: 800px;
+            margin: 0 auto;
+            .modalContent {
+                padding: 0 2rem;
+                .heading {
+                    display: flex;
+                    justify-content: space-between;
+                    .title {
+                        color: $gray-9;
+                    }
+                }
+    
+                .termContent {
+                    margin-top: 2rem;
+
+                    > ol li {
+                        margin-bottom: 1.4rem;
+                    }
+                }    
+
+                .actions {
+                    display: flex;
+                    justify-content: flex-end;
+
+                    > button:not(:first-child) {
+                        margin-left: .8rem;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -3,6 +3,7 @@ import get from 'lodash/get';
 
 import { locales } from './locales';
 import { configureColumns, tableColumns } from './tableColumns';
+import { terms } from './terms';
 
 export const cache: InMemoryCache = new InMemoryCache({
     typePolicies: {
@@ -19,6 +20,9 @@ export const cache: InMemoryCache = new InMemoryCache({
                         }
                         return configureColumns(variables!.default, columns);
                     },
+                },
+                terms: {
+                    read: () => terms(),
                 },
             },
         },

@@ -25,6 +25,7 @@ export const FILE_TAB_DATA = gql`
                                     node {
                                         name
                                         short_name_keyword
+                                        study_id_keyword
                                     }
                                 }
                             }
