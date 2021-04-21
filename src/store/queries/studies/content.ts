@@ -9,7 +9,7 @@ export const STUDIES_PAGE_DATA = gql`
                     node {
                         domain
                         website
-                        id
+                        study_id_keyword
                         name
                         short_name_keyword
                         population

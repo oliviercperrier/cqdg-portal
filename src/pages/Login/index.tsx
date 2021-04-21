@@ -1,9 +1,12 @@
 import React from 'react';
 import { useEffect } from 'react';
 import { Redirect, useLocation } from 'react-router-dom';
+import { useQuery } from '@apollo/client';
 import { useKeycloak } from '@react-keycloak/web';
 import { Spin } from 'antd';
 import get from 'lodash/get';
+
+import { GET_LOCALE } from 'store/queries/locales';
 
 interface ILocation {
     from: string;
@@ -11,6 +14,10 @@ interface ILocation {
 
 const Login = (): React.ReactElement => {
     const location = useLocation<{ [key: string]: any }>();
+    const {
+        data: { locale },
+    } = useQuery<any>(GET_LOCALE);
+
     const defaultLoginLocation = '/files';
     const currentLocationState: ILocation = (location.state as ILocation) || {
         from: defaultLoginLocation,
@@ -26,6 +33,7 @@ const Login = (): React.ReactElement => {
                 redirectLocation = defaultLoginLocation;
             }
             keycloak.login({
+                locale,
                 redirectUri: `${window.location.origin}/terms?redirectAfter=${redirectLocation}`,
             });
         }
