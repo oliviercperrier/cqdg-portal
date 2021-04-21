@@ -6,13 +6,14 @@ import { Spin } from 'antd';
 import get from 'lodash/get';
 
 interface ILocation {
-    from: { pathname: string };
+    from: string;
 }
 
 const Login = (): React.ReactElement => {
     const location = useLocation<{ [key: string]: any }>();
+    const defaultLoginLocation = '/files';
     const currentLocationState: ILocation = (location.state as ILocation) || {
-        from: '/',
+        from: defaultLoginLocation,
     };
 
     const { initialized, keycloak } = useKeycloak();
@@ -20,8 +21,12 @@ const Login = (): React.ReactElement => {
 
     useEffect(() => {
         if (initialized && keycloak && !isAuthenticated) {
+            let redirectLocation = currentLocationState.from;
+            if (redirectLocation === '/') {
+                redirectLocation = defaultLoginLocation;
+            }
             keycloak.login({
-                redirectUri: `${window.location.origin}/terms?redirectAfter=${currentLocationState.from}`,
+                redirectUri: `${window.location.origin}/terms?redirectAfter=${redirectLocation}`,
             });
         }
     }, [initialized]);

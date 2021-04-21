@@ -95,14 +95,13 @@
     "terms": {
         "decline": "Refuser",
         "accept": "Accepter",
-        "1": "Vous êtes responsable du maintien de la confidentialité de votre compte et de toutes les activités qui se déroulent par suite de l’utilisation de votre compte.",
-        "2": "Vous devez être âgé de plus de 13 ans pour utiliser le portail Web.",
-        "3": "Vous êtes responsable de tout le matériel que vous soumettez sur ce site. Vous ne devez pas transmettre du contenu ou des documents qui contiennent des fichiers corrompus, des virus ou tout autre fichier logiciel similaire qui puissent endommager le fonctionnement d’un système informatique. Vous devez vous assurer qu’aucuns renseignements personnels soient inclus dans les données soumises au CQDG.",
-        "4": "En conformité avec les politiques d’accès aux données des études fiduciaires, vous devez prendre les mesures appropriées pour protéger les données contre tout vol, perte, interception, utilisation ou divulgation non autorisée",
-        "5": "Vous utiliserez les ensembles de données à accès contrôlé uniquement en relation avec le projet de recherche décrit dans une demande d'accès aux données approuvée pour chaque ensemble de données;",
-        "6": "Vous adhérez aux clauses concernant la propriété intellectuelle (le cas échéant) telles que spécifiées dans les politiques d’accès et utilisation des données des études fiduciaires",
-        "7": "Vous ne ferez aucune tentative d’identifier ou de contacter des participants ou des groupes de participants auprès desquels les données ont été collectées, ou de générer des informations qui pourraient permettre de déterminer facilement l’identité des participants;",
-        "8": "Vous rapporterez toute divulgation non autorisée de données, violation de la sécurité des données ou autres incidents de gestion de données contraires aux conditions d'accès aux données."
+        "1": "Vous êtes responsable du maintien de la confidentialité de votre compte et de toutes les activités qui se déroulent par suite de l’utilisation de votre compte;",
+        "2": "Vous êtes responsable de tout le matériel que vous soumettez sur ce site. Vous ne devez pas transmettre du contenu ou des documents qui contiennent des fichiers corrompus, des virus ou tout autre fichier logiciel similaire qui puissent endommager le fonctionnement d’un système informatique. Vous devez vous assurer qu’aucun renseignements personnels soient inclus dans les données soumises au CQDG;",
+        "3": "En conformité avec les politiques d’accès aux données des études fiduciaires, vous devez prendre les mesures appropriées pour protéger les données contre tout vol, perte, interception, utilisation ou divulgation non autorisée;",
+        "4": "Vous utiliserez les ensembles de données à accès contrôlé uniquement en relation avec le projet de recherche décrit dans une demande d'accès aux données approuvée pour chaque ensemble de données;",
+        "5": "Vous adhérez aux clauses concernant la propriété intellectuelle (le cas échéant) telles que spécifiées dans les politiques d’accès et utilisation des données des études fiduciaires;",
+        "6": "Vous ne ferez aucune tentative d’identifier ou de contacter des participants ou des groupes de participants auprès desquels les données ont été collectées, ou de générer des informations qui pourraient permettre de déterminer facilement l’identité des participants;",
+        "7": "Vous rapporterez toute divulgation non autorisée de données, violation de la sécurité des données ou autres incidents de gestion de données contraires aux conditions d'accès aux données;"
     },
     "footer": {
         "title": "Vous ne trouvez pas ce que vous chercher?",
