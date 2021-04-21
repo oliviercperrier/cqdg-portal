@@ -12,6 +12,11 @@ export const fileMapping: Map<string, string> = new Map([
 ]);
 
 export const donorMapping: Map<string, string> = new Map([
+    ['donors.diagnoses.mondo_term_keyword', 'diagnoses.mondo_term_keyword'],
+    ['donors.phenotypes.hpo_category_keyword', 'phenotypes.hpo_category_keyword'],
+    ['donors.diagnoses.icd_category_keyword', 'diagnoses.icd_category_keyword'],
+    ['population', 'study.population'],
+    ['domain', 'study.domain'],
     ['study_id_keyword', 'study.study_id_keyword'],
     ['savesets.donor', 'submitter_donor_id'],
     ['savesets.file', 'files.file_id'],

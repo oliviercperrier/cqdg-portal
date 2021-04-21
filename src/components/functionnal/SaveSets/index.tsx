@@ -8,6 +8,7 @@ import StackLayout from '@ferlab/ui/core/layout/StackLayout';
 import { Button, Dropdown, Input, Menu, Modal, notification, Select, Tooltip } from 'antd';
 import cx from 'classnames';
 import get from 'lodash/get';
+import isEmpty from 'lodash/isEmpty';
 
 import ListItem from 'components/functionnal/SaveSets/ListItem';
 import { t } from 'locales/translate';
@@ -253,7 +254,7 @@ const SaveSets: React.FunctionComponent<SaveSets> = ({ dictionary, Icon, total, 
             <Modal
                 cancelButtonProps={{ disabled: loading }}
                 destroyOnClose
-                okButtonProps={{ disabled: hasInputError, loading }}
+                okButtonProps={{ disabled: hasInputError || isEmpty(inputText), loading }}
                 okText={t('global.savesets.saveset')}
                 onCancel={() => {
                     if (!loading) {

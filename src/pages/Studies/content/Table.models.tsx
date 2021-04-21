@@ -5,6 +5,13 @@ import { addFilter } from 'utils/filters/manipulator';
 
 const StudyModel = [
     {
+        dataIndex: ['node', 'study_id_keyword'],
+        hidden: false,
+        id: 'study_id_keyword',
+        movable: true,
+        title: t('facet.study.study_id_keyword'),
+    },
+    {
         dataIndex: ['node', 'name'],
         hidden: false,
         id: 'study_name',

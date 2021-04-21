@@ -15,7 +15,7 @@ import styles from './Terms.module.scss';
 
 const getText = () => {
     const data = [];
-    for (let i = 1; i <= 8; i++) {
+    for (let i = 1; i <= 7; i++) {
         data.push(<li key={i}>{t(`terms.${i}`)}</li>);
     }
 
@@ -40,7 +40,7 @@ const Terms: React.FC = () => {
                             <ol>{getText()}</ol>
                         </ScrollView>
                         <div className={styles.actions}>
-                            <Button onClick={() => history.push('/')}>{t('terms.decline')}</Button>
+                            <Button onClick={() => history.push('/logout')}>{t('terms.decline')}</Button>
                             <Button
                                 onClick={() => {
                                     setTerms(true);
