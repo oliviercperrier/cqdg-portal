@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { MdInsertDriveFile, MdSave } from 'react-icons/md';
 import { useQuery } from '@apollo/client';
 import CountWithIcon, { CountWithIconTypeEnum } from '@ferlab/ui/core/components/labels/CountWithIcon';
@@ -27,6 +27,7 @@ import './FilesTable.scss';
 
 const tableKey = 'files-tabs-file';
 const FilesTable = (): React.ReactElement => {
+    const [selectedRow, setSelectedRow] = useState<string[]>([]);
     const { mappedFilters } = useFilters();
     const { currentPage, pageFilter, pageSize, setCurrentPageFilter } = usePagination(mappedFilters);
     const { loading, result } = useLazyResultQuery<any>(FILE_TAB_DATA, {
@@ -39,7 +40,7 @@ const FilesTable = (): React.ReactElement => {
     const filesData = get(result, `File.${Hits.COLLECTION}`, []);
     const dataSource = filesData.map((data: any) => ({
         ...data,
-        key: data.node.id,
+        key: data.node.file_id,
     }));
     const totalFiles = get(result, `File.${Hits.ITEM}.total`, 0);
     const totalSizes = get(result, `File.aggregations.file_size.stats.sum`, 0);
@@ -52,6 +53,7 @@ const FilesTable = (): React.ReactElement => {
                     <SaveSets
                         Icon={<MdInsertDriveFile />}
                         dictionary={{ labelType: t('global.files') }}
+                        selectedIds={selectedRow}
                         total={totalFiles}
                         type="saveSetsFile"
                     />
@@ -98,6 +100,32 @@ const FilesTable = (): React.ReactElement => {
                     onChange: (page, pageSize = 25) => setCurrentPageFilter(page, pageSize),
                     pageSize,
                     total: totalFiles,
+                }}
+                rowSelection={{
+                    onSelect: (record, selected) => {
+                        if (selected) {
+                            setSelectedRow((s) => s.concat(record.key));
+                            return;
+                        }
+
+                        setSelectedRow((s) => s.filter((item) => item !== record.key));
+                    },
+                    onSelectAll: (selected, _, changeRows) => {
+                        if (selected) {
+                            setSelectedRow((s) => [
+                                ...s,
+                                ...changeRows.map((item) => {
+                                    if (!s.includes(item.key)) {
+                                        return item.key;
+                                    }
+                                }),
+                            ]);
+                            return;
+                        }
+                        const changeRowKeys = changeRows.map((item) => item.key);
+                        setSelectedRow((s) => s.filter((item) => !changeRowKeys.includes(item)));
+                    },
+                    selectedRowKeys: selectedRow,
                 }}
             />
         </DataLayout>

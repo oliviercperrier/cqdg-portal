@@ -10,7 +10,7 @@ export const FilesModel = [
     {
         hidden: false,
         id: 'data_access',
-        initialOrder: 0,
+        initialOrder: 1,
         movable: false,
         render: ({ node }: any) =>
             node.data_access.toLowerCase() === 'controled' ? (
@@ -28,9 +28,24 @@ export const FilesModel = [
         translate: 'Controlled',
     },
     {
+        dataIndex: ['node', 'file_id'],
+        hidden: false,
+        id: 'file_id',
+        initialOrder: 2,
+        movable: true,
+        sortDirection: ['ascend', 'descend'],
+        sorter: {
+            compare: (a: Record<string, any>, b: Record<string, any>): number =>
+                a.node.file_id.localeCompare(b.node.file_id),
+            multiple: 3,
+        },
+        title: t('facet.file_id'),
+        translate: 'facet.file_id',
+    },
+    {
         hidden: false,
         id: 'study.hits.edges[0].node.short_name_keyword',
-        initialOrder: 1,
+        initialOrder: 2,
         movable: true,
         render: ({ node }: any) => (
             <InternalLink params={{ id: node.study.hits.edges[0].node.study_id_keyword }} path={Routes.STUDY}>
@@ -47,25 +62,10 @@ export const FilesModel = [
         translate: 'facet.study.name',
     },
     {
-        dataIndex: ['node', 'file_name_keyword'],
-        hidden: true,
-        id: 'file_name_keyword',
-        initialOrder: 2,
-        movable: true,
-        sortDirection: ['ascend', 'descend'],
-        sorter: {
-            compare: (a: Record<string, any>, b: Record<string, any>): number =>
-                a.node.file_name_keyword.localeCompare(b.node.file_name_keyword),
-            multiple: 3,
-        },
-        title: t('facet.file_name_keyword'),
-        translate: 'facet.file_name_keyword',
-    },
-    {
         dataIndex: ['node', 'data_category'],
         hidden: false,
         id: 'data_category',
-        initialOrder: 3,
+        initialOrder: 4,
         movable: true,
         sortDirection: ['ascend', 'descend'],
         sorter: {
@@ -80,7 +80,7 @@ export const FilesModel = [
         dataIndex: ['node', 'file_format'],
         hidden: false,
         id: 'file_format',
-        initialOrder: 4,
+        initialOrder: 5,
         movable: true,
         sortDirection: ['ascend', 'descend'],
         sorter: {
@@ -94,7 +94,7 @@ export const FilesModel = [
     {
         hidden: true,
         id: 'is_harmonized',
-        initialOrder: 5,
+        initialOrder: 6,
         movable: true,
         render: ({ node }: any) => (!!node.is_harmonized ? 'yes' : 'no'),
         title: t('facet.is_harmonized'),
@@ -104,7 +104,7 @@ export const FilesModel = [
         dataIndex: ['node', 'data_type'],
         hidden: true,
         id: 'data_type',
-        initialOrder: 6,
+        initialOrder: 7,
         movable: true,
         title: t('facet.data_type'),
         translate: 'facet.data_type',
@@ -113,7 +113,7 @@ export const FilesModel = [
         dataIndex: ['node', 'experimental_strategy'],
         hidden: true,
         id: 'experimental_strategy',
-        initialOrder: 7,
+        initialOrder: 8,
         movable: true,
         title: t('facet.experimental_strategy'),
         translate: 'facet.experimental_strategy',
@@ -122,7 +122,7 @@ export const FilesModel = [
         dataIndex: ['node', 'platform'],
         hidden: true,
         id: 'platform',
-        initialOrder: 8,
+        initialOrder: 9,
         movable: true,
         title: t('facet.platform'),
         translate: 'facet.platform',
@@ -131,7 +131,7 @@ export const FilesModel = [
         className: 'numerical',
         hidden: false,
         id: 'donors.hits.edges[0].node.submitter_donor_id',
-        initialOrder: 9,
+        initialOrder: 10,
         movable: true,
         render: ({ node }: any) => (
             <InternalLink
@@ -149,7 +149,7 @@ export const FilesModel = [
         className: 'numerical',
         hidden: false,
         id: 'file_size',
-        initialOrder: 10,
+        initialOrder: 11,
         movable: true,
         render: ({ node }: any) => formatFileSize(node.file_size, {}, EFileInputType.MB),
         sortDirection: ['ascend', 'descend'],

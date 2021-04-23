@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { MdFileDownload, MdPeople } from 'react-icons/md';
 import { useQuery } from '@apollo/client';
 import CountWithIcon, { CountWithIconTypeEnum } from '@ferlab/ui/core/components/labels/CountWithIcon';
@@ -27,6 +27,7 @@ import styles from './DonorsTable.module.scss';
 
 const tableKey = 'files-tabs-donor';
 const DonorsTable = (): React.ReactElement => {
+    const [selectedRow, setSelectedRow] = useState<string[]>([]);
     const { filters, mappedFilters } = useFilters();
     const { currentPage, pageFilter, pageSize, setCurrentPageFilter } = usePagination(mappedFilters);
     const { loading, result } = useLazyResultQuery<any>(DONOR_TAB_DATA, {
@@ -38,7 +39,7 @@ const DonorsTable = (): React.ReactElement => {
     const donorsData = get(result, `Donor.${Hits.COLLECTION}`, []);
     const dataSource = donorsData.map((data: any) => ({
         ...data,
-        key: data.node.id,
+        key: data.node.submitter_donor_id,
     }));
     const totalDonors = get(result, `Donor.${Hits.ITEM}.total`, 0);
     const filteredColumns = tablesData.tableColumns.filter((item: ITableColumnItem) => !item.hidden);
@@ -54,6 +55,7 @@ const DonorsTable = (): React.ReactElement => {
                         <SaveSets
                             Icon={<MdPeople />}
                             dictionary={{ labelType: t('global.donors') }}
+                            selectedIds={selectedRow}
                             total={totalDonors}
                             type="saveSetsDonor"
                         />
@@ -92,6 +94,32 @@ const DonorsTable = (): React.ReactElement => {
                     onChange: (page, pageSize = 25) => setCurrentPageFilter(page, pageSize),
                     pageSize,
                     total: totalDonors,
+                }}
+                rowSelection={{
+                    onSelect: (record, selected) => {
+                        if (selected) {
+                            setSelectedRow((s) => s.concat(record.key));
+                            return;
+                        }
+
+                        setSelectedRow((s) => s.filter((item) => item !== record.key));
+                    },
+                    onSelectAll: (selected, _, changeRows) => {
+                        if (selected) {
+                            setSelectedRow((s) => [
+                                ...s,
+                                ...changeRows.map((item) => {
+                                    if (!s.includes(item.key)) {
+                                        return item.key;
+                                    }
+                                }),
+                            ]);
+                            return;
+                        }
+                        const changeRowKeys = changeRows.map((item) => item.key);
+                        setSelectedRow((s) => s.filter((item) => !changeRowKeys.includes(item)));
+                    },
+                    selectedRowKeys: selectedRow,
                 }}
             />
         </DataLayout>

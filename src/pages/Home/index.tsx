@@ -79,11 +79,11 @@ const Home = (): React.ReactElement => {
                                     </>
                                 ) : (
                                     <>
-                                        <Link className="ant-btn buttons__main menu-item" to="/files">
-                                            <DatabaseIcon className="menu-item-icon" /> {t('nav.file.repo')}
-                                        </Link>
                                         <Link className="ant-btn buttons__main menu-item" to="/studies">
                                             <StorageIcon className="menu-item-icon" /> {t('nav.studies')}
+                                        </Link>
+                                        <Link className="ant-btn buttons__main menu-item" to="/files">
+                                            <DatabaseIcon className="menu-item-icon" /> {t('nav.file.repo')}
                                         </Link>
                                     </>
                                 )}

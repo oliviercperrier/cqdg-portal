@@ -134,6 +134,7 @@ const Study: React.FC<RouteComponentProps<any>> = ({ match: { params } }) => {
                                     }
                                     return (
                                         <Progress
+                                            className={styles['data-progress']}
                                             percent={(data.donors / studyData.donors.hits.total) * 100}
                                             showInfo={false}
                                             strokeLinecap="square"
@@ -141,12 +142,13 @@ const Study: React.FC<RouteComponentProps<any>> = ({ match: { params } }) => {
                                     );
                                 },
                                 title: `(n=${studyData.donors.hits.total})`,
+                                width: 85,
                             },
                         ]}
                         dataSource={[
                             {
                                 data: 'Diagnostic',
-                                donors: getRandom(studyData.donors.hits.total),
+                                donors: 377,
                             },
                             { data: 'Phenotype', donors: 0 },
                             {
@@ -169,13 +171,16 @@ const Study: React.FC<RouteComponentProps<any>> = ({ match: { params } }) => {
                                     }
                                     return (
                                         <Progress
+                                            className={styles['data-progress']}
                                             percent={(data.donors / studyData.donors.hits.total) * 100}
                                             showInfo={false}
                                             strokeLinecap="square"
                                         />
                                     );
                                 },
+
                                 title: `(n=${studyData.donors.hits.total})`,
+                                width: 85,
                             },
                             { className: 'numerical', dataIndex: 'files', title: t('global.files.title') },
                             {
@@ -185,13 +190,16 @@ const Study: React.FC<RouteComponentProps<any>> = ({ match: { params } }) => {
                                     }
                                     return (
                                         <Progress
+                                            className={styles['data-progress']}
                                             percent={(data.files / studyData.files.hits.total) * 100}
                                             showInfo={false}
                                             strokeLinecap="square"
                                         />
                                     );
                                 },
+
                                 title: `(n=${studyData.files.hits.total})`,
+                                width: 85,
                             },
                         ]}
                         dataSource={[
@@ -238,13 +246,16 @@ const Study: React.FC<RouteComponentProps<any>> = ({ match: { params } }) => {
                                     }
                                     return (
                                         <Progress
+                                            className={styles['data-progress']}
                                             percent={(data.donors / studyData.donors.hits.total) * 100}
                                             showInfo={false}
                                             strokeLinecap="square"
                                         />
                                     );
                                 },
+
                                 title: `(n=${studyData.donors.hits.total})`,
+                                width: 85,
                             },
                             { className: 'numerical', dataIndex: 'files', title: t('global.files.title') },
                             {
@@ -254,13 +265,16 @@ const Study: React.FC<RouteComponentProps<any>> = ({ match: { params } }) => {
                                     }
                                     return (
                                         <Progress
+                                            className={styles['data-progress']}
                                             percent={(data.files / studyData.files.hits.total) * 100}
                                             showInfo={false}
                                             strokeLinecap="square"
                                         />
                                     );
                                 },
+
                                 title: `(n=${studyData.files.hits.total})`,
+                                width: 85,
                             },
                         ]}
                         dataSource={[

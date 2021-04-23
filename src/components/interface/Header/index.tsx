@@ -31,17 +31,18 @@ const Header: React.FC<IHeader> = ({ className = '', isNavActive = true }) => {
                 {isNavActive && (
                     <>
                         <Link
-                            className={`ant-btn menu-item ${location.pathname.includes('/files') ? '--active' : ''}`}
-                            to="/files"
-                        >
-                            <DatabaseIcon className="menu-item-icon" /> {t('nav.file.repo')}
-                        </Link>
-                        <Link
                             className={`ant-btn menu-item ${location.pathname.includes('/studies') ? '--active' : ''}`}
                             to="/studies"
                         >
                             <StorageIcon className="menu-item-icon" />
                             {t('nav.studies')}
+                        </Link>
+                        <Link
+                            className={`ant-btn menu-item ${location.pathname.includes('/files') ? '--active' : ''}`}
+                            to="/files"
+                        >
+                            <DatabaseIcon className="menu-item-icon" />
+                            {t('nav.file.repo')}
                         </Link>
                     </>
                 )}

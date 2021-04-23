@@ -24983,6 +24983,12 @@ a.ant-btn {
   background: #F0F3F8;
   border-bottom-color: #D8E1EB;
 }
+.ant-table-tbody > tr.ant-table-row-selected > td.ant-table-cell {
+  background: #F0F3F8;
+}
+.ant-table-tbody > tr.ant-table-row-selected:hover > td.ant-table-cell {
+  background: #F0F3F8;
+}
 .ant-dropdown-menu-item:hover,
 .ant-dropdown-menu-submenu-title:hover {
   background: #F0F3F8;
@@ -25125,4 +25131,7 @@ a.ant-btn {
 }
 .ant-descriptions .ant-descriptions-item-content {
   padding: 1.6rem 2.4rem;
+}
+.ant-progress-status-success .ant-progress-bg {
+  background: #00AEEF;
 }

@@ -52,6 +52,7 @@
             "choose": "Choose a set",
             "save": "Save a set",
             "saveset": "Save set",
+            "cancel": "Cancel",
             "create": "Create a new set",
             "create.title": "Save a new set",
             "create.label": "Set Name",
