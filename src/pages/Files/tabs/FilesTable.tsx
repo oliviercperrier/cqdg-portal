@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { MdInsertDriveFile, MdSave } from 'react-icons/md';
 import { useQuery } from '@apollo/client';
 import CountWithIcon, { CountWithIconTypeEnum } from '@ferlab/ui/core/components/labels/CountWithIcon';
@@ -11,14 +11,12 @@ import ContentSeparator from 'components/layouts/ContentSeparator';
 import DataLayout from 'layouts/DataContent';
 import { t } from 'locales/translate';
 import { setTableColumn } from 'store/cache/tableColumns';
-import { FILE_TAB_DATA } from 'store/queries/files/fileTabs';
 import { GET_TABLE_COLUMNS } from 'store/queries/tables';
-import { ITableColumnItem } from 'types/interface';
+import { ITableColumnItem, ITablePage } from 'types/interface';
 import { formatToTSV } from 'utils/download';
 import { useFilters } from 'utils/filters/useFilters';
 import { EFileInputType, formatFileSize } from 'utils/formatFileSize';
 import { Hits } from 'utils/graphql/query';
-import { useLazyResultQuery } from 'utils/graphql/query';
 import { usePagination } from 'utils/pagination/usePagination';
 
 import { FilesModel } from './FilesTable.models';
@@ -26,24 +24,26 @@ import { FilesModel } from './FilesTable.models';
 import './FilesTable.scss';
 
 const tableKey = 'files-tabs-file';
-const FilesTable = (): React.ReactElement => {
+
+const FilesTable: React.FC<ITablePage> = ({ data, loading, setCurrentPage }) => {
     const [selectedRow, setSelectedRow] = useState<string[]>([]);
-    const { mappedFilters } = useFilters();
-    const { currentPage, pageFilter, pageSize, setCurrentPageFilter } = usePagination(mappedFilters);
-    const { loading, result } = useLazyResultQuery<any>(FILE_TAB_DATA, {
-        variables: { ...pageFilter, ...mappedFilters },
-    });
+    const { filters } = useFilters();
+    const { currentPage, pageFilter, pageSize, setCurrentPageFilter } = usePagination(filters);
     const { data: tablesData } = useQuery<any>(GET_TABLE_COLUMNS, {
         variables: { default: FilesModel, key: tableKey },
     });
 
-    const filesData = get(result, `File.${Hits.COLLECTION}`, []);
+    useEffect(() => {
+        setCurrentPage(pageFilter);
+    }, [pageFilter]);
+
+    const filesData = get(data, `File.${Hits.COLLECTION}`, []);
     const dataSource = filesData.map((data: any) => ({
         ...data,
         key: data.node.file_id,
     }));
-    const totalFiles = get(result, `File.${Hits.ITEM}.total`, 0);
-    const totalSizes = get(result, `File.aggregations.file_size.stats.sum`, 0);
+    const totalFiles = get(data, `File.${Hits.ITEM}.total`, 0);
+    const totalSizes = get(data, `File.aggregations.file_size.stats.sum`, 0);
     const fileSizes = formatFileSize(totalSizes, { output: 'object' }, EFileInputType.MB) as Record<string, any>;
     const filteredColumns = tablesData.tableColumns.filter((item: ITableColumnItem) => !item.hidden);
     return (

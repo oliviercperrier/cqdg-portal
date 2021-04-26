@@ -22,7 +22,6 @@ export default ({
 }: AuthRouteProps): React.ReactElement => {
     const { initialized, keycloak } = useKeycloak();
     const isAuthorized = isAuthenticated(keycloak);
-
     return (
         <Route
             {...rest}

@@ -1,3 +1,5 @@
+//import 'config/wdyr';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { ErrorBoundary, FallbackProps } from 'react-error-boundary';
@@ -25,13 +27,11 @@ const ErrorFallback: React.FC<FallbackProps> = ({ error, resetErrorBoundary }) =
 );
 
 ReactDOM.render(
-    <React.StrictMode>
-        <ErrorBoundary FallbackComponent={ErrorFallback}>
-            <Providers>
-                <App />
-            </Providers>
-        </ErrorBoundary>
-    </React.StrictMode>,
+    <ErrorBoundary FallbackComponent={ErrorFallback}>
+        <Providers>
+            <App />
+        </Providers>
+    </ErrorBoundary>,
     document.getElementById('root')
 );
 

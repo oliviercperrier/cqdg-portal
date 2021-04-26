@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { MdFileDownload, MdPeople } from 'react-icons/md';
 import { useQuery } from '@apollo/client';
 import CountWithIcon, { CountWithIconTypeEnum } from '@ferlab/ui/core/components/labels/CountWithIcon';
@@ -12,13 +12,11 @@ import ContentSeparator from 'components/layouts/ContentSeparator';
 import DataLayout from 'layouts/DataContent';
 import { t } from 'locales/translate';
 import { setTableColumn } from 'store/cache/tableColumns';
-import { DONOR_TAB_DATA } from 'store/queries/files/donorTabs';
 import { GET_TABLE_COLUMNS } from 'store/queries/tables';
-import { ITableColumnItem } from 'types/interface';
+import { ITableColumnItem, ITablePage } from 'types/interface';
 import { formatToTSV } from 'utils/download';
 import { useFilters } from 'utils/filters/useFilters';
 import { Hits } from 'utils/graphql/query';
-import { useLazyResultQuery } from 'utils/graphql/query';
 import { usePagination } from 'utils/pagination/usePagination';
 
 import { presetDonorsModel } from './DonorsTable.models';
@@ -26,22 +24,24 @@ import { presetDonorsModel } from './DonorsTable.models';
 import styles from './DonorsTable.module.scss';
 
 const tableKey = 'files-tabs-donor';
-const DonorsTable = (): React.ReactElement => {
+const DonorsTable: React.FC<ITablePage> = ({ data, loading, setCurrentPage }) => {
     const [selectedRow, setSelectedRow] = useState<string[]>([]);
-    const { filters, mappedFilters } = useFilters();
-    const { currentPage, pageFilter, pageSize, setCurrentPageFilter } = usePagination(mappedFilters);
-    const { loading, result } = useLazyResultQuery<any>(DONOR_TAB_DATA, {
-        variables: { ...pageFilter, ...mappedFilters },
-    });
+    const { filters } = useFilters();
+    const { currentPage, pageFilter, pageSize, setCurrentPageFilter } = usePagination(filters);
     const { data: tablesData } = useQuery<any>(GET_TABLE_COLUMNS, {
         variables: { default: presetDonorsModel, key: tableKey },
     });
-    const donorsData = get(result, `Donor.${Hits.COLLECTION}`, []);
+
+    useEffect(() => {
+        setCurrentPage(pageFilter);
+    }, [pageFilter]);
+
+    const donorsData = get(data, `Donor.${Hits.COLLECTION}`, []);
     const dataSource = donorsData.map((data: any) => ({
         ...data,
         key: data.node.submitter_donor_id,
     }));
-    const totalDonors = get(result, `Donor.${Hits.ITEM}.total`, 0);
+    const totalDonors = get(data, `Donor.${Hits.ITEM}.total`, 0);
     const filteredColumns = tablesData.tableColumns.filter((item: ITableColumnItem) => !item.hidden);
     return (
         <DataLayout

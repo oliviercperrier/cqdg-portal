@@ -5,31 +5,26 @@ import get from 'lodash/get';
 
 import PieChart from 'components/charts/Pie';
 import { t } from 'locales/translate';
-import { FILE_SUMMARY_DATA } from 'store/queries/files/summary';
 import { updateQueryFilters } from 'utils/filters';
 import { createSubFilter } from 'utils/filters/manipulator';
-import { useFilters } from 'utils/filters/useFilters';
 import { formatPieChart } from 'utils/formatChartData';
-import { useLazyResultQuery } from 'utils/graphql/query';
 
 const { Panel } = Collapse;
 
 import styles from './Summary.module.scss';
-const Summary = (): React.ReactElement => {
+interface ISummary {
+    data: any;
+}
+const Summary: React.FC<ISummary> = ({ data }) => {
     const history = useHistory();
-
-    const { mappedFilters } = useFilters();
-    const { result } = useLazyResultQuery(FILE_SUMMARY_DATA, {
-        variables: mappedFilters,
-    });
     const pieChartCommonProps = {
         height: 160,
         onMouseMove: (_: any, event: any) => (event.target.style.cursor = 'pointer'),
         width: 160,
     };
 
-    const filesGraphData = get(result, 'File.pies', {});
-    const donorsGraphData = get(result, 'Donor.pies', {});
+    const filesGraphData = get(data, 'File.pies', {});
+    const donorsGraphData = get(data, 'Donor.pies', {});
     return (
         <Collapse defaultActiveKey={[1, 2]}>
             <Panel header={t('global.files.title')} key={`1`}>
