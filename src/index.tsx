@@ -1,5 +1,3 @@
-//import 'config/wdyr';
-
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { ErrorBoundary, FallbackProps } from 'react-error-boundary';
