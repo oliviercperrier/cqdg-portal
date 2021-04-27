@@ -1,13 +1,12 @@
 import React from 'react';
 import { MdInsertDriveFile, MdPeople } from 'react-icons/md';
-import { useHistory } from 'react-router-dom';
 import FilterContainer from '@ferlab/ui/core/components/filters/FilterContainer';
 import get from 'lodash/get';
 
 import GlobalSearch from 'components/containers/GlobalSearch';
 import SelectSets from 'components/functionnal/SaveSets/SelectSets';
 import { t } from 'locales/translate';
-import { FILE_GLOBAL_SEARCH, FILE_TAB_FILTERS } from 'store/queries/files/filters';
+import { FILE_GLOBAL_SEARCH } from 'store/queries/files/filters';
 import { GET_ALL_SAVE_SETS } from 'store/queries/files/saveSets';
 import { enhanceFilters, getSelectedFilters } from 'utils/filters';
 import { updateFilters, updateQueryFilters } from 'utils/filters';
@@ -17,19 +16,19 @@ import { Hits, useLazyResultQuery } from 'utils/graphql/query';
 
 import presetFilters from './FileFilter.model';
 
-const FileFilters: React.FC = () => {
-    const history = useHistory();
+interface IFileFilters {
+    history: any;
+    data: any;
+}
+const FileFilters: React.FC<IFileFilters> = ({ data, history }) => {
     const {
         filters,
         mappedFilters: { fileFilters },
     } = useFilters();
 
-    const { result } = useLazyResultQuery<any>(FILE_TAB_FILTERS, {
-        variables: { fileFilters },
-    });
     const { result: saveSetResults } = useLazyResultQuery<any>(GET_ALL_SAVE_SETS);
 
-    const aggregations = get(result, 'File.aggregations', []);
+    const aggregations = get(data, 'File.fileFilters', []);
     return (
         <>
             <GlobalSearch

@@ -28,6 +28,7 @@ import styles from './SaveSets.module.scss';
 type TType = 'saveSetsFile' | 'saveSetsDonor';
 
 type SaveSets = {
+    selectedIds?: string[];
     total: number;
     type: TType;
     Icon: React.ReactNode;
@@ -82,7 +83,7 @@ const getIds = async (
     return fileIds.map((item: any) => item.node.id);
 };
 
-const SaveSets: React.FunctionComponent<SaveSets> = ({ dictionary, Icon, total, type }) => {
+const SaveSets: React.FunctionComponent<SaveSets> = ({ dictionary, Icon, selectedIds, total, type }) => {
     const intl = useIntl();
 
     const [loading, setLoading] = useState(false);
@@ -112,7 +113,10 @@ const SaveSets: React.FunctionComponent<SaveSets> = ({ dictionary, Icon, total, 
             : [];
     const handleSaveNewSet = async () => {
         setLoading(true);
-        const arrayIds = await getIds(clientApollo, mappedType, mappedFilters);
+        let arrayIds = selectedIds;
+        if (isEmpty(arrayIds)) {
+            arrayIds = await getIds(clientApollo, mappedType, mappedFilters);
+        }
         try {
             await clientApollo.mutate({
                 mutation: SET_SAVE_SET,
@@ -145,13 +149,17 @@ const SaveSets: React.FunctionComponent<SaveSets> = ({ dictionary, Icon, total, 
 
         const saveSetName = updateDeleteModalContent.selectedSet;
         const actionType = updateDeleteModalContent.type;
-        const currentFilterIds = await getIds(clientApollo, mappedType, mappedFilters);
+        let currentFilterIds = selectedIds;
+        if (isEmpty(currentFilterIds)) {
+            currentFilterIds = await getIds(clientApollo, mappedType, mappedFilters);
+        }
+
         const oldContent = result[type].filter((item: any) => item.content.name === saveSetName)[0];
         let newContent = [];
         if (actionType === EType.ADD) {
             newContent = noDuplicate(currentFilterIds, oldContent.content.ids);
         } else {
-            newContent = oldContent.content.ids.filter((id: string) => !currentFilterIds.includes(id));
+            newContent = oldContent.content.ids.filter((id: string) => !currentFilterIds!.includes(id));
         }
         try {
             await clientApollo.mutate({
@@ -253,6 +261,7 @@ const SaveSets: React.FunctionComponent<SaveSets> = ({ dictionary, Icon, total, 
             </Dropdown>
             <Modal
                 cancelButtonProps={{ disabled: loading }}
+                cancelText={t('global.savesets.cancel')}
                 destroyOnClose
                 okButtonProps={{ disabled: hasInputError || isEmpty(inputText), loading }}
                 okText={t('global.savesets.saveset')}
@@ -288,6 +297,7 @@ const SaveSets: React.FunctionComponent<SaveSets> = ({ dictionary, Icon, total, 
             </Modal>
             <Modal
                 cancelButtonProps={{ disabled: loading }}
+                cancelText={t('global.savesets.cancel')}
                 okButtonProps={{ disabled: !updateDeleteModalContent.selectedSet, loading }}
                 okText={updateDeleteModalContent.okText}
                 onCancel={() => {

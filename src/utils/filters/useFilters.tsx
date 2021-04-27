@@ -1,5 +1,4 @@
 import { useContext } from 'react';
-import { useLocation } from 'react-router-dom';
 
 import { FilterContext } from 'providers/Filter';
 import { GET_ALL_SAVE_SETS } from 'store/queries/files/saveSets';
@@ -18,10 +17,9 @@ interface IFilters {
 }
 
 export const useFilters = (filters: ISqonGroupFilter | null = null): IFilters => {
-    const { search } = useLocation();
     const filterTypes = useContext(FilterContext);
     const { result } = useLazyResultQuery<any>(GET_ALL_SAVE_SETS);
-    const currentFilters = filters || getFiltersQuery(search);
+    const currentFilters = filters || getFiltersQuery();
     const mappedFilters: IMapFilters = {};
     filterTypes.forEach((filter) => {
         const filtersWithSaveSetIds = remapFilterToSaveSets(

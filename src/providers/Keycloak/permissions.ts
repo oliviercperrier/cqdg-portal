@@ -22,7 +22,7 @@ export const setPermissions = ({ token }: ITokens): void => {
 
             const keycloakConf = JSON.parse(KEYCLOAK_CONFIGS);
 
-            axios
+            /*axios
                 .post(`${keycloakConf.url}/realms/${keycloakConf.realm}/protocol/openid-connect/token`, formData, {
                     headers: {
                         Authorization: `Bearer ${token}`,
@@ -34,7 +34,7 @@ export const setPermissions = ({ token }: ITokens): void => {
                 })
                 .catch((error) => {
                     // console.error("Failed to retrieve user's permissions", error);
-                });
+                });*/
         }
     }
 };

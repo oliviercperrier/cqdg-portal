@@ -3,7 +3,7 @@ import isEqual from 'lodash/isEqual';
 
 import { usePrevious } from './usePrevious';
 
-interface IPageFilterState {
+export interface IPageFilterState {
     offset: number;
     first: number;
 }

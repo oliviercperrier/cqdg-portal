@@ -25,13 +25,11 @@ const ErrorFallback: React.FC<FallbackProps> = ({ error, resetErrorBoundary }) =
 );
 
 ReactDOM.render(
-    <React.StrictMode>
-        <ErrorBoundary FallbackComponent={ErrorFallback}>
-            <Providers>
-                <App />
-            </Providers>
-        </ErrorBoundary>
-    </React.StrictMode>,
+    <ErrorBoundary FallbackComponent={ErrorFallback}>
+        <Providers>
+            <App />
+        </Providers>
+    </ErrorBoundary>,
     document.getElementById('root')
 );
 

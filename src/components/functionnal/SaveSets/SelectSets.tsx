@@ -80,8 +80,8 @@ const SelectSets: React.FunctionComponent<ISelectSets> = ({ data, dictionary, on
                 {data.map((dataSaveSet, i) => (
                     <OptGroup key={i} label={dataSaveSet.dictionary?.groupTitle || 'Group Title'}>
                         {dataSaveSet.values.length > 0 ? (
-                            dataSaveSet.values.map((item: any) => (
-                                <Option value={item.name}>
+                            dataSaveSet.values.map((item: any, i) => (
+                                <Option key={i} value={item.name}>
                                     <ListItem Icon={item.icon} label={item.name} total={item.count} />
                                 </Option>
                             ))

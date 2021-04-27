@@ -1,30 +1,29 @@
 import React from 'react';
 import { MdPeople } from 'react-icons/md';
-import { useHistory } from 'react-router-dom';
 import FilterContainer from '@ferlab/ui/core/components/filters/FilterContainer';
 import get from 'lodash/get';
 
 import GlobalSearch from 'components/containers/GlobalSearch';
 import { t } from 'locales/translate';
-import { DONOR_GLOBAL_SEARCH, DONOR_TAB_FILTERS } from 'store/queries/files/filters';
+import { DONOR_GLOBAL_SEARCH } from 'store/queries/files/filters';
 import { enhanceFilters, getSelectedFilters } from 'utils/filters';
 import { updateFilters, updateQueryFilters } from 'utils/filters';
 import { createSubFilter } from 'utils/filters/manipulator';
 import { useFilters } from 'utils/filters/useFilters';
-import { Hits, useLazyResultQuery } from 'utils/graphql/query';
+import { Hits } from 'utils/graphql/query';
 
 import presetFilters from './DonorFilter.model';
 
-const FileFilters: React.FC = () => {
-    const history = useHistory();
+interface IDonorFilters {
+    history: any;
+    data: any;
+}
+const DonorFilters: React.FC<IDonorFilters> = ({ data, history }) => {
     const {
         mappedFilters: { donorFilters },
     } = useFilters();
-    const { result } = useLazyResultQuery<any>(DONOR_TAB_FILTERS, {
-        variables: { donorFilters },
-    });
 
-    const aggregations = get(result, 'Donor.aggregations', []);
+    const aggregations = get(data, 'Donor.donorFilters', []);
     return (
         <>
             <GlobalSearch
@@ -47,7 +46,6 @@ const FileFilters: React.FC = () => {
                 }}
                 tooltipText={t('facet.search_suggest_tooltip_donors')}
             />
-
             {presetFilters.map((filter) => {
                 const enhancedFilters = enhanceFilters(aggregations, filter.field);
                 const selectedFilters = getSelectedFilters(enhancedFilters, filter);
@@ -66,4 +64,4 @@ const FileFilters: React.FC = () => {
     );
 };
 
-export default FileFilters;
+export default DonorFilters;

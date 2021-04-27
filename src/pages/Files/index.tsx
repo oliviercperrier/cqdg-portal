@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { AiFillPieChart } from 'react-icons/ai';
 import { MdInsertDriveFile, MdPeople } from 'react-icons/md';
-import { useHistory } from 'react-router-dom';
+import { RouteComponentProps } from 'react-router-dom';
+import { useQuery } from '@apollo/client';
 import QueryBuilder from '@ferlab/ui/core/components/QueryBuilder';
 import StackLayout from '@ferlab/ui/core/layout/StackLayout';
 import { Tabs } from 'antd';
@@ -14,7 +15,7 @@ import DonorsTable from 'pages/Files/tabs/DonorsTable';
 import FilesTable from 'pages/Files/tabs/FilesTable';
 import Summary from 'pages/Files/tabs/Summary';
 import { getQueryBuilderCache, setQueryBuilderCache } from 'store/cache/queryBuilder';
-import { FILE_PAGE_METADATA } from 'store/queries/files/page';
+import { FILE_PAGE_DATA } from 'store/queries/files/page';
 import { updateQueryFilters } from 'utils/filters';
 import { useFilters } from 'utils/filters/useFilters';
 import { useLazyResultQuery } from 'utils/graphql/query';
@@ -24,12 +25,17 @@ import './Files.scss';
 
 const { TabPane } = Tabs;
 const tabKey = 'searchTableTab';
-const FileRepo: React.FC = () => {
-    const history = useHistory();
 
+const FileRepo: React.FC<RouteComponentProps<any>> = ({ history }) => {
+    const [pageOffsetData, setPageOffsetData] = useState({
+        donorFirst: 25,
+        donorOffset: 0,
+        fileFirst: 25,
+        fileOffset: 0,
+    });
     const { filters, mappedFilters } = useFilters();
-    const { loading, result } = useLazyResultQuery<any>(FILE_PAGE_METADATA, {
-        variables: mappedFilters,
+    const { loading, result } = useLazyResultQuery<any>(FILE_PAGE_DATA, {
+        variables: { ...pageOffsetData, ...mappedFilters },
     });
 
     const onTabChange = (activeKey: string) => {
@@ -38,8 +44,9 @@ const FileRepo: React.FC = () => {
 
     const filesTotal = get(result, 'File.hits.total', 0);
     const donorsTotal = get(result, 'Donor.hits.total', 0);
+
     return (
-        <QueryLayout className="file-repo" sidebar={<SideBarContent />}>
+        <QueryLayout className="file-repo" sidebar={<SideBarContent data={result} history={history} />}>
             <StackLayout className="file-repo__wrapper" fitContent flexContent vertical>
                 <QueryBuilder
                     IconTotal={<MdInsertDriveFile size={18} />}
@@ -47,8 +54,9 @@ const FileRepo: React.FC = () => {
                     currentQuery={filters}
                     dictionary={{ query: { facet: (key) => t(`facet.${key}`) } }}
                     initialState={getQueryBuilderCache('file-repo')}
-                    loading={loading}
-                    onChangeQuery={(_, query) => updateQueryParam(history, 'filters', query)}
+                    onChangeQuery={(_, query) => {
+                        updateQueryParam(history, 'filters', query);
+                    }}
                     onRemoveFacet={(query) => updateQueryFilters(history, query.content.field, [])}
                     onUpdate={(state) => setQueryBuilderCache('file-repo', state)}
                     total={filesTotal}
@@ -74,10 +82,9 @@ const FileRepo: React.FC = () => {
                                 }
                             >
                                 <StackLayout fitContent flexContent vertical>
-                                    <Summary />
+                                    <Summary data={result} />
                                 </StackLayout>
                             </TabPane>
-
                             <TabPane
                                 className="tabs-container__panes"
                                 key="files"
@@ -89,7 +96,17 @@ const FileRepo: React.FC = () => {
                                 }
                             >
                                 <StackLayout fitContent flexContent vertical>
-                                    <FilesTable />
+                                    <FilesTable
+                                        data={result}
+                                        loading={loading}
+                                        setCurrentPage={(filters) =>
+                                            setPageOffsetData((s) => ({
+                                                ...s,
+                                                fileFirst: filters.first,
+                                                fileOffset: filters.offset,
+                                            }))
+                                        }
+                                    />
                                 </StackLayout>
                             </TabPane>
                             <TabPane
@@ -103,7 +120,17 @@ const FileRepo: React.FC = () => {
                                 }
                             >
                                 <StackLayout fitContent flexContent vertical>
-                                    <DonorsTable />
+                                    <DonorsTable
+                                        data={result}
+                                        loading={loading}
+                                        setCurrentPage={(filters) =>
+                                            setPageOffsetData((s) => ({
+                                                ...s,
+                                                donorFirst: filters.first,
+                                                donorOffset: filters.offset,
+                                            }))
+                                        }
+                                    />
                                 </StackLayout>
                             </TabPane>
                         </Tabs>

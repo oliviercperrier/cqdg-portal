@@ -1,6 +1,5 @@
 import React from 'react';
 import { MdInsertDriveFile, MdPeople } from 'react-icons/md';
-import { useHistory } from 'react-router-dom';
 import ScrollView from '@ferlab/ui/core/layout/ScrollView';
 import { Tabs } from 'antd';
 
@@ -15,9 +14,11 @@ import './SideBarContent.scss';
 const { TabPane } = Tabs;
 const tabKey = 'facetTab';
 
-const SideBar: React.FC = () => {
-    const history = useHistory();
-
+interface ISidebarContent {
+    history: any;
+    data: any;
+}
+const SideBar: React.FC<ISidebarContent> = ({ data, history }) => {
     const onTabChange = (activeKey: string) => {
         updateQueryParam(history, tabKey, activeKey);
     };
@@ -37,7 +38,7 @@ const SideBar: React.FC = () => {
                 }
             >
                 <ScrollView className="side-panel-content__panes__content" vertical>
-                    <FileFilters />
+                    <FileFilters data={data} history={history} />
                 </ScrollView>
             </TabPane>
             <TabPane
@@ -50,7 +51,7 @@ const SideBar: React.FC = () => {
                 }
             >
                 <ScrollView className="side-panel-content__panes__content" vertical>
-                    <DonorFilters />
+                    <DonorFilters data={data} history={history} />
                 </ScrollView>
             </TabPane>
         </Tabs>
