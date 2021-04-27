@@ -6,6 +6,7 @@ export const fileMapping: Map<string, string> = new Map([
     ['ethnicity', 'donors.ethnicity'],
     ['age_at_recruitment', 'donors.age_at_recruitment'],
     ['vital_status', 'donors.vital_status'],
+    ['donor_id', 'donors.donor_id'],
     ['files.file_id', 'file_id'],
     ['submitter_donor_id', 'donors.submitter_donor_id'],
     ['short_name_keyword', 'study.short_name_keyword'],

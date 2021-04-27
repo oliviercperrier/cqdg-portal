@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Head from 'components/seo/Head';
 import AppLayout from 'layouts/App';
 import EntityLayout from 'layouts/Entity';
+import DonorPage from 'pages/Donor';
 import FilesPage from 'pages/Files';
 import HomePage from 'pages/Home';
 import LoginPage from 'pages/Login';
@@ -20,6 +21,7 @@ export enum Routes {
     FILES = '/files',
     STUDIES = '/studies',
     STUDY = '/study/:id',
+    DONOR = '/donor/:id',
     LOGIN = '/login',
     LOGOUT = '/logout',
     TERMS = '/terms',
@@ -40,6 +42,7 @@ export default (): React.ReactElement => (
             </Route>
             <AuthRoute component={FilesPage} exact layout={AppLayout} path={Routes.FILES} />
             <AuthRoute component={StudyPage} exact layout={EntityLayout} path={Routes.STUDY} />
+            <AuthRoute component={DonorPage} exact layout={EntityLayout} path={Routes.DONOR} />
             <AuthRoute component={StudiesPage} exact layout={AppLayout} path={Routes.STUDIES} />
             <AuthRoute component={TermsPage} exact hasToAcceptTerms={false} path={Routes.TERMS} />
         </Switch>

@@ -8,6 +8,7 @@
         "donors.title": "Donneurs",
         "donors": "donneurs",
         "studies": "études",
+        "studies.title": "Études",
         "study": "étude",
         "login": "Connexion",
         "total": "Total",
@@ -115,7 +116,7 @@
     "short_footer": {
         "info": "Info"
     },
-    "study": {
+    "entity": {
         "actions": {
             "manifest": "Manifeste",
             "access": "Demande d'accès",
@@ -200,6 +201,7 @@
         "ethnicity": "Ethnicité"
     },
     "facet": {
+        "creation_date": "Date de création",
         "access_limitations": "Restrictions d'accès",
         "access_requirements": "Condition d'utilisation",
         "domain": "Domaine",
@@ -233,7 +235,8 @@
         "hpo.category": "Category HPO",
         "phenotypes.hpo_category_keyword": "Category HPO",
         "donors.diagnoses.mondo_term_keyword": "Type de maladie (Mondo)",
-        "file_id": "UUID du Fichier",
+        "file_id": "ID du Fichier",
+        "donor_id": "ID du donneur",
         "data_access": "Accès",
         "file_name_keyword": "Nom de fichier",
         "files.data_category": "Catégorie de données",
