@@ -1,0 +1,27 @@
+@import '~@ferlab/style/themes/cqdg/colors';
+
+.container {
+    .iconSpace {
+        margin-right: .8rem;
+    }
+
+    .default {
+        color: $gray-6;
+    }
+
+    .success {
+        color: $green-6;
+    }
+
+    .processing {
+        color: $blue-6;
+    }
+    
+    .error {
+        color: $red-6;
+    }
+
+    .warning {
+        color: $gold-7;
+    }
+}

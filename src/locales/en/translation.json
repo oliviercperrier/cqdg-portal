@@ -119,7 +119,8 @@
         "actions": {
             "manifest": "Manifest",
             "access": "Request access",
-            "link.summary": "See this study in the repository"
+            "link.summary.study": "See this study in the repository",
+            "link.summary.donor": "See this donor in the repository"
         },
         "title": {
             "summary": "Summary",

@@ -1,3 +1,5 @@
+@import '~@ferlab/style/themes/cqdg/colors';
+
 .container {
     max-width: 1440px;
     margin: 0 auto;
@@ -42,6 +44,13 @@
         }
         .clinical {
             grid-area: clinical;
+
+            .icon-close {
+                color: $red-6;
+            }
+            .icon-check {
+                color: $green-6;
+            }
         }
         .category {
             grid-area: category;

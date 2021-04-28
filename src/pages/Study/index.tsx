@@ -68,7 +68,7 @@ const Study: React.FC<RouteComponentProps<any>> = ({ match: { params } }) => {
                 title={studyData.name}
             />
             <div className={styles.dataContent}>
-                <CardContainerNotched className={styles.dataSummary}>
+                <CardContainerNotched className={styles.dataSummary} type="shadow">
                     <StackLayout className={styles.dataSummaryContent}>
                         <CountWithIcon
                             Icon={<DonorIcon />}
@@ -90,7 +90,7 @@ const Study: React.FC<RouteComponentProps<any>> = ({ match: { params } }) => {
                             {t('entity.actions.link.summary')}
                         </InternalLink>
                     }
-                    title={t('entity.title.summary')}
+                    title={t('entity.title.summary.study')}
                 >
                     <DescriptionList>
                         <ListItem label={t(`facet.study_id`)}>{studyData.study_id_keyword}</ListItem>

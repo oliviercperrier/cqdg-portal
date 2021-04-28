@@ -1,10 +1,11 @@
 import React from 'react';
-import { AiOutlineCheck, AiOutlineClose, AiOutlineDownload } from 'react-icons/ai';
+import { AiOutlineDownload } from 'react-icons/ai';
 import { RouteComponentProps } from 'react-router-dom';
 import CountWithIcon from '@ferlab/ui/core/components/labels/CountWithIcon';
 import StackLayout from '@ferlab/ui/core/layout/StackLayout';
-import { Card, PageHeader, Progress, Spin } from 'antd';
+import { Card, List, PageHeader, Progress, Spin } from 'antd';
 
+import Badge, { EFormat, ESize, EType } from 'components/functionnal/Badge';
 import DescriptionList, { ListItem } from 'components/functionnal/DescriptionList';
 import DownloadClinicalButton from 'components/functionnal/DownloadClinicalButton';
 import InternalLink from 'components/functionnal/InternalLink';
@@ -55,7 +56,7 @@ const Study: React.FC<RouteComponentProps<any>> = ({ match: { params } }) => {
                 title={donorData.submitter_donor_id}
             />
             <div className={styles.dataContent}>
-                <CardContainerNotched className={styles.dataSummary}>
+                <CardContainerNotched className={styles.dataSummary} type="shadow">
                     <StackLayout className={styles.dataSummaryContent}>
                         <CountWithIcon
                             Icon={<StudyIcon />}
@@ -73,8 +74,8 @@ const Study: React.FC<RouteComponentProps<any>> = ({ match: { params } }) => {
                 <Card
                     className={`${styles.summary} ant-card-body-small`}
                     extra={
-                        <InternalLink filters={filters} path={Routes.STUDIES}>
-                            {t('entity.actions.link.summary')}
+                        <InternalLink filters={filters} path={Routes.FILES} query={{ searchTableTab: 'donors' }}>
+                            {t('entity.actions.link.summary.donor')}
                         </InternalLink>
                     }
                     title={t('entity.title.summary')}
@@ -111,33 +112,31 @@ const Study: React.FC<RouteComponentProps<any>> = ({ match: { params } }) => {
                         <ListItem label={t(`global.access_authority`)}>data-access@rhmds.ca</ListItem>
                     </DescriptionList>
                 </Card>
-                <Card className={`${styles.clinical}`} title={t('entity.title.clinical')}>
-                    <DescriptionList>
-                        <ListItem label="Diagnosis">
-                            {getRandom(2) === 1 ? <AiOutlineCheck /> : <AiOutlineClose />}
-                        </ListItem>
-                        <ListItem label="Phenotype">
-                            {getRandom(2) === 1 ? <AiOutlineCheck /> : <AiOutlineClose />}
-                        </ListItem>
-                        <ListItem label="Exposure">
-                            {getRandom(2) === 1 ? <AiOutlineCheck /> : <AiOutlineClose />}
-                        </ListItem>
-                        <ListItem label="Treatment">
-                            {getRandom(2) === 1 ? <AiOutlineCheck /> : <AiOutlineClose />}
-                        </ListItem>
-                        <ListItem label="Follow-up (cancer)">
-                            {getRandom(2) === 1 ? <AiOutlineCheck /> : <AiOutlineClose />}
-                        </ListItem>
-                        <ListItem label="Family Relationship">
-                            {getRandom(2) === 1 ? <AiOutlineCheck /> : <AiOutlineClose />}
-                        </ListItem>
-                        <ListItem label="Family History">
-                            {getRandom(2) === 1 ? <AiOutlineCheck /> : <AiOutlineClose />}
-                        </ListItem>
-                        <ListItem label="Biospecimens">
-                            {getRandom(2) === 1 ? <AiOutlineCheck /> : <AiOutlineClose />}
-                        </ListItem>
-                    </DescriptionList>
+                <Card className={`${styles.clinical} ant-card-body-small`} title={t('entity.title.clinical')}>
+                    <List
+                        dataSource={[
+                            'Diagnosis',
+                            'Phenotype',
+                            'Exposure',
+                            'Treatment',
+                            'Follow-up (cancer)',
+                            'Family Relationship',
+                            'Family History',
+                            'Biospecimens',
+                        ]}
+                        grid={{ column: 2 }}
+                        renderItem={(item) => (
+                            <List.Item>
+                                <Badge
+                                    format={EFormat.ICON}
+                                    size={ESize.SMALL}
+                                    type={getRandom(2) === 1 ? EType.SUCCESS : EType.ERROR}
+                                >
+                                    {item}
+                                </Badge>
+                            </List.Item>
+                        )}
+                    />
                 </Card>
                 <Card className={`${styles.category}`} title={t('entity.title.categories')}>
                     <TableContent

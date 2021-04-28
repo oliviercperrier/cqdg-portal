@@ -2,7 +2,7 @@ import React from 'react';
 
 import '@ferlab/style/themes/cqdg/components/cardContainerNotched.scss';
 
-type ContainerTypeEnum = 'none' | 'header' | 'hover' | 'hovered';
+type ContainerTypeEnum = 'none' | 'header' | 'hover' | 'hovered' | 'shadow';
 
 interface ICardContainerNotchedProps {
     type?: ContainerTypeEnum;
@@ -19,6 +19,7 @@ const containerType: ContainerType = {
     hover: 'card--notched-hover',
     hovered: 'card--notched-hovered',
     none: '',
+    shadow: 'card--notched-shadow',
 };
 
 const CardContainerNotched: React.FC<ICardContainerNotchedProps> = ({

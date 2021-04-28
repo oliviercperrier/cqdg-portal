@@ -1,19 +1,26 @@
 import get from 'lodash/get';
 
+import InternalLink from 'components/functionnal/InternalLink';
 import { t } from 'locales/translate';
+import { Routes } from 'routes';
 
 const DonorsModel = [
     {
-        dataIndex: ['node', 'submitter_donor_id'],
         hidden: false,
         id: 'submitter_donor_id',
         movable: true,
+        render: ({ node }: any) => (
+            <InternalLink params={{ id: node.submitter_donor_id }} path={Routes.DONOR}>
+                {node.submitter_donor_id}
+            </InternalLink>
+        ),
         sortDirection: ['ascend', 'descend'],
         sorter: {
             compare: (a: Record<string, any>, b: Record<string, any>): number =>
                 a.node.submitter_donor_id.localeCompare(b.node.submitter_donor_id),
             multiple: 3,
         },
+
         title: t('facet.submitter_donor_id'),
         translate: 'facet.submitter_donor_id',
     },
