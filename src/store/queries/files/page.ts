@@ -10,6 +10,7 @@ export const FILE_PAGE_DATA = gql`
         $donorFirst: Int
         $fileFilters: JSON
         $donorFilters: JSON
+        $studyFilters: JSON
     ) {
         File {
             hits(offset: $fileOffset, first: $fileFirst, filters: $fileFilters) {
@@ -124,6 +125,11 @@ export const FILE_PAGE_DATA = gql`
                         key
                     }
                 }
+            }
+        }
+        Study {
+            hits(filters: $studyFilters) {
+                total
             }
         }
         Donor {

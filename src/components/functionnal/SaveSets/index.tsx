@@ -196,7 +196,7 @@ const SaveSets: React.FunctionComponent<SaveSets> = ({ dictionary, Icon, selecte
                         <Menu.Item>
                             <StackLayout className={styles.totalContainer}>
                                 <div className={styles.text}>
-                                    {total} {dictionary.labelType}
+                                    {selectedIds ? selectedIds.length : total} {dictionary.labelType}
                                 </div>
                                 <Tooltip overlay={t('global.savesets.warning')}>
                                     <AiOutlineInfoCircle />

@@ -39,7 +39,6 @@ const createRangeFilter = (field: string, filters: IFilter<IFilterRange>[]) => {
     if (filters.length === 0) {
         return selectedFilters;
     }
-
     const selectedRange = filters[0];
     if (selectedRange.data.min && selectedRange.data.max) {
         selectedFilters.push({
@@ -60,7 +59,6 @@ const createRangeFilter = (field: string, filters: IFilter<IFilterRange>[]) => {
             });
         }
     }
-
     return selectedFilters;
 };
 

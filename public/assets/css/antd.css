@@ -24984,10 +24984,12 @@ a.ant-btn {
   border-bottom-color: #D8E1EB;
 }
 .ant-table-tbody > tr.ant-table-row-selected > td.ant-table-cell {
-  background: #F0F3F8;
+  background: #FFEEC2;
+  border-bottom-color: #FFD261;
 }
 .ant-table-tbody > tr.ant-table-row-selected:hover > td.ant-table-cell {
-  background: #F0F3F8;
+  background: #FFEEC2;
+  border-bottom-color: #FFD261;
 }
 .ant-dropdown-menu-item:hover,
 .ant-dropdown-menu-submenu-title:hover {

@@ -34,11 +34,8 @@
             "clear": "Enlever"
         },
         "tables": {
-            "showing": "Affichage de <strong>{start}</strong> - <strong>{end}</strong> {docType} sur <strong>{total}</strong>",
-            "footer": {
-                "Show": "Show",
-                "entries": "Entrées"
-            },
+            "showing": "sur",
+            "selected": "items sélectionnées",
             "actions": {
                 "clinical.data": "Données Cliniques",
                 "export": "Export Current View",

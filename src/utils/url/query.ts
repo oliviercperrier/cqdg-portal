@@ -4,12 +4,13 @@ import qs from 'query-string';
 import xss, { IFilterXSSOptions } from 'xss';
 
 const xssConfig: IFilterXSSOptions = {
-    // empty, means filter out all tags
-    stripIgnoreTag: true,
-    // filter out all HTML not in the whitelist
-    stripIgnoreTagBody: ['script'],
-    whiteList: {}, // the script tag is a special case, we need
-    // to filter out its content
+    escapeHtml: (f) => f,
+
+    stripIgnoreTag: true, // filter out all HTML not in the whitelist
+
+    stripIgnoreTagBody: ['script'], // the script tag is a special case, we need to filter out its content
+
+    whiteList: {}, // empty, means filter out all tags
 };
 
 export const updateQueryParam = (history: any, key: string, value: any): void => {
