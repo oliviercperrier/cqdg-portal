@@ -1,25 +1,35 @@
 import React, { useState } from 'react';
 import { AiFillPieChart } from 'react-icons/ai';
-import { MdInsertDriveFile, MdPeople } from 'react-icons/md';
+import { MdFileDownload, MdInsertDriveFile, MdPeople } from 'react-icons/md';
 import { RouteComponentProps } from 'react-router-dom';
-import { useQuery } from '@apollo/client';
+import CountWithIcon from '@ferlab/ui/core/components/labels/CountWithIcon';
 import QueryBuilder from '@ferlab/ui/core/components/QueryBuilder';
 import StackLayout from '@ferlab/ui/core/layout/StackLayout';
 import { Tabs } from 'antd';
 import get from 'lodash/get';
 
+import TableContainer from 'components/containers/Table';
+import DownloadClinicalButton from 'components/functionnal/DownloadClinicalButton';
+import SaveSets from 'components/functionnal/SaveSets';
+import CloudStorageIcon from 'components/interface/Icon/CloudStorage';
+import DonorIcon from 'components/interface/Icon/Donor';
+import FileIcon from 'components/interface/Icon/File';
+import StudyIcon from 'components/interface/Icon/Study';
+import CardContainerNotched from 'components/layouts/Card/CardContainerNotched';
 import QueryLayout from 'layouts/Query';
 import { t } from 'locales/translate';
 import SideBarContent from 'pages/Files/filters/SideBarContent';
-import DonorsTable from 'pages/Files/tabs/DonorsTable';
-import FilesTable from 'pages/Files/tabs/FilesTable';
 import Summary from 'pages/Files/tabs/Summary';
 import { getQueryBuilderCache, setQueryBuilderCache } from 'store/cache/queryBuilder';
 import { FILE_PAGE_DATA } from 'store/queries/files/page';
 import { updateQueryFilters } from 'utils/filters';
 import { useFilters } from 'utils/filters/useFilters';
-import { useLazyResultQuery } from 'utils/graphql/query';
+import { EFileInputType, formatFileSize } from 'utils/formatFileSize';
+import { Hits, useLazyResultQuery } from 'utils/graphql/query';
 import { readQueryParam, updateQueryParam } from 'utils/url/query';
+
+import { presetDonorsModel } from './tabs/DonorsTable.models';
+import { FilesModel } from './tabs/FilesTable.models';
 
 import './Files.scss';
 
@@ -44,6 +54,9 @@ const FileRepo: React.FC<RouteComponentProps<any>> = ({ history }) => {
 
     const filesTotal = get(result, 'File.hits.total', 0);
     const donorsTotal = get(result, 'Donor.hits.total', 0);
+    const studyTotal = get(result, 'Study.hits.total', 0);
+    const totalSizes = get(result, `File.aggregations.file_size.stats.sum`, 0);
+    const fileSizes = formatFileSize(totalSizes, { output: 'object' }, EFileInputType.MB) as Record<string, any>;
 
     return (
         <QueryLayout className="file-repo" sidebar={<SideBarContent data={result} history={history} />}>
@@ -61,6 +74,20 @@ const FileRepo: React.FC<RouteComponentProps<any>> = ({ history }) => {
                     onUpdate={(state) => setQueryBuilderCache('file-repo', state)}
                     total={filesTotal}
                 />
+                <StackLayout className="file-repo__summary" fitContent vertical>
+                    <CardContainerNotched type="shadow">
+                        <StackLayout className="file-repo__summary__content">
+                            <CountWithIcon Icon={<StudyIcon />} label={t('global.studies.title')} total={studyTotal} />
+                            <CountWithIcon Icon={<DonorIcon />} label={t('global.donors.title')} total={donorsTotal} />
+                            <CountWithIcon Icon={<FileIcon />} label={t('global.files.title')} total={filesTotal} />
+                            <CountWithIcon
+                                Icon={<CloudStorageIcon />}
+                                label={fileSizes.symbol}
+                                total={fileSizes.value}
+                            />
+                        </StackLayout>
+                    </CardContainerNotched>
+                </StackLayout>
                 <StackLayout fitContent flexContent vertical>
                     <StackLayout fitContent flexContent vertical>
                         <Tabs
@@ -91,14 +118,27 @@ const FileRepo: React.FC<RouteComponentProps<any>> = ({ history }) => {
                                 tab={
                                     <div className="tabs-container__panes__tab">
                                         <MdInsertDriveFile className="icon" />
-                                        {t('repo.tabs.files', { count: filesTotal.toLocaleString() })}
+                                        {t('global.files.title')}
                                     </div>
                                 }
                             >
                                 <StackLayout fitContent flexContent vertical>
-                                    <FilesTable
-                                        data={result}
+                                    <TableContainer
+                                        data={get(result, `File.${Hits.COLLECTION}`, []).map((data: any) => ({
+                                            ...data,
+                                            key: data.node.file_id,
+                                        }))}
+                                        extraActions={(selectedRow) => (
+                                            <SaveSets
+                                                Icon={<MdInsertDriveFile />}
+                                                dictionary={{ labelType: t('global.files') }}
+                                                selectedIds={selectedRow}
+                                                total={filesTotal}
+                                                type="saveSetsFile"
+                                            />
+                                        )}
                                         loading={loading}
+                                        model={FilesModel}
                                         setCurrentPage={(filters) =>
                                             setPageOffsetData((s) => ({
                                                 ...s,
@@ -106,6 +146,8 @@ const FileRepo: React.FC<RouteComponentProps<any>> = ({ history }) => {
                                                 fileOffset: filters.offset,
                                             }))
                                         }
+                                        tableKey="files-tabs-file"
+                                        total={filesTotal}
                                     />
                                 </StackLayout>
                             </TabPane>
@@ -115,14 +157,33 @@ const FileRepo: React.FC<RouteComponentProps<any>> = ({ history }) => {
                                 tab={
                                     <div className="tabs-container__panes__tab">
                                         <MdPeople className="icon" />
-                                        {t('repo.tabs.donors', { count: donorsTotal.toLocaleString() })}
+                                        {t('global.donors.title')}
                                     </div>
                                 }
                             >
                                 <StackLayout fitContent flexContent vertical>
-                                    <DonorsTable
-                                        data={result}
+                                    <TableContainer
+                                        data={get(result, `Donor.${Hits.COLLECTION}`, []).map((data: any) => ({
+                                            ...data,
+                                            key: data.node.submitter_donor_id,
+                                        }))}
+                                        extraActions={(selectedRow) => (
+                                            <>
+                                                <DownloadClinicalButton className="clinical-download" filters={filters}>
+                                                    <MdFileDownload size={16} />
+                                                    {t('global.tables.actions.clinical.data')}
+                                                </DownloadClinicalButton>
+                                                <SaveSets
+                                                    Icon={<MdPeople />}
+                                                    dictionary={{ labelType: t('global.donors') }}
+                                                    selectedIds={selectedRow}
+                                                    total={donorsTotal}
+                                                    type="saveSetsDonor"
+                                                />
+                                            </>
+                                        )}
                                         loading={loading}
+                                        model={presetDonorsModel}
                                         setCurrentPage={(filters) =>
                                             setPageOffsetData((s) => ({
                                                 ...s,
@@ -130,6 +191,8 @@ const FileRepo: React.FC<RouteComponentProps<any>> = ({ history }) => {
                                                 donorOffset: filters.offset,
                                             }))
                                         }
+                                        tableKey="files-tabs-donor"
+                                        total={donorsTotal}
                                     />
                                 </StackLayout>
                             </TabPane>

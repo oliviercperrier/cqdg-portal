@@ -11,7 +11,7 @@ interface IQueryProp {
 
 type IParamProp = IQueryProp;
 
-interface IInternalLink {
+export interface IInternalLink {
     path: string;
     params?: IParamProp;
     query?: IQueryProp;

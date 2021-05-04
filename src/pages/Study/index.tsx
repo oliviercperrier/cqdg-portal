@@ -38,7 +38,6 @@ const Study: React.FC<RouteComponentProps<any>> = ({ match: { params } }) => {
         return <Spin />;
     }
     const studyData = result.Study.hits.edges[0].node;
-    //console.log(studyData);
     const fileSizeSummary = result.File.aggregations.file_size.stats.sum;
     const fileSizes = formatFileSize(fileSizeSummary, { output: 'object' }, EFileInputType.MB) as Record<string, any>;
     return (
@@ -55,30 +54,30 @@ const Study: React.FC<RouteComponentProps<any>> = ({ match: { params } }) => {
                         onClick={() => setVisibleModal((prevState) => ({ ...prevState, manifestModal: true }))}
                     >
                         <AiOutlineDownload size={16} />
-                        {t('study.actions.manifest')}
+                        {t('entity.actions.manifest')}
                     </Button>,
                     <Button
                         onClick={() => setVisibleModal((prevState) => ({ ...prevState, accessModal: true }))}
                         type="primary"
                     >
-                        {t('study.actions.access')}
+                        {t('entity.actions.access')}
                     </Button>,
                 ]}
                 onBack={() => null}
                 title={studyData.name}
             />
             <div className={styles.dataContent}>
-                <CardContainerNotched className={styles.dataSummary}>
+                <CardContainerNotched className={styles.dataSummary} type="shadow">
                     <StackLayout className={styles.dataSummaryContent}>
                         <CountWithIcon
                             Icon={<DonorIcon />}
                             label={t('global.donors.title')}
-                            total={studyData.files.hits.total}
+                            total={studyData.donors.hits.total}
                         />
                         <CountWithIcon
                             Icon={<FileIcon />}
                             label={t('global.files.title')}
-                            total={studyData.donors.hits.total}
+                            total={studyData.files.hits.total}
                         />
                         <CountWithIcon Icon={<CloudStorageIcon />} label={fileSizes.symbol} total={fileSizes.value} />
                     </StackLayout>
@@ -87,10 +86,10 @@ const Study: React.FC<RouteComponentProps<any>> = ({ match: { params } }) => {
                     className={`${styles.summary} ant-card-body-small`}
                     extra={
                         <InternalLink filters={filters} path={Routes.STUDIES}>
-                            {t('study.actions.link.summary')}
+                            {t('entity.actions.link.summary')}
                         </InternalLink>
                     }
-                    title={t('study.title.summary')}
+                    title={t('entity.title.summary')}
                 >
                     <DescriptionList>
                         <ListItem label={t(`facet.study_id`)}>{studyData.study_id_keyword}</ListItem>
@@ -111,7 +110,7 @@ const Study: React.FC<RouteComponentProps<any>> = ({ match: { params } }) => {
                         </ListItem>
                     </DescriptionList>
                 </Card>
-                <Card className={`${styles.access} ant-card-body-small`} title={t('study.title.access')}>
+                <Card className={`${styles.access} ant-card-body-small`} title={t('entity.title.access')}>
                     <DescriptionList>
                         <ListItem label={t(`facet.access_limitations`)}>
                             Disease-specifc research (DUO 00000007)
@@ -122,7 +121,7 @@ const Study: React.FC<RouteComponentProps<any>> = ({ match: { params } }) => {
                         <ListItem label={t(`global.access_authority`)}>data-access@rhmds.ca</ListItem>
                     </DescriptionList>
                 </Card>
-                <Card className={`${styles.clinical}`} title={t('study.title.clinical')}>
+                <Card className={`${styles.clinical}`} title={t('entity.title.clinical')}>
                     <TableContent
                         columns={[
                             { dataIndex: 'data', title: t('global.data') },
@@ -159,7 +158,7 @@ const Study: React.FC<RouteComponentProps<any>> = ({ match: { params } }) => {
                         pagination={false}
                     />
                 </Card>
-                <Card className={`${styles.category}`} title={t('study.title.categories')}>
+                <Card className={`${styles.category}`} title={t('entity.title.categories')}>
                     <TableContent
                         columns={[
                             { dataIndex: 'category', title: t('global.category') },
@@ -234,7 +233,7 @@ const Study: React.FC<RouteComponentProps<any>> = ({ match: { params } }) => {
                         pagination={false}
                     />
                 </Card>
-                <Card className={`${styles.experimental}`} title={t('study.title.strategy')}>
+                <Card className={`${styles.experimental}`} title={t('entity.title.strategy')}>
                     <TableContent
                         columns={[
                             { dataIndex: 'strategy', title: t('global.strategy') },
@@ -300,22 +299,22 @@ const Study: React.FC<RouteComponentProps<any>> = ({ match: { params } }) => {
                     />
                 </Card>
                 <Modal
-                    okText={t('study.modal.actions.download')}
+                    okText={t('entity.modal.actions.download')}
                     onCancel={() => setVisibleModal((prevState) => ({ ...prevState, accessModal: false }))}
                     onOk={() => setVisibleModal((prevState) => ({ ...prevState, accessModal: false }))}
-                    title={t('study.modal.access.title')}
+                    title={t('entity.modal.access.title')}
                     visible={visibleModal.accessModal}
                 >
-                    <span>{t('study.modal.access.desc')}</span>
+                    <span>{t('entity.modal.access.desc')}</span>
                 </Modal>
                 <Modal
-                    okText={t('study.modal.actions.download')}
+                    okText={t('entity.modal.actions.download')}
                     onCancel={() => setVisibleModal((prevState) => ({ ...prevState, manifestModal: false }))}
                     onOk={() => setVisibleModal((prevState) => ({ ...prevState, manifestModal: false }))}
-                    title={t('study.modal.manifest.title')}
+                    title={t('entity.modal.manifest.title')}
                     visible={visibleModal.manifestModal}
                 >
-                    <span>{t('study.modal.manifest.desc')}</span>
+                    <span>{t('entity.modal.manifest.desc')}</span>
                 </Modal>
             </div>
         </div>

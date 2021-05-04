@@ -26,6 +26,7 @@ import { ITableColumnItem } from 'types/interface';
 import { updateQueryFilters } from 'utils/filters';
 import { useFilters } from 'utils/filters/useFilters';
 import { Hits, useLazyResultQuery } from 'utils/graphql/query';
+import { usePagination } from 'utils/pagination/usePagination';
 import { updateQueryParam } from 'utils/url/query';
 
 import Filters from './filters/StudyFilters';
@@ -34,16 +35,16 @@ import styles from './Studies.module.scss';
 
 const tableKey = 'study-content';
 const Study: React.FC<RouteComponentProps<any>> = ({ history }) => {
-    const [showCards, setShowCards] = useState(false);
+    const [showCards, setShowCards] = useState(true);
     const { filters, mappedFilters } = useFilters();
 
     const { data: tablesData } = useQuery<any>(GET_TABLE_COLUMNS, {
         variables: { default: presetModel, key: tableKey },
     });
 
-    //const { currentPage, pageFilter, pageSize, setCurrentPageFilter } = usePagination(mappedFilters);
+    const { currentPage, pageFilter, pageSize, setCurrentPageFilter } = usePagination(mappedFilters);
     const { loading, result } = useLazyResultQuery<any>(STUDIES_PAGE_DATA, {
-        variables: { ...mappedFilters },
+        variables: { ...mappedFilters, ...pageFilter },
     });
     const totalDonors = get(result, `Donor.${Hits.ITEM}.total`, 0);
     const totalStudies = get(result, `Study.${Hits.ITEM}.total`, 0);
@@ -124,7 +125,12 @@ const Study: React.FC<RouteComponentProps<any>> = ({ history }) => {
                                 columns={tablesData.tableColumns.filter((item: ITableColumnItem) => !item.hidden)}
                                 dataSource={dataSource}
                                 loading={loading}
-                                pagination={false}
+                                pagination={{
+                                    current: currentPage,
+                                    onChange: (page, pageSize = 25) => setCurrentPageFilter(page, pageSize),
+                                    pageSize,
+                                    total: totalStudies,
+                                }}
                             />
                         )}
                     </DataLayout>

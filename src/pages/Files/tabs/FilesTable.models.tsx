@@ -14,9 +14,9 @@ export const FilesModel = [
         movable: false,
         render: ({ node }: any) =>
             node.data_access.toLowerCase() === 'controled' ? (
-                <MdLockOutline className="files-table-locks files-table-lock" />
+                <MdLockOutline className="table-locks table-lock" />
             ) : (
-                <MdLockOpen className="files-table-locks files-table-lock-open" />
+                <MdLockOpen className="table-locks table-lock-open" />
             ),
         sortDirection: ['ascend', 'descend'],
         sorter: {
@@ -24,7 +24,7 @@ export const FilesModel = [
                 a.node.data_access.localeCompare(b.node.data_access),
             multiple: 1,
         },
-        title: <MdLock className="files-table-locks" />,
+        title: <MdLock className="table-locks" />,
         translate: 'Controlled',
     },
     {

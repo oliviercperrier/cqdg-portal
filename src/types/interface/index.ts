@@ -11,5 +11,9 @@ export interface ITableColumnItem {
 export interface ITablePage {
     loading: boolean;
     data: any;
+    total: number;
+    model: any;
+    extraActions?: (selectedRows: string[]) => React.ReactNode;
+    tableKey: string;
     setCurrentPage: (filters: IPageFilterState) => void;
 }

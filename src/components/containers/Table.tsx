@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { MdInsertDriveFile, MdSave } from 'react-icons/md';
+import { AiOutlineClose } from 'react-icons/ai';
 import { useQuery } from '@apollo/client';
-import CountWithIcon, { CountWithIconTypeEnum } from '@ferlab/ui/core/components/labels/CountWithIcon';
-import get from 'lodash/get';
+import StackLayout from '@ferlab/ui/core/layout/StackLayout';
+import { Button } from 'antd';
+import isEqual from 'lodash/isEqual';
 
-import SaveSets from 'components/functionnal/SaveSets';
 import TableActions from 'components/functionnal/TableActions';
 import { TableContent } from 'components/functionnal/TableContent';
 import ContentSeparator from 'components/layouts/ContentSeparator';
@@ -15,91 +15,96 @@ import { GET_TABLE_COLUMNS } from 'store/queries/tables';
 import { ITableColumnItem, ITablePage } from 'types/interface';
 import { formatToTSV } from 'utils/download';
 import { useFilters } from 'utils/filters/useFilters';
-import { EFileInputType, formatFileSize } from 'utils/formatFileSize';
-import { Hits } from 'utils/graphql/query';
 import { usePagination } from 'utils/pagination/usePagination';
 
-import { FilesModel } from './FilesTable.models';
+import styles from './Table.module.scss';
 
-import './FilesTable.scss';
-
-const tableKey = 'files-tabs-file';
-
-const FilesTable: React.FC<ITablePage> = ({ data, loading, setCurrentPage }) => {
+const FilesTable: React.FC<ITablePage> = ({
+    data,
+    extraActions = null,
+    loading,
+    model,
+    setCurrentPage,
+    tableKey,
+    total,
+}) => {
     const [selectedRow, setSelectedRow] = useState<string[]>([]);
     const { filters } = useFilters();
     const { currentPage, pageFilter, pageSize, setCurrentPageFilter } = usePagination(filters);
-    const { data: tablesData } = useQuery<any>(GET_TABLE_COLUMNS, {
-        variables: { default: FilesModel, key: tableKey },
-    });
 
+    const [showingData, setShowingData] = useState({ lowerRange: 1, upperRange: pageSize });
+    const { data: tablesData } = useQuery<any>(GET_TABLE_COLUMNS, {
+        variables: { default: model, key: tableKey },
+    });
     useEffect(() => {
         setCurrentPage(pageFilter);
     }, [pageFilter]);
 
-    const filesData = get(data, `File.${Hits.COLLECTION}`, []);
-    const dataSource = filesData.map((data: any) => ({
-        ...data,
-        key: data.node.file_id,
-    }));
-    const totalFiles = get(data, `File.${Hits.ITEM}.total`, 0);
-    const totalSizes = get(data, `File.aggregations.file_size.stats.sum`, 0);
-    const fileSizes = formatFileSize(totalSizes, { output: 'object' }, EFileInputType.MB) as Record<string, any>;
     const filteredColumns = tablesData.tableColumns.filter((item: ITableColumnItem) => !item.hidden);
     return (
         <DataLayout
             actions={
                 <ContentSeparator>
-                    <SaveSets
-                        Icon={<MdInsertDriveFile />}
-                        dictionary={{ labelType: t('global.files') }}
-                        selectedIds={selectedRow}
-                        total={totalFiles}
-                        type="saveSetsFile"
-                    />
+                    {extraActions && extraActions(selectedRow)}
                     <TableActions
-                        downloadData={formatToTSV(filteredColumns, dataSource)}
+                        downloadData={formatToTSV(filteredColumns, data)}
                         onCheckBoxChange={(items) => {
                             setTableColumn(tableKey, items);
                         }}
                         onSortingChange={(items) => {
                             setTableColumn(tableKey, items);
                         }}
-                        restoreDefault={() => setTableColumn(tableKey, FilesModel)}
+                        restoreDefault={() => setTableColumn(tableKey, model)}
                         sortableList={tablesData.tableColumns}
                     />
                 </ContentSeparator>
             }
-            className="files-content"
+            className={styles.container}
             summary={
-                <ContentSeparator className="data-summary">
-                    <CountWithIcon
-                        Icon={<MdInsertDriveFile />}
-                        label={t('global.files')}
-                        labelClassName="data-label"
-                        total={totalFiles.toLocaleString()}
-                        type={CountWithIconTypeEnum.Inline}
-                    />
-                    <CountWithIcon
-                        Icon={<MdSave />}
-                        label={fileSizes.symbol}
-                        labelClassName="data-label"
-                        total={fileSizes.value}
-                        type={CountWithIconTypeEnum.Inline}
-                    />
+                <ContentSeparator className={styles.summary}>
+                    <StackLayout>
+                        {selectedRow.length > 0 ? (
+                            <>
+                                <span className={styles.bold}>{selectedRow.length}</span>
+                                <span className={styles.spacing}>{t('global.tables.selected')}</span>
+                                <Button
+                                    className={styles.selectedItems}
+                                    icon={<AiOutlineClose />}
+                                    onClick={() => setSelectedRow([])}
+                                    size="small"
+                                    type="primary"
+                                />
+                            </>
+                        ) : (
+                            <>
+                                <span className={styles.bold}>
+                                    {showingData.lowerRange}-{showingData.upperRange}
+                                </span>
+                                <span className={styles.spacing}>{t('global.tables.showing')}</span>
+                                <span className={styles.bold}>{total}</span>
+                            </>
+                        )}
+                    </StackLayout>
                 </ContentSeparator>
             }
         >
             <TableContent
                 className="files-table"
                 columns={filteredColumns}
-                dataSource={dataSource}
+                dataSource={data}
                 loading={loading}
                 pagination={{
                     current: currentPage,
                     onChange: (page, pageSize = 25) => setCurrentPageFilter(page, pageSize),
                     pageSize,
-                    total: totalFiles,
+                    showTotal: (_, range) => {
+                        const newTotal = { lowerRange: range[0], upperRange: range[1] };
+                        if (!isEqual(newTotal, showingData)) {
+                            setShowingData({ lowerRange: range[0], upperRange: range[1] });
+                        }
+                        return null;
+                    },
+                    total,
                 }}
                 rowSelection={{
                     onSelect: (record, selected) => {

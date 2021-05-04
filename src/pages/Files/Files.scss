@@ -1,11 +1,14 @@
 @import '~@ferlab/style/themes/cqdg/colors';
 .file-repo {
-    &__graph-content {
-        margin-bottom: 1.6rem;
-    }
-
     &__query-builder {
-        margin-bottom: 1.6rem;
+        margin-bottom: 2.4rem;
+    }
+    &__summary{
+        margin-bottom: 2.4rem;
+        &__content {
+            justify-content: space-between;
+            padding: 0 8rem;
+        }
     }
 
     .tabs-container {
@@ -27,7 +30,24 @@
                     margin-right: 1rem;
                 }    
             }
+
+
+            .table-locks, .table-lock {
+                vertical-align: middle;
+            }
+        
+            .table-lock {
+                color: $red-6;
+            }
+        
+            .table-lock-open {
+                color: $lime-7;
+            }    
+            
+            .clinical-download {
+                margin-right: .8rem;
+                height: 2.4rem;            
+            }
         }
-    
     }
 }

@@ -5,10 +5,14 @@ import { addFilter } from 'utils/filters/manipulator';
 
 const StudyModel = [
     {
-        dataIndex: ['node', 'study_id_keyword'],
         hidden: false,
         id: 'study_id_keyword',
         movable: true,
+        render: ({ node }: any) => (
+            <InternalLink params={{ id: node.study_id_keyword }} path={Routes.STUDY}>
+                {node.name}
+            </InternalLink>
+        ),
         title: t('facet.study.study_id_keyword'),
     },
     {

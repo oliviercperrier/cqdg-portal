@@ -23,8 +23,8 @@ const filters: IFilterModel[] = [
     },
     {
         config: {
-            max: 0,
-            min: 0,
+            max: undefined,
+            min: undefined,
             rangeTypes: [
                 {
                     key: 'years',
@@ -41,8 +41,8 @@ const filters: IFilterModel[] = [
     },
     {
         config: {
-            max: 0,
-            min: 0,
+            max: undefined,
+            min: undefined,
             rangeTypes: [
                 {
                     key: 'years',
