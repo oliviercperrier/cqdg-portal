@@ -117,8 +117,7 @@
         "actions": {
             "manifest": "Manifeste",
             "access": "Demande d'accès",
-            "link.summary.study": "Voir cette étude dans le répertoire",
-            "link.summary.donor": "Voir ce donneur dans le répertoire"
+            "link.summary": "Voir dans le répertoire"
         },
         "title": {
             "summary": "Résumé",

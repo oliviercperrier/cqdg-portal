@@ -38,7 +38,6 @@ const Study: React.FC<RouteComponentProps<any>> = ({ match: { params } }) => {
         return <Spin />;
     }
     const studyData = result.Study.hits.edges[0].node;
-    //console.log(studyData);
     const fileSizeSummary = result.File.aggregations.file_size.stats.sum;
     const fileSizes = formatFileSize(fileSizeSummary, { output: 'object' }, EFileInputType.MB) as Record<string, any>;
     return (
@@ -90,7 +89,7 @@ const Study: React.FC<RouteComponentProps<any>> = ({ match: { params } }) => {
                             {t('entity.actions.link.summary')}
                         </InternalLink>
                     }
-                    title={t('entity.title.summary.study')}
+                    title={t('entity.title.summary')}
                 >
                     <DescriptionList>
                         <ListItem label={t(`facet.study_id`)}>{studyData.study_id_keyword}</ListItem>

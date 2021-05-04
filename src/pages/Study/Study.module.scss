@@ -1,3 +1,5 @@
+@import '~@ferlab/style/themes/cqdg/colors';
+
 .container {
     max-width: 1440px;
     margin: 0 auto;
@@ -12,14 +14,16 @@
             grid-template-areas: 
             "summary data"
             "summary access"
+            "summary ."
             "clinical category"
             "experimental category"
             "experimental .";
         }
         @media screen and (min-width: 1000px) and (max-width: 1099px) {
             grid-template-areas: 
-            "summary data"
+            "data data"
             "summary access"
+            "summary ."
             "clinical clinical"
             "category category"
             "experimental experimental";
@@ -66,6 +70,7 @@
         cursor: default;
         width: 2.4rem;
         height: 2.4rem;
+        color: $gray-7;
     }
 
     .button {

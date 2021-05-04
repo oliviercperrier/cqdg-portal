@@ -75,7 +75,7 @@ const Study: React.FC<RouteComponentProps<any>> = ({ match: { params } }) => {
                     className={`${styles.summary} ant-card-body-small`}
                     extra={
                         <InternalLink filters={filters} path={Routes.FILES} query={{ searchTableTab: 'donors' }}>
-                            {t('entity.actions.link.summary.donor')}
+                            {t('entity.actions.link.summary')}
                         </InternalLink>
                     }
                     title={t('entity.title.summary')}
@@ -100,6 +100,36 @@ const Study: React.FC<RouteComponentProps<any>> = ({ match: { params } }) => {
                         </ListItem>
                         <ListItem label={t(`facet.creation_date`)}>27/04/2021</ListItem>
                     </DescriptionList>
+                    <Card
+                        bordered={false}
+                        className={`${styles.clinical} ant-inner-card-small`}
+                        title={t('entity.title.clinical')}
+                    >
+                        <List
+                            dataSource={[
+                                'Diagnosis',
+                                'Phenotype',
+                                'Exposure',
+                                'Treatment',
+                                'Follow-up (cancer)',
+                                'Family Relationship',
+                                'Family History',
+                                'Biospecimens',
+                            ]}
+                            grid={{ gutter: 16 }}
+                            renderItem={(item) => (
+                                <List.Item>
+                                    <Badge
+                                        format={EFormat.ICON}
+                                        size={ESize.SMALL}
+                                        type={getRandom(2) === 1 ? EType.SUCCESS : EType.ERROR}
+                                    >
+                                        {item}
+                                    </Badge>
+                                </List.Item>
+                            )}
+                        />
+                    </Card>
                 </Card>
                 <Card className={`${styles.access} ant-card-body-small`} title={t('entity.title.access')}>
                     <DescriptionList>
@@ -112,32 +142,7 @@ const Study: React.FC<RouteComponentProps<any>> = ({ match: { params } }) => {
                         <ListItem label={t(`global.access_authority`)}>data-access@rhmds.ca</ListItem>
                     </DescriptionList>
                 </Card>
-                <Card className={`${styles.clinical} ant-card-body-small`} title={t('entity.title.clinical')}>
-                    <List
-                        dataSource={[
-                            'Diagnosis',
-                            'Phenotype',
-                            'Exposure',
-                            'Treatment',
-                            'Follow-up (cancer)',
-                            'Family Relationship',
-                            'Family History',
-                            'Biospecimens',
-                        ]}
-                        grid={{ column: 2 }}
-                        renderItem={(item) => (
-                            <List.Item>
-                                <Badge
-                                    format={EFormat.ICON}
-                                    size={ESize.SMALL}
-                                    type={getRandom(2) === 1 ? EType.SUCCESS : EType.ERROR}
-                                >
-                                    {item}
-                                </Badge>
-                            </List.Item>
-                        )}
-                    />
-                </Card>
+
                 <Card className={`${styles.category}`} title={t('entity.title.categories')}>
                     <TableContent
                         columns={[

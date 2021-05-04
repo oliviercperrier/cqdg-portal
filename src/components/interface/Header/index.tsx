@@ -7,7 +7,7 @@ import { Button, Divider } from 'antd';
 import Locale from 'components/functionnal/Locale';
 import DatabaseIcon from 'components/interface/Icon/Database';
 import ExternalIcon from 'components/interface/Icon/ExternalLink';
-import StorageIcon from 'components/interface/Icon/Storage';
+import StudyIcon from 'components/interface/Icon/Study';
 import { t } from 'locales/translate';
 import { isAuthenticated } from 'providers/Keycloak/keycloak';
 
@@ -34,7 +34,7 @@ const Header: React.FC<IHeader> = ({ className = '', isNavActive = true }) => {
                             className={`ant-btn menu-item ${location.pathname.includes('/studies') ? '--active' : ''}`}
                             to="/studies"
                         >
-                            <StorageIcon className="menu-item-icon" />
+                            <StudyIcon className="menu-item-icon" colored={false} size={18} />
                             {t('nav.studies')}
                         </Link>
                         <Link

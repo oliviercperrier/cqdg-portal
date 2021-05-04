@@ -14,14 +14,15 @@
             grid-template-areas: 
             "summary data"
             "summary access"
-            "clinical category"
-            "experimental ."
+            "summary ."
+            "experimental category"
+            ". category"
         }
         @media screen and (min-width: 1000px) and (max-width: 1099px) {
             grid-template-areas: 
-            "summary data"
+            "data data"
             "summary access"
-            "clinical clinical"
+            "summary ."
             "category category"
             "experimental experimental";
         }
@@ -31,7 +32,6 @@
             "data"
             "summary"
             "access"
-            "clinical"
             "category"
             "experimental";
         }
@@ -43,8 +43,6 @@
             grid-area: access;
         }
         .clinical {
-            grid-area: clinical;
-
             .icon-close {
                 color: $red-6;
             }
@@ -74,6 +72,7 @@
         cursor: default;
         width: 2.4rem;
         height: 2.4rem;
+        color: $gray-7;
     }
 
     .button {

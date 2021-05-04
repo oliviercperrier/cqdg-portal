@@ -19,8 +19,6 @@ import CardContainerNotched from 'components/layouts/Card/CardContainerNotched';
 import QueryLayout from 'layouts/Query';
 import { t } from 'locales/translate';
 import SideBarContent from 'pages/Files/filters/SideBarContent';
-import DonorsTable from 'pages/Files/tabs/DonorsTable';
-import FilesTable from 'pages/Files/tabs/FilesTable';
 import Summary from 'pages/Files/tabs/Summary';
 import { getQueryBuilderCache, setQueryBuilderCache } from 'store/cache/queryBuilder';
 import { FILE_PAGE_DATA } from 'store/queries/files/page';
