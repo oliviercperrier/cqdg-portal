@@ -43,12 +43,6 @@ export const FILE_PAGE_DATA = gql`
                 }
             }
             pies: aggregations(filters: $fileFilters, aggregations_filter_themselves: true) {
-                study__short_name_keyword {
-                    buckets {
-                        doc_count
-                        key
-                    }
-                }
                 data_category {
                     buckets {
                         doc_count
@@ -128,6 +122,20 @@ export const FILE_PAGE_DATA = gql`
             }
         }
         Study {
+            pies: aggregations(filters: $studyFilters, aggregations_filter_themselves: true) {
+                domain {
+                    buckets {
+                        doc_count
+                        key
+                    }
+                }
+                population {
+                    buckets {
+                        doc_count
+                        key
+                    }
+                }
+            }
             hits(filters: $studyFilters) {
                 total
             }
@@ -269,20 +277,6 @@ export const FILE_PAGE_DATA = gql`
                         key
                     }
                 }
-                diagnoses__mondo_term_keyword {
-                    #TODO: Aggregate Number of donors (by study.short_name)
-                    buckets {
-                        doc_count
-                        key
-                    }
-                }
-                phenotypes__hpo_category_keyword {
-                    #TODO: Aggregate Number of donors (by study.short_name)
-                    buckets {
-                        doc_count
-                        key
-                    }
-                }
                 gender {
                     buckets {
                         doc_count
@@ -295,13 +289,30 @@ export const FILE_PAGE_DATA = gql`
                         key
                     }
                 }
-                #TODO: Aggregate Number of donors (by study.short_name)
-                #diagnoses__age_at_diagnosis {
-                #    buckets {
-                #        doc_count
-                #        key
-                #    }
-                #}
+                familyRelationships__family_type {
+                    buckets {
+                        doc_count
+                        key
+                    }
+                }
+                diagnoses__icd_category_keyword {
+                    buckets {
+                        doc_count
+                        key
+                    }
+                }
+                phenotypes__hpo_category_keyword {
+                    buckets {
+                        doc_count
+                        key
+                    }
+                }
+                vital_status {
+                    buckets {
+                        doc_count
+                        key
+                    }
+                }
             }
         }
     }

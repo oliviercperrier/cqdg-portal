@@ -4,6 +4,7 @@ import { Pie, PieSvgProps, ResponsivePie } from '@nivo/pie';
 
 import ChartsIcon from 'components/interface/Icon/Charts';
 import { t } from 'locales/translate';
+import { getCommonColors } from 'utils/formatChartData';
 
 import { IChartProps } from './types';
 
@@ -14,6 +15,7 @@ interface IPieChartProps extends IChartProps, Omit<PieSvgProps<any>, 'height' | 
     width?: number;
     height?: number;
 }
+const colors = getCommonColors();
 const PieChart: React.FC<IPieChartProps> = ({
     className = '',
     data,
@@ -24,20 +26,7 @@ const PieChart: React.FC<IPieChartProps> = ({
     ...rest
 }) => {
     const commonProps = {
-        colors: [
-            '#A6CEE3',
-            '#1F78B4',
-            '#B2DF8A',
-            '#33A02C',
-            '#FB9A99',
-            '#E31A1C',
-            '#FDBF6F',
-            '#FF7F00',
-            '#CAB2D6',
-            '#6A3D9A',
-            '#FFFF99',
-            '#B15928',
-        ],
+        colors,
         enableRadialLabels: false,
         enableSliceLabels: false,
         theme: {

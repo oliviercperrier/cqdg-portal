@@ -2,19 +2,35 @@
 
 .container {
     height: 100%;
-
     .title {
         color: $gray-8;
     }
-
-    .tooltipColor {
-        display: inline-block;
-        margin-right: .5rem;
-        width: 12px;
-        height: 12px;
-    }
-
-    .tooltipValue {
-        font-weight: 600;
+    .chartContainer {
+        position: relative;
+        color: $gray-7;
+        font-size: 1.2rem;
+        
+        .titleLeftBar {
+            position: absolute;
+            left: -10px;
+            top: 50%;
+            transform: translate(-50%, -50%) rotate(-90deg);
+        }    
+        .titleBottomBar {
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }    
+        .tooltipColor {
+            display: inline-block;
+            margin-right: .5rem;
+            width: 12px;
+            height: 12px;
+        }
+    
+        .tooltipValue {
+            font-weight: 600;
+        }    
     }
 }

@@ -109,7 +109,7 @@ const FileRepo: React.FC<RouteComponentProps<any>> = ({ history }) => {
                                 }
                             >
                                 <StackLayout fitContent flexContent vertical>
-                                    <Summary data={result} />
+                                    <Summary data={result} loading={loading} />
                                 </StackLayout>
                             </TabPane>
                             <TabPane

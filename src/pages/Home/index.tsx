@@ -25,7 +25,7 @@ import CardContent from 'components/layouts/Card/CardContent';
 import { t } from 'locales/translate';
 import { isAuthenticated } from 'providers/Keycloak/keycloak';
 import { getHomeStats } from 'services/api';
-import { formatPieChart } from 'utils/formatChartData';
+import { formatChartData } from 'utils/formatChartData';
 import { EFileInputType, formatFileSize } from 'utils/formatFileSize';
 import { Hits } from 'utils/graphql/query';
 import { getDocsEnvDomain } from 'utils/url/domain';
@@ -136,22 +136,10 @@ const Home = (): React.ReactElement => {
                                 <div className="graph-content">
                                     <ResponsiveBar
                                         axisLeft={null}
-                                        data={formatPieChart(
+                                        data={formatChartData(
                                             get(data, 'Donor.aggregations.diagnoses__icd_category_keyword.buckets', []),
                                             'key',
-                                            'doc_count',
-                                            [
-                                                '#D06D5E',
-                                                '#36CFC9',
-                                                '#F759AB',
-                                                '#FFB600',
-                                                '#FF7A45',
-                                                '#ADC6FF',
-                                                '#08979C',
-                                                '#00AEEF',
-                                                '#FF9C6E',
-                                                '#FF85C0',
-                                            ]
+                                            'doc_count'
                                         )}
                                         enableLabel={false}
                                         layout="horizontal"
@@ -171,7 +159,7 @@ const Home = (): React.ReactElement => {
                             <CardContent cardType="stack">
                                 <div className="graph-content">
                                     <ResponsivePie
-                                        data={formatPieChart(
+                                        data={formatChartData(
                                             get(data, 'Study.aggregations.domain.buckets', []),
                                             'key',
                                             'doc_count'
@@ -197,26 +185,14 @@ const Home = (): React.ReactElement => {
                                 <div className="graph-content">
                                     <ResponsiveBar
                                         axisLeft={null}
-                                        data={formatPieChart(
+                                        data={formatChartData(
                                             get(
                                                 data,
                                                 'Donor.aggregations.phenotypes__hpo_category_keyword.buckets',
                                                 []
                                             ),
                                             'key',
-                                            'doc_count',
-                                            [
-                                                '#D06D5E',
-                                                '#36CFC9',
-                                                '#F759AB',
-                                                '#FFB600',
-                                                '#FF7A45',
-                                                '#ADC6FF',
-                                                '#08979C',
-                                                '#00AEEF',
-                                                '#FF9C6E',
-                                                '#FF85C0',
-                                            ]
+                                            'doc_count'
                                         )}
                                         enableLabel={false}
                                         layout="horizontal"
