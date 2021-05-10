@@ -145,10 +145,6 @@ const Home = (): React.ReactElement => {
                                         layout="horizontal"
                                         margin={{ bottom: 50, left: 5, right: 20, top: 0 }}
                                         padding={0.3}
-                                        theme={{
-                                            fontSize: 10,
-                                            textColor: '#486F90',
-                                        }}
                                         title={t('home.graphs.graph1.title')}
                                         titleClassName="graph-title"
                                     />
@@ -164,16 +160,10 @@ const Home = (): React.ReactElement => {
                                             'key',
                                             'doc_count'
                                         )}
-                                        enableRadialLabels={false}
-                                        enableSliceLabels={false}
                                         legends={[
                                             { anchor: 'right', direction: 'column', itemHeight: 18, itemWidth: 50 },
                                         ]}
                                         margin={{ bottom: 30, left: -100, right: 100, top: 10 }}
-                                        theme={{
-                                            fontSize: 10,
-                                            textColor: '#486F90',
-                                        }}
                                         title={t('home.graphs.graph2.title')}
                                         titleClassName="graph-title"
                                     />

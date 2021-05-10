@@ -27,8 +27,8 @@ const PieChart: React.FC<IPieChartProps> = ({
 }) => {
     const commonProps = {
         colors,
-        enableRadialLabels: false,
-        enableSliceLabels: false,
+        enableArcLabels: false,
+        enableArcLinkLabels: false,
         theme: {
             fontSize: 10,
             textColor: '#486F90',
