@@ -23,7 +23,7 @@ const SideBar: React.FC<ISidebar> = ({ children, className = '' }) => {
                 </Button>
             </div>
             <div className="side-panel-content">{children}</div>
-            <FooterCompact />
+            {!isCollapsed && <FooterCompact />}
         </div>
     );
 };

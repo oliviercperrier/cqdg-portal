@@ -188,9 +188,31 @@
         }
     },
     "charts": {
+        "header": {
+            "demographic": "Profil Socio-Demographique",
+            "clinical": "Clinique",
+            "available.clinical": "Données clinique disponibles",
+            "available.genomic": "Données génomiques disponibles"
+        },
+        "sideTitle": {
+            "phenotypes.hpo_category_keyword": "Termes HPO",
+            "diagnoses.icd_category_keyword": "Termes CIM-10"
+        },
+        "bottomTitle": {
+            "available.clinical": "Données cliniques"
+        },
+        "available.clinical": "Nombre de donneurs par type de données cliniques",
+        "phenotypes.hpo_category_keyword": "Nombre de donneurs par Anomalie phénotypique (HPO)",
+        "diagnoses.icd_category_keyword": "Nombre de donneurs par Catégorie de diagnostic (CIM-10)",
+        "vital_status": "Status vital",
+        "domain": "Études par domaine",
+        "population": "Études par type population",
+        "study.short_name_keyword": "Donneurs par étude",
+        "familyRelationships.family_type": "Composition familiale",
         "study": "Étude",
         "data_category": "Catégorie de données",
         "data_type": "Type de données",
+        "experimental_strategy": "Stratégie expérimentale",
         "file_format": "Format de fichiers",
         "disease_type": "Donneurs par type de maladie",
         "phenotype_category": "Donneurs par catégorie de phénotype",
