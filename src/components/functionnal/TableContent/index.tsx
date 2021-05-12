@@ -25,6 +25,7 @@ export const TableContent: React.FC<TTableContent> = ({ className = '', paginati
             onHeaderRow={() => ({ className: 'table-header' })}
             pagination={page}
             rowClassName={(_, index) => (index % 2 === 0 ? 'odd' : 'even')}
+            showSorterTooltip={false}
             size="small"
             {...rest}
         />
