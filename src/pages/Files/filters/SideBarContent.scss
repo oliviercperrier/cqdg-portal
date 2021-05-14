@@ -2,7 +2,10 @@
     flex-grow: 1;
     font-size: 1.2rem;
     overflow: hidden;
-    padding: 0 1.6rem;
+
+    .ant-tabs-nav {
+        margin: 0 1.6rem;
+    }
 
     &__panes {
         height: 100%;
@@ -18,7 +21,7 @@
         &__content {
             height: 100%;
 
-            padding: 2.4rem .4rem 2.4rem 0;
+            padding: 2.4rem 1.6rem;
 
             > *:not(:last-child) {
                 margin-bottom: 1.6rem;

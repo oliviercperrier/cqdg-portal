@@ -11,8 +11,8 @@
     transition: .5s; 
 
     &:not(&-collapsed) {
-        max-width: 312px;
-        min-width: 312px;
+        max-width: 420px;
+        min-width: 320px;
         > :first-child {
             margin-bottom: 1.6rem;
         }    
