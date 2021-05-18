@@ -1,7 +1,5 @@
 .side-panel-content {
-    flex-grow: 1;
     font-size: 1.2rem;
-    overflow: hidden;
 
     .ant-tabs-nav {
         margin: 0 1.6rem;
@@ -20,7 +18,7 @@
 
         &__content {
             height: 100%;
-
+            overflow-y: auto;
             padding: 2.4rem 1.6rem;
 
             > *:not(:last-child) {

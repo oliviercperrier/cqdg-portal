@@ -60,7 +60,7 @@ const FileRepo: React.FC<RouteComponentProps<any>> = ({ history }) => {
 
     return (
         <QueryLayout className="file-repo" sidebar={<SideBarContent data={result} history={history} />}>
-            <StackLayout className="file-repo__wrapper" fitContent flexContent vertical>
+            <div className="file-repo__wrapper">
                 <QueryBuilder
                     IconTotal={<MdInsertDriveFile size={18} />}
                     className="file-repo__query-builder"
@@ -74,7 +74,7 @@ const FileRepo: React.FC<RouteComponentProps<any>> = ({ history }) => {
                     onUpdate={(state) => setQueryBuilderCache('file-repo', state)}
                     total={filesTotal}
                 />
-                <StackLayout className="file-repo__summary" fitContent vertical>
+                <div className="file-repo__summary">
                     <CardContainerNotched type="shadow">
                         <StackLayout className="file-repo__summary__content">
                             <CountWithIcon Icon={<StudyIcon />} label={t('global.studies.title')} total={studyTotal} />
@@ -87,119 +87,113 @@ const FileRepo: React.FC<RouteComponentProps<any>> = ({ history }) => {
                             />
                         </StackLayout>
                     </CardContainerNotched>
-                </StackLayout>
-                <StackLayout fitContent flexContent vertical>
-                    <StackLayout fitContent flexContent vertical>
-                        <Tabs
-                            activeKey={readQueryParam(tabKey, {
-                                defaultValue: 'files',
-                                whiteList: ['files', 'donors', 'summary'],
-                            })}
-                            className="tabs-container"
-                            onChange={onTabChange}
-                            type="card"
+                </div>
+                <div>
+                    <Tabs
+                        activeKey={readQueryParam(tabKey, {
+                            defaultValue: 'files',
+                            whiteList: ['files', 'donors', 'summary'],
+                        })}
+                        className="tabs-container"
+                        onChange={onTabChange}
+                        type="card"
+                    >
+                        <TabPane
+                            className="tabs-container__panes"
+                            key="summary"
+                            tab={
+                                <div className="tabs-container__panes__tab">
+                                    <AiFillPieChart className="icon" /> {t('repo.tabs.summary')}
+                                </div>
+                            }
                         >
-                            <TabPane
-                                className="tabs-container__panes"
-                                key="summary"
-                                tab={
-                                    <div className="tabs-container__panes__tab">
-                                        <AiFillPieChart className="icon" /> {t('repo.tabs.summary')}
-                                    </div>
-                                }
-                            >
-                                <StackLayout fitContent flexContent vertical>
-                                    <Summary data={result} loading={loading} />
-                                </StackLayout>
-                            </TabPane>
-                            <TabPane
-                                className="tabs-container__panes"
-                                key="files"
-                                tab={
-                                    <div className="tabs-container__panes__tab">
-                                        <MdInsertDriveFile className="icon" />
-                                        {t('global.files.title')}
-                                    </div>
-                                }
-                            >
-                                <StackLayout fitContent flexContent vertical>
-                                    <TableContainer
-                                        data={get(result, `File.${Hits.COLLECTION}`, []).map((data: any) => ({
-                                            ...data,
-                                            key: data.node.file_id,
-                                        }))}
-                                        extraActions={(selectedRow) => (
-                                            <SaveSets
-                                                Icon={<MdInsertDriveFile />}
-                                                dictionary={{ labelType: t('global.files') }}
-                                                selectedIds={selectedRow}
-                                                total={filesTotal}
-                                                type="saveSetsFile"
-                                            />
-                                        )}
-                                        loading={loading}
-                                        model={FilesModel}
-                                        setCurrentPage={(filters) =>
-                                            setPageOffsetData((s) => ({
-                                                ...s,
-                                                fileFirst: filters.first,
-                                                fileOffset: filters.offset,
-                                            }))
-                                        }
-                                        tableKey="files-tabs-file"
+                            <StackLayout fitContent flexContent vertical>
+                                <Summary data={result} loading={loading} />
+                            </StackLayout>
+                        </TabPane>
+                        <TabPane
+                            className="tabs-container__panes"
+                            key="files"
+                            tab={
+                                <div className="tabs-container__panes__tab">
+                                    <MdInsertDriveFile className="icon" />
+                                    {t('global.files.title')}
+                                </div>
+                            }
+                        >
+                            <TableContainer
+                                data={get(result, `File.${Hits.COLLECTION}`, []).map((data: any) => ({
+                                    ...data,
+                                    key: data.node.file_id,
+                                }))}
+                                extraActions={(selectedRow) => (
+                                    <SaveSets
+                                        Icon={<MdInsertDriveFile />}
+                                        dictionary={{ labelType: t('global.files') }}
+                                        selectedIds={selectedRow}
                                         total={filesTotal}
+                                        type="saveSetsFile"
                                     />
-                                </StackLayout>
-                            </TabPane>
-                            <TabPane
-                                className="tabs-container__panes"
-                                key="donors"
-                                tab={
-                                    <div className="tabs-container__panes__tab">
-                                        <MdPeople className="icon" />
-                                        {t('global.donors.title')}
-                                    </div>
+                                )}
+                                loading={loading}
+                                model={FilesModel}
+                                setCurrentPage={(filters) =>
+                                    setPageOffsetData((s) => ({
+                                        ...s,
+                                        fileFirst: filters.first,
+                                        fileOffset: filters.offset,
+                                    }))
                                 }
-                            >
-                                <StackLayout fitContent flexContent vertical>
-                                    <TableContainer
-                                        data={get(result, `Donor.${Hits.COLLECTION}`, []).map((data: any) => ({
-                                            ...data,
-                                            key: data.node.submitter_donor_id,
-                                        }))}
-                                        extraActions={(selectedRow) => (
-                                            <>
-                                                <DownloadClinicalButton className="clinical-download" filters={filters}>
-                                                    <MdFileDownload size={16} />
-                                                    {t('global.tables.actions.clinical.data')}
-                                                </DownloadClinicalButton>
-                                                <SaveSets
-                                                    Icon={<MdPeople />}
-                                                    dictionary={{ labelType: t('global.donors') }}
-                                                    selectedIds={selectedRow}
-                                                    total={donorsTotal}
-                                                    type="saveSetsDonor"
-                                                />
-                                            </>
-                                        )}
-                                        loading={loading}
-                                        model={presetDonorsModel}
-                                        setCurrentPage={(filters) =>
-                                            setPageOffsetData((s) => ({
-                                                ...s,
-                                                donorFirst: filters.first,
-                                                donorOffset: filters.offset,
-                                            }))
-                                        }
-                                        tableKey="files-tabs-donor"
-                                        total={donorsTotal}
-                                    />
-                                </StackLayout>
-                            </TabPane>
-                        </Tabs>
-                    </StackLayout>
-                </StackLayout>
-            </StackLayout>
+                                tableKey="files-tabs-file"
+                                total={filesTotal}
+                            />
+                        </TabPane>
+                        <TabPane
+                            className="tabs-container__panes"
+                            key="donors"
+                            tab={
+                                <div className="tabs-container__panes__tab">
+                                    <MdPeople className="icon" />
+                                    {t('global.donors.title')}
+                                </div>
+                            }
+                        >
+                            <TableContainer
+                                data={get(result, `Donor.${Hits.COLLECTION}`, []).map((data: any) => ({
+                                    ...data,
+                                    key: data.node.submitter_donor_id,
+                                }))}
+                                extraActions={(selectedRow) => (
+                                    <>
+                                        <DownloadClinicalButton className="clinical-download" filters={filters}>
+                                            <MdFileDownload size={16} />
+                                            {t('global.tables.actions.clinical.data')}
+                                        </DownloadClinicalButton>
+                                        <SaveSets
+                                            Icon={<MdPeople />}
+                                            dictionary={{ labelType: t('global.donors') }}
+                                            selectedIds={selectedRow}
+                                            total={donorsTotal}
+                                            type="saveSetsDonor"
+                                        />
+                                    </>
+                                )}
+                                loading={loading}
+                                model={presetDonorsModel}
+                                setCurrentPage={(filters) =>
+                                    setPageOffsetData((s) => ({
+                                        ...s,
+                                        donorFirst: filters.first,
+                                        donorOffset: filters.offset,
+                                    }))
+                                }
+                                tableKey="files-tabs-donor"
+                                total={donorsTotal}
+                            />
+                        </TabPane>
+                    </Tabs>
+                </div>
+            </div>
         </QueryLayout>
     );
 };

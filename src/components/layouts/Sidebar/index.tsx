@@ -16,15 +16,15 @@ const SideBar: React.FC<ISidebar> = ({ children, className = '' }) => {
 
     const isCollapsedClassName = classNames({ 'side-panel-collapsed': isCollapsed });
     return (
-        <div className={`side-panel ${isCollapsedClassName} ${className}`}>
-            <div className="side-panel-header">
+        <aside className={`side-panel ${isCollapsedClassName} ${className}`}>
+            <section className="side-panel-header">
                 <Button onClick={() => setIsCollapsed(!isCollapsed)} type="text">
                     {isCollapsed ? <AiOutlineMenu size={24} /> : <AiOutlineMenuFold size={24} />}
                 </Button>
-            </div>
-            <div className="side-panel-content">{children}</div>
+            </section>
+            <section className="side-panel-content">{children}</section>
             {!isCollapsed && <FooterCompact />}
-        </div>
+        </aside>
     );
 };
 

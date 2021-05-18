@@ -1,15 +1,12 @@
 @import  '~@ferlab/style/themes/cqdg/mixins';
 
-#root {
-    display: flex;
-    height: 100vh;
-    flex-direction: column;
-}
-
 .layout-app {
+    display: grid;
+    grid-template-rows: min-content 1fr;
+    height: 100vh;
+
     &__content {
         background-color: $gray-3;
-        flex-grow: 1;
         overflow: hidden;
     }
 }

@@ -10,7 +10,7 @@ const Compact = () => {
     const intl = useIntl();
 
     return (
-        <div className={styles.container}>
+        <footer className={styles.container}>
             <Button className={styles.link} href="mailto:support@cqdg.ca" type="link">
                 {t('short_footer.info')}
             </Button>
@@ -32,7 +32,7 @@ const Compact = () => {
             >
                 CHU Sainte-Justine
             </Button>
-        </div>
+        </footer>
     );
 };
 
