@@ -57,24 +57,24 @@ const Study: React.FC<RouteComponentProps<any>> = ({ history }) => {
         <QueryLayout
             className={styles.container}
             sidebar={
-                <ScrollView className={styles.filters}>
+                <div className={styles.filters}>
                     <Filters />
-                </ScrollView>
+                </div>
             }
         >
-            <QueryBuilder
-                IconTotal={<MdAssignment size={18} />}
-                className="file-repo__query-builder"
-                currentQuery={filters}
-                dictionary={{ query: { facet: (key) => t(`facet.${key}`) } }}
-                enableSingleQuery
-                initialState={getQueryBuilderCache('study-repo')}
-                onChangeQuery={(_, query) => updateQueryParam(history, 'filters', query)}
-                onRemoveFacet={(query) => updateQueryFilters(history, query.content.field, [])}
-                onUpdate={(state) => setQueryBuilderCache('study-repo', state)}
-                total={totalStudies}
-            />
-            <StackLayout flexContent vertical>
+            <div className={styles.content}>
+                <QueryBuilder
+                    IconTotal={<MdAssignment size={18} />}
+                    className="file-repo__query-builder"
+                    currentQuery={filters}
+                    dictionary={{ query: { facet: (key) => t(`facet.${key}`) } }}
+                    enableSingleQuery
+                    initialState={getQueryBuilderCache('study-repo')}
+                    onChangeQuery={(_, query) => updateQueryParam(history, 'filters', query)}
+                    onRemoveFacet={(query) => updateQueryFilters(history, query.content.field, [])}
+                    onUpdate={(state) => setQueryBuilderCache('study-repo', state)}
+                    total={totalStudies}
+                />
                 <BorderedContainer grow>
                     <DataLayout
                         actions={
@@ -135,7 +135,7 @@ const Study: React.FC<RouteComponentProps<any>> = ({ history }) => {
                         )}
                     </DataLayout>
                 </BorderedContainer>
-            </StackLayout>
+            </div>
         </QueryLayout>
     );
 };

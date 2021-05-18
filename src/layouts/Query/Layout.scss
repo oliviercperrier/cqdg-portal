@@ -1,9 +1,8 @@
 .layout-query {
-    overflow: hidden;
+    display: grid;
+    grid-template-columns: auto 1fr;
     height: 100%;
-
     &__content {
-        padding: 1.6rem;
         overflow-y: auto;
     }
 }

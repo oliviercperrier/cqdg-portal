@@ -1,6 +1,5 @@
 import React from 'react';
 import { MdInsertDriveFile, MdPeople } from 'react-icons/md';
-import ScrollView from '@ferlab/ui/core/layout/ScrollView';
 import { Tabs } from 'antd';
 
 import { t } from 'locales/translate';
@@ -37,9 +36,9 @@ const SideBar: React.FC<ISidebarContent> = ({ data, history }) => {
                     </div>
                 }
             >
-                <ScrollView className="side-panel-content__panes__content" vertical>
+                <div className="side-panel-content__panes__content">
                     <FileFilters data={data} history={history} />
-                </ScrollView>
+                </div>
             </TabPane>
             <TabPane
                 key="donors"
@@ -50,9 +49,9 @@ const SideBar: React.FC<ISidebarContent> = ({ data, history }) => {
                     </div>
                 }
             >
-                <ScrollView className="side-panel-content__panes__content" vertical>
+                <div className="side-panel-content__panes__content">
                     <DonorFilters data={data} history={history} />
-                </ScrollView>
+                </div>
             </TabPane>
         </Tabs>
     );

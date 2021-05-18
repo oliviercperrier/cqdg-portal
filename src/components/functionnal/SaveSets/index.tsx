@@ -83,7 +83,7 @@ const getIds = async (
     return fileIds.map((item: any) => item.node.id);
 };
 
-const SaveSets: React.FunctionComponent<SaveSets> = ({ dictionary, Icon, selectedIds, total, type }) => {
+const SaveSets: React.FunctionComponent<SaveSets> = ({ dictionary, Icon, selectedIds = [], total, type }) => {
     const intl = useIntl();
 
     const [loading, setLoading] = useState(false);
@@ -196,7 +196,7 @@ const SaveSets: React.FunctionComponent<SaveSets> = ({ dictionary, Icon, selecte
                         <Menu.Item>
                             <StackLayout className={styles.totalContainer}>
                                 <div className={styles.text}>
-                                    {selectedIds ? selectedIds.length : total} {dictionary.labelType}
+                                    {selectedIds.length > 0 ? selectedIds.length : total} {dictionary.labelType}
                                 </div>
                                 <Tooltip overlay={t('global.savesets.warning')}>
                                     <AiOutlineInfoCircle />

@@ -4,11 +4,11 @@
     background-color: $gray-3;
     border-right: thin solid $gray-4;
     box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    transition: width 0.2s;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    transition: width 0.5s;
     z-index: 1;
-    transition: .5s; 
+    overflow: hidden;
 
     &:not(&-collapsed) {
         max-width: 420px;
@@ -18,7 +18,7 @@
         }    
     }
 
-    .side-panel-header {
+    &-header {
         flex-grow: 0;
         display: flex;
         justify-content: start;
@@ -31,11 +31,15 @@
         }
     }
 
+    &-content {
+        overflow: hidden;
+    }
+
     
-    .side-panel-footer {
+    &-footer {
         align-items: center;
-        border-top: thin solid #D8E1EB;
-        color: #486F90;
+        border-top: thin solid $gray-4;
+        color: $gray-7;
         display: flex;
         flex-grow: 0;
         flex-shrink: 0;

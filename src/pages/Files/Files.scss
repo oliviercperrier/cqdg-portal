@@ -1,10 +1,14 @@
 @import '~@ferlab/style/themes/cqdg/colors';
 .file-repo {
-    &__query-builder {
-        margin-bottom: 2.4rem;
+    &__wrapper {
+        display: grid;
+        grid-template-rows: min-content min-content 1fr;
+        gap: 2.4rem;
+        padding: 1.6rem;
+        min-height: 100%;
     }
+
     &__summary{
-        margin-bottom: 2.4rem;
         &__content {
             justify-content: space-between;
             padding: 0 8rem;
@@ -46,7 +50,8 @@
             
             .clinical-download {
                 margin-right: .8rem;
-                height: 2.4rem;            
+                height: 2.4rem;    
+                line-height: 1.2rem;        
             }
         }
     }
