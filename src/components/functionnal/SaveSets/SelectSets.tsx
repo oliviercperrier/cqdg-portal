@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { AiOutlineDown } from 'react-icons/ai';
 import StackLayout from '@ferlab/ui/core/layout/StackLayout';
-import { Select, Tag } from 'antd';
+import { Alert, Select, Tag } from 'antd';
 
 import ListItem from 'components/functionnal/SaveSets/ListItem';
+
+import styles from './SelectSets.module.scss';
 const { OptGroup, Option } = Select;
 
 interface ISelectSets {
@@ -20,8 +22,9 @@ interface IDataSaveSet {
     values: IItemListSaveSets[];
     indexName: string;
     dictionary?: {
-        groupTitle: React.ReactNode;
-        emptyValue: React.ReactNode;
+        groupTitle?: React.ReactNode;
+        emptyValueTitle: React.ReactNode;
+        emptyValueText: React.ReactNode;
     };
 }
 
@@ -47,6 +50,7 @@ const SelectSets: React.FunctionComponent<ISelectSets> = ({ data, dictionary, on
 
     const handleChange = (values: string[]) => {
         const selectedData: any = {};
+        data.forEach((item) => (selectedData[item.indexName] = []));
         values.forEach((value) => {
             Object.keys(aggData).forEach((key) => {
                 if (aggData[key].includes(value)) {
@@ -65,33 +69,48 @@ const SelectSets: React.FunctionComponent<ISelectSets> = ({ data, dictionary, on
         <StackLayout vertical>
             <label>{dictionary?.title || 'Select'}</label>
             <Select
+                listHeight={150}
                 maxTagCount="responsive"
                 mode="multiple"
-                onChange={(value: string[]) => handleChange(value)}
+                onChange={(value) => handleChange(value)}
                 placeholder={dictionary?.placeholder || 'placeholder'}
                 suffixIcon={<AiOutlineDown />}
                 tagRender={({ onClose, value }) => (
-                    <Tag closable onClose={onClose}>
+                    <Tag className={styles.tag} closable onClose={onClose}>
                         {value}
                     </Tag>
                 )}
                 value={currentValues}
             >
-                {data.map((dataSaveSet, i) => (
-                    <OptGroup key={i} label={dataSaveSet.dictionary?.groupTitle || 'Group Title'}>
-                        {dataSaveSet.values.length > 0 ? (
+                {data.map((dataSaveSet, i) => {
+                    const options =
+                        dataSaveSet.values.length > 0 ? (
                             dataSaveSet.values.map((item: any, i) => (
                                 <Option key={i} value={item.name}>
                                     <ListItem Icon={item.icon} label={item.name} total={item.count} />
                                 </Option>
                             ))
                         ) : (
-                            <Option disabled value="nothing">
-                                {dataSaveSet.dictionary?.emptyValue || 'No Data'}
+                            <Option disabled key={i} value="empty">
+                                <div className={styles.emptyDataContainer}>
+                                    <h3 className={styles.emptyDataTitle}>{dataSaveSet.dictionary?.emptyValueTitle}</h3>
+                                    <span className={styles.emptyDataText}>
+                                        {dataSaveSet.dictionary?.emptyValueText}
+                                    </span>
+                                </div>
                             </Option>
-                        )}
-                    </OptGroup>
-                ))}
+                        );
+
+                    if (dataSaveSet.dictionary?.groupTitle) {
+                        return (
+                            <OptGroup key={i} label={dataSaveSet.dictionary?.groupTitle}>
+                                {options}
+                            </OptGroup>
+                        );
+                    }
+
+                    return options;
+                })}
             </Select>
         </StackLayout>
     );

@@ -9,7 +9,7 @@ interface IItemList {
 }
 const ListItem: React.FunctionComponent<IItemList> = ({ Icon = null, label, total }) => (
     <span className={styles.listItem}>
-        {label}
+        <span>{label}</span>
         <span className={styles.listTotal}>
             {Icon}
             {total}

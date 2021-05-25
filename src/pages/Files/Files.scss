@@ -3,6 +3,7 @@
     &__wrapper {
         display: grid;
         grid-template-rows: min-content min-content 1fr;
+        grid-auto-rows: auto;
         gap: 2.4rem;
         padding: 1.6rem;
         min-height: 100%;

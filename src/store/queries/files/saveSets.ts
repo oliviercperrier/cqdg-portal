@@ -67,3 +67,12 @@ export const UPDATE_SAVE_SET = gql`
         }
     }
 `;
+
+export const DELETE_SAVE_SET = gql`
+    mutation DeleteSaveSet($id: Int!) {
+        saveSets(id: $id)
+            @rest(path: "/content/{args.id}", endpoint: "dataStorage", method: "DELETE", type: "SaveSets") {
+            content
+        }
+    }
+`;

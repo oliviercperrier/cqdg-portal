@@ -1,0 +1,27 @@
+@import '~@ferlab/style/themes/cqdg/colors';
+
+.manageSaveSet {
+    background: transparent;
+    border: none;
+    width: 100%;
+    padding: 0;
+    text-align: left;
+    outline: transparent;
+    display: flex;
+    align-items: center;
+    color: inherit;
+
+    &:hover, &:focus {
+        background: transparent;
+        border: none;
+        color: inherit;
+    }
+
+    .icon {
+        margin-right: .8rem;
+    }
+}
+
+.emptyText {
+    color: $gray-7;
+}

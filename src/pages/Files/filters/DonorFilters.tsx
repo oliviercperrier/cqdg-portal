@@ -53,24 +53,16 @@ const DonorFilters: React.FC<IDonorFilters> = ({ data, history }) => {
             <SelectSets
                 data={[
                     {
-                        dictionary: { emptyValue: t('global.empty'), groupTitle: t('global.donors.title') },
+                        dictionary: {
+                            emptyValueText: t('global.savesets.empty.description', { type: t('global.donors') }),
+                            emptyValueTitle: t('global.savesets.empty.title', { type: t('global.donors') }),
+                        },
                         indexName: 'savesets.donor',
                         selectedValues: getSubFilter('savesets.donor', filters) as string[],
                         values:
                             saveSetResults?.saveSetsDonor.map((item: any) => ({
                                 count: item.content.ids.length,
                                 icon: <MdPeople />,
-                                name: item.content.name,
-                            })) || [],
-                    },
-                    {
-                        dictionary: { emptyValue: t('global.empty'), groupTitle: t('global.files.title') },
-                        indexName: 'savesets.file',
-                        selectedValues: getSubFilter('savesets.file', filters) as string[],
-                        values:
-                            saveSetResults?.saveSetsFile.map((item: any) => ({
-                                count: item.content.ids.length,
-                                icon: <MdInsertDriveFile />,
                                 name: item.content.name,
                             })) || [],
                     },

@@ -7,6 +7,9 @@
         .text {
             font-size: 1.2rem;
         }
+        .warningText {
+            color: $red-6;
+        }
     }
     .divider {
         background: $gray-4;
@@ -44,6 +47,11 @@
 
 .select {
     width: 100%;
+}
+
+.tooltip {
+    white-space: pre;
+    width: fit-content;
 }
 
 .listItem {

@@ -56,18 +56,10 @@ const FileFilters: React.FC<IFileFilters> = ({ data, history }) => {
             <SelectSets
                 data={[
                     {
-                        dictionary: { emptyValue: t('global.empty'), groupTitle: t('global.donors.title') },
-                        indexName: 'savesets.donor',
-                        selectedValues: getSubFilter('savesets.donor', filters) as string[],
-                        values:
-                            saveSetResults?.saveSetsDonor.map((item: any) => ({
-                                count: item.content.ids.length,
-                                icon: <MdPeople />,
-                                name: item.content.name,
-                            })) || [],
-                    },
-                    {
-                        dictionary: { emptyValue: t('global.empty'), groupTitle: t('global.files.title') },
+                        dictionary: {
+                            emptyValueText: t('global.savesets.empty.description', { type: t('global.files') }),
+                            emptyValueTitle: t('global.savesets.empty.title', { type: t('global.files') }),
+                        },
                         indexName: 'savesets.file',
                         selectedValues: getSubFilter('savesets.file', filters) as string[],
                         values:
