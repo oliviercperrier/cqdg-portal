@@ -47,7 +47,7 @@
             "columns": {}
         },
         "savesets": {
-            "title": "Mes ensembles de données",
+            "title": "Mes ensembles de {type}",
             "choose": "Choisir un ensemble",
             "save": "Mes ensembles",
             "saveset": "Sauvegarder l'ensemble",

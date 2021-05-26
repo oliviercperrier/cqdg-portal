@@ -46,7 +46,7 @@
             }
         },
         "savesets": {
-            "title": "My Save Sets",
+            "title": "My {type} sets",
             "choose": "Choose a set",
             "save": "My sets",
             "saveset": "Save set",

@@ -70,7 +70,10 @@ const FileFilters: React.FC<IFileFilters> = ({ data, history }) => {
                             })) || [],
                     },
                 ]}
-                dictionary={{ placeholder: t('global.savesets.choose'), title: t('global.savesets.title') }}
+                dictionary={{
+                    placeholder: t('global.savesets.choose'),
+                    title: t('global.savesets.title', { type: t('global.files') }),
+                }}
                 onSelect={(items) =>
                     items.forEach((item) => updateQueryFilters(history, item.key, createSubFilter(item.key, item.data)))
                 }

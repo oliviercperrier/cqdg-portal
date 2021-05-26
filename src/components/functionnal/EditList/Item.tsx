@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { AiFillDelete, AiFillEdit, AiOutlineCheck, AiOutlineClose } from 'react-icons/ai';
 import { Button, Input, Popconfirm } from 'antd';
+import cx from 'classnames';
 
 import styles from './Item.module.scss';
 
@@ -9,6 +10,7 @@ interface IItem {
     label: string;
     extra?: React.ReactNode;
     dictionary?: {
+        error?: React.ReactNode;
         actions?: {
             delete?: {
                 text: React.ReactNode;
@@ -20,6 +22,8 @@ interface IItem {
     onUpdate?: (id: string, label: string) => void;
     onEdit?: (id: string) => void;
     onDelete?: (id: string) => void;
+    onChange?: (value: string) => void;
+    validate?: (value: string) => boolean;
     disableActions?: boolean;
 }
 const Item: React.FC<IItem> = ({
@@ -31,8 +35,11 @@ const Item: React.FC<IItem> = ({
     id,
     onEdit = (f) => f,
     onDelete = (f) => f,
+    onChange = (f) => f,
+    validate = () => true,
 }) => {
     const [isModifying, setIsModifying] = useState(false);
+    const [hasError, setHasError] = useState(false);
     const [currentLabel, setCurrentLabel] = useState(label);
     useEffect(() => {
         setCurrentLabel(label);
@@ -42,26 +49,45 @@ const Item: React.FC<IItem> = ({
         setIsModifying(false);
         onUpdate(id, currentLabel);
         onEdit(id);
+        setHasError(false);
     };
 
     const handleEdit = () => {
         setIsModifying(true);
         onEdit(id);
     };
+
+    const handleValidate = (value: string) => {
+        if (!validate(value)) {
+            setHasError(true);
+            return;
+        }
+
+        setHasError(false);
+    };
     return (
         <div className={styles.container}>
             <div className={styles.label}>
                 {isModifying ? (
-                    <Input
-                        autoFocus
-                        onChange={(e) => setCurrentLabel(e.target.value)}
-                        onKeyUp={(e) => {
-                            if (e.key === 'Enter') {
-                                handleUpdate();
-                            }
-                        }}
-                        value={currentLabel}
-                    />
+                    <div className={styles.inputContainer}>
+                        <Input
+                            autoFocus
+                            className={cx({ [styles.inputError]: hasError })}
+                            onChange={(e) => {
+                                const { value } = e.target;
+                                setCurrentLabel(value);
+                                onChange(value);
+                                handleValidate(value);
+                            }}
+                            onKeyUp={(e) => {
+                                if (e.key === 'Enter') {
+                                    handleUpdate();
+                                }
+                            }}
+                            value={currentLabel}
+                        />
+                        {hasError && <label className={styles.error}>{dictionary?.error || 'Duplicate Name'}</label>}
+                    </div>
                 ) : (
                     <>
                         <span className={styles.text}>{currentLabel}</span>
@@ -72,7 +98,12 @@ const Item: React.FC<IItem> = ({
             <div className={styles.actions}>
                 {isModifying ? (
                     <>
-                        <Button className={styles.buttons} onClick={() => handleUpdate()} type="text">
+                        <Button
+                            className={styles.buttons}
+                            disabled={hasError}
+                            onClick={() => handleUpdate()}
+                            type="text"
+                        >
                             <AiOutlineCheck size={16} />
                         </Button>
                         <Button
@@ -81,6 +112,7 @@ const Item: React.FC<IItem> = ({
                                 setIsModifying(false);
                                 setCurrentLabel(label);
                                 onEdit(id);
+                                setHasError(false);
                             }}
                             type="text"
                         >

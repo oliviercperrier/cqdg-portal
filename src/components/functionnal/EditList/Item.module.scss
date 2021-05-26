@@ -1,8 +1,8 @@
-@import '~@ferlab/style/themes/cqdg/colors';
+@import '~@ferlab/style/themes/cqdg/mixins';
 
 .container {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
     padding: .8rem 1.6rem;
     .label {
@@ -10,6 +10,14 @@
         align-items: center;
         max-width: 80%;
         width: 100%;
+
+        .inputContainer {
+            width: 100%;
+
+            .inputError {
+                @include input-error;
+            }
+        }
 
         .text {
             text-overflow: ellipsis;
@@ -26,6 +34,10 @@
             > *:not(:last-child) {
                 margin-right: .4rem;
             }
+        }
+
+        .error {
+            color: $red-6;
         }
     }
     .actions {

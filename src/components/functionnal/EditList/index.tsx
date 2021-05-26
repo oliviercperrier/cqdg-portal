@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import ScrollView from '@ferlab/ui/core/layout/ScrollView';
 import { Divider } from 'antd';
 
 import Item from './Item';
@@ -12,6 +13,8 @@ interface IEditList {
     };
     onUpdate: (id: string, label: string) => void;
     onDelete: (id: string) => void;
+    onChange?: (value: string) => void;
+    onValidateItem?: (value: string) => boolean;
 }
 
 interface IItemData {
@@ -20,7 +23,14 @@ interface IItemData {
     extra?: React.ReactNode;
 }
 
-const EditList: React.FC<IEditList> = ({ data, onDelete, onUpdate, dictonary = {} }) => {
+const EditList: React.FC<IEditList> = ({
+    data,
+    onDelete,
+    onUpdate,
+    dictonary = {},
+    onChange = (f) => f,
+    onValidateItem = () => true,
+}) => {
     const [state, setState] = useState<{ isEditing: boolean; key: string | null }>({
         isEditing: false,
         key: null,
@@ -34,7 +44,7 @@ const EditList: React.FC<IEditList> = ({ data, onDelete, onUpdate, dictonary = {
         setState({ isEditing: true, key: id });
     };
     return (
-        <div className={styles.container}>
+        <ScrollView className={styles.container}>
             {data.length > 0 ? (
                 data.map((item, i) => (
                     <>
@@ -43,9 +53,11 @@ const EditList: React.FC<IEditList> = ({ data, onDelete, onUpdate, dictonary = {
                             extra={item.extra}
                             id={item.id}
                             label={item.label}
+                            onChange={onChange}
                             onDelete={onDelete}
                             onEdit={handleEdit}
                             onUpdate={onUpdate}
+                            validate={onValidateItem}
                         />
                         {data.length - 1 > i && <Divider className={styles.divider} />}
                     </>
@@ -59,7 +71,7 @@ const EditList: React.FC<IEditList> = ({ data, onDelete, onUpdate, dictonary = {
                     )}
                 </div>
             )}
-        </div>
+        </ScrollView>
     );
 };
 

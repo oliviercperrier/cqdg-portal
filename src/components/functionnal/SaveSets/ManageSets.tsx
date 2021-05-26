@@ -5,6 +5,7 @@ import { useIntl } from 'react-intl';
 import { useHistory } from 'react-router';
 import { useApolloClient } from '@apollo/client';
 import { Button, Modal, notification } from 'antd';
+import isEmpty from 'lodash/isEmpty';
 
 import EditList from 'components/functionnal/EditList';
 import FileDonorTabs from 'components/functionnal/Tabs/FileDonor';
@@ -44,6 +45,8 @@ const ManageSets: React.FC<IManageSets> = ({ dictionary, type = 'files' }) => {
     const history = useHistory();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const { result } = useLazyResultQuery<any>(GET_ALL_SAVE_SETS);
+    const saveSetsFileName = result.saveSetsFile.map((item: ISaveSet) => item.content.name);
+    const saveSetsDonorName = result.saveSetsDonor.map((item: ISaveSet) => item.content.name);
     const handleDelete = async (id: string, type: string) => {
         try {
             await clientApollo.mutate({
@@ -66,6 +69,9 @@ const ManageSets: React.FC<IManageSets> = ({ dictionary, type = 'files' }) => {
         }
     };
     const handleUpdate = async (id: string, label: string, result: any, type: string) => {
+        if (!isEmpty(result.find((item: ISaveSet) => item.content.name === label))) {
+            return;
+        }
         const dataFound = result.find((item: ISaveSet) => item.id === id);
         try {
             await clientApollo.mutate({
@@ -116,7 +122,8 @@ const ManageSets: React.FC<IManageSets> = ({ dictionary, type = 'files' }) => {
                                 result?.saveSetsDonor.map((item: ISaveSet) => ({
                                     extra: (
                                         <>
-                                            <MdPeople size={14} /> <span>{item.content.ids.length}</span>
+                                            <MdPeople size={14} />{' '}
+                                            <span className={styles.listItemCount}>{item.content.ids.length}</span>
                                         </>
                                     ),
                                     id: item.id,
@@ -126,6 +133,7 @@ const ManageSets: React.FC<IManageSets> = ({ dictionary, type = 'files' }) => {
                             dictonary={{ emptyData: <EmptyData type={t('global.donors')} /> }}
                             onDelete={(id) => handleDelete(id, 'Donor')}
                             onUpdate={(id, label) => handleUpdate(id, label, result.saveSetsDonor, 'Donor')}
+                            onValidateItem={(value) => !saveSetsDonorName.includes(value)}
                         />
                     }
                     files={
@@ -134,7 +142,8 @@ const ManageSets: React.FC<IManageSets> = ({ dictionary, type = 'files' }) => {
                                 result?.saveSetsFile.map((item: ISaveSet) => ({
                                     extra: (
                                         <>
-                                            <MdInsertDriveFile size={14} /> <span>{item.content.ids.length}</span>
+                                            <MdInsertDriveFile size={14} />{' '}
+                                            <span className={styles.listItemCount}>{item.content.ids.length}</span>
                                         </>
                                     ),
                                     id: item.id,
@@ -144,6 +153,7 @@ const ManageSets: React.FC<IManageSets> = ({ dictionary, type = 'files' }) => {
                             dictonary={{ emptyData: <EmptyData type={t('global.files')} /> }}
                             onDelete={(id) => handleDelete(id, 'File')}
                             onUpdate={(id, label) => handleUpdate(id, label, result.saveSetsFile, 'File')}
+                            onValidateItem={(value) => !saveSetsFileName.includes(value)}
                         />
                     }
                     history={history}
