@@ -8,7 +8,7 @@ import styles from './EditList.module.scss';
 
 interface IEditList {
     data: IItemData[];
-    dictonary?: {
+    dictionary?: {
         emptyData?: React.ReactNode;
     };
     onUpdate: (id: string, label: string) => void;
@@ -27,7 +27,7 @@ const EditList: React.FC<IEditList> = ({
     data,
     onDelete,
     onUpdate,
-    dictonary = {},
+    dictionary = {},
     onChange = (f) => f,
     onValidateItem = () => true,
 }) => {
@@ -64,8 +64,8 @@ const EditList: React.FC<IEditList> = ({
                 ))
             ) : (
                 <div className={styles.emptyContainer}>
-                    {dictonary?.emptyData ? (
-                        dictonary?.emptyData
+                    {dictionary?.emptyData ? (
+                        dictionary?.emptyData
                     ) : (
                         <span className={styles.emptyText}>No Data Available</span>
                     )}

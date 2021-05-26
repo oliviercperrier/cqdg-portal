@@ -130,7 +130,7 @@ const ManageSets: React.FC<IManageSets> = ({ dictionary, type = 'files' }) => {
                                     label: item.content.name,
                                 })) || []
                             }
-                            dictonary={{ emptyData: <EmptyData type={t('global.donors')} /> }}
+                            dictionary={{ emptyData: <EmptyData type={t('global.donors')} /> }}
                             onDelete={(id) => handleDelete(id, 'Donor')}
                             onUpdate={(id, label) => handleUpdate(id, label, result.saveSetsDonor, 'Donor')}
                             onValidateItem={(value) => !saveSetsDonorName.includes(value)}
@@ -150,7 +150,7 @@ const ManageSets: React.FC<IManageSets> = ({ dictionary, type = 'files' }) => {
                                     label: item.content.name,
                                 })) || []
                             }
-                            dictonary={{ emptyData: <EmptyData type={t('global.files')} /> }}
+                            dictionary={{ emptyData: <EmptyData type={t('global.files')} /> }}
                             onDelete={(id) => handleDelete(id, 'File')}
                             onUpdate={(id, label) => handleUpdate(id, label, result.saveSetsFile, 'File')}
                             onValidateItem={(value) => !saveSetsFileName.includes(value)}
