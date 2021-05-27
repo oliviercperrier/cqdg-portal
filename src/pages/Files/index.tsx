@@ -130,6 +130,7 @@ const FileRepo: React.FC<RouteComponentProps<any>> = ({ history }) => {
                                     <SaveSets
                                         Icon={<MdInsertDriveFile />}
                                         dictionary={{ labelType: t('global.files') }}
+                                        saveSetType="files"
                                         selectedIds={selectedRow}
                                         total={filesTotal}
                                         type="saveSetsFile"
@@ -172,6 +173,7 @@ const FileRepo: React.FC<RouteComponentProps<any>> = ({ history }) => {
                                         <SaveSets
                                             Icon={<MdPeople />}
                                             dictionary={{ labelType: t('global.donors') }}
+                                            saveSetType="donors"
                                             selectedIds={selectedRow}
                                             total={donorsTotal}
                                             type="saveSetsDonor"

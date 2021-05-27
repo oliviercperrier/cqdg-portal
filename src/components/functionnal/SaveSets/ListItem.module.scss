@@ -2,7 +2,10 @@
 
 .listItem {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
+    .label {
+        word-break: break-all;
+    }
     .listTotal {
         display: flex;
         align-items: center;

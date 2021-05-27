@@ -1,0 +1,29 @@
+@import '~@ferlab/style/themes/cqdg/colors';
+
+.divider {
+    margin: 1rem 0;
+}
+
+.tag {
+    color: $white;
+    background: $blue-8;
+    > * {
+        color: $white;
+    }
+}
+
+.emptyDataContainer {
+    background: $gray-3;
+    padding: .8rem 1.6rem;
+
+    .emptyDataTitle {
+        font-weight: 600;
+        color: $gray-8;
+        font-size: 1.2rem;
+    }
+
+    .emptyDataText {
+        font-size: 1.2rem;
+        color: $gray-8;
+    }
+}

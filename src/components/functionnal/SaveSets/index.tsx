@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-types */
 import React, { useState } from 'react';
-import { AiFillFolder, AiOutlineDown, AiOutlineInfoCircle, AiOutlinePlus } from 'react-icons/ai';
+import { AiFillSave, AiOutlineDown, AiOutlineInfoCircle, AiOutlinePlus } from 'react-icons/ai';
 import { CgPlayListAdd, CgPlayListRemove } from 'react-icons/cg';
 import { useIntl } from 'react-intl';
 import { ApolloClient, DocumentNode, useApolloClient } from '@apollo/client';
@@ -23,11 +23,14 @@ import { noDuplicate } from 'utils/duplicate';
 import { useFilters } from 'utils/filters/useFilters';
 import { Hits, useLazyResultQuery } from 'utils/graphql/query';
 
+import ManageSets from './ManageSets';
+
 import styles from './SaveSets.module.scss';
 
 type TType = 'saveSetsFile' | 'saveSetsDonor';
 
 type SaveSets = {
+    saveSetType?: 'files' | 'donors';
     selectedIds?: string[];
     total: number;
     type: TType;
@@ -83,7 +86,16 @@ const getIds = async (
     return fileIds.map((item: any) => item.node.id);
 };
 
-const SaveSets: React.FunctionComponent<SaveSets> = ({ dictionary, Icon, selectedIds = [], total, type }) => {
+const MAX_ITEMS = 10000;
+
+const SaveSets: React.FunctionComponent<SaveSets> = ({
+    dictionary,
+    Icon,
+    selectedIds = [],
+    total,
+    type,
+    saveSetType = 'files',
+}) => {
     const intl = useIntl();
 
     const [loading, setLoading] = useState(false);
@@ -188,6 +200,8 @@ const SaveSets: React.FunctionComponent<SaveSets> = ({ dictionary, Icon, selecte
     };
 
     const inputClassName = cx({ [styles.inputError]: hasInputError });
+    const totalItems = selectedIds.length > 0 ? selectedIds.length : total;
+    const hasMaxItems = totalItems >= MAX_ITEMS;
     return (
         <>
             <Dropdown
@@ -195,10 +209,22 @@ const SaveSets: React.FunctionComponent<SaveSets> = ({ dictionary, Icon, selecte
                     <Menu className={styles.menu}>
                         <Menu.Item>
                             <StackLayout className={styles.totalContainer}>
-                                <div className={styles.text}>
-                                    {selectedIds.length > 0 ? selectedIds.length : total} {dictionary.labelType}
+                                <div className={cx(styles.text, { [styles.warningText]: hasMaxItems })}>
+                                    {totalItems} {dictionary.labelType}
                                 </div>
-                                <Tooltip overlay={t('global.savesets.warning')}>
+                                <Tooltip
+                                    arrowPointAtCenter
+                                    className={cx({ [styles.warningText]: hasMaxItems })}
+                                    overlay={
+                                        hasMaxItems
+                                            ? t('global.savesets.warning.exceed', {
+                                                  max: MAX_ITEMS.toLocaleString(),
+                                              })
+                                            : t('global.savesets.warning', { max: MAX_ITEMS.toLocaleString() })
+                                    }
+                                    overlayClassName={styles.tooltip}
+                                    placement="topRight"
+                                >
                                     <AiOutlineInfoCircle />
                                 </Tooltip>
                             </StackLayout>
@@ -211,7 +237,7 @@ const SaveSets: React.FunctionComponent<SaveSets> = ({ dictionary, Icon, selecte
                             }}
                         >
                             <AiOutlinePlus className={styles.icons} size={16} />
-                            {t('global.savesets.create')}
+                            {t('global.savesets.create', { type: dictionary.labelType })}
                         </Menu.Item>
                         <Menu.Item
                             className={styles.actions}
@@ -247,13 +273,17 @@ const SaveSets: React.FunctionComponent<SaveSets> = ({ dictionary, Icon, selecte
                             <CgPlayListRemove className={styles.icons} size={16} />
                             {t('global.savesets.delete')}
                         </Menu.Item>
+                        <Menu.Divider className={styles.divider} />
+                        <Menu.Item disabled={saveSetOptions.length === 0}>
+                            <ManageSets type={saveSetType} />
+                        </Menu.Item>
                     </Menu>
                 }
                 placement="bottomRight"
                 trigger={['click']}
             >
                 <div className={styles.buttonContainer}>
-                    <Button className={styles.button} icon={<AiFillFolder size={16} />}>
+                    <Button className={styles.button} icon={<AiFillSave size={16} />}>
                         <span className={styles.text}>{t('global.savesets.save')}</span>
                         <AiOutlineDown size={12} />
                     </Button>

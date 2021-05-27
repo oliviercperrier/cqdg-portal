@@ -51,6 +51,7 @@ const Study: React.FC<RouteComponentProps<any>> = ({ match: { params } }) => {
                     </DownloadClinicalButton>,
                     <Button
                         className={styles.button}
+                        disabled
                         onClick={() => setVisibleModal((prevState) => ({ ...prevState, manifestModal: true }))}
                     >
                         <AiOutlineDownload size={16} />

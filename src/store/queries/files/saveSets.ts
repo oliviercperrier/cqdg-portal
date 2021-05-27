@@ -5,10 +5,12 @@ export const GET_ALL_SAVE_SETS = gql`
         saveSetsFile @rest(path: "/type/save_sets_file", endpoint: "dataStorage", type: "SaveSetsFile") {
             id
             content
+            updated_at
         }
         saveSetsDonor @rest(path: "/type/save_sets_donor", endpoint: "dataStorage", type: "SaveSetsDonor") {
             id
             content
+            updated_at
         }
     }
 `;
@@ -63,6 +65,15 @@ export const UPDATE_SAVE_SET = gql`
     mutation UpdateSaveSet($id: Int!, $content: JSON) {
         saveSets(input: $content, id: $id)
             @rest(path: "/content/{args.id}", endpoint: "dataStorage", method: "PUT", type: "SaveSets") {
+            content
+        }
+    }
+`;
+
+export const DELETE_SAVE_SET = gql`
+    mutation DeleteSaveSet($id: Int!) {
+        saveSets(id: $id)
+            @rest(path: "/content/{args.id}", endpoint: "dataStorage", method: "DELETE", type: "SaveSets") {
             content
         }
     }

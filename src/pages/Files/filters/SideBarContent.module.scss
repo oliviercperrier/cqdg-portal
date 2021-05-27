@@ -1,0 +1,7 @@
+.content {
+    padding: 2.4rem 1.6rem;
+
+    > *:not(:last-child) {
+        margin-bottom: 1.6rem;
+    }
+}

@@ -46,12 +46,14 @@
             }
         },
         "savesets": {
-            "title": "My Save Sets",
+            "title": "My {type} sets",
             "choose": "Choose a set",
-            "save": "Save a set",
+            "save": "My sets",
             "saveset": "Save set",
+            "empty.title": "No {type} set saved",
+            "empty.description": "You can save a set by pressing the \"My sets\" button on top of the {type} table",
             "cancel": "Cancel",
-            "create": "Create a new set",
+            "create": "Create a new set of {type}",
             "create.title": "Save a new set",
             "create.label": "Set Name",
             "create.label.error": "A set with this name already exists",
@@ -67,11 +69,16 @@
             "update.success.description": "You can use your Set from the filter bar",
             "update.error.title": "An error has occured",
             "update.error.description": "It was impossible to update your Set. Please try again",
+            "delete.success.title": "Your Set has been deleted",
+            "delete.success.description": "Your Set has been deleted successfully",
+            "delete.error.title": "An error occured",
+            "delete.error.description": "It was impossible to delete your Set. Please try again",
             "delete": "Remove from an existing set",
             "delete.title": "Remove from {type} set",
             "delete.label": "{type} Set",
             "delete.confirm": "Remove from set",
-            "warning": "Max. 10 000 items each times. The first 10 000 items will be used."
+            "warning": "Max. {max} items each times.",
+            "warning.exceed": "Max. {max} items each times.\nThe first {max} items will be used."
         },
         "cards": {
             "details": "Details"
