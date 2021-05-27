@@ -5,10 +5,12 @@ export const GET_ALL_SAVE_SETS = gql`
         saveSetsFile @rest(path: "/type/save_sets_file", endpoint: "dataStorage", type: "SaveSetsFile") {
             id
             content
+            updated_at
         }
         saveSetsDonor @rest(path: "/type/save_sets_donor", endpoint: "dataStorage", type: "SaveSetsDonor") {
             id
             content
+            updated_at
         }
     }
 `;

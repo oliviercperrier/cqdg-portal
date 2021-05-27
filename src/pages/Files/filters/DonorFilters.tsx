@@ -1,10 +1,12 @@
 import React from 'react';
-import { MdInsertDriveFile, MdPeople } from 'react-icons/md';
+import { MdPeople } from 'react-icons/md';
 import FilterContainer from '@ferlab/ui/core/components/filters/FilterContainer';
+import cloneDeep from 'lodash/cloneDeep';
 import get from 'lodash/get';
 
 import GlobalSearch from 'components/containers/GlobalSearch';
 import SelectSets from 'components/functionnal/SaveSets/SelectSets';
+import { ISaveSet } from 'components/functionnal/SaveSets/type';
 import { t } from 'locales/translate';
 import { DONOR_GLOBAL_SEARCH } from 'store/queries/files/filters';
 import { GET_ALL_SAVE_SETS } from 'store/queries/files/saveSets';
@@ -26,6 +28,7 @@ const DonorFilters: React.FC<IDonorFilters> = ({ data, history }) => {
         mappedFilters: { donorFilters },
     } = useFilters();
     const { result: saveSetResults } = useLazyResultQuery<any>(GET_ALL_SAVE_SETS);
+    const dataSaveSets = cloneDeep(saveSetResults?.saveSetsDonor) || [];
 
     const aggregations = get(data, 'Donor.donorFilters', []);
     return (
@@ -59,12 +62,16 @@ const DonorFilters: React.FC<IDonorFilters> = ({ data, history }) => {
                         },
                         indexName: 'savesets.donor',
                         selectedValues: getSubFilter('savesets.donor', filters) as string[],
-                        values:
-                            saveSetResults?.saveSetsDonor.map((item: any) => ({
+                        values: dataSaveSets
+                            .sort(
+                                (a: ISaveSet, b: ISaveSet) =>
+                                    new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime()
+                            )
+                            .map((item: ISaveSet) => ({
                                 count: item.content.ids.length,
                                 icon: <MdPeople />,
                                 name: item.content.name,
-                            })) || [],
+                            })),
                     },
                 ]}
                 dictionary={{

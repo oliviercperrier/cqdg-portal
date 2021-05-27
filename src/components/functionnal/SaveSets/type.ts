@@ -4,4 +4,5 @@ export interface ISaveSet {
         ids: string[];
         name: string;
     };
+    updated_at: string;
 }
