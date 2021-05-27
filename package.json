@@ -56,8 +56,7 @@
     "lint-staged": {
         "src/**/*.{ts,tsx}": [
             "npm run lint&fix"
-        ],
-        "*.js": "eslint --cache --fix"
+        ]
     },
     "browserslist": {
         "production": [
