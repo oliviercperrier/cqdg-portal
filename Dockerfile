@@ -1,4 +1,4 @@
-FROM node:14.17.0-alpine as build
+FROM node:15.14.0-alpine as build
 
 ENV SASS_PATH=node_modules/@ferlab/style/themes/cqdg/:src/style/themes/default
 
