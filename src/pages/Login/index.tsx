@@ -12,15 +12,16 @@ interface ILocation {
     from: string;
 }
 
+export const DEFAULT_LOGIN_LOCATION = '/studies';
+
 const Login = (): React.ReactElement => {
     const location = useLocation<{ [key: string]: any }>();
     const {
         data: { locale },
     } = useQuery<any>(GET_LOCALE);
 
-    const defaultLoginLocation = '/files';
     const currentLocationState: ILocation = (location.state as ILocation) || {
-        from: defaultLoginLocation,
+        from: DEFAULT_LOGIN_LOCATION,
     };
 
     const { initialized, keycloak } = useKeycloak();
@@ -30,7 +31,7 @@ const Login = (): React.ReactElement => {
         if (initialized && keycloak && !isAuthenticated) {
             let redirectLocation = currentLocationState.from;
             if (redirectLocation === '/') {
-                redirectLocation = defaultLoginLocation;
+                redirectLocation = DEFAULT_LOGIN_LOCATION;
             }
             keycloak.login({
                 locale,

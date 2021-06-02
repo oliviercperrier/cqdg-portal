@@ -3,12 +3,13 @@ import { Redirect, useLocation } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import qs from 'query-string';
 
+import { DEFAULT_LOGIN_LOCATION } from 'pages/Login';
 import { GET_TERMS } from 'store/queries/terms';
 
 interface IRedirectTerms {
     redirectAfter?: string;
 }
-const RedirectTerms: React.FC<IRedirectTerms> = ({ children, redirectAfter = '/files' }): any => {
+const RedirectTerms: React.FC<IRedirectTerms> = ({ children, redirectAfter = DEFAULT_LOGIN_LOCATION }): any => {
     const {
         data: { terms },
     } = useQuery<any>(GET_TERMS);

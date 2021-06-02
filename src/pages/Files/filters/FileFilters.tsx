@@ -7,9 +7,11 @@ import get from 'lodash/get';
 import GlobalSearch from 'components/containers/GlobalSearch';
 import SelectSets from 'components/functionnal/SaveSets/SelectSets';
 import { ISaveSet } from 'components/functionnal/SaveSets/type';
+import DropdownLabels from 'components/layouts/DropdownLabels';
 import { t } from 'locales/translate';
 import { FILE_GLOBAL_SEARCH } from 'store/queries/files/filters';
 import { GET_ALL_SAVE_SETS } from 'store/queries/files/saveSets';
+import { getFiltersDictionary } from 'utils/dictionnary';
 import { enhanceFilters, getSelectedFilters } from 'utils/filters';
 import { updateFilters, updateQueryFilters } from 'utils/filters';
 import { createSubFilter, getSubFilter } from 'utils/filters/manipulator';
@@ -35,25 +37,29 @@ const FileFilters: React.FC<IFileFilters> = ({ data, history }) => {
         <>
             <GlobalSearch
                 filterKey="fileFilters"
-                filters={fileFilters}
-                onSelect={(value) =>
-                    updateQueryFilters(history, 'file_name_keyword', createSubFilter('file_name_keyword', [value]))
+                onSelect={(values) =>
+                    updateQueryFilters(history, 'file_name_keyword', createSubFilter('file_name_keyword', values))
                 }
+                placeHolder={t('search.files.placeholder')}
                 query={FILE_GLOBAL_SEARCH}
-                searchKey="file_name"
+                searchKey={['file_name', 'file_id']}
+                selectedItems={getSubFilter('file_name_keyword', fileFilters) as string[]}
                 setCurrentOptions={(options) => {
                     const globalSearchOptions = get(options, `File.${Hits.COLLECTION}`, []);
 
                     return globalSearchOptions.map(({ node }: any) => ({
                         label: (
-                            <div>
-                                <MdInsertDriveFile /> {node.file_name}
-                            </div>
+                            <DropdownLabels
+                                Icon={<MdInsertDriveFile />}
+                                label={node.file_id}
+                                subLabel={node.file_name}
+                            />
                         ),
                         value: node.file_name,
                     }));
                 }}
-                tooltipText={t('facet.search_suggest_tooltip_files')}
+                title={t('search.files.title')}
+                tooltipText={t('search.files.tooltips')}
             />
             <SelectSets
                 data={[
@@ -89,6 +95,7 @@ const FileFilters: React.FC<IFileFilters> = ({ data, history }) => {
                 const selectedFilters = getSelectedFilters(enhancedFilters, filter);
                 return (
                     <FilterContainer
+                        dictionary={getFiltersDictionary()}
                         filterGroup={filter}
                         filters={enhancedFilters}
                         key={filter.field}

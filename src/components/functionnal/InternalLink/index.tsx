@@ -16,10 +16,21 @@ export interface IInternalLink {
     params?: IParamProp;
     query?: IQueryProp;
     filters?: ISqonGroupFilter;
+    type?: 'button' | 'link';
+    className?: string;
 }
 
-const InternalLink: React.FC<IInternalLink> = ({ children, filters = {}, path, params = {}, query = {} }) => {
+const InternalLink: React.FC<IInternalLink> = ({
+    children,
+    filters = {},
+    path,
+    params = {},
+    query = {},
+    type = 'link',
+    className = '',
+}) => {
     let realPath = path;
+    const linkClassName = type === 'link' ? 'link' : 'ant-btn';
     if (!isEmpty(params)) {
         Object.keys(params).forEach((key) => {
             realPath = realPath.replace(`:${key}`, params[key]);
@@ -29,7 +40,7 @@ const InternalLink: React.FC<IInternalLink> = ({ children, filters = {}, path, p
         realPath = `${realPath}${createQueryParams({ ...query, filters })}`;
     }
     return (
-        <Link className="link" to={realPath}>
+        <Link className={`${linkClassName} ${className}`} to={realPath}>
             {children}
         </Link>
     );

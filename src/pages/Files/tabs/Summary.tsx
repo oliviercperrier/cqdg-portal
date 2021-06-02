@@ -97,6 +97,13 @@ const Summary: React.FC<ISummary> = ({ data, loading }) => {
                                         enableLabel={false}
                                         layout="horizontal"
                                         margin={{ bottom: 20, left: 5, right: 10, top: 0 }}
+                                        onClick={(datum) =>
+                                            updateQueryFilters(
+                                                history,
+                                                key,
+                                                createSubFilter(key, [datum.indexValue as string])
+                                            )
+                                        }
                                         padding={0.5}
                                         title={t(`charts.${key}`)}
                                         titleClassName={styles.title}

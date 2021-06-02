@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 import { MdAssignment, MdBorderAll, MdDashboard, MdPeople } from 'react-icons/md';
 import { RouteComponentProps } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
-import CountWithIcon, { CountWithIconTypeEnum } from '@ferlab/ui/core/components/labels/CountWithIcon';
+import MultiLabel, { MultiLabelTypeEnum } from '@ferlab/ui/core/components/labels/MultiLabel';
 import QueryBuilder from '@ferlab/ui/core/components/QueryBuilder';
-import ScrollView from '@ferlab/ui/core/layout/ScrollView';
 import StackLayout from '@ferlab/ui/core/layout/StackLayout';
 import { Button } from 'antd';
 import get from 'lodash/get';
@@ -23,6 +22,7 @@ import { setTableColumn } from 'store/cache/tableColumns';
 import { STUDIES_PAGE_DATA } from 'store/queries/studies/content';
 import { GET_TABLE_COLUMNS } from 'store/queries/tables';
 import { ITableColumnItem } from 'types/interface';
+import { getQueryBuilderDictionary } from 'utils/dictionnary';
 import { updateQueryFilters } from 'utils/filters';
 import { useFilters } from 'utils/filters/useFilters';
 import { Hits, useLazyResultQuery } from 'utils/graphql/query';
@@ -67,7 +67,7 @@ const Study: React.FC<RouteComponentProps<any>> = ({ history }) => {
                     IconTotal={<MdAssignment size={18} />}
                     className="file-repo__query-builder"
                     currentQuery={filters}
-                    dictionary={{ query: { facet: (key) => t(`facet.${key}`) } }}
+                    dictionary={getQueryBuilderDictionary()}
                     enableSingleQuery
                     initialState={getQueryBuilderCache('study-repo')}
                     onChangeQuery={(_, query) => updateQueryParam(history, 'filters', query)}
@@ -103,17 +103,17 @@ const Study: React.FC<RouteComponentProps<any>> = ({ history }) => {
                         }
                         summary={
                             <ContentSeparator>
-                                <CountWithIcon
+                                <MultiLabel
                                     Icon={<MdPeople />}
-                                    label={t('global.donors')}
-                                    total={totalDonors.toLocaleString()}
-                                    type={CountWithIconTypeEnum.Inline}
+                                    label={totalDonors.toLocaleString()}
+                                    subLabel={t('global.donors')}
+                                    type={MultiLabelTypeEnum.Inline}
                                 />
-                                <CountWithIcon
+                                <MultiLabel
                                     Icon={<MdAssignment />}
-                                    label={t('global.studies')}
-                                    total={totalStudies.toLocaleString()}
-                                    type={CountWithIconTypeEnum.Inline}
+                                    label={totalStudies.toLocaleString()}
+                                    subLabel={t('global.studies')}
+                                    type={MultiLabelTypeEnum.Inline}
                                 />
                             </ContentSeparator>
                         }

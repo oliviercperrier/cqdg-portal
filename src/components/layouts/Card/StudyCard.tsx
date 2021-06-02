@@ -1,5 +1,5 @@
 import React from 'react';
-import CountWithIcon from '@ferlab/ui/core/components/labels/CountWithIcon';
+import MultiLabel from '@ferlab/ui/core/components/labels/MultiLabel';
 
 import InternalLink, { IInternalLink } from 'components/functionnal/InternalLink';
 import DonorIcon from 'components/interface/Icon/Donor';
@@ -12,19 +12,31 @@ import './StudyCard.scss';
 
 interface IStudyCardProp {
     title: string;
+    headerTitle: string;
     description: string;
     totalDonors: number;
     totalFiles: number;
-    linkProp: IInternalLink;
+    detailsLinkProps: IInternalLink;
+    donorsLinkProps: IInternalLink;
+    filesLinkProps: IInternalLink;
 }
 
-const StudyCard = ({ description, linkProp, title, totalDonors, totalFiles }: IStudyCardProp): React.ReactElement => (
+const StudyCard = ({
+    description,
+    detailsLinkProps,
+    donorsLinkProps,
+    filesLinkProps,
+    headerTitle,
+    title,
+    totalDonors,
+    totalFiles,
+}: IStudyCardProp): React.ReactElement => (
     <CardContainerNotched className="card-container" type="header">
         <CardContent cardType="headerFooter">
             <header>
                 <div className="card-padding">
-                    <h2 className="header-title">{title}</h2>
-                    <InternalLink {...linkProp}>{t('global.cards.details')}</InternalLink>
+                    <h2 className="header-title">{headerTitle}</h2>
+                    <InternalLink {...detailsLinkProps}>{t('global.cards.details')}</InternalLink>
                 </div>
             </header>
             <div className="card-padding">
@@ -32,16 +44,20 @@ const StudyCard = ({ description, linkProp, title, totalDonors, totalFiles }: IS
                 <p>{description}</p>
             </div>
             <div className="card-footer card-padding">
-                <CountWithIcon
-                    Icon={<DonorIcon colored={false} />}
-                    label={t('global.donors')}
-                    total={totalFiles.toLocaleString()}
-                />
-                <CountWithIcon
-                    Icon={<FileIcon colored={false} />}
-                    label={t('global.files')}
-                    total={totalDonors.toLocaleString()}
-                />
+                <InternalLink {...donorsLinkProps} className={`card-footer-link`} type="button">
+                    <MultiLabel
+                        Icon={<DonorIcon colored={false} />}
+                        label={totalFiles.toLocaleString()}
+                        subLabel={t('global.donors')}
+                    />
+                </InternalLink>
+                <InternalLink {...filesLinkProps} className={`card-footer-link`} type="button">
+                    <MultiLabel
+                        Icon={<FileIcon colored={false} />}
+                        label={totalDonors.toLocaleString()}
+                        subLabel={t('global.files')}
+                    />
+                </InternalLink>
             </div>
         </CardContent>
     </CardContainerNotched>

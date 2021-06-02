@@ -3,6 +3,7 @@ import get from 'lodash/get';
 import InternalLink from 'components/functionnal/InternalLink';
 import { t } from 'locales/translate';
 import { Routes } from 'routes';
+import { addFilter } from 'utils/filters/manipulator';
 
 const DonorsModel = [
     {
@@ -126,15 +127,24 @@ const DonorsModel = [
     },
     {
         className: 'numerical',
-        dataIndex: ['node', 'files', 'hits', 'total'],
         hidden: false,
         id: 'files.hits.total',
         movable: true,
+        render: ({ node }: any) => (
+            <InternalLink
+                filters={addFilter(null, 'submitter_donor_id', [node.submitter_donor_id])}
+                path={Routes.FILES}
+                query={{ searchTableTab: 'files' }}
+            >
+                {node.files.hits.total}
+            </InternalLink>
+        ),
         sortDirection: ['ascend', 'descend'],
         sorter: {
             compare: (a: Record<string, any>, b: Record<string, any>): number => a.node.file_size - b.node.file_size,
             multiple: 6,
         },
+
         title: t('facet.files.count'),
         translate: 'facet.files.count',
     },

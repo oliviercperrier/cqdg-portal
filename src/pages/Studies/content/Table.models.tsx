@@ -54,10 +54,18 @@ const StudyModel = [
         title: t('facet.population'),
     },
     {
-        dataIndex: ['node', 'donors', 'hits', 'total'],
         hidden: false,
         id: 'donors',
         movable: true,
+        render: ({ node }: any) => (
+            <InternalLink
+                filters={addFilter(null, 'short_name_keyword', [node.short_name_keyword])}
+                path={Routes.FILES}
+                query={{ searchTableTab: 'donors' }}
+            >
+                {node.donors.hits.total}
+            </InternalLink>
+        ),
         title: t('global.donors.title'),
     },
     {
