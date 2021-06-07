@@ -5,7 +5,7 @@ import { RestLink } from 'apollo-link-rest';
 
 import { DATA_STORAGE_API, GRAPHQL_API } from 'config/constants';
 import { IProvider } from 'providers';
-import { getTokens } from 'providers/Keycloak/tokens';
+import { getToken } from 'providers/Keycloak/keycloak';
 import { cache } from 'store/cache';
 
 const httpLink = createHttpLink({
@@ -20,7 +20,7 @@ const restEndpoints = new RestLink({
 
 const authLink = setContext((_, { headers }) => {
     // get the authentication token from local storage if it exists
-    const { token } = getTokens();
+    const token = getToken();
     // return the headers to the context so httpLink can read them
     return {
         headers: {
