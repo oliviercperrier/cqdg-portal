@@ -28,14 +28,14 @@
         display: flex;
 
         > * {
-            border: 1px solid $gray-5;
-            border-radius: 2px;
-            background: $white;
-            padding: .4rem .8rem;
-
             &:not(:last-child) {
                 margin-right: 1.6rem;
             }
+        }
+        &-link {
+            height: auto;
+            line-height: inherit;
+            text-align: inherit;
         }
 
         .label, .count {

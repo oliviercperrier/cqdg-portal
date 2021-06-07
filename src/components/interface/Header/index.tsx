@@ -9,6 +9,7 @@ import DatabaseIcon from 'components/interface/Icon/Database';
 import ExternalIcon from 'components/interface/Icon/ExternalLink';
 import StudyIcon from 'components/interface/Icon/Study';
 import { t } from 'locales/translate';
+import { DEFAULT_LOGIN_LOCATION } from 'pages/Login';
 import { isAuthenticated } from 'providers/Keycloak/keycloak';
 
 import '@ferlab/style/themes/cqdg/components/header.scss';
@@ -57,7 +58,7 @@ const Header: React.FC<IHeader> = ({ className = '', isNavActive = true }) => {
                     ) : (
                         <Link
                             className="ant-btn ant-btn-text login"
-                            to={{ pathname: '/login', state: { from: '/files' } }}
+                            to={{ pathname: '/login', state: { from: DEFAULT_LOGIN_LOCATION } }}
                         >
                             <AiOutlineLogin className="icon" />
                             {t('nav.login')}

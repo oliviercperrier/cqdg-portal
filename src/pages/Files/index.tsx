@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { AiFillPieChart } from 'react-icons/ai';
 import { MdFileDownload, MdInsertDriveFile, MdPeople } from 'react-icons/md';
 import { RouteComponentProps } from 'react-router-dom';
-import CountWithIcon from '@ferlab/ui/core/components/labels/CountWithIcon';
+import MultiLabel from '@ferlab/ui/core/components/labels/MultiLabel';
 import QueryBuilder from '@ferlab/ui/core/components/QueryBuilder';
 import StackLayout from '@ferlab/ui/core/layout/StackLayout';
 import { Tabs } from 'antd';
@@ -22,6 +22,7 @@ import SideBarContent from 'pages/Files/filters/SideBarContent';
 import Summary from 'pages/Files/tabs/Summary';
 import { getQueryBuilderCache, setQueryBuilderCache } from 'store/cache/queryBuilder';
 import { FILE_PAGE_DATA } from 'store/queries/files/page';
+import { getQueryBuilderDictionary } from 'utils/dictionnary';
 import { updateQueryFilters } from 'utils/filters';
 import { useFilters } from 'utils/filters/useFilters';
 import { EFileInputType, formatFileSize } from 'utils/formatFileSize';
@@ -65,7 +66,7 @@ const FileRepo: React.FC<RouteComponentProps<any>> = ({ history }) => {
                     IconTotal={<MdInsertDriveFile size={18} />}
                     className="file-repo__query-builder"
                     currentQuery={filters}
-                    dictionary={{ query: { facet: (key) => t(`facet.${key}`) } }}
+                    dictionary={getQueryBuilderDictionary()}
                     initialState={getQueryBuilderCache('file-repo')}
                     onChangeQuery={(_, query) => {
                         updateQueryParam(history, 'filters', query);
@@ -77,13 +78,13 @@ const FileRepo: React.FC<RouteComponentProps<any>> = ({ history }) => {
                 <div className="file-repo__summary">
                     <CardContainerNotched type="shadow">
                         <StackLayout className="file-repo__summary__content">
-                            <CountWithIcon Icon={<StudyIcon />} label={t('global.studies.title')} total={studyTotal} />
-                            <CountWithIcon Icon={<DonorIcon />} label={t('global.donors.title')} total={donorsTotal} />
-                            <CountWithIcon Icon={<FileIcon />} label={t('global.files.title')} total={filesTotal} />
-                            <CountWithIcon
+                            <MultiLabel Icon={<StudyIcon />} label={studyTotal} subLabel={t('global.studies.title')} />
+                            <MultiLabel Icon={<DonorIcon />} label={donorsTotal} subLabel={t('global.donors.title')} />
+                            <MultiLabel Icon={<FileIcon />} label={filesTotal} subLabel={t('global.files.title')} />
+                            <MultiLabel
                                 Icon={<CloudStorageIcon />}
-                                label={fileSizes.symbol}
-                                total={fileSizes.value}
+                                label={fileSizes.value}
+                                subLabel={fileSizes.symbol}
                             />
                         </StackLayout>
                     </CardContainerNotched>
@@ -91,7 +92,7 @@ const FileRepo: React.FC<RouteComponentProps<any>> = ({ history }) => {
                 <div>
                     <Tabs
                         activeKey={readQueryParam(tabKey, {
-                            defaultValue: 'files',
+                            defaultValue: 'summary',
                             whiteList: ['files', 'donors', 'summary'],
                         })}
                         className="tabs-container"

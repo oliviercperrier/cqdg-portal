@@ -1,7 +1,7 @@
 import React from 'react';
 import { AiOutlineDownload } from 'react-icons/ai';
 import { RouteComponentProps } from 'react-router-dom';
-import CountWithIcon from '@ferlab/ui/core/components/labels/CountWithIcon';
+import MultiLabel from '@ferlab/ui/core/components/labels/MultiLabel';
 import StackLayout from '@ferlab/ui/core/layout/StackLayout';
 import { Card, List, PageHeader, Progress, Spin } from 'antd';
 
@@ -58,30 +58,29 @@ const Study: React.FC<RouteComponentProps<any>> = ({ match: { params } }) => {
             <div className={styles.dataContent}>
                 <CardContainerNotched className={styles.dataSummary} type="shadow">
                     <StackLayout className={styles.dataSummaryContent}>
-                        <CountWithIcon
+                        <MultiLabel
                             Icon={<StudyIcon />}
-                            label={t('global.studies.title')}
-                            total={donorData.study.hits.total}
+                            label={donorData.study.hits.total}
+                            subLabel={t('global.studies.title')}
                         />
-                        <CountWithIcon
+                        <MultiLabel
                             Icon={<FileIcon />}
-                            label={t('global.files.title')}
-                            total={donorData.files.hits.total}
+                            label={donorData.files.hits.total}
+                            subLabel={t('global.files.title')}
                         />
-                        <CountWithIcon Icon={<CloudStorageIcon />} label={fileSizes.symbol} total={fileSizes.value} />
+                        <MultiLabel Icon={<CloudStorageIcon />} label={fileSizes.value} subLabel={fileSizes.symbol} />
                     </StackLayout>
                 </CardContainerNotched>
                 <Card
                     className={`${styles.summary} ant-card-body-small`}
                     extra={
-                        <InternalLink filters={filters} path={Routes.FILES} query={{ searchTableTab: 'donors' }}>
+                        <InternalLink filters={filters} path={Routes.FILES} query={{ searchTableTab: 'summary' }}>
                             {t('entity.actions.link.summary')}
                         </InternalLink>
                     }
                     title={t('entity.title.summary')}
                 >
                     <DescriptionList>
-                        <ListItem label={t(`facet.donor_id`)}>{donorData.donor_id}</ListItem>
                         <ListItem label={t(`facet.submitter_donor_id`)}>{donorData.submitter_donor_id}</ListItem>
                         <ListItem label={t(`facet.study_id_keyword`)}>
                             <InternalLink

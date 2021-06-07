@@ -1,0 +1,14 @@
+@import '~@ferlab/style/themes/cqdg/colors';
+
+.container {
+    .label {
+        font-weight: normal;
+        font-size: 1.4rem;
+    }
+    
+    .subLabel {
+        font-size: 1.2rem;
+        color: $gray-7;
+    }
+}
+

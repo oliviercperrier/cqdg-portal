@@ -80,6 +80,40 @@
             "warning": "Max. {max} items each times.",
             "warning.exceed": "Max. {max} items each times.\nThe first {max} items will be used."
         },
+        "filters": {
+            "actions": {
+                "all": "Select All",
+                "none": "None",
+                "clear": "Clear",
+                "less": "Less",
+                "more": "More",
+                "apply": "Apply"
+            },
+            "messages": {
+                "empty": "No values found for this request"
+            },
+            "checkbox": {
+                "placeholder": "Search..."
+            }
+        },
+        "querybuilder": {
+            "empty": "Use the filters to build a query",
+            "actions": {
+                "new": "New Query",
+                "clear": {
+                    "button": "Clear All",
+                    "cancel": "Cancel",
+                    "confirm": "Delete",
+                    "title": "Delete All Queries?",
+                    "description": "You are about to delete all your queries. They will be lost forever."
+                },
+                "delete": {
+                    "cancel": "Cancel",
+                    "confirm": "Delete",
+                    "title": "Delete This Query?"
+                }
+            }
+        },
         "cards": {
             "details": "Details"
         },
@@ -123,7 +157,7 @@
         "actions": {
             "manifest": "Manifest",
             "access": "Request access",
-            "link.summary": "See in the repository"
+            "link.summary": "Files Repository"
         },
         "title": {
             "summary": "Summary",
@@ -191,6 +225,23 @@
                 "title": "Submitting Data",
                 "text": "Data submission guide"
             }
+        }
+    },
+    "search": {
+        "files": {
+            "tooltips" : "Search by ID or by File Name",
+            "title" : "Search Files",
+            "placeholder" : "FS00456, 51dA8Y.cram..."
+        },
+        "donors": {
+            "tooltips" : "Search by Donors ID",
+            "title" : "Search Donors",
+            "placeholder" : "PT00068"
+        },
+        "studies": {
+            "tooltips" : "Search by Name, ID, or Study Keywords (ex: Cancer)",
+            "title" : "Recherche d'études",
+            "placeholder" : "ST00034, Cartagène, Cancer..."
         }
     },
     "charts": {
@@ -371,7 +422,7 @@
         "endocrine,.nutritional.and.metabolic.diseases": "Endocrine, nutritional and metabolic diseases",
         "diseases.of.the.eye.and.adnexa": "Diseases of the eye and adnexa",
         "diseases.of.the.skin.and.subcutaneous.tissue": "Diseases of the skin and subcutaneous tissue",
-        "__missing__": "No Data",
+        "nodata": "No Data",
         "neoplasm": "Neoplasm",
         "growth.abnormality": "Growth abnormality",
         "abnormality.of.the.cardiovascular.system": "Abnormality of the cardiovascular system",
@@ -464,11 +515,6 @@
         "phenotypes.hpo_category_keyword": "HPO Category",
         "phenotypes.hpo_term_keyword": "HPO Term",
         "vital_status": "Vital Status"
-    },
-    "search": {
-        "search": "Search ...",
-        "advanced.search": "Advanced Search",
-        "no.results": "No results found using those filters."
     },
     "repo": {
         "search": {

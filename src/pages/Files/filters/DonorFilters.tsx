@@ -7,9 +7,11 @@ import get from 'lodash/get';
 import GlobalSearch from 'components/containers/GlobalSearch';
 import SelectSets from 'components/functionnal/SaveSets/SelectSets';
 import { ISaveSet } from 'components/functionnal/SaveSets/type';
+import DropdownLabels from 'components/layouts/DropdownLabels';
 import { t } from 'locales/translate';
 import { DONOR_GLOBAL_SEARCH } from 'store/queries/files/filters';
 import { GET_ALL_SAVE_SETS } from 'store/queries/files/saveSets';
+import { getFiltersDictionary } from 'utils/dictionnary';
 import { enhanceFilters, getSelectedFilters } from 'utils/filters';
 import { updateFilters, updateQueryFilters } from 'utils/filters';
 import { createSubFilter, getSubFilter } from 'utils/filters/manipulator';
@@ -35,23 +37,29 @@ const DonorFilters: React.FC<IDonorFilters> = ({ data, history }) => {
         <>
             <GlobalSearch
                 filterKey="donorFilters"
-                filters={donorFilters}
-                onSelect={(value, key) => updateQueryFilters(history, key, createSubFilter(key, [value]))}
+                onSelect={(values) =>
+                    updateQueryFilters(history, 'submitter_donor_id', createSubFilter('submitter_donor_id', values))
+                }
+                placeHolder={t('search.donors.placeholder')}
                 query={DONOR_GLOBAL_SEARCH}
-                searchKey="submitter_donor_id"
+                searchKey={['submitter_donor_id']}
+                selectedItems={getSubFilter('submitter_donor_id', donorFilters) as string[]}
                 setCurrentOptions={(options) => {
                     const globalSearchOptions = get(options, `Donor.${Hits.COLLECTION}`, []);
 
                     return globalSearchOptions.map(({ node }: any) => ({
                         label: (
-                            <div>
-                                <MdPeople /> {node.submitter_donor_id}
-                            </div>
+                            <DropdownLabels
+                                Icon={<MdPeople />}
+                                label={node.submitter_donor_id}
+                                subLabel={node.study.hits.edges[0].node.name}
+                            />
                         ),
                         value: node.submitter_donor_id,
                     }));
                 }}
-                tooltipText={t('facet.search_suggest_tooltip_donors')}
+                title={t('search.donors.title')}
+                tooltipText={t('search.donors.tooltips')}
             />
             <SelectSets
                 data={[
@@ -89,6 +97,7 @@ const DonorFilters: React.FC<IDonorFilters> = ({ data, history }) => {
 
                 return (
                     <FilterContainer
+                        dictionary={getFiltersDictionary()}
                         filterGroup={filter}
                         filters={enhancedFilters}
                         key={filter.field}

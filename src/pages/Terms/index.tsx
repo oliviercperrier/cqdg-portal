@@ -9,6 +9,7 @@ import Header from 'components/interface/Header';
 import CardContainerNotched from 'components/layouts/Card/CardContainerNotched';
 import CardContent from 'components/layouts/Card/CardContent';
 import { t } from 'locales/translate';
+import { DEFAULT_LOGIN_LOCATION } from 'pages/Login';
 import { setTerms } from 'store/cache/terms';
 
 import styles from './Terms.module.scss';
@@ -25,7 +26,7 @@ const getText = () => {
 const Terms: React.FC = () => {
     const location = useLocation<any>();
     const history = useHistory<any>();
-    const from = qs.parse(location.search).redirectAfter || location.state.from || '/files';
+    const from = qs.parse(location.search).redirectAfter || location.state.from || DEFAULT_LOGIN_LOCATION;
     return (
         <div className={styles.container}>
             <Header isNavActive={false} />

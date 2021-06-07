@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { AiOutlineArrowRight } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
-import CountWithIcon from '@ferlab/ui/core/components/labels/CountWithIcon';
+import MultiLabel from '@ferlab/ui/core/components/labels/MultiLabel';
 import { useKeycloak } from '@react-keycloak/web';
 import { Button } from 'antd';
 import get from 'lodash/get';
@@ -23,6 +23,7 @@ import StudyIcon from 'components/interface/Icon/Study';
 import CardContainerNotched from 'components/layouts/Card/CardContainerNotched';
 import CardContent from 'components/layouts/Card/CardContent';
 import { t } from 'locales/translate';
+import { DEFAULT_LOGIN_LOCATION } from 'pages/Login';
 import { isAuthenticated } from 'providers/Keycloak/keycloak';
 import { getHomeStats } from 'services/api';
 import { formatChartData } from 'utils/formatChartData';
@@ -52,7 +53,7 @@ const Home = (): React.ReactElement => {
     let accountUrl = '';
     if (initialized) {
         accountUrl = keycloak.createRegisterUrl({
-            redirectUri: window.location.origin + '/files',
+            redirectUri: window.location.origin + DEFAULT_LOGIN_LOCATION,
         });
     }
     return (
@@ -96,35 +97,35 @@ const Home = (): React.ReactElement => {
                                         <h2>{t('home.hero.data.header')}</h2>
                                         <span>{t('home.hero.data.subtitle')}</span>
                                     </div>
-                                    <CountWithIcon
+                                    <MultiLabel
                                         Icon={<StudyIcon />}
-                                        label={t('home.hero.data.groups.study')}
-                                        total={totalStudies}
+                                        label={totalStudies}
+                                        subLabel={t('home.hero.data.groups.study')}
                                     />
-                                    <CountWithIcon
+                                    <MultiLabel
                                         Icon={<DonorIcon />}
-                                        label={t('home.hero.data.groups.donor')}
-                                        total={totalDonors}
+                                        label={totalDonors}
+                                        subLabel={t('home.hero.data.groups.donor')}
                                     />
-                                    <CountWithIcon
+                                    <MultiLabel
                                         Icon={<GenomeIcon />}
-                                        label={t('home.hero.data.groups.genome')}
-                                        total={102}
+                                        label={102}
+                                        subLabel={t('home.hero.data.groups.genome')}
                                     />
-                                    <CountWithIcon
+                                    <MultiLabel
                                         Icon={<ExomeIcon />}
-                                        label={t('home.hero.data.groups.exome')}
-                                        total={800}
+                                        label={800}
+                                        subLabel={t('home.hero.data.groups.exome')}
                                     />
-                                    <CountWithIcon
+                                    <MultiLabel
                                         Icon={<FileIcon />}
-                                        label={t('home.hero.data.groups.file')}
-                                        total={totalFiles}
+                                        label={totalFiles}
+                                        subLabel={t('home.hero.data.groups.file')}
                                     />
-                                    <CountWithIcon
+                                    <MultiLabel
                                         Icon={<CloudStorageIcon />}
-                                        label={fileSizes.symbol}
-                                        total={fileSizes.value}
+                                        label={fileSizes.value}
+                                        subLabel={fileSizes.symbol}
                                     />
                                 </CardContent>
                             </CardContainerNotched>
@@ -141,6 +142,8 @@ const Home = (): React.ReactElement => {
                                             'key',
                                             'doc_count'
                                         )}
+                                        enableGridX
+                                        enableGridY={false}
                                         enableLabel={false}
                                         layout="horizontal"
                                         margin={{ bottom: 50, left: 5, right: 20, top: 0 }}
@@ -184,6 +187,8 @@ const Home = (): React.ReactElement => {
                                             'key',
                                             'doc_count'
                                         )}
+                                        enableGridX
+                                        enableGridY={false}
                                         enableLabel={false}
                                         layout="horizontal"
                                         margin={{ bottom: 50, left: 5, right: 20, top: 10 }}
@@ -210,7 +215,7 @@ const Home = (): React.ReactElement => {
                                     </CardContent>
                                 </CardContainerNotched>
                             </Button>
-                            <Button href={`${docsRootUrl}/dictionary/`} target="_blank" type="link">
+                            <Button href={`${docsRootUrl}/dictionaire/`} target="_blank" type="link">
                                 <CardContainerNotched className="card-container" type="hover">
                                     <CardContent cardType="stackCenter">
                                         <DataIcon />
@@ -220,7 +225,7 @@ const Home = (): React.ReactElement => {
                                 </CardContainerNotched>
                             </Button>
                             <Button
-                                href={`${docsRootUrl}/submission/submitting-clinical-data/`}
+                                href={`${docsRootUrl}/soumission/soumettre-donnees-cliniques/`}
                                 target="_blank"
                                 type="link"
                             >

@@ -110,18 +110,30 @@ export const updateQueryFilters = (history: any, field: string, filters: TSqonGr
 };
 
 const booleanValues = ['1', '0'];
+
 export const enhanceFilters = (aggregations: IAggregations, key: string): IFilter[] => {
     const aggregation = aggregations[key.split('.').join('__')];
-    return aggregation
-        ? aggregation.buckets.map((f) => ({
-              data: {
-                  count: f.doc_count,
-                  key: booleanValues.includes(f.key) ? `${f.key === '1' ? true : false}` : f.key,
-              },
-              id: f.key.trim().toLowerCase().split(' ').join('.'),
-              name: t(`aggregation.${f.key.trim().toLowerCase().split(' ').join('.')}`, {}, f.key),
-          }))
+    const newData: IFilter[] = aggregation
+        ? aggregation.buckets.map((f) => {
+              const newKeyValue = f.key.includes('missing') ? 'No Data' : f.key;
+              return {
+                  data: {
+                      count: f.doc_count,
+                      key: booleanValues.includes(newKeyValue) ? `${newKeyValue === '1' ? true : false}` : newKeyValue,
+                  },
+                  id: f.key.trim().toLowerCase().split(' ').join('.'),
+                  name: t(`aggregation.${newKeyValue.trim().toLowerCase().split(' ').join('.')}`, {}, newKeyValue),
+              };
+          })
         : [{ data: {}, id: key, name: key }];
+    const indexMissingData = newData.findIndex((item: IFilter) => item.data.key === 'No Data');
+    if (indexMissingData > 0) {
+        const missingData: IFilter = newData[indexMissingData];
+        newData.splice(indexMissingData, 1);
+        newData.push(missingData);
+    }
+
+    return newData;
 };
 
 const isFilterSelected = (filters: ISqonGroupFilter, filterGroup: IFilterGroup, key: string) => {
@@ -181,17 +193,25 @@ export const mapFilter = (filters: ISqonGroupFilter, mapping: Map<string, string
     const filtersContent = get(filters, 'content', [] as IValueFilter[]);
     const remapedFilterContent: IValueFilter[] = filtersContent.map((filter: IValueFilter) => {
         const field = get(filter, 'content.field', null);
+        const values = get(filter, 'content.value', []).map((v: string) => v.replace('No Data', '__missing__'));
+        const newFilter = {
+            ...filter,
+            content: {
+                ...filter.content,
+                value: values,
+            },
+        };
         if (mapping.has(field)) {
             return {
-                ...filter,
+                ...newFilter,
                 content: {
-                    ...filter.content,
+                    ...newFilter.content,
                     field: mapping.get(field)!,
                 },
             };
         }
 
-        return filter;
+        return newFilter;
     });
 
     if (isEmpty(remapedFilterContent)) {

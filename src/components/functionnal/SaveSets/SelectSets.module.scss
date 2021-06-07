@@ -4,14 +4,6 @@
     margin: 1rem 0;
 }
 
-.tag {
-    color: $white;
-    background: $blue-8;
-    > * {
-        color: $white;
-    }
-}
-
 .emptyDataContainer {
     background: $gray-3;
     padding: .8rem 1.6rem;

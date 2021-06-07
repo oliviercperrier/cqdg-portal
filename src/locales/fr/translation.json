@@ -81,6 +81,40 @@
             "warning": "Max. {max} items à la fois.",
             "warning.exceed": "Max. {max} items à la fois.\nLes {max} premiers items seront traités."
         },
+        "filters": {
+            "actions": {
+                "all": "Selectionner tout",
+                "none": "Effacer",
+                "clear": "Effacer",
+                "less": "Voir -",
+                "more": "De plus",
+                "apply": "Appliquer"
+            },
+            "messages": {
+                "empty": "Aucune valeur trouvé pour cette requête"
+            },
+            "checkbox": {
+                "placeholder": "Recherche..."
+            }
+        },
+        "querybuilder": {
+            "empty": "Utiliser les filtres pour bâtir une requête",
+            "actions": {
+                "new": "Nouvelle requête",
+                "clear": {
+                    "button": "Tout effacer",
+                    "cancel": "Annuler",
+                    "confirm": "Effacer",
+                    "title": "Effacer les requêtes?",
+                    "description": "Vous êtes sur le point d'effacer toutes les requêtes. Ils seront perdus pour toujours."
+                },
+                "delete": {
+                    "cancel": "Annuler",
+                    "confirm": "Effacer",
+                    "title": "Effacer cette requête?"
+                }
+            }
+        },
         "cards": {
             "details": "Détails"
         },
@@ -124,14 +158,14 @@
         "actions": {
             "manifest": "Manifeste",
             "access": "Demande d'accès",
-            "link.summary": "Voir dans le répertoire"
+            "link.summary": "Repertoire de fichiers"
         },
         "title": {
             "summary": "Résumé",
             "access": "Accès aux données",
             "clinical": "Données cliniques disponibles",
             "categories": "Nombre par catégorie de données",
-            "strategy": "Nombre par stratégie Experimentale"
+            "strategy": "Nombre par stratégie experimentale"
         },
         "modal": {
             "access.title": "Demande d'accès",
@@ -192,6 +226,23 @@
                 "title": "Soumettre des données",
                 "text": "Guide pour la soumission de données"
             }
+        }
+    },
+    "search": {
+        "files": {
+            "tooltips" : "Recherche par code ou nom de fichier",
+            "title" : "Recherche de fichiers",
+            "placeholder" : "FS00456, 51dA8Y.cram..."
+        },
+        "donors": {
+            "tooltips" : "Recherche par code de donneur",
+            "title" : "Recherche de donneurs",
+            "placeholder" : "PT00068"
+        },
+        "studies": {
+            "tooltips" : "Recherche par nom, code, ou mot clef (ex: Cancer) de l'étude",
+            "title" : "Recherche d'études",
+            "placeholder" : "ST00034, Cartagène, Cancer..."
         }
     },
     "charts": {
@@ -272,7 +323,7 @@
         "search": "Recherche",
         "search_suggest_tooltip_files": "Rechercher par Nom de fichier",
         "search_suggest_tooltip_donors": "Rechercher par ID de donneur",
-        "is_harmonized": "Données Harmonisées",
+        "is_harmonized": "Données harmonisées",
         "data_type": "Type de données",
         "experimental_strategy": "Stratégie expérimentale",
         "platform": "Platforme",
@@ -372,7 +423,7 @@
         "endocrine,.nutritional.and.metabolic.diseases": "Endocrine, nutritional and metabolic diseases",
         "diseases.of.the.eye.and.adnexa": "Diseases of the eye and adnexa",
         "diseases.of.the.skin.and.subcutaneous.tissue": "Diseases of the skin and subcutaneous tissue",
-        "__missing__": "Aucune donnée",
+        "nodata": "Aucune donnée",
         "neoplasm": "Neoplasm",
         "growth.abnormality": "Growth abnormality",
         "abnormality.of.the.cardiovascular.system": "Abnormality of the cardiovascular system",
@@ -465,11 +516,6 @@
         "phenotypes.hpo_category_keyword": "Categorie HPO",
         "phenotypes.hpo_term_keyword": "Terme HPO",
         "vital_status": "État vital"
-    },
-    "search": {
-        "search": "Recherche ...",
-        "advanced.search": "Advanced Search",
-        "no.results": "Aucun resultats trouvés avec ces filtres."
     },
     "repo": {
         "search": {
