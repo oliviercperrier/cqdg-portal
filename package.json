@@ -71,7 +71,6 @@
         ]
     },
     "devDependencies": {
-        "@babel/core": "^7.12.3",
         "@types/classnames": "^2.2.11",
         "@types/dateformat": "^3.0.1",
         "@types/file-saver": "^2.0.1",
