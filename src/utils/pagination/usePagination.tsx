@@ -15,7 +15,10 @@ type TPagination = {
     pageSize: number;
 };
 
-export const usePagination = (data: any, initialState: IPageFilterState = { first: 25, offset: 0 }): TPagination => {
+export const usePagination = (
+    data: Record<string, any>,
+    initialState: IPageFilterState = { first: 25, offset: 0 }
+): TPagination => {
     const [pageFilter, setPageFilter] = useState<IPageFilterState>(initialState);
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [pageSize, setPageSize] = useState<number>(25);

@@ -13,6 +13,7 @@ export type TSortableItem = {
     hidden: boolean;
     movable: boolean;
     initialOrder: number;
+    translate: string;
 };
 
 type TRenderItem = (item: TSortableItem) => React.ReactNode;

@@ -6,7 +6,7 @@ import { t } from 'locales/translate';
 
 import styles from './Compact.module.scss';
 
-const Compact = () => {
+const Compact: React.FC = () => {
     const intl = useIntl();
 
     return (

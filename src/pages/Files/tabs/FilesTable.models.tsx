@@ -3,6 +3,7 @@ import { MdLock, MdLockOpen, MdLockOutline } from 'react-icons/md';
 import InternalLink from 'components/functionnal/InternalLink';
 import { t } from 'locales/translate';
 import { Routes } from 'routes';
+import { INode } from 'types/interface/data';
 import { addFilter } from 'utils/filters/manipulator';
 import { EFileInputType, formatFileSize } from 'utils/formatFileSize';
 
@@ -12,7 +13,7 @@ export const FilesModel = [
         id: 'data_access',
         initialOrder: 1,
         movable: false,
-        render: ({ node }: any) =>
+        render: ({ node }: INode): React.ReactElement =>
             node.data_access.toLowerCase() === 'controled' ? (
                 <MdLockOutline className="table-locks table-lock" />
             ) : (
@@ -48,7 +49,7 @@ export const FilesModel = [
         id: 'donors.hits.edges[0].node.submitter_donor_id',
         initialOrder: 3,
         movable: true,
-        render: ({ node }: any) => {
+        render: ({ node }: INode): React.ReactElement => {
             const linkProps =
                 node.donors.hits.total > 1
                     ? {
@@ -72,7 +73,7 @@ export const FilesModel = [
         id: 'study.hits.edges[0].node.short_name_keyword',
         initialOrder: 4,
         movable: true,
-        render: ({ node }: any) => (
+        render: ({ node }: INode): React.ReactElement => (
             <InternalLink params={{ id: node.study.hits.edges[0].node.study_id_keyword }} path={Routes.STUDY}>
                 {node.study.hits.edges[0].node.name}
             </InternalLink>
@@ -122,7 +123,7 @@ export const FilesModel = [
         id: 'file_size',
         initialOrder: 6,
         movable: true,
-        render: ({ node }: any) => formatFileSize(node.file_size, {}, EFileInputType.MB),
+        render: ({ node }: INode): string => formatFileSize(node.file_size, {}, EFileInputType.MB) as string,
         sortDirection: ['ascend', 'descend'],
         sorter: {
             compare: (a: Record<string, any>, b: Record<string, any>): number => a.node.file_size - b.node.file_size,

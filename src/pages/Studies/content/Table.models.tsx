@@ -1,6 +1,7 @@
 import InternalLink from 'components/functionnal/InternalLink';
 import { t } from 'locales/translate';
 import { Routes } from 'routes';
+import { ITableColumnItem } from 'types/interface';
 import { addFilter } from 'utils/filters/manipulator';
 
 const StudyModel = [
@@ -14,6 +15,7 @@ const StudyModel = [
             </InternalLink>
         ),
         title: t('facet.study.study_id_keyword'),
+        translate: 'facet.study.study_id_keyword',
     },
     {
         dataIndex: ['node', 'name'],
@@ -26,6 +28,7 @@ const StudyModel = [
             multiple: 1,
         },
         title: t('facet.study.name'),
+        translate: 'facet.study.name',
     },
     {
         dataIndex: ['node', 'domain'],
@@ -39,6 +42,7 @@ const StudyModel = [
             multiple: 2,
         },
         title: t('facet.domain'),
+        translate: 'facet.domain',
     },
     {
         dataIndex: ['node', 'population'],
@@ -52,6 +56,7 @@ const StudyModel = [
             multiple: 3,
         },
         title: t('facet.population'),
+        translate: 'facet.population',
     },
     {
         hidden: false,
@@ -67,6 +72,7 @@ const StudyModel = [
             </InternalLink>
         ),
         title: t('global.donors.title'),
+        translate: 'global.donors.title',
     },
     {
         hidden: false,
@@ -82,7 +88,8 @@ const StudyModel = [
             </InternalLink>
         ),
         title: t('global.files.title'),
+        translate: 'global.files.title',
     },
 ];
 
-export const presetModel = StudyModel.map((item, index) => ({ ...item, initialOrder: index }));
+export const presetModel: ITableColumnItem[] = StudyModel.map((item, index) => ({ ...item, initialOrder: index }));

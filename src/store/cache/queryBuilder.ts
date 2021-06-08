@@ -14,6 +14,6 @@ export const getQueryBuilderCache = (type: string): any => {
     }
 };
 
-export const setQueryBuilderCache = (type: string, items: any): void => {
+export const setQueryBuilderCache = (type: string, items: Record<string, any>): void => {
     localStorage.setItem(`query-builder-cache-${type}`, JSON.stringify(items));
 };

@@ -1,1 +1,3 @@
-export const noDuplicate = (left: any, right: any) => [...new Set<string[]>([...left, ...right])];
+export const noDuplicate = (left: string[], right: string[]): string[][] => [
+    ...new Set<string[]>([...left, ...right] as Iterable<string[]>),
+];

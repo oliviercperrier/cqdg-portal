@@ -5,6 +5,7 @@ import {
     IFilterRange,
     VisualType,
 } from '@ferlab/ui/core/components/filters/types';
+import { History } from 'history';
 import get from 'lodash/get';
 import isEmpty from 'lodash/isEmpty';
 
@@ -83,13 +84,13 @@ const createSQONFromFilters = (filterGroup: IFilterGroup, selectedFilters: IFilt
     }
 };
 
-export const updateFilters = (history: any, filterGroup: IFilterGroup, selected: IFilter[]): void => {
+export const updateFilters = (history: History, filterGroup: IFilterGroup, selected: IFilter[]): void => {
     const newSelectedFilters: TSqonGroupContent = createSQONFromFilters(filterGroup, selected);
 
     updateQueryFilters(history, filterGroup.field, newSelectedFilters);
 };
 
-export const updateQueryFilters = (history: any, field: string, filters: TSqonGroupContent): void => {
+export const updateQueryFilters = (history: History, field: string, filters: TSqonGroupContent): void => {
     const currentFilter = getFiltersQuery();
     const newField = field.replace('__', '.');
 
