@@ -1,3 +1,4 @@
+import { History } from 'history';
 import get from 'lodash/get';
 import isEmpty from 'lodash/isEmpty';
 import qs from 'query-string';
@@ -13,7 +14,7 @@ const xssConfig: IFilterXSSOptions = {
     whiteList: {}, // empty, means filter out all tags
 };
 
-export const updateQueryParam = (history: any, key: string, value: any): void => {
+export const updateQueryParam = (history: History, key: string, value: Record<string, any> | string): void => {
     const query = getQueryParams();
     if (isEmpty(value) && !query[key]) {
         return;

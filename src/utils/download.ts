@@ -3,6 +3,8 @@ import get from 'lodash/get';
 import { json2tsv } from 'tsv-json';
 
 import { translate } from 'locales/translate';
+import { ITableColumnItem } from 'types/interface';
+import { INode } from 'types/interface/data';
 
 interface IDownloadType {
     [key: string]: string;
@@ -22,9 +24,9 @@ export const download = (body: string, format: string, filename: string): void =
     saveAs(new Blob([body], { type }), filename);
 };
 
-export const formatToTSV = (columns: any, data: any): string => {
-    const headerColumns = columns.map((columnData: any) => translate(columnData.translate));
-    const formatedData: string[][] = data.map((datum: any) => {
+export const formatToTSV = (columns: ITableColumnItem[], data: INode[]): string => {
+    const headerColumns = columns.map((columnData: ITableColumnItem) => translate(columnData.translate));
+    const formatedData: string[][] = data.map((datum: INode) => {
         const aggData: any = [];
         columns.forEach((dataColumn: any) => {
             let dataToUse = String(get(datum.node, dataColumn.id, ''));

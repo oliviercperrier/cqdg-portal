@@ -8,7 +8,7 @@ import { GET_LOCALE } from 'store/queries/locales';
 
 export const defaultLocale = 'en';
 
-const intlErrorHandler = (error: any) => {
+const intlErrorHandler = () => {
     if (IS_DEV_ENV) {
         //console.log(error);
     }

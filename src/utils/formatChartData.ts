@@ -1,12 +1,14 @@
 import isEmpty from 'lodash/isEmpty';
 
+import { INode } from 'types/interface/data';
+
 interface IChart {
     id: string;
     value: string;
     color?: string;
 }
 
-export const formatChartData = (data: any, key: string, value: string, colors: string[] = []) => {
+export const formatChartData = (data: INode[], key: string, value: string, colors: string[] = []): IChart[] => {
     if (isEmpty(data)) return [];
     return data
         .filter((item: any) => item[key] !== '__missing__')
@@ -39,5 +41,5 @@ export const getCommonColors = (): string[] => [
     '#1f78b4',
 ];
 
-export const addBarChartColor = (data: any, colors: string[]) =>
+export const addBarChartColor = (data: Record<string, any>, colors: string[]): IChart[] =>
     data.map((item: any, i: number) => ({ ...item, color: colors[i % (colors.length - 1)] }));

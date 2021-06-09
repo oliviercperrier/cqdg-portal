@@ -6,6 +6,7 @@ export interface ITableColumnItem {
     initialOrder: number;
     movable: boolean;
     title: React.ReactNode;
+    translate: string;
 }
 
 export interface ITablePage {

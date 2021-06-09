@@ -4,7 +4,7 @@ import get from 'lodash/get';
 import isEmpty from 'lodash/isEmpty';
 
 import { CLINICAL_DATA_API, GRAPHQL_API } from 'config/constants';
-import { getTokens } from 'providers/Keycloak/tokens';
+import { getToken } from 'providers/Keycloak/keycloak';
 import { ISqonGroupFilter } from 'types/interface/filters';
 import { getDefaultFilters } from 'utils/filters';
 import { downloadFile } from 'utils/url/download';
@@ -24,7 +24,7 @@ export const getHomeStats = async (): Promise<Record<string, any>> => {
 };
 
 export const getClinicalData = async (filters: ISqonGroupFilter): Promise<boolean> => {
-    const { token } = getTokens();
+    const token = getToken();
     const data = isEmpty(filters) ? getDefaultFilters() : filters;
     const response = await clinicalRestAPI.post(`/download/clinical`, data, {
         headers: {

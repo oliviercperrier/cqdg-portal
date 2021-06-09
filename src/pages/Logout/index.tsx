@@ -5,7 +5,6 @@ import { useKeycloak } from '@react-keycloak/web';
 import { Spin } from 'antd';
 import get from 'lodash/get';
 
-import { destroyTokens } from 'providers/Keycloak/tokens';
 import { setTerms } from 'store/cache/terms';
 
 const Logout: React.FC = () => {
@@ -15,7 +14,6 @@ const Logout: React.FC = () => {
 
     useEffect(() => {
         if (initialized && keycloak && isAuthenticated) {
-            destroyTokens();
             setTerms(false);
 
             keycloak.logout({

@@ -5,7 +5,6 @@ import { IProvider } from 'providers';
 
 import keycloak from './keycloak';
 import { setPermissions } from './permissions';
-import { getTokens, setTokens } from './tokens';
 
 const eventLogger = (event: unknown, error: unknown) => {
     // eslint-disable-next-line no-console
@@ -13,17 +12,11 @@ const eventLogger = (event: unknown, error: unknown) => {
 };
 
 const tokenHandler = (tokens: any) => {
-    setTokens(tokens);
     setPermissions(tokens);
 };
 
 export default ({ children }: IProvider): ReactElement => (
-    <KeycloakProvider
-        authClient={keycloak}
-        initOptions={{ ...getTokens(), timeSkew: 5 }}
-        onEvent={eventLogger}
-        onTokens={tokenHandler}
-    >
+    <KeycloakProvider authClient={keycloak} onEvent={eventLogger} onTokens={tokenHandler}>
         {children}
     </KeycloakProvider>
 );

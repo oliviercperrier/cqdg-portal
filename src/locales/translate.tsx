@@ -9,7 +9,7 @@ export const t = (key: string, values = {}, defaultMessage = ''): React.ReactEle
     return <FormattedMessage defaultMessage={defaultMessage} id={newKey} values={values} />;
 };
 
-export const translate = (key: string) => {
+export const translate = (key: string): string => {
     if (!key) {
         return '';
     }

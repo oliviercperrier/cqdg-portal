@@ -1,5 +1,7 @@
 import { makeVar } from '@apollo/client';
 
+import { ITableColumnItem } from 'types/interface';
+
 const getTableColumns = (): Record<string, any> => JSON.parse(localStorage.getItem('tableColumns') || '{}') || {};
 export const configureColumns = (original: Array<any>, newOrder: Array<any>): Array<any> => {
     const newDataOrder: Array<any> = [];
@@ -14,11 +16,18 @@ export const configureColumns = (original: Array<any>, newOrder: Array<any>): Ar
     return newDataOrder;
 };
 
-export const setTableColumn = (key: string, data: any): void => {
+type TableColumns = {
+    hidden: boolean;
+    order: number;
+};
+export const setTableColumn = (key: string, data: ITableColumnItem[]): void => {
     tableColumns({
         ...tableColumns(),
         [key]: data.reduce(
-            (acc: string[], item: any) => [...acc, { hidden: item.hidden, order: item.initialOrder }],
+            (acc: TableColumns[], item: ITableColumnItem) => [
+                ...acc,
+                { hidden: item.hidden, order: item.initialOrder },
+            ],
             []
         ),
     });
