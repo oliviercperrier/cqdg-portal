@@ -113,11 +113,13 @@ const Study: React.FC<RouteComponentProps<any>> = ({ match: { params } }) => {
                 </Card>
                 <Card className={`${styles.access} ant-card-body-small`} title={t('entity.title.access')}>
                     <DescriptionList>
-                        <ListItem label={t(`facet.access_limitations`)}>
+                        <ListItem label={t(`facet.access_limitations`)} labelClassName={styles.duoCode}>
                             {studyData.data_access_codes.access_limitations}
                         </ListItem>
-                        <ListItem label={t(`facet.access_requirements`)}>
-                            {studyData.data_access_codes.access_requirements.join(',')}
+                        <ListItem label={t(`facet.access_requirements`)} labelClassName={styles.duoCode}>
+                            {studyData.data_access_codes.access_requirements.map((item: string) => (
+                                <p>{item}</p>
+                            ))}
                         </ListItem>
                         <ListItem label={t(`global.access_authority`)}>{studyData.access_authority}</ListItem>
                     </DescriptionList>
