@@ -16,8 +16,7 @@
             "summary access"
             "summary ."
             "clinical category"
-            "experimental category"
-            "experimental .";
+            "clinical experimental"
         }
         @media screen and (min-width: 1000px) and (max-width: 1099px) {
             grid-template-areas: 
@@ -82,6 +81,6 @@
     }
 }
 
-.data-progress {
-    max-width: 50px;
+.capitalize {
+    text-transform: capitalize;
 }

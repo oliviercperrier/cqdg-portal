@@ -6,6 +6,7 @@ import { useKeycloak } from '@react-keycloak/web';
 import { Spin } from 'antd';
 import get from 'lodash/get';
 
+import { isTermsAccepted } from 'store/cache/terms';
 import { GET_LOCALE } from 'store/queries/locales';
 
 interface ILocation {
@@ -33,9 +34,13 @@ const Login = (): React.ReactElement => {
             if (redirectLocation === '/') {
                 redirectLocation = DEFAULT_LOGIN_LOCATION;
             }
+            let redirectUri = `${window.location.origin}/terms?redirectAfter=${redirectLocation}`;
+            if (isTermsAccepted()) {
+                redirectUri = `${window.location.origin}${redirectLocation}`;
+            }
             keycloak.login({
                 locale,
-                redirectUri: `${window.location.origin}/terms?redirectAfter=${redirectLocation}`,
+                redirectUri,
             });
         }
     }, [initialized]);

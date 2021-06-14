@@ -38,12 +38,12 @@ const DonorFilters: React.FC<IDonorFilters> = ({ data, history }) => {
             <GlobalSearch
                 filterKey="donorFilters"
                 onSelect={(values) =>
-                    updateQueryFilters(history, 'submitter_donor_id', createSubFilter('submitter_donor_id', values))
+                    updateQueryFilters(history, 'internal_donor_id', createSubFilter('internal_donor_id', values))
                 }
                 placeHolder={t('search.donors.placeholder')}
                 query={DONOR_GLOBAL_SEARCH}
-                searchKey={['submitter_donor_id']}
-                selectedItems={getSubFilter('submitter_donor_id', donorFilters) as string[]}
+                searchKey={['internal_donor_id']}
+                selectedItems={getSubFilter('internal_donor_id', donorFilters) as string[]}
                 setCurrentOptions={(options) => {
                     const globalSearchOptions = get(options, `Donor.${Hits.COLLECTION}`, []);
 
@@ -51,11 +51,11 @@ const DonorFilters: React.FC<IDonorFilters> = ({ data, history }) => {
                         label: (
                             <DropdownLabels
                                 Icon={<MdPeople />}
-                                label={node.submitter_donor_id}
+                                label={node.internal_donor_id}
                                 subLabel={node.study.hits.edges[0].node.name}
                             />
                         ),
-                        value: node.submitter_donor_id,
+                        value: node.internal_donor_id,
                     }));
                 }}
                 title={t('search.donors.title')}

@@ -18,7 +18,7 @@ import { useFilters } from 'utils/filters/useFilters';
 import { Hits } from 'utils/graphql/query';
 
 import presetFilters from './StudyFilter.model';
-const globalSearchKey = 'study_id_keyword';
+const globalSearchKey = 'internal_study_id';
 
 const StudyFilters: React.FC = () => {
     const history = useHistory();
@@ -54,11 +54,11 @@ const StudyFilters: React.FC = () => {
                         label: (
                             <DropdownLabels
                                 Icon={<MdAssignment />}
-                                label={node.study_id_keyword}
+                                label={node.internal_study_id}
                                 subLabel={node.name}
                             />
                         ),
-                        value: node.study_id_keyword,
+                        value: node.internal_study_id,
                     }));
                 }}
                 title={t('search.studies.title')}

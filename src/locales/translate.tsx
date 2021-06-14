@@ -5,7 +5,7 @@ import translations from 'locales';
 import { getLocale } from 'store/cache/locales';
 
 export const t = (key: string, values = {}, defaultMessage = ''): React.ReactElement => {
-    const newKey = key.replace('__', '.');
+    const newKey = key.replaceAll('__', '.');
     return <FormattedMessage defaultMessage={defaultMessage} id={newKey} values={values} />;
 };
 

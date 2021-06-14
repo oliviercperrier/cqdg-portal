@@ -3,7 +3,8 @@ import { AiOutlineDownload } from 'react-icons/ai';
 import { RouteComponentProps } from 'react-router-dom';
 import MultiLabel from '@ferlab/ui/core/components/labels/MultiLabel';
 import StackLayout from '@ferlab/ui/core/layout/StackLayout';
-import { Card, List, PageHeader, Progress, Spin } from 'antd';
+import { Card, List, PageHeader, Spin } from 'antd';
+import get from 'lodash/get';
 
 import Badge, { EFormat, ESize, EType } from 'components/functionnal/Badge';
 import DescriptionList, { ListItem } from 'components/functionnal/DescriptionList';
@@ -21,15 +22,15 @@ import { DONOR_PAGE_DATA } from 'store/queries/donor';
 import { addFilter } from 'utils/filters/manipulator';
 import { useFilters } from 'utils/filters/useFilters';
 import { EFileInputType, formatFileSize } from 'utils/formatFileSize';
-import { useLazyResultQuery } from 'utils/graphql/query';
+import { Hits, useLazyResultQuery } from 'utils/graphql/query';
+
+import { dataCategoriesModel, experimentalStrategiesModel } from './Donor.model';
 
 import styles from './Donor.module.scss';
 
-const getRandom = (value: number) => Math.floor(Math.random() * value) + 1;
-
 const Study: React.FC<RouteComponentProps<any>> = ({ match: { params } }) => {
     const { id } = params;
-    const filters = addFilter(null, 'submitter_donor_id', [id]);
+    const filters = addFilter(null, 'internal_donor_id', [id]);
     const { mappedFilters } = useFilters(filters);
     const { result } = useLazyResultQuery<any>(DONOR_PAGE_DATA, {
         variables: mappedFilters,
@@ -39,9 +40,9 @@ const Study: React.FC<RouteComponentProps<any>> = ({ match: { params } }) => {
     }
 
     const donorData = result.Donor.hits.edges[0].node;
-    const fileSizeSummary = result.File.aggregations.file_size.stats.sum;
+    const studyData = donorData.study.hits.edges[0].node;
+    const fileSizeSummary = result.Donor.aggregations.files__file_size.stats.sum;
     const fileSizes = formatFileSize(fileSizeSummary, { output: 'object' }, EFileInputType.MB) as Record<string, any>;
-
     return (
         <div className={styles.container}>
             <PageHeader
@@ -53,7 +54,7 @@ const Study: React.FC<RouteComponentProps<any>> = ({ match: { params } }) => {
                     </DownloadClinicalButton>,
                 ]}
                 onBack={() => null}
-                title={donorData.submitter_donor_id}
+                title={donorData.internal_donor_id}
             />
             <div className={styles.dataContent}>
                 <CardContainerNotched className={styles.dataSummary} type="shadow">
@@ -81,23 +82,20 @@ const Study: React.FC<RouteComponentProps<any>> = ({ match: { params } }) => {
                     title={t('entity.title.summary')}
                 >
                     <DescriptionList>
-                        <ListItem label={t(`facet.submitter_donor_id`)}>{donorData.submitter_donor_id}</ListItem>
-                        <ListItem label={t(`facet.study_id_keyword`)}>
-                            <InternalLink
-                                params={{ id: donorData.study.hits.edges[0].node.study_id_keyword }}
-                                path={Routes.STUDY}
-                            >
-                                {donorData.study.hits.edges[0].node.study_id_keyword}
+                        <ListItem label={t(`facet.internal_donor_id`)}>{donorData.internal_donor_id}</ListItem>
+                        <ListItem label={t(`facet.internal_study_id`)}>
+                            <InternalLink params={{ id: studyData.internal_study_id }} path={Routes.STUDY}>
+                                {studyData.internal_study_id}
                             </InternalLink>
                         </ListItem>
-                        <ListItem label={t(`facet.domain`)}>{donorData.study.hits.edges[0].node.domain}</ListItem>
+                        <ListItem label={t(`facet.domain`)}>{studyData.domain}</ListItem>
                         <ListItem label={t(`facet.keywords`)}>Cancer</ListItem>
                         <ListItem label={t(`facet.files`)}>
                             <InternalLink filters={filters} path={Routes.FILES} query={{ searchTableTab: 'files' }}>
                                 {donorData.files.hits.total}
                             </InternalLink>
                         </ListItem>
-                        <ListItem label={t(`facet.creation_date`)}>27/04/2021</ListItem>
+                        <ListItem label={t(`facet.creation_date`)}>{donorData.study_version_creation_date}</ListItem>
                     </DescriptionList>
                     <Card
                         bordered={false}
@@ -105,25 +103,17 @@ const Study: React.FC<RouteComponentProps<any>> = ({ match: { params } }) => {
                         title={t('entity.title.clinical')}
                     >
                         <List
-                            dataSource={[
-                                'Diagnosis',
-                                'Phenotype',
-                                'Exposure',
-                                'Treatment',
-                                'Follow-up (cancer)',
-                                'Family Relationship',
-                                'Family History',
-                                'Biospecimens',
-                            ]}
+                            dataSource={get(donorData, `summary.clinical_data_available.${Hits.COLLECTION}`, [])}
                             grid={{ gutter: 16 }}
-                            renderItem={(item) => (
+                            renderItem={(item: any) => (
                                 <List.Item>
                                     <Badge
+                                        className={styles.capitalize}
                                         format={EFormat.ICON}
                                         size={ESize.SMALL}
-                                        type={getRandom(2) === 1 ? EType.SUCCESS : EType.ERROR}
+                                        type={item.node.available ? EType.SUCCESS : EType.ERROR}
                                     >
-                                        {item}
+                                        {item.node.key.replace('_', ' ')}
                                     </Badge>
                                 </List.Item>
                             )}
@@ -133,106 +123,26 @@ const Study: React.FC<RouteComponentProps<any>> = ({ match: { params } }) => {
                 <Card className={`${styles.access} ant-card-body-small`} title={t('entity.title.access')}>
                     <DescriptionList>
                         <ListItem label={t(`facet.access_limitations`)}>
-                            Disease-specifc research (DUO 00000007)
+                            {studyData.data_access_codes.access_limitations}
                         </ListItem>
                         <ListItem label={t(`facet.access_requirements`)}>
-                            Ethics approval required (DUO 00000021) Collaboration required (DUO 00000013)
+                            {studyData.data_access_codes.access_requirements.join(', ')}
                         </ListItem>
-                        <ListItem label={t(`global.access_authority`)}>data-access@rhmds.ca</ListItem>
+                        <ListItem label={t(`global.access_authority`)}>{studyData.access_authority}</ListItem>
                     </DescriptionList>
                 </Card>
 
                 <Card className={`${styles.category}`} title={t('entity.title.categories')}>
                     <TableContent
-                        columns={[
-                            { dataIndex: 'category', title: t('global.category') },
-                            { className: 'numerical', dataIndex: 'files', title: t('global.files.title') },
-                            {
-                                render: (data) => {
-                                    if (data.files === 0) {
-                                        return '--';
-                                    }
-                                    return (
-                                        <Progress
-                                            className={styles['data-progress']}
-                                            percent={(data.files / donorData.files.hits.total) * 100}
-                                            showInfo={false}
-                                            strokeLinecap="square"
-                                        />
-                                    );
-                                },
-
-                                title: `(n=${donorData.files.hits.total})`,
-                                width: 85,
-                            },
-                        ]}
-                        dataSource={[
-                            {
-                                category: 'Sequencing reads',
-                                files: getRandom(donorData.files.hits.total),
-                            },
-                            { category: 'Transcriptome profiling', files: 0 },
-                            {
-                                category: 'Single nucleotide variation',
-                                files: getRandom(donorData.files.hits.total),
-                            },
-                            { category: 'Copy number variation', files: 0 },
-                            {
-                                category: 'DNA methylation',
-                                files: getRandom(donorData.files.hits.total),
-                            },
-                            {
-                                category: 'Clinical supplements',
-                                files: getRandom(donorData.files.hits.total),
-                            },
-                            {
-                                category: 'Biospecimen supplements',
-                                files: getRandom(donorData.files.hits.total),
-                            },
-                        ]}
+                        columns={dataCategoriesModel(donorData)}
+                        dataSource={get(donorData, `summary.data_category.${Hits.COLLECTION}`, [])}
                         pagination={false}
                     />
                 </Card>
                 <Card className={`${styles.experimental}`} title={t('entity.title.strategy')}>
                     <TableContent
-                        columns={[
-                            { dataIndex: 'strategy', title: t('global.strategy') },
-                            { className: 'numerical', dataIndex: 'files', title: t('global.files.title') },
-                            {
-                                render: (data) => {
-                                    if (data.files === 0) {
-                                        return '--';
-                                    }
-                                    return (
-                                        <Progress
-                                            className={styles['data-progress']}
-                                            percent={(data.files / donorData.files.hits.total) * 100}
-                                            showInfo={false}
-                                            strokeLinecap="square"
-                                        />
-                                    );
-                                },
-
-                                title: `(n=${donorData.files.hits.total})`,
-                                width: 85,
-                            },
-                        ]}
-                        dataSource={[
-                            {
-                                files: getRandom(donorData.files.hits.total),
-                                strategy: 'WGS',
-                            },
-                            { files: 0, strategy: 'RNA-seq' },
-                            {
-                                files: getRandom(donorData.files.hits.total),
-                                strategy: 'Genotype array',
-                            },
-                            { files: 0, strategy: 'miRNA-seq' },
-                            {
-                                files: getRandom(donorData.files.hits.total),
-                                strategy: 'Methylation array',
-                            },
-                        ]}
+                        columns={experimentalStrategiesModel(donorData)}
+                        dataSource={get(donorData, `summary.experimental_strategy.${Hits.COLLECTION}`, [])}
                         pagination={false}
                     />
                 </Card>

@@ -7,10 +7,10 @@ import { addFilter } from 'utils/filters/manipulator';
 const StudyModel = [
     {
         hidden: false,
-        id: 'study_id_keyword',
+        id: 'internal_study_id',
         movable: true,
         render: ({ node }: any) => (
-            <InternalLink params={{ id: node.study_id_keyword }} path={Routes.STUDY}>
+            <InternalLink params={{ id: node.internal_study_id }} path={Routes.STUDY}>
                 {node.name}
             </InternalLink>
         ),
@@ -64,7 +64,7 @@ const StudyModel = [
         movable: true,
         render: ({ node }: any) => (
             <InternalLink
-                filters={addFilter(null, 'short_name_keyword', [node.short_name_keyword])}
+                filters={addFilter(null, 'name', [node.name])}
                 path={Routes.FILES}
                 query={{ searchTableTab: 'donors' }}
             >
@@ -80,7 +80,7 @@ const StudyModel = [
         movable: true,
         render: ({ node }: any) => (
             <InternalLink
-                filters={addFilter(null, 'short_name_keyword', [node.short_name_keyword])}
+                filters={addFilter(null, 'name', [node.name])}
                 path={Routes.FILES}
                 query={{ searchTableTab: 'files' }}
             >

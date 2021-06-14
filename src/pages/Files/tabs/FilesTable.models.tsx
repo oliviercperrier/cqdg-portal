@@ -29,38 +29,38 @@ export const FilesModel = [
         translate: 'Controlled',
     },
     {
-        dataIndex: ['node', 'file_name'],
+        dataIndex: ['node', 'internal_file_id'],
         hidden: false,
-        id: 'file_name',
+        id: 'internal_file_id',
         initialOrder: 2,
         movable: true,
         sortDirection: ['ascend', 'descend'],
         sorter: {
             compare: (a: Record<string, any>, b: Record<string, any>): number =>
-                a.node.file_id.localeCompare(b.node.file_id),
+                a.node.internal_file_id.localeCompare(b.node.internal_file_id),
             multiple: 3,
         },
-        title: t('facet.file_name_keyword'),
-        translate: 'facet.file_name_keyword',
+        title: t('facet.internal_file_id'),
+        translate: 'facet.internal_file_id',
     },
     {
         className: 'numerical',
         hidden: false,
-        id: 'donors.hits.edges[0].node.submitter_donor_id',
+        id: 'donors.hits.edges[0].node.internal_donor_id',
         initialOrder: 3,
         movable: true,
         render: ({ node }: INode): React.ReactElement => {
             const linkProps =
                 node.donors.hits.total > 1
                     ? {
-                          filters: addFilter(null, 'submitter_donor_id', [
-                              node.donors.hits.edges[0].node.submitter_donor_id,
+                          filters: addFilter(null, 'internal_donor_id', [
+                              node.donors.hits.edges[0].node.internal_donor_id,
                           ]),
                           path: Routes.FILES,
                           query: { searchTableTab: 'donors' },
                       }
                     : {
-                          params: { id: node.donors.hits.edges[0].node.submitter_donor_id },
+                          params: { id: node.donors.hits.edges[0].node.internal_donor_id },
                           path: Routes.DONOR,
                       };
             return <InternalLink {...linkProps}>{node.donors.hits.total}</InternalLink>;
@@ -70,11 +70,11 @@ export const FilesModel = [
     },
     {
         hidden: false,
-        id: 'study.hits.edges[0].node.short_name_keyword',
+        id: 'study.hits.edges[0].node.name',
         initialOrder: 4,
         movable: true,
         render: ({ node }: INode): React.ReactElement => (
-            <InternalLink params={{ id: node.study.hits.edges[0].node.study_id_keyword }} path={Routes.STUDY}>
+            <InternalLink params={{ id: node.study.hits.edges[0].node.internal_study_id }} path={Routes.STUDY}>
                 {node.study.hits.edges[0].node.name}
             </InternalLink>
         ),

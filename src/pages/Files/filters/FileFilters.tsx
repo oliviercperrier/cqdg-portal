@@ -38,12 +38,12 @@ const FileFilters: React.FC<IFileFilters> = ({ data, history }) => {
             <GlobalSearch
                 filterKey="fileFilters"
                 onSelect={(values) =>
-                    updateQueryFilters(history, 'file_name_keyword', createSubFilter('file_name_keyword', values))
+                    updateQueryFilters(history, 'internal_file_id', createSubFilter('internal_file_id', values))
                 }
                 placeHolder={t('search.files.placeholder')}
                 query={FILE_GLOBAL_SEARCH}
-                searchKey={['file_name', 'file_id']}
-                selectedItems={getSubFilter('file_name_keyword', fileFilters) as string[]}
+                searchKey={['internal_file_id']}
+                selectedItems={getSubFilter('internal_file_id', fileFilters) as string[]}
                 setCurrentOptions={(options) => {
                     const globalSearchOptions = get(options, `File.${Hits.COLLECTION}`, []);
 
@@ -51,11 +51,11 @@ const FileFilters: React.FC<IFileFilters> = ({ data, history }) => {
                         label: (
                             <DropdownLabels
                                 Icon={<MdInsertDriveFile />}
-                                label={node.file_id}
-                                subLabel={node.file_name}
+                                label={node.internal_file_id}
+                                subLabel={node.study.hits.edges[0].node.name}
                             />
                         ),
-                        value: node.file_name,
+                        value: node.internal_file_id,
                     }));
                 }}
                 title={t('search.files.title')}

@@ -22,7 +22,7 @@ export const FILE_PAGE_DATA = gql`
                                 total
                                 edges {
                                     node {
-                                        submitter_donor_id
+                                        internal_donor_id
                                     }
                                 }
                             }
@@ -32,8 +32,7 @@ export const FILE_PAGE_DATA = gql`
                                 edges {
                                     node {
                                         name
-                                        short_name_keyword
-                                        study_id_keyword
+                                        internal_study_id
                                     }
                                 }
                             }
@@ -146,7 +145,7 @@ export const FILE_PAGE_DATA = gql`
                 edges {
                     node {
                         id
-                        submitter_donor_id
+                        internal_donor_id
                         gender
                         ethnicity
                         vital_status
@@ -167,19 +166,17 @@ export const FILE_PAGE_DATA = gql`
                                 edges {
                                     node {
                                         age_at_diagnosis
-                                        icd_category_keyword
-                                        icd_term
+                                        diagnosis_ICD_code
                                     }
                                 }
                             }
                         }
 
-                        phenotypes {
+                        observed_phenotype_tagged {
                             hits {
-                                total
                                 edges {
                                     node {
-                                        hpo_term
+                                        name
                                     }
                                 }
                             }
@@ -190,9 +187,7 @@ export const FILE_PAGE_DATA = gql`
                                 total
                                 edges {
                                     node {
-                                        file_id
-                                        file_name
-                                        file_name_keyword
+                                        internal_file_id
                                         file_size
                                         data_access
                                         data_category
@@ -209,13 +204,13 @@ export const FILE_PAGE_DATA = gql`
                 }
             }
             donorFilters: aggregations(filters: $donorFilters) {
-                study__short_name_keyword {
+                study__name {
                     buckets {
                         doc_count
                         key
                     }
                 }
-                study__study_id_keyword {
+                study__internal_study_id {
                     buckets {
                         doc_count
                         key
@@ -245,25 +240,25 @@ export const FILE_PAGE_DATA = gql`
                         key
                     }
                 }
-                diagnoses__icd_category_keyword {
+                diagnoses__tagged_icd__main_category {
                     buckets {
                         doc_count
                         key
                     }
                 }
-                phenotypes__hpo_category_keyword {
+                observed_phenotype_tagged__main_category {
                     buckets {
                         doc_count
                         key
                     }
                 }
-                phenotypes__hpo_term_keyword {
+                observed_phenotype_tagged__name {
                     buckets {
                         doc_count
                         key
                     }
                 }
-                diagnoses__mondo_term_keyword {
+                diagnoses__tagged_mondo__name {
                     buckets {
                         doc_count
                         key
@@ -271,7 +266,7 @@ export const FILE_PAGE_DATA = gql`
                 }
             }
             pies: aggregations(filters: $donorFilters, aggregations_filter_themselves: true) {
-                study__short_name_keyword {
+                study__name {
                     buckets {
                         doc_count
                         key
@@ -295,13 +290,19 @@ export const FILE_PAGE_DATA = gql`
                         key
                     }
                 }
-                diagnoses__icd_category_keyword {
+                diagnoses__tagged_icd__main_category {
                     buckets {
                         doc_count
                         key
                     }
                 }
-                phenotypes__hpo_category_keyword {
+                observed_phenotype_tagged__main_category {
+                    buckets {
+                        doc_count
+                        key
+                    }
+                }
+                summary__clinical_data_available_only__key {
                     buckets {
                         doc_count
                         key

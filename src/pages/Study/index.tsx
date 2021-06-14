@@ -3,7 +3,8 @@ import { AiOutlineDownload } from 'react-icons/ai';
 import { RouteComponentProps } from 'react-router-dom';
 import MultiLabel from '@ferlab/ui/core/components/labels/MultiLabel';
 import StackLayout from '@ferlab/ui/core/layout/StackLayout';
-import { Button, Card, Modal, PageHeader, Progress, Spin } from 'antd';
+import { Button, Card, Modal, PageHeader, Spin } from 'antd';
+import get from 'lodash/get';
 
 import DescriptionList, { ListItem } from 'components/functionnal/DescriptionList';
 import DownloadClinicalButton from 'components/functionnal/DownloadClinicalButton';
@@ -20,16 +21,16 @@ import { STUDY_DATA_PAGE } from 'store/queries/study';
 import { addFilter } from 'utils/filters/manipulator';
 import { useFilters } from 'utils/filters/useFilters';
 import { EFileInputType, formatFileSize } from 'utils/formatFileSize';
-import { useLazyResultQuery } from 'utils/graphql/query';
+import { Hits, useLazyResultQuery } from 'utils/graphql/query';
+
+import { availableClinicalDataModel, dataCategoriesModel, experimentalStrategiesModel } from './Study.model';
 
 import styles from './Study.module.scss';
-
-const getRandom = (value: number) => Math.floor(Math.random() * value) + 1;
 
 const Study: React.FC<RouteComponentProps<any>> = ({ match: { params } }) => {
     const [visibleModal, setVisibleModal] = useState({ accessModal: false, manifestModal: false });
     const { id } = params;
-    const filters = addFilter(null, 'study_id_keyword', [id]);
+    const filters = addFilter(null, 'internal_study_id', [id]);
     const { mappedFilters } = useFilters(filters);
     const { result } = useLazyResultQuery<any>(STUDY_DATA_PAGE, {
         variables: mappedFilters,
@@ -93,12 +94,11 @@ const Study: React.FC<RouteComponentProps<any>> = ({ match: { params } }) => {
                     title={t('entity.title.summary')}
                 >
                     <DescriptionList>
-                        <ListItem label={t(`facet.study_id`)}>{studyData.study_id_keyword}</ListItem>
+                        <ListItem label={t(`facet.study_id`)}>{studyData.internal_study_id}</ListItem>
                         <ListItem label={t(`facet.study.name`)}>{studyData.name}</ListItem>
-                        <ListItem label={t(`facet.abbreviation`)}>Abr.</ListItem>
                         <ListItem label={t(`facet.domain`)}>{studyData.domain}</ListItem>
                         <ListItem label={t(`facet.population`)}>{studyData.population}</ListItem>
-                        <ListItem label={t(`facet.keywords`)}>Cancer</ListItem>
+                        <ListItem label={t(`facet.keywords`)}>{studyData.keyword.split(';').join(',')}</ListItem>
                         <ListItem label={t(`facet.donors`)}>
                             <InternalLink filters={filters} path={Routes.FILES} query={{ searchTableTab: 'donors' }}>
                                 {studyData.donors.hits.total}
@@ -114,188 +114,32 @@ const Study: React.FC<RouteComponentProps<any>> = ({ match: { params } }) => {
                 <Card className={`${styles.access} ant-card-body-small`} title={t('entity.title.access')}>
                     <DescriptionList>
                         <ListItem label={t(`facet.access_limitations`)}>
-                            Disease-specifc research (DUO 00000007)
+                            {studyData.data_access_codes.access_limitations}
                         </ListItem>
                         <ListItem label={t(`facet.access_requirements`)}>
-                            Ethics approval required (DUO 00000021) Collaboration required (DUO 00000013)
+                            {studyData.data_access_codes.access_requirements.join(',')}
                         </ListItem>
-                        <ListItem label={t(`global.access_authority`)}>data-access@rhmds.ca</ListItem>
+                        <ListItem label={t(`global.access_authority`)}>{studyData.access_authority}</ListItem>
                     </DescriptionList>
                 </Card>
                 <Card className={`${styles.clinical}`} title={t('entity.title.clinical')}>
                     <TableContent
-                        columns={[
-                            { dataIndex: 'data', title: t('global.data') },
-                            { className: 'numerical', dataIndex: 'donors', title: t('global.donors.title') },
-                            {
-                                render: (data) => {
-                                    if (data.donors === 0) {
-                                        return '--';
-                                    }
-                                    return (
-                                        <Progress
-                                            className={styles['data-progress']}
-                                            percent={(data.donors / studyData.donors.hits.total) * 100}
-                                            showInfo={false}
-                                            strokeLinecap="square"
-                                        />
-                                    );
-                                },
-                                title: `(n=${studyData.donors.hits.total})`,
-                                width: 85,
-                            },
-                        ]}
-                        dataSource={[
-                            {
-                                data: 'Diagnostic',
-                                donors: 377,
-                            },
-                            { data: 'Phenotype', donors: 0 },
-                            {
-                                data: 'Treatement',
-                                donors: getRandom(studyData.donors.hits.total),
-                            },
-                        ]}
+                        columns={availableClinicalDataModel(studyData)}
+                        dataSource={get(studyData, `summary.clinical_data_available.${Hits.COLLECTION}`, [])}
                         pagination={false}
                     />
                 </Card>
                 <Card className={`${styles.category}`} title={t('entity.title.categories')}>
                     <TableContent
-                        columns={[
-                            { dataIndex: 'category', title: t('global.category') },
-                            { className: 'numerical', dataIndex: 'donors', title: t('global.donors.title') },
-                            {
-                                render: (data) => {
-                                    if (data.donors === 0) {
-                                        return '--';
-                                    }
-                                    return (
-                                        <Progress
-                                            className={styles['data-progress']}
-                                            percent={(data.donors / studyData.donors.hits.total) * 100}
-                                            showInfo={false}
-                                            strokeLinecap="square"
-                                        />
-                                    );
-                                },
-
-                                title: `(n=${studyData.donors.hits.total})`,
-                                width: 85,
-                            },
-                            { className: 'numerical', dataIndex: 'files', title: t('global.files.title') },
-                            {
-                                render: (data) => {
-                                    if (data.files === 0) {
-                                        return '--';
-                                    }
-                                    return (
-                                        <Progress
-                                            className={styles['data-progress']}
-                                            percent={(data.files / studyData.files.hits.total) * 100}
-                                            showInfo={false}
-                                            strokeLinecap="square"
-                                        />
-                                    );
-                                },
-
-                                title: `(n=${studyData.files.hits.total})`,
-                                width: 85,
-                            },
-                        ]}
-                        dataSource={[
-                            {
-                                category: 'Sequencing reads',
-                                donors: getRandom(studyData.donors.hits.total),
-                                files: getRandom(studyData.files.hits.total),
-                            },
-                            { category: 'Transcriptome profiling', donors: 0, files: 0 },
-                            {
-                                category: 'Single nucleotide variation',
-                                donors: getRandom(studyData.donors.hits.total),
-                                files: getRandom(studyData.files.hits.total),
-                            },
-                            { category: 'Copy number variation', donors: 0, files: 0 },
-                            {
-                                category: 'DNA methylation',
-                                donors: getRandom(studyData.donors.hits.total),
-                                files: getRandom(studyData.files.hits.total),
-                            },
-                            {
-                                category: 'Clinical supplements',
-                                donors: getRandom(studyData.donors.hits.total),
-                                files: getRandom(studyData.files.hits.total),
-                            },
-                            {
-                                category: 'Biospecimen supplements',
-                                donors: getRandom(studyData.donors.hits.total),
-                                files: getRandom(studyData.files.hits.total),
-                            },
-                        ]}
+                        columns={dataCategoriesModel(studyData)}
+                        dataSource={get(studyData, `summary.data_category.${Hits.COLLECTION}`, [])}
                         pagination={false}
                     />
                 </Card>
                 <Card className={`${styles.experimental}`} title={t('entity.title.strategy')}>
                     <TableContent
-                        columns={[
-                            { dataIndex: 'strategy', title: t('global.strategy') },
-                            { className: 'numerical', dataIndex: 'donors', title: t('global.donors.title') },
-                            {
-                                render: (data) => {
-                                    if (data.donors === 0) {
-                                        return '--';
-                                    }
-                                    return (
-                                        <Progress
-                                            className={styles['data-progress']}
-                                            percent={(data.donors / studyData.donors.hits.total) * 100}
-                                            showInfo={false}
-                                            strokeLinecap="square"
-                                        />
-                                    );
-                                },
-
-                                title: `(n=${studyData.donors.hits.total})`,
-                                width: 85,
-                            },
-                            { className: 'numerical', dataIndex: 'files', title: t('global.files.title') },
-                            {
-                                render: (data) => {
-                                    if (data.files === 0) {
-                                        return '--';
-                                    }
-                                    return (
-                                        <Progress
-                                            className={styles['data-progress']}
-                                            percent={(data.files / studyData.files.hits.total) * 100}
-                                            showInfo={false}
-                                            strokeLinecap="square"
-                                        />
-                                    );
-                                },
-
-                                title: `(n=${studyData.files.hits.total})`,
-                                width: 85,
-                            },
-                        ]}
-                        dataSource={[
-                            {
-                                donors: getRandom(studyData.donors.hits.total),
-                                files: getRandom(studyData.files.hits.total),
-                                strategy: 'WGS',
-                            },
-                            { donors: 0, files: 0, strategy: 'RNA-seq' },
-                            {
-                                donors: getRandom(studyData.donors.hits.total),
-                                files: getRandom(studyData.files.hits.total),
-                                strategy: 'Genotype array',
-                            },
-                            { donors: 0, files: 0, strategy: 'miRNA-seq' },
-                            {
-                                donors: getRandom(studyData.donors.hits.total),
-                                files: getRandom(studyData.files.hits.total),
-                                strategy: 'Methylation array',
-                            },
-                        ]}
+                        columns={experimentalStrategiesModel(studyData)}
+                        dataSource={get(studyData, `summary.experimental_strategy.${Hits.COLLECTION}`, [])}
                         pagination={false}
                     />
                 </Card>

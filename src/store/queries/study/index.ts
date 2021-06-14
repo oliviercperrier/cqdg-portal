@@ -6,6 +6,11 @@ export const STUDY_DATA_PAGE = gql`
             hits(filters: $studyFilters) {
                 edges {
                     node {
+                        access_authority
+                        data_access_codes {
+                            access_requirements
+                            access_limitations
+                        }
                         name
                         donors {
                             hits {
@@ -24,9 +29,44 @@ export const STUDY_DATA_PAGE = gql`
                                 }
                             }
                         }
-                        study_id_keyword
+                        internal_study_id
                         domain
                         population
+                        keyword
+                        summary {
+                            clinical_data_available {
+                                hits {
+                                    edges {
+                                        node {
+                                            donors
+                                            key
+                                        }
+                                    }
+                                }
+                            }
+                            data_category {
+                                hits {
+                                    edges {
+                                        node {
+                                            donors
+                                            files
+                                            key
+                                        }
+                                    }
+                                }
+                            }
+                            experimental_strategy {
+                                hits {
+                                    edges {
+                                        node {
+                                            donors
+                                            files
+                                            key
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }

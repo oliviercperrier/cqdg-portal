@@ -229,19 +229,19 @@
     },
     "search": {
         "files": {
-            "tooltips" : "Search by ID or by File Name",
+            "tooltips" : "Search by ID",
             "title" : "Search Files",
-            "placeholder" : "FS00456, 51dA8Y.cram..."
+            "placeholder" : "FIL0000456"
         },
         "donors": {
             "tooltips" : "Search by Donors ID",
             "title" : "Search Donors",
-            "placeholder" : "PT00068"
+            "placeholder" : "DON0000068"
         },
         "studies": {
             "tooltips" : "Search by Name, ID, or Study Keywords (ex: Cancer)",
             "title" : "Recherche d'études",
-            "placeholder" : "ST00034, Cartagène, Cancer..."
+            "placeholder" : "STU0000034, Cartagène, Cancer..."
         }
     },
     "charts": {
@@ -252,19 +252,19 @@
             "available.genomic": "Available Genomic Data"
         },
         "sideTitle": {
-            "phenotypes.hpo_category_keyword": "HPO Terms",
-            "diagnoses.icd_category_keyword": "CIM-10 Terms"
+            "observed_phenotype_tagged.main_category": "HPO Terms",
+            "diagnoses.tagged_icd.main_category": "CIM-10 Terms"
         },
         "bottomTitle": {
             "available.clinical": "Clinical Data"
         },
         "available.clinical": "Number of Donors per Clinical Data Type",
-        "phenotypes.hpo_category_keyword": "Number of Donors per Phenotypic abnormality (HPO)",
-        "diagnoses.icd_category_keyword": "Number of Donors per Diagnostic category (ICD-10)",
+        "observed_phenotype_tagged.main_category": "Number of Donors per Phenotypic abnormality (HPO)",
+        "diagnoses.tagged_icd.main_category": "Number of Donors per Diagnostic category (ICD-10)",
         "vital_status": "Vital status",
         "domain": "Studies per domain ",
         "population": "Studies per population type",
-        "study.short_name_keyword": "Donors per studies",
+        "study.name": "Donors per studies",
         "familyRelationships.family_type": "Family Composition",
         "study": "Study",
         "data_category": "Data category",
@@ -285,12 +285,10 @@
         "abbreviation": "Abbreviation",
         "keywords": "Keywords",
         "study_id": "Study ID",
-        "study_id_keyword": "Study ID",
-        "study.study_id": "Study ID",
-        "study.study_id_keyword": "Study ID",
-        "study.short_name_keyword": "Study Name",
-        "short_name_keyword": "Study Name",
+        "internal_study_id": "Study ID",
+        "study.internal_study_id": "Study ID",
         "study.name": "Study Name",
+        "name": "Study Name",
         "study.domain": "Study Domain",
         "gender": "Gender",
         "ethnicity": "Ethnicity",
@@ -299,22 +297,20 @@
         "age.at.diagnosis": "Age at diagnosis",
         "diagnoses.age_at_diagnosis": "Age at diagnosis",
         "diagnoses.icd_term": "Diagnosis ICD Term",
-        "diagnoses.icd_category_keyword": "Diagnosis ICD Term",
-        "phenotypes.hpo_term": "Phenotype HPO Term",
+        "diagnoses.tagged_icd.main_category": "Diagnosis ICD Term",
+        "observed_phenotype_tagged.name": "Phenotype HPO Term",
         "vital_status": "Vital Status",
-        "donors.diagnoses.icd_category_keyword": "Anomaly Type",
-        "donors.phenotypes.hpo_category_keyword": "Disease Type (CIM-10)",
+        "donors.diagnoses.tagged_icd.main_category": "Anomaly Type",
+        "donors.observed_phenotype_tagged.main_category": "Disease Type (CIM-10)",
         "diagnoses.mondo_term_keyword": "Mondo Term",
         "mondo.term": "Mondo Term",
-        "phenotypes.hpo_term_keyword": "HPO Term",
         "hpo.term": "HPO Term",
         "hpo.category": "HPO Category",
-        "phenotypes.hpo_category_keyword": "HPO Category",
+        "observed_phenotype_tagged.main_category": "HPO Category",
         "donors.diagnoses.mondo_term_keyword": "Disease Type (Mondo)",
-        "file_id": "File ID",
+        "internal_file_id": "File ID",
         "donor_id": "Donor ID",
         "data_access": "Access",
-        "file_name_keyword": "File Name",
         "files.data_category": "Data Category",
         "data_category": "Data Category",
         "file_format": "Data Format",
@@ -329,7 +325,7 @@
         "files.count": "Number of files",
         "files": "Number of files",
         "donors": "Number of donors",
-        "submitter_donor_id": "Donor ID",
+        "internal_donor_id": "Donor ID",
         "file": "File",
         "range": {
             "from": "From",
@@ -389,7 +385,7 @@
         "st4": "Study 4",
         "st1.desc": "Population-based cohort focusing on complex conditions.",
         "st2.desc": "Genomic testing results.",
-        "st3.desc": "Study on unusual cancer phenotypes.",
+        "st3.desc": "Study on unusual cancer observed_phenotype_tagged.",
         "st4.desc": "A multicenter biobank dedicated to prostate cancer research.",
         "rare.cancers": "Rare Cancers",
         "procure": "Procure",
@@ -504,16 +500,16 @@
         "melanoma": " Melanoma",
         "portal.vein.thrombosis": " Portal vein thrombosis",
         "small.cell.lung.carcinoma": " Small cell lung carcinoma",
-        "study.short_name_keyword": "Study",
+        "study.name": "Study",
         "study.domain": "Domain",
         "gender": "Gender",
         "ethnicity": "Ethnicity",
         "age_at_recruitment": "Age At Recruitment",
         "diagnoses.age_at_diagnosis": "Age At Diagnosis",
-        "diagnoses.icd_category_keyword": "ICD Category",
+        "diagnoses.tagged_icd.main_category": "ICD Category",
         "diagnoses.mondo_term_keyword": "Mondo Term",
-        "phenotypes.hpo_category_keyword": "HPO Category",
-        "phenotypes.hpo_term_keyword": "HPO Term",
+        "observed_phenotype_tagged.main_category": "HPO Category",
+        "observed_phenotype_tagged.name_keyword": "HPO Term",
         "vital_status": "Vital Status"
     },
     "repo": {

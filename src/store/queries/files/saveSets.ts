@@ -21,7 +21,7 @@ export const GET_FILE_FILTER_IDS = gql`
             hits(filters: $fileFilters, first: 10000) {
                 edges {
                     node {
-                        id: file_id
+                        id: internal_file_id
                     }
                 }
             }
@@ -35,7 +35,7 @@ export const GET_DONOR_FILTER_IDS = gql`
             hits(filters: $donorFilters, first: 10000) {
                 edges {
                     node {
-                        id: submitter_donor_id
+                        id: internal_donor_id
                     }
                 }
             }

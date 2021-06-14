@@ -2,10 +2,7 @@ import { gql } from '@apollo/client';
 
 export const FILE_DATA = gql`
     fragment FileFragment on FileNode {
-        id
-        file_id
-        file_name
-        file_name_keyword
+        internal_file_id
         file_size
         data_access
         data_category

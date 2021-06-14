@@ -8,22 +8,22 @@ import { addFilter } from 'utils/filters/manipulator';
 const DonorsModel = [
     {
         hidden: false,
-        id: 'submitter_donor_id',
+        id: 'internal_donor_id',
         movable: true,
         render: ({ node }: any) => (
-            <InternalLink params={{ id: node.submitter_donor_id }} path={Routes.DONOR}>
-                {node.submitter_donor_id}
+            <InternalLink params={{ id: node.internal_donor_id }} path={Routes.DONOR}>
+                {node.internal_donor_id}
             </InternalLink>
         ),
         sortDirection: ['ascend', 'descend'],
         sorter: {
             compare: (a: Record<string, any>, b: Record<string, any>): number =>
-                a.node.submitter_donor_id.localeCompare(b.node.submitter_donor_id),
+                a.node.internal_donor_id.localeCompare(b.node.internal_donor_id),
             multiple: 3,
         },
 
-        title: t('facet.submitter_donor_id'),
-        translate: 'facet.submitter_donor_id',
+        title: t('facet.internal_donor_id'),
+        translate: 'facet.internal_donor_id',
     },
     {
         dataIndex: ['node', 'study', 'hits', 'edges', '0', 'node', 'name'],
@@ -100,10 +100,10 @@ const DonorsModel = [
 
             const age = Math.min(node.diagnoses.hits.edges.map((item: any) => item.node.age_at_diagnosis));
             const result = node.diagnoses.hits.edges.find((item: any) => item.node.age_at_diagnosis === age);
-            return get(result, 'node.icd_term', '--');
+            return get(result, 'node.diagnosis_ICD_code', '--');
         },
         hidden: true,
-        id: 'diagnoses.icd_term',
+        id: 'diagnoses.diagnosis_ICD_code',
         movable: true,
         render: ({ node }: any) => {
             if (!node) {
@@ -112,18 +112,18 @@ const DonorsModel = [
 
             const age = Math.min(node.diagnoses.hits.edges.map((item: any) => item.node.age_at_diagnosis));
             const result = node.diagnoses.hits.edges.find((item: any) => item.node.age_at_diagnosis === age);
-            return get(result, 'node.icd_term', '--');
+            return get(result, 'node.diagnosis_ICD_code', '--');
         },
         title: t('facet.diagnoses.icd_term'),
         translate: 'facet.diagnoses.icd_term',
     },
     {
-        dataIndex: ['node', 'phenotypes', 'hits', 'edges', '0', 'node', 'hpo_term'],
+        dataIndex: ['node', 'observed_phenotype_tagged', 'hits', 'edges', '0', 'node', 'name'],
         hidden: true,
-        id: 'phenotypes.hits.edges[0].node.hpo_term',
+        id: 'observed_phenotype_tagged.hits.edges[0].node.name',
         movable: true,
-        title: t('facet.phenotypes.hpo_term'),
-        translate: 'facet.phenotypes.hpo_term',
+        title: t('facet.observed_phenotype_tagged.name'),
+        translate: 'facet.observed_phenotype_tagged.name',
     },
     {
         className: 'numerical',
@@ -132,7 +132,7 @@ const DonorsModel = [
         movable: true,
         render: ({ node }: any) => (
             <InternalLink
-                filters={addFilter(null, 'submitter_donor_id', [node.submitter_donor_id])}
+                filters={addFilter(null, 'internal_donor_id', [node.internal_donor_id])}
                 path={Routes.FILES}
                 query={{ searchTableTab: 'files' }}
             >
