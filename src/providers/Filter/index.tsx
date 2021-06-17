@@ -14,7 +14,7 @@ interface IFilterTypes {
     remapValues: TFilterType;
 }
 
-export interface IFilterProviderProps {
+interface IFilterProviderProps {
     types: IFilterTypes[];
 }
 

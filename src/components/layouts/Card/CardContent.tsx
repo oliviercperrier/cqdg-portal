@@ -1,15 +1,14 @@
 import React from 'react';
 
-import { IBasicProp } from 'types/generic';
-
 import './CardContent.scss';
 
 type CardTypeEnum = 'stack' | 'stackCenter' | 'headerFooter' | 'header2Column';
-interface ICardContentProps extends IBasicProp {
+interface ICardContentProps {
     cardType?: CardTypeEnum;
+    className?: string;
 }
 
-const CardContent = ({ cardType = 'stack', children, className = '' }: ICardContentProps): React.ReactElement => (
+const CardContent: React.FC<ICardContentProps> = ({ cardType = 'stack', children, className = '' }) => (
     <div className={`${cardType} ${className}`}>{children}</div>
 );
 

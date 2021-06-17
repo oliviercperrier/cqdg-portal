@@ -22,6 +22,7 @@ import StorageIcon from 'components/interface/Icon/Storage';
 import StudyIcon from 'components/interface/Icon/Study';
 import CardContainerNotched from 'components/layouts/Card/CardContainerNotched';
 import CardContent from 'components/layouts/Card/CardContent';
+import { CQDG_DOCS_URL } from 'config/constants';
 import { t } from 'locales/translate';
 import { DEFAULT_LOGIN_LOCATION } from 'pages/Login';
 import { isAuthenticated } from 'providers/Keycloak/keycloak';
@@ -29,7 +30,6 @@ import { getHomeStats } from 'services/api';
 import { formatChartData } from 'utils/formatChartData';
 import { EFileInputType, formatFileSize } from 'utils/formatFileSize';
 import { Hits } from 'utils/graphql/query';
-import { getDocsEnvDomain } from 'utils/url/domain';
 
 import './Home.scss';
 
@@ -49,7 +49,6 @@ const Home = (): React.ReactElement => {
     const totalFiles = get(data, `File.${Hits.ITEM}.total`, 0);
     const totalSizes = get(data, `File.aggregations.file_size.stats.sum`, 0);
     const fileSizes = formatFileSize(totalSizes, { output: 'object' }, EFileInputType.MB) as Record<string, any>;
-    const docsRootUrl = getDocsEnvDomain();
     let accountUrl = '';
     if (initialized) {
         accountUrl = keycloak.createRegisterUrl({
@@ -210,7 +209,7 @@ const Home = (): React.ReactElement => {
                             <p>{t('home.cards.text.block.text')}</p>
                         </div>
                         <div className="home__contentWrapper__links--cards">
-                            <Button href={docsRootUrl} target="_blank" type="link">
+                            <Button href={CQDG_DOCS_URL} target="_blank" type="link">
                                 <CardContainerNotched className="card-container" type="hover">
                                     <CardContent cardType="stackCenter">
                                         <DocIcon />
@@ -219,7 +218,7 @@ const Home = (): React.ReactElement => {
                                     </CardContent>
                                 </CardContainerNotched>
                             </Button>
-                            <Button href={`${docsRootUrl}/dictionaire/`} target="_blank" type="link">
+                            <Button href={`${CQDG_DOCS_URL}/dictionaire/`} target="_blank" type="link">
                                 <CardContainerNotched className="card-container" type="hover">
                                     <CardContent cardType="stackCenter">
                                         <DataIcon />
@@ -229,7 +228,7 @@ const Home = (): React.ReactElement => {
                                 </CardContainerNotched>
                             </Button>
                             <Button
-                                href={`${docsRootUrl}/soumission/soumettre-donnees-cliniques/`}
+                                href={`${CQDG_DOCS_URL}/soumission/soumettre-donnees-cliniques/`}
                                 target="_blank"
                                 type="link"
                             >

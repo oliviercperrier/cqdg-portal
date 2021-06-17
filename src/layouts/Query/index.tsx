@@ -1,12 +1,12 @@
 import React from 'react';
 
 import SideBar from 'components/layouts/Sidebar';
-import { IBasicProp } from 'types/generic';
 
 import './Layout.scss';
 
-interface QueryLayoutProps extends IBasicProp {
+interface QueryLayoutProps {
     sidebar: React.ReactNode;
+    className?: string;
 }
 
 const Layout: React.FC<QueryLayoutProps> = ({ children, className = '', sidebar }) => (

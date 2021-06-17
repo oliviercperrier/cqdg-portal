@@ -2,11 +2,13 @@ import { MdLock, MdLockOpen, MdLockOutline } from 'react-icons/md';
 
 import InternalLink from 'components/functionnal/InternalLink';
 import { t } from 'locales/translate';
+import { getFilePermissions } from 'providers/Keycloak/permissions';
 import { Routes } from 'routes';
 import { INode } from 'types/interface/data';
 import { addFilter } from 'utils/filters/manipulator';
 import { EFileInputType, formatFileSize } from 'utils/formatFileSize';
 
+const filePermissions = getFilePermissions();
 export const FilesModel = [
     {
         hidden: false,
@@ -14,7 +16,7 @@ export const FilesModel = [
         initialOrder: 1,
         movable: false,
         render: ({ node }: INode): React.ReactElement =>
-            node.data_access.toLowerCase() === 'controled' ? (
+            node.data_access.toLowerCase() === 'controled' && !filePermissions.includes(node.internal_file_id) ? (
                 <MdLockOutline className="table-locks table-lock" />
             ) : (
                 <MdLockOpen className="table-locks table-lock-open" />

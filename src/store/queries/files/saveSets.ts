@@ -43,15 +43,6 @@ export const GET_DONOR_FILTER_IDS = gql`
     }
 `;
 
-export const GET_SAVE_SETS_BY_NAME = gql`
-    query GetSaveSetsByName($key: String!, $value: String!) {
-        saveSets(key: $key, value: $value)
-            @rest(path: "/search?key={args.key}&value={args.value}", endpoint: "dataStorage", type: "SaveSets") {
-            content
-        }
-    }
-`;
-
 export const SET_SAVE_SET = gql`
     mutation SetSaveSet($content: JSON, $type: String) {
         saveSets(input: $content, type: $type)

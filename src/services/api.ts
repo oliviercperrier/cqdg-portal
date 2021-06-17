@@ -41,3 +41,37 @@ export const getClinicalData = async (filters: ISqonGroupFilter): Promise<boolea
 
     return true;
 };
+
+export const getRequestAccessFilesByStudyID = async (studyID: string): Promise<boolean> => {
+    const token = getToken();
+    const response = await appRestAPI.get(`/request/access/${studyID}`, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+        responseType: 'blob',
+    });
+    if (response.status === 200) {
+        const now = new Date();
+        const dateFormatted = dateformat(now, 'yyyy-mm-dd-HH:MM:ss');
+        downloadFile(response.data, `request-access-${studyID}-${dateFormatted}.zip`);
+    }
+
+    return true;
+};
+
+export const getManifestFilesByStudyID = async (studyID: string): Promise<boolean> => {
+    const token = getToken();
+    const response = await appRestAPI.get(`/request/manifest/${studyID}`, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+        responseType: 'blob',
+    });
+    if (response.status === 200) {
+        const now = new Date();
+        const dateFormatted = dateformat(now, 'yyyy-mm-dd-HH:MM:ss');
+        downloadFile(response.data, `manifest-${studyID}-${dateFormatted}.zip`);
+    }
+
+    return true;
+};

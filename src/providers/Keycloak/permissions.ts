@@ -22,7 +22,7 @@ export const setPermissions = ({ token }: ITokens): void => {
 
             const keycloakConf = JSON.parse(KEYCLOAK_CONFIGS);
 
-            /*axios
+            axios
                 .post(`${keycloakConf.url}/realms/${keycloakConf.realm}/protocol/openid-connect/token`, formData, {
                     headers: {
                         Authorization: `Bearer ${token}`,
@@ -34,15 +34,14 @@ export const setPermissions = ({ token }: ITokens): void => {
                 })
                 .catch((error) => {
                     // console.error("Failed to retrieve user's permissions", error);
-                });*/
+                });
         }
     }
 };
 
-// [
-//     {
-//         "rsid": "7e927587-fa34-48fb-ae90-ab8ae3fae91c",
-//         "rsname": "FI000004"
-//     }
-// ]
-export const getPermissions = (): any[] => getWithExpiry(PERMISSIONS) || [];
+interface IPermissions {
+    rsid: string;
+    rsname: string;
+}
+const getPermissions = (): IPermissions[] => getWithExpiry(PERMISSIONS) || [];
+export const getFilePermissions = (): string[] => getPermissions().map((item) => item.rsname);

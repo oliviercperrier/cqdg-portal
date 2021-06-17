@@ -4,7 +4,7 @@
     "private": true,
     "dependencies": {
         "@apollo/client": "^3.3.11",
-        "@ferlab/style": "^1.6.2",
+        "@ferlab/style": "^1.6.3",
         "@ferlab/ui": "^1.6.2",
         "@nivo/bar": "^0.69.1",
         "@nivo/core": "^0.69.0",
