@@ -41,6 +41,10 @@
         }
         .access {
             grid-area: access;
+            .duoCode {
+                text-transform: capitalize;
+            }
+
         }
         .clinical {
             .icon-close {
@@ -84,6 +88,6 @@
     }
 }
 
-.data-progress {
-    max-width: 50px;
+.capitalize {
+    text-transform: capitalize;
 }

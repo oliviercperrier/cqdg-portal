@@ -8,10 +8,8 @@ export const STUDIES_PAGE_DATA = gql`
                 edges {
                     node {
                         domain
-                        website
-                        study_id_keyword
+                        internal_study_id
                         name
-                        short_name_keyword
                         population
                         description
                         donors {

@@ -1,13 +1,13 @@
 import { gql } from '@apollo/client';
 
 export const DONOR_PAGE_DATA = gql`
-    query GetStudyData($donorFilters: JSON, $fileFilters: JSON) {
+    query GetStudyData($donorFilters: JSON) {
         Donor {
             hits(filters: $donorFilters) {
                 edges {
                     node {
-                        donor_id
-                        submitter_donor_id
+                        internal_donor_id
+                        study_version_creation_date
                         files {
                             hits {
                                 total
@@ -18,8 +18,45 @@ export const DONOR_PAGE_DATA = gql`
                                 total
                                 edges {
                                     node {
-                                        study_id_keyword
+                                        internal_study_id
                                         domain
+                                        access_authority
+                                        data_access_codes {
+                                            access_limitations
+                                            access_requirements
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        summary {
+                            clinical_data_available {
+                                hits {
+                                    edges {
+                                        node {
+                                            key
+                                            available
+                                        }
+                                    }
+                                }
+                            }
+                            data_category {
+                                hits {
+                                    edges {
+                                        node {
+                                            files
+                                            key
+                                        }
+                                    }
+                                }
+                            }
+                            experimental_strategy {
+                                hits {
+                                    edges {
+                                        node {
+                                            files
+                                            key
+                                        }
                                     }
                                 }
                             }
@@ -27,11 +64,8 @@ export const DONOR_PAGE_DATA = gql`
                     }
                 }
             }
-        }
-        File {
-            #Once the files.file_size existe in Study, remove this aggregation
-            aggregations(filters: $fileFilters) {
-                file_size {
+            aggregations(filters: $donorFilters) {
+                files__file_size {
                     stats {
                         sum
                     }

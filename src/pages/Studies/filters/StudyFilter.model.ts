@@ -5,11 +5,6 @@ import { presetModels } from 'utils/filters/model';
 
 const filters: IFilterModel[] = [
     {
-        field: 'short_name_keyword',
-        title: 'facet.study.name',
-        type: VisualType.Checkbox,
-    },
-    {
         field: 'domain',
         title: 'facet.study.domain',
         type: VisualType.Checkbox,
@@ -19,15 +14,16 @@ const filters: IFilterModel[] = [
         type: VisualType.Checkbox,
     },
     {
-        field: 'donors.diagnoses.icd_category_keyword',
+        field: 'donors.diagnoses.tagged_icd.main_category',
         type: VisualType.Checkbox,
     },
     {
-        field: 'donors.phenotypes.hpo_category_keyword',
+        field: 'donors.observed_phenotype_tagged.main_category',
         type: VisualType.Checkbox,
     },
     {
-        field: 'donors.diagnoses.mondo_term_keyword',
+        field: 'donors.diagnoses.tagged_mondo.main_category',
+        title: 'facet.donors.diagnoses.mondo_term_keyword',
         type: VisualType.Checkbox,
     },
     {

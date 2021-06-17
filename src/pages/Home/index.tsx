@@ -138,7 +138,11 @@ const Home = (): React.ReactElement => {
                                     <ResponsiveBar
                                         axisLeft={null}
                                         data={formatChartData(
-                                            get(data, 'Donor.aggregations.diagnoses__icd_category_keyword.buckets', []),
+                                            get(
+                                                data,
+                                                'Donor.aggregations.diagnoses__tagged_icd__main_category.buckets',
+                                                []
+                                            ),
                                             'key',
                                             'doc_count'
                                         )}
@@ -181,7 +185,7 @@ const Home = (): React.ReactElement => {
                                         data={formatChartData(
                                             get(
                                                 data,
-                                                'Donor.aggregations.phenotypes__hpo_category_keyword.buckets',
+                                                'Donor.aggregations.observed_phenotype_tagged__main_category.buckets',
                                                 []
                                             ),
                                             'key',

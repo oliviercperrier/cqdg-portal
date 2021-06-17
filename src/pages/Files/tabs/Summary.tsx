@@ -20,9 +20,13 @@ interface ISummary {
 interface IExtraProps {
     [key: string]: string | number;
 }
-const studies = ['study__short_name_keyword', 'domain', 'population'];
+const studies = ['study__name', 'domain', 'population'];
 const demographicData = ['gender', 'ethnicity', 'familyRelationships__family_type'];
-const clinicalData = ['vital_status', 'diagnoses__icd_category_keyword', 'phenotypes__hpo_category_keyword'];
+const clinicalData = [
+    'vital_status',
+    'diagnoses__tagged_icd__main_category',
+    'observed_phenotype_tagged__main_category',
+];
 
 const getPieChart = (history: any, data: any, key: string, extraProps: IExtraProps = { height: 100, width: 100 }) => (
     <PieChart
@@ -123,19 +127,14 @@ const Summary: React.FC<ISummary> = ({ data, loading }) => {
                     <BarChart
                         axisBottom={null}
                         chartContainerClassName={styles.availableClinicalContent}
-                        data={[
-                            { id: 'biospecimen', value: 25 },
-                            { id: 'diagnosis', value: 21 },
-                            { id: 'phenotype', value: 18 },
-                            { id: 'exposure', value: 16 },
-                            { id: 'treatment', value: 12 },
-                            { id: 'follow-up', value: 11 },
-                            { id: 'family relationship', value: 10 },
-                            { id: 'family history', value: 7 },
-                        ]}
+                        data={formatChartData(
+                            get(donorsGraphData, `summary__clinical_data_available_only__key.buckets`),
+                            'key',
+                            'doc_count'
+                        )}
                         enableGridX={false}
                         enableLabel={false}
-                        margin={{ bottom: 5, left: 20, right: 10, top: 0 }}
+                        margin={{ bottom: 5, left: 35, right: 10, top: 0 }}
                         padding={0.5}
                         title={t(`charts.available.clinical`)}
                         titleBottomBar={t(`charts.bottomTitle.available.clinical`)}

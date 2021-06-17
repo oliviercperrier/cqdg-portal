@@ -5,11 +5,12 @@ const DescriptionList: React.FC = ({ children }) => <dl className={styles.contai
 
 interface IListItem {
     label: string | React.ReactNode;
+    labelClassName?: string;
 }
-export const ListItem: React.FC<IListItem> = ({ children, label }) => (
+export const ListItem: React.FC<IListItem> = ({ children, label, labelClassName = '' }) => (
     <>
         <dt className={styles.label}>{label}</dt>
-        <dd className={styles.desc}>{children}</dd>
+        <dd className={`${styles.desc} ${labelClassName}`}>{children}</dd>
     </>
 );
 

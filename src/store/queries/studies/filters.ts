@@ -4,7 +4,7 @@ export const STUDY_FILTERS = gql`
     query GetStudyFilters($studyFilters: JSON) {
         Study {
             aggregations(filters: $studyFilters) {
-                short_name_keyword {
+                name {
                     buckets {
                         doc_count
                         key
@@ -22,21 +22,21 @@ export const STUDY_FILTERS = gql`
                         key
                     }
                 }
-                donors__phenotypes__hpo_category_keyword {
+                donors__observed_phenotype_tagged__main_category {
                     #Type d'anomalie
                     buckets {
                         doc_count
                         key
                     }
                 }
-                donors__diagnoses__icd_category_keyword {
+                donors__diagnoses__tagged_icd__main_category {
                     #type de maladie (CIM-10)
                     buckets {
                         doc_count
                         key
                     }
                 }
-                donors__diagnoses__mondo_term_keyword {
+                donors__diagnoses__tagged_mondo__main_category {
                     #type de maladie (mondo)
                     buckets {
                         key

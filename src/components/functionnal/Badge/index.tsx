@@ -33,6 +33,7 @@ interface IBadge {
     format?: EFormat;
     type?: EType;
     size?: ESize;
+    className?: string;
 }
 
 const classNameMappings = {
@@ -62,8 +63,14 @@ const getDotComponent = (type: EType, format: EFormat, size: ESize) => {
             return <AiOutlineExclamationCircle className={className} size={iconSize} />;
     }
 };
-const Badge: React.FC<IBadge> = ({ format = EFormat.DOT, type = EType.DEFAULT, children, size = ESize.DEFAULT }) => (
-    <div className={styles.container}>
+const Badge: React.FC<IBadge> = ({
+    className = '',
+    format = EFormat.DOT,
+    type = EType.DEFAULT,
+    children,
+    size = ESize.DEFAULT,
+}) => (
+    <div className={`${styles.container} ${className}`}>
         {getDotComponent(type, format, size)}
         {children}
     </div>

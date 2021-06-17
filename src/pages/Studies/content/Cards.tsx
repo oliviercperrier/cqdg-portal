@@ -11,18 +11,19 @@ const Cards: React.FC<any> = ({ data }) => (
         {data.map((item: any) => (
             <StudyCard
                 description={item.node.description}
-                detailsLinkProps={{ params: { id: item.node.study_id_keyword }, path: Routes.STUDY }}
+                detailsLinkProps={{ params: { id: item.node.internal_study_id }, path: Routes.STUDY }}
                 donorsLinkProps={{
-                    filters: addFilter(null, 'study_id_keyword', [item.node.study_id_keyword]),
+                    filters: addFilter(null, 'internal_study_id', [item.node.internal_study_id]),
                     path: Routes.FILES,
                     query: { searchTableTab: 'donors' },
                 }}
                 filesLinkProps={{
-                    filters: addFilter(null, 'study_id_keyword', [item.node.study_id_keyword]),
+                    filters: addFilter(null, 'internal_study_id', [item.node.internal_study_id]),
                     path: Routes.FILES,
                     query: { searchTableTab: 'files' },
                 }}
-                headerTitle={item.node.study_id_keyword}
+                headerTitle={item.node.internal_study_id}
+                key={item.node.internal_study_id}
                 title={item.node.name}
                 totalDonors={item.node.donors.hits.total}
                 totalFiles={item.node.files.hits.total}

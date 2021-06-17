@@ -163,7 +163,7 @@ const FileRepo: React.FC<RouteComponentProps<any>> = ({ history }) => {
                             <TableContainer
                                 data={get(result, `Donor.${Hits.COLLECTION}`, []).map((data: any) => ({
                                     ...data,
-                                    key: data.node.submitter_donor_id,
+                                    key: data.node.internal_donor_id,
                                 }))}
                                 extraActions={(selectedRow) => (
                                     <>

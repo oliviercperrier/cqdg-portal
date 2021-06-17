@@ -6,8 +6,16 @@ export const FILE_GLOBAL_SEARCH = gql`
             hits(filters: $fileFilters) {
                 edges {
                     node {
-                        file_id
-                        file_name
+                        internal_file_id
+                        study {
+                            hits {
+                                edges {
+                                    node {
+                                        name
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -22,7 +30,7 @@ export const STUDY_GLOBAL_SEARCH = gql`
                 edges {
                     node {
                         name
-                        study_id_keyword
+                        internal_study_id
                     }
                 }
             }
@@ -36,7 +44,7 @@ export const DONOR_GLOBAL_SEARCH = gql`
             hits(filters: $donorFilters) {
                 edges {
                     node {
-                        submitter_donor_id
+                        internal_donor_id
                         study {
                             hits {
                                 edges {

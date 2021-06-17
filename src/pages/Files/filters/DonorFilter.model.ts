@@ -6,7 +6,7 @@ import { presetModels } from 'utils/filters/model';
 
 const filters: IFilterModel[] = [
     {
-        field: 'study.short_name_keyword',
+        field: 'study.name',
         type: VisualType.Checkbox,
     },
     {
@@ -62,22 +62,22 @@ const filters: IFilterModel[] = [
         type: VisualType.Checkbox,
     },
     {
-        field: 'diagnoses.icd_category_keyword',
+        field: 'diagnoses.tagged_icd.main_category',
         title: 'facet.diagnoses.icd_term',
         type: VisualType.Checkbox,
     },
     {
-        field: 'diagnoses.mondo_term_keyword',
+        field: 'diagnoses.tagged_mondo.name',
         title: 'facet.mondo.term',
         type: VisualType.Checkbox,
     },
     {
-        field: 'phenotypes.hpo_category_keyword',
+        field: 'observed_phenotype_tagged.main_category',
         title: 'facet.hpo.category',
         type: VisualType.Checkbox,
     },
     {
-        field: 'phenotypes.hpo_term_keyword',
+        field: 'observed_phenotype_tagged.name',
         title: 'facet.hpo.term',
         type: VisualType.Checkbox,
     },

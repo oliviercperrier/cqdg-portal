@@ -230,19 +230,19 @@
     },
     "search": {
         "files": {
-            "tooltips" : "Recherche par code ou nom de fichier",
+            "tooltips" : "Recherche par code",
             "title" : "Recherche de fichiers",
-            "placeholder" : "FS00456, 51dA8Y.cram..."
+            "placeholder" : "FIL0000456"
         },
         "donors": {
             "tooltips" : "Recherche par code de donneur",
             "title" : "Recherche de donneurs",
-            "placeholder" : "PT00068"
+            "placeholder" : "DON0000068"
         },
         "studies": {
             "tooltips" : "Recherche par nom, code, ou mot clef (ex: Cancer) de l'étude",
             "title" : "Recherche d'études",
-            "placeholder" : "ST00034, Cartagène, Cancer..."
+            "placeholder" : "STU0000034, Cartagène, Cancer..."
         }
     },
     "charts": {
@@ -253,19 +253,19 @@
             "available.genomic": "Données génomiques disponibles"
         },
         "sideTitle": {
-            "phenotypes.hpo_category_keyword": "Termes HPO",
-            "diagnoses.icd_category_keyword": "Termes CIM-10"
+            "observed_phenotype_tagged.main_category": "Termes HPO",
+            "diagnoses.tagged_icd.main_category": "Termes CIM-10"
         },
         "bottomTitle": {
             "available.clinical": "Données cliniques"
         },
         "available.clinical": "Nombre de donneurs par type de données cliniques",
-        "phenotypes.hpo_category_keyword": "Nombre de donneurs par Anomalie phénotypique (HPO)",
-        "diagnoses.icd_category_keyword": "Nombre de donneurs par Catégorie de diagnostic (CIM-10)",
+        "observed_phenotype_tagged.main_category": "Nombre de donneurs par Anomalie phénotypique (HPO)",
+        "diagnoses.tagged_icd.main_category": "Nombre de donneurs par Catégorie de diagnostic (CIM-10)",
         "vital_status": "Status vital",
         "domain": "Études par domaine",
         "population": "Études par type population",
-        "study.short_name_keyword": "Donneurs par étude",
+        "study.name": "Donneurs par étude",
         "familyRelationships.family_type": "Composition familiale",
         "study": "Étude",
         "data_category": "Catégorie de données",
@@ -286,12 +286,11 @@
         "abbreviation": "Abbréviation",
         "keywords": "Mots clés",
         "study_id": "ID de l'étude",
-        "study_id_keyword": "ID de l'étude",
+        "internal_study_id": "ID de l'étude",
         "study.study_id": "ID de l'étude",
-        "study.study_id_keyword": "ID de l'étude",
-        "study.short_name_keyword": "Nom de l'étude",
-        "short_name_keyword": "Nom de l'étude",
+        "study.internal_study_id": "ID de l'étude",
         "study.name": "Nom de l'étude",
+        "name": "Nom de l'étude",
         "study.domain": "Domaine d'étude",
         "gender": "Sexe",
         "ethnicity": "Ethnicité",
@@ -300,22 +299,20 @@
         "age.at.diagnosis": "Âge au diagnostique",
         "diagnoses.age_at_diagnosis": "Âge au diagnostique",
         "diagnoses.icd_term": "Terme diagnostic CIM",
-        "diagnoses.icd_category_keyword": "Terme diagnostic CIM",
-        "phenotypes.hpo_term": "Terme Phénotype HPO",
+        "diagnoses.tagged_icd.main_category": "Terme diagnostic CIM",
+        "observed_phenotype_tagged.hpo_term": "Terme Phénotype HPO",
         "vital_status": "Statut vital",
-        "donors.diagnoses.icd_category_keyword": "Type d'anomalie",
-        "donors.phenotypes.hpo_category_keyword": "Type de maladie (CIM-10)",
+        "donors.diagnoses.tagged_icd.main_category": "Type d'anomalie",
+        "donors.observed_phenotype_tagged.main_category": "Type de maladie (CIM-10)",
         "hpo.term": "Terme HPO",
         "mondo.term": "Terme Mondo",
         "diagnoses.mondo_term_keyword": "Terme Mondo",
-        "phenotypes.hpo_term_keyword": "Terme HPO",
         "hpo.category": "Category HPO",
-        "phenotypes.hpo_category_keyword": "Category HPO",
+        "observed_phenotype_tagged.main_category": "Category HPO",
         "donors.diagnoses.mondo_term_keyword": "Type de maladie (Mondo)",
-        "file_id": "ID du Fichier",
+        "internal_file_id": "ID du Fichier",
         "donor_id": "ID du donneur",
         "data_access": "Accès",
-        "file_name_keyword": "Nom de fichier",
         "files.data_category": "Catégorie de données",
         "data_category": "Catégorie de données",
         "file_format": "Format de données",
@@ -330,7 +327,7 @@
         "files.count": "Nombre de fichiers",
         "files": "Nombre de fichiers",
         "donors": "Nombre de donneurs",
-        "submitter_donor_id": "ID du donneur",
+        "internal_donor_id": "ID du donneur",
         "file": "Fichier",
         "range": {
             "from": "De",
@@ -505,16 +502,16 @@
         "melanoma": " Melanoma",
         "portal.vein.thrombosis": " Portal vein thrombosis",
         "small.cell.lung.carcinoma": " Small cell lung carcinoma",
-        "study.short_name_keyword": "Étude",
+        "study.name": "Étude",
         "study.domain": "Domaine",
         "gender": "Genre",
         "ethnicity": "Ethnicité",
         "age_at_recruitment": "Âge au recrutement",
         "diagnoses.age_at_diagnosis": "Âge au diagnostique",
-        "diagnoses.icd_category_keyword": "Catégorie ICD",
+        "diagnoses.tagged_icd.main_category": "Catégorie ICD",
         "diagnoses.mondo_term_keyword": "Terme mondo",
-        "phenotypes.hpo_category_keyword": "Categorie HPO",
-        "phenotypes.hpo_term_keyword": "Terme HPO",
+        "observed_phenotype_tagged.main_category": "Categorie HPO",
+        "observed_phenotype_tagged.hpo_term_keyword": "Terme HPO",
         "vital_status": "État vital"
     },
     "repo": {
