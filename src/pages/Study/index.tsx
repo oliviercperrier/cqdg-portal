@@ -17,6 +17,7 @@ import StudyIcon from 'components/interface/Icon/Study';
 import CardContainerNotched from 'components/layouts/Card/CardContainerNotched';
 import { t } from 'locales/translate';
 import { Routes } from 'routes';
+import { getManifestFilesByStudyID, getRequestAccessFilesByStudyID } from 'services/api';
 import { STUDY_DATA_PAGE } from 'store/queries/study';
 import { addFilter } from 'utils/filters/manipulator';
 import { useFilters } from 'utils/filters/useFilters';
@@ -29,6 +30,7 @@ import styles from './Study.module.scss';
 
 const Study: React.FC<RouteComponentProps<any>> = ({ match: { params } }) => {
     const [visibleModal, setVisibleModal] = useState({ accessModal: false, manifestModal: false });
+    const [isDownloading, setIsDownloading] = useState(false);
     const { id } = params;
     const filters = addFilter(null, 'internal_study_id', [id]);
     const { mappedFilters } = useFilters(filters);
@@ -52,7 +54,6 @@ const Study: React.FC<RouteComponentProps<any>> = ({ match: { params } }) => {
                     </DownloadClinicalButton>,
                     <Button
                         className={styles.button}
-                        disabled
                         onClick={() => setVisibleModal((prevState) => ({ ...prevState, manifestModal: true }))}
                     >
                         <AiOutlineDownload size={16} />
@@ -146,18 +147,32 @@ const Study: React.FC<RouteComponentProps<any>> = ({ match: { params } }) => {
                     />
                 </Card>
                 <Modal
+                    okButtonProps={{ loading: isDownloading }}
                     okText={t('entity.modal.actions.download')}
                     onCancel={() => setVisibleModal((prevState) => ({ ...prevState, accessModal: false }))}
-                    onOk={() => setVisibleModal((prevState) => ({ ...prevState, accessModal: false }))}
+                    onOk={async () => {
+                        setIsDownloading(true);
+                        await getRequestAccessFilesByStudyID(id);
+                        setIsDownloading(false);
+
+                        setVisibleModal((prevState) => ({ ...prevState, accessModal: false }));
+                    }}
                     title={t('entity.modal.access.title')}
                     visible={visibleModal.accessModal}
                 >
                     <span>{t('entity.modal.access.desc')}</span>
                 </Modal>
                 <Modal
+                    okButtonProps={{ loading: isDownloading }}
                     okText={t('entity.modal.actions.download')}
                     onCancel={() => setVisibleModal((prevState) => ({ ...prevState, manifestModal: false }))}
-                    onOk={() => setVisibleModal((prevState) => ({ ...prevState, manifestModal: false }))}
+                    onOk={async () => {
+                        setIsDownloading(true);
+                        await getManifestFilesByStudyID(id);
+                        setIsDownloading(false);
+
+                        setVisibleModal((prevState) => ({ ...prevState, manifestModal: false }));
+                    }}
                     title={t('entity.modal.manifest.title')}
                     visible={visibleModal.manifestModal}
                 >

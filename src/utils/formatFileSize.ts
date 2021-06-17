@@ -7,12 +7,12 @@ export enum EFileInputType {
     MB = 'mb',
 }
 
-export type TFilesizeInput = (
+type TFilesizeInput = (
     input?: number,
     options?: Record<string, any>,
     inputType?: EFileInputType
 ) => string | Record<string, any>;
-export type TConvertFileSize = (input: number, inputType: EFileInputType) => number;
+type TConvertFileSize = (input: number, inputType: EFileInputType) => number;
 
 const baseConversion = 1000;
 const convertInputBase: TConvertFileSize = (input, inputType) => {

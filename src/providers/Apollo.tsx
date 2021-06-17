@@ -14,6 +14,7 @@ const httpLink = createHttpLink({
 
 const restEndpoints = new RestLink({
     endpoints: {
+        dataApi: GRAPHQL_API,
         dataStorage: DATA_STORAGE_API,
     },
 });

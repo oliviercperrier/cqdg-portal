@@ -1,6 +1,6 @@
 import { TFilterGroupConfig, VisualType } from '@ferlab/ui/core/components/filters/types';
 export type TFilterValue = Array<string | number | boolean>;
-export interface IValueContent {
+interface IValueContent {
     field: string;
     value: TFilterValue;
 }
@@ -12,7 +12,7 @@ export interface IValueFilter {
 }
 
 export type TSqonGroupContent = IValueFilter[];
-export type TSqonGroupOp = 'and' | 'or';
+type TSqonGroupOp = 'and' | 'or';
 export interface ISqonGroupFilter {
     content: TSqonGroupContent;
     op: TSqonGroupOp;
