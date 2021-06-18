@@ -4,7 +4,6 @@ import { RouteComponentProps } from 'react-router-dom';
 import MultiLabel from '@ferlab/ui/core/components/labels/MultiLabel';
 import StackLayout from '@ferlab/ui/core/layout/StackLayout';
 import { Button, Card, Modal, PageHeader, Spin } from 'antd';
-import get from 'lodash/get';
 
 import DescriptionList, { ListItem } from 'components/functionnal/DescriptionList';
 import DownloadClinicalButton from 'components/functionnal/DownloadClinicalButton';
@@ -19,10 +18,11 @@ import { t } from 'locales/translate';
 import { Routes } from 'routes';
 import { getManifestFilesByStudyID, getRequestAccessFilesByStudyID } from 'services/api';
 import { STUDY_DATA_PAGE } from 'store/queries/study';
+import { getDataWithKey } from 'utils/data/manipulation';
 import { addFilter } from 'utils/filters/manipulator';
 import { useFilters } from 'utils/filters/useFilters';
 import { EFileInputType, formatFileSize } from 'utils/formatFileSize';
-import { Hits, useLazyResultQuery } from 'utils/graphql/query';
+import { useLazyResultQuery } from 'utils/graphql/query';
 
 import { availableClinicalDataModel, dataCategoriesModel, experimentalStrategiesModel } from './Study.model';
 
@@ -48,18 +48,20 @@ const Study: React.FC<RouteComponentProps<any>> = ({ match: { params } }) => {
             <PageHeader
                 backIcon={<StudyIcon className={styles.backIcon} />}
                 extra={[
-                    <DownloadClinicalButton filters={filters}>
+                    <DownloadClinicalButton filters={filters} key="downloadClinical">
                         <AiOutlineDownload size={16} />
                         {t('global.tables.actions.clinical.data')}
                     </DownloadClinicalButton>,
                     <Button
                         className={styles.button}
+                        key="downloadManifest"
                         onClick={() => setVisibleModal((prevState) => ({ ...prevState, manifestModal: true }))}
                     >
                         <AiOutlineDownload size={16} />
                         {t('entity.actions.manifest')}
                     </Button>,
                     <Button
+                        key="requestAccess"
                         onClick={() => setVisibleModal((prevState) => ({ ...prevState, accessModal: true }))}
                         type="primary"
                     >
@@ -119,7 +121,7 @@ const Study: React.FC<RouteComponentProps<any>> = ({ match: { params } }) => {
                         </ListItem>
                         <ListItem label={t(`facet.access_requirements`)} labelClassName={styles.duoCode}>
                             {studyData.data_access_codes.access_requirements.map((item: string) => (
-                                <p>{item}</p>
+                                <p key={item}>{item}</p>
                             ))}
                         </ListItem>
                         <ListItem label={t(`global.access_authority`)}>{studyData.access_authority}</ListItem>
@@ -128,21 +130,21 @@ const Study: React.FC<RouteComponentProps<any>> = ({ match: { params } }) => {
                 <Card className={`${styles.clinical}`} title={t('entity.title.clinical')}>
                     <TableContent
                         columns={availableClinicalDataModel(studyData)}
-                        dataSource={get(studyData, `summary.clinical_data_available.${Hits.COLLECTION}`, [])}
+                        dataSource={getDataWithKey(studyData, `summary.clinical_data_available`, 'key')}
                         pagination={false}
                     />
                 </Card>
                 <Card className={`${styles.category}`} title={t('entity.title.categories')}>
                     <TableContent
                         columns={dataCategoriesModel(studyData)}
-                        dataSource={get(studyData, `summary.data_category.${Hits.COLLECTION}`, [])}
+                        dataSource={getDataWithKey(studyData, `summary.data_category`, 'key')}
                         pagination={false}
                     />
                 </Card>
                 <Card className={`${styles.experimental}`} title={t('entity.title.strategy')}>
                     <TableContent
                         columns={experimentalStrategiesModel(studyData)}
-                        dataSource={get(studyData, `summary.experimental_strategy.${Hits.COLLECTION}`, [])}
+                        dataSource={getDataWithKey(studyData, `summary.experimental_strategy`, 'key')}
                         pagination={false}
                     />
                 </Card>

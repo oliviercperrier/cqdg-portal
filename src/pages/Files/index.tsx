@@ -22,11 +22,12 @@ import SideBarContent from 'pages/Files/filters/SideBarContent';
 import Summary from 'pages/Files/tabs/Summary';
 import { getQueryBuilderCache, setQueryBuilderCache } from 'store/cache/queryBuilder';
 import { FILE_PAGE_DATA } from 'store/queries/files/page';
+import { getDataWithKey } from 'utils/data/manipulation';
 import { getQueryBuilderDictionary } from 'utils/dictionnary';
 import { updateQueryFilters } from 'utils/filters';
 import { useFilters } from 'utils/filters/useFilters';
 import { EFileInputType, formatFileSize } from 'utils/formatFileSize';
-import { Hits, useLazyResultQuery } from 'utils/graphql/query';
+import { useLazyResultQuery } from 'utils/graphql/query';
 import { readQueryParam, updateQueryParam } from 'utils/url/query';
 
 import { presetDonorsModel } from './tabs/DonorsTable.models';
@@ -123,10 +124,7 @@ const FileRepo: React.FC<RouteComponentProps<any>> = ({ history }) => {
                             }
                         >
                             <TableContainer
-                                data={get(result, `File.${Hits.COLLECTION}`, []).map((data: any) => ({
-                                    ...data,
-                                    key: data.node.file_id,
-                                }))}
+                                data={getDataWithKey(result, 'File', 'internal_file_id')}
                                 extraActions={(selectedRow) => (
                                     <SaveSets
                                         Icon={<MdInsertDriveFile />}
@@ -161,10 +159,7 @@ const FileRepo: React.FC<RouteComponentProps<any>> = ({ history }) => {
                             }
                         >
                             <TableContainer
-                                data={get(result, `Donor.${Hits.COLLECTION}`, []).map((data: any) => ({
-                                    ...data,
-                                    key: data.node.internal_donor_id,
-                                }))}
+                                data={getDataWithKey(result, 'Donor', 'internal_donor_id')}
                                 extraActions={(selectedRow) => (
                                     <>
                                         <DownloadClinicalButton className="clinical-download" filters={filters}>

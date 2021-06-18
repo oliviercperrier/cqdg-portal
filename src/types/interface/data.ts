@@ -17,7 +17,9 @@ export interface IIndex {
 }
 
 export interface INode {
-    node: {
-        [key: string]: any;
-    };
+    node: INodeData;
+}
+
+export interface INodeData {
+    [key: string]: any;
 }
