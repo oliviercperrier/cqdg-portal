@@ -22,6 +22,18 @@ export const STUDIES_PAGE_DATA = gql`
                                 total
                             }
                         }
+                        summary {
+                            data_category {
+                                hits {
+                                    edges {
+                                        node {
+                                            donors
+                                            key
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }

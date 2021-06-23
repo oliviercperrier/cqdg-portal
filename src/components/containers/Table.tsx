@@ -19,7 +19,7 @@ import { usePagination } from 'utils/pagination/usePagination';
 
 import styles from './Table.module.scss';
 
-const FilesTable: React.FC<ITablePage> = ({
+const TableContainer: React.FC<ITablePage> = ({
     data,
     extraActions = null,
     loading,
@@ -136,4 +136,4 @@ const FilesTable: React.FC<ITablePage> = ({
         </DataLayout>
     );
 };
-export default FilesTable;
+export default TableContainer;

@@ -1,10 +1,15 @@
 import isEmpty from 'lodash/isEmpty';
 
-import { ISqonGroupFilter, TFilterValue, TSqonGroupContent, TValueOp } from 'types/interface/filters';
+import { ISqonGroupFilter, TFilterValue, TSqonGroupContent, TSqonGroupOp, TValueOp } from 'types/interface/filters';
 
-export const addFilter = (filters: ISqonGroupFilter | null, field: string, value: string[]): ISqonGroupFilter => {
+export const addFilter = (
+    filters: ISqonGroupFilter | null,
+    field: string,
+    value: string[],
+    operator: TSqonGroupOp = 'or'
+): ISqonGroupFilter => {
     if (isEmpty(filters)) {
-        return { content: [{ content: { field, value }, op: 'in' }], op: 'or' };
+        return { content: [{ content: { field, value }, op: 'in' }], op: operator };
     }
 
     return { ...filters!, content: [...filters!.content, { content: { field, value }, op: 'in' }] };

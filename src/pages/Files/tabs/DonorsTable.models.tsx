@@ -100,7 +100,7 @@ const DonorsModel = [
 
             const age = Math.min(node.diagnoses.hits.edges.map((item: any) => item.node.age_at_diagnosis));
             const result = node.diagnoses.hits.edges.find((item: any) => item.node.age_at_diagnosis === age);
-            return get(result, 'node.diagnosis_ICD_code', '--');
+            return get(result, 'node.tagged_icd.name', '--');
         },
         hidden: true,
         id: 'diagnoses.diagnosis_ICD_code',
@@ -112,7 +112,7 @@ const DonorsModel = [
 
             const age = Math.min(node.diagnoses.hits.edges.map((item: any) => item.node.age_at_diagnosis));
             const result = node.diagnoses.hits.edges.find((item: any) => item.node.age_at_diagnosis === age);
-            return get(result, 'node.diagnosis_ICD_code', '--');
+            return get(result, 'node.tagged_icd.name', '--');
         },
         title: t('facet.diagnoses.icd_term'),
         translate: 'facet.diagnoses.icd_term',

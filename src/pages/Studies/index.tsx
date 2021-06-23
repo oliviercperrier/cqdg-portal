@@ -51,7 +51,7 @@ const Study: React.FC<RouteComponentProps<any>> = ({ history }) => {
     const studyData = get(result, `Study.${Hits.COLLECTION}`, []);
     const dataSource = studyData.map((data: any) => ({
         ...data,
-        key: data.node.id,
+        key: data.node.internal_study_id,
     }));
     return (
         <QueryLayout

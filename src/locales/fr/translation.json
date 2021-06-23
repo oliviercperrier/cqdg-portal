@@ -278,6 +278,9 @@
         "ethnicity": "Ethnicité"
     },
     "facet": {
+        "sequencing_read.short_name": "Seq",
+        "simple_nucleotide_variation.short_name": "SNV",
+        "transriptome_profiling.short_name": "Exp",
         "creation_date": "Date de création",
         "access_limitations": "Restrictions d'accès",
         "access_requirements": "Condition d'utilisation",
@@ -300,7 +303,7 @@
         "diagnoses.age_at_diagnosis": "Âge au diagnostique",
         "diagnoses.icd_term": "Terme diagnostic CIM",
         "diagnoses.tagged_icd.main_category": "Terme diagnostic CIM",
-        "observed_phenotype_tagged.hpo_term": "Terme Phénotype HPO",
+        "observed_phenotype_tagged.name": "Terme Phénotype HPO",
         "vital_status": "Statut vital",
         "donors.diagnoses.tagged_icd.main_category": "Type d'anomalie",
         "donors.observed_phenotype_tagged.main_category": "Type de maladie (CIM-10)",

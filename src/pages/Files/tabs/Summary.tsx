@@ -32,6 +32,7 @@ const getPieChart = (history: any, data: any, key: string, extraProps: IExtraPro
     <PieChart
         className={styles.graph}
         data={formatChartData(get(data, `${key}.buckets`), 'key', 'doc_count')}
+        key={key}
         onClick={(datum) => updateQueryFilters(history, key, createSubFilter(key, [datum.id as string]))}
         onMouseMove={(_: any, event: any) => (event.target.style.cursor = 'pointer')}
         title={t(`charts.${key}`)}
@@ -99,6 +100,7 @@ const Summary: React.FC<ISummary> = ({ data, loading }) => {
                                         enableGridX
                                         enableGridY={false}
                                         enableLabel={false}
+                                        key={key}
                                         layout="horizontal"
                                         margin={{ bottom: 20, left: 5, right: 10, top: 0 }}
                                         onClick={(datum) =>

@@ -12,7 +12,7 @@ export interface IValueFilter {
 }
 
 export type TSqonGroupContent = IValueFilter[];
-type TSqonGroupOp = 'and' | 'or';
+export type TSqonGroupOp = 'and' | 'or';
 export interface ISqonGroupFilter {
     content: TSqonGroupContent;
     op: TSqonGroupOp;

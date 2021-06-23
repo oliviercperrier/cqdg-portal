@@ -19,6 +19,7 @@ import CardContainerNotched from 'components/layouts/Card/CardContainerNotched';
 import { t } from 'locales/translate';
 import { Routes } from 'routes';
 import { DONOR_PAGE_DATA } from 'store/queries/donor';
+import { getDataWithKey } from 'utils/data/manipulation';
 import { addFilter } from 'utils/filters/manipulator';
 import { useFilters } from 'utils/filters/useFilters';
 import { EFileInputType, formatFileSize } from 'utils/formatFileSize';
@@ -48,7 +49,7 @@ const Study: React.FC<RouteComponentProps<any>> = ({ match: { params } }) => {
             <PageHeader
                 backIcon={<DonorIcon className={styles.backIcon} />}
                 extra={[
-                    <DownloadClinicalButton filters={filters}>
+                    <DownloadClinicalButton filters={filters} key="downloadClinicalData">
                         <AiOutlineDownload size={16} />
                         {t('global.tables.actions.clinical.data')}
                     </DownloadClinicalButton>,
@@ -127,7 +128,7 @@ const Study: React.FC<RouteComponentProps<any>> = ({ match: { params } }) => {
                         </ListItem>
                         <ListItem label={t(`facet.access_requirements`)} labelClassName={styles.duoCode}>
                             {studyData.data_access_codes.access_requirements.map((item: string) => (
-                                <p>{item}</p>
+                                <p key={item}>{item}</p>
                             ))}
                         </ListItem>
                         <ListItem label={t(`global.access_authority`)}>{studyData.access_authority}</ListItem>
@@ -137,14 +138,14 @@ const Study: React.FC<RouteComponentProps<any>> = ({ match: { params } }) => {
                 <Card className={`${styles.category}`} title={t('entity.title.categories')}>
                     <TableContent
                         columns={dataCategoriesModel(donorData)}
-                        dataSource={get(donorData, `summary.data_category.${Hits.COLLECTION}`, [])}
+                        dataSource={getDataWithKey(donorData, `summary.data_category`, 'key')}
                         pagination={false}
                     />
                 </Card>
                 <Card className={`${styles.experimental}`} title={t('entity.title.strategy')}>
                     <TableContent
                         columns={experimentalStrategiesModel(donorData)}
-                        dataSource={get(donorData, `summary.experimental_strategy.${Hits.COLLECTION}`, [])}
+                        dataSource={getDataWithKey(donorData, `summary.experimental_strategy`, 'key')}
                         pagination={false}
                     />
                 </Card>

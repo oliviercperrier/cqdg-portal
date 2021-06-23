@@ -166,7 +166,9 @@ export const FILE_PAGE_DATA = gql`
                                 edges {
                                     node {
                                         age_at_diagnosis
-                                        diagnosis_ICD_code
+                                        tagged_icd {
+                                            name
+                                        }
                                     }
                                 }
                             }
