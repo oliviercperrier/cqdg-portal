@@ -83,7 +83,7 @@
         },
         "filters": {
             "actions": {
-                "all": "Selectionner tout",
+                "all": "Sélectionner tout",
                 "none": "Effacer",
                 "clear": "Effacer",
                 "less": "Voir -",
@@ -91,7 +91,7 @@
                 "apply": "Appliquer"
             },
             "messages": {
-                "empty": "Aucune valeur trouvé pour cette requête"
+                "empty": "Aucune valeur trouvée pour cette requête"
             },
             "checkbox": {
                 "placeholder": "Recherche..."
@@ -106,7 +106,7 @@
                     "cancel": "Annuler",
                     "confirm": "Effacer",
                     "title": "Effacer les requêtes?",
-                    "description": "Vous êtes sur le point d'effacer toutes les requêtes. Ils seront perdus pour toujours."
+                    "description": "Vous êtes sur le point d'effacer toutes les requêtes. Elles seront perdues pour toujours."
                 },
                 "delete": {
                     "cancel": "Annuler",
@@ -126,7 +126,7 @@
         "home": "Accueil",
         "file.repo": "Répertoire de fichiers",
         "studies": "Études",
-        "terms": "Termes et Conditions",
+        "terms": "Termes et conditions",
         "login": "Connexion",
         "logout": "Déconnexion",
         "documentation": "Documentation",
@@ -145,7 +145,7 @@
     },
     "footer": {
         "title": "Vous ne trouvez pas ce que vous chercher?",
-        "info": "Pour plus d'informations contactez:",
+        "info": "Pour plus d'information, contacter:",
         "logo": {
             "genome.link": "http://www.genomequebec.com/accueil/",
             "chusj.link": "https://recherche.chusj.org/fr/accueil"
@@ -165,13 +165,13 @@
             "access": "Accès aux données",
             "clinical": "Données cliniques disponibles",
             "categories": "Nombre par catégorie de données",
-            "strategy": "Nombre par stratégie experimentale"
+            "strategy": "Nombre par stratégie expérimentale"
         },
         "modal": {
             "access.title": "Demande d'accès",
-            "access.desc": "Téléchargez les documents fournissant des instructions pour demander l'accès aux données d'études sélectionnées",
+            "access.desc": "Télécharger les documents qui pourront être utilisés pour faire une demande d’accès aux données des études sélectionnées",
             "manifest.title": "Manifeste",
-            "manifest.desc": "Téléchargez les documents fournissant des instructions pour demander l'accès aux données d'études sélectionnées",
+            "manifest.desc": "Télécharger un fichier manifeste qui sera utilisé par l’outil de transfert de données CQDG pour télécharger les données.",
             "actions.cancel": "Annuler",
             "actions.download": "Télécharger"
         }
@@ -206,7 +206,7 @@
                 "title": "Études par domaines de recherche"
             },
             "graph3": {
-                "title": "Donneurs par type d'anomalie"
+                "title": "Donneurs par type d’anormalité phénotypique"
             }
         },
         "cards": {
@@ -240,28 +240,28 @@
             "placeholder" : "DON0000068"
         },
         "studies": {
-            "tooltips" : "Recherche par nom, code, ou mot clef (ex: Cancer) de l'étude",
+            "tooltips" : "Recherche par nom, code, ou mot clé (ex: Cancer) de l'étude",
             "title" : "Recherche d'études",
-            "placeholder" : "STU0000034, Cartagène, Cancer..."
+            "placeholder" : "STU0000034, CARTaGENE, Cancer..."
         }
     },
     "charts": {
         "header": {
-            "demographic": "Profil Socio-Demographique",
+            "demographic": "Profil sociodémographique",
             "clinical": "Clinique",
-            "available.clinical": "Données clinique disponibles",
+            "available.clinical": "Données cliniques disponibles",
             "available.genomic": "Données génomiques disponibles"
         },
         "sideTitle": {
-            "observed_phenotype_tagged.main_category": "Termes HPO",
-            "diagnoses.tagged_icd.main_category": "Termes CIM-10"
+            "observed_phenotype_tagged.main_category": "Type d’anormalité phénotypique (HPO)",
+            "diagnoses.tagged_icd.main_category": "Type de maladie (CIM-10)"
         },
         "bottomTitle": {
             "available.clinical": "Données cliniques"
         },
         "available.clinical": "Nombre de donneurs par type de données cliniques",
-        "observed_phenotype_tagged.main_category": "Nombre de donneurs par Anomalie phénotypique (HPO)",
-        "diagnoses.tagged_icd.main_category": "Nombre de donneurs par Catégorie de diagnostic (CIM-10)",
+        "observed_phenotype_tagged.main_category": "Nombre de donneurs par type d’anormalité phénotypique (HPO)",
+        "diagnoses.tagged_icd.main_category": "Nombre de donneurs par type de maladie (CIM-10)",
         "vital_status": "Status vital",
         "domain": "Études par domaine",
         "population": "Études par type population",
@@ -273,7 +273,7 @@
         "experimental_strategy": "Stratégie expérimentale",
         "file_format": "Format de fichiers",
         "disease_type": "Donneurs par type de maladie",
-        "phenotype_category": "Donneurs par catégorie de phénotype",
+        "phenotype_category": "Donneurs par type d’anormalité phénotypique (HPO)",
         "gender": "Genre",
         "ethnicity": "Ethnicité"
     },
@@ -283,7 +283,7 @@
         "transriptome_profiling.short_name": "Exp",
         "creation_date": "Date de création",
         "access_limitations": "Restrictions d'accès",
-        "access_requirements": "Condition d'utilisation",
+        "access_requirements": "Conditions d'utilisation",
         "domain": "Domaine",
         "population": "Population",
         "abbreviation": "Abbréviation",
@@ -300,20 +300,20 @@
         "age.at.recruitment": "Âge au recrutement",
         "age_at_recruitment": "Âge au recrutement",
         "age.at.diagnosis": "Âge au diagnostique",
-        "diagnoses.age_at_diagnosis": "Âge au diagnostique",
-        "diagnoses.icd_term": "Terme diagnostic CIM",
-        "diagnoses.tagged_icd.main_category": "Terme diagnostic CIM",
-        "observed_phenotype_tagged.name": "Terme Phénotype HPO",
+        "diagnoses.age_at_diagnosis": "Âge au diagnostic",
+        "diagnoses.icd_term": "Diagnostic (CIM-10)",
+        "diagnoses.tagged_icd.main_category": "Type de maladie (CIM-10)",
+        "observed_phenotype_tagged.name": "Anormalité  phénotypique (HPO)",
         "vital_status": "Statut vital",
-        "donors.diagnoses.tagged_icd.main_category": "Type d'anomalie",
-        "donors.observed_phenotype_tagged.main_category": "Type de maladie (CIM-10)",
-        "hpo.term": "Terme HPO",
-        "mondo.term": "Terme Mondo",
-        "diagnoses.mondo_term_keyword": "Terme Mondo",
-        "hpo.category": "Category HPO",
-        "observed_phenotype_tagged.main_category": "Category HPO",
-        "donors.diagnoses.mondo_term_keyword": "Type de maladie (Mondo)",
-        "internal_file_id": "ID du Fichier",
+        "donors.diagnoses.tagged_icd.main_category": "Type de maladie (CIM-10)",
+        "donors.observed_phenotype_tagged.main_category": "Type d'anormalité phénotypique (HPO)",
+        "hpo.term": "Anormalité phénotypique (HPO)",
+        "mondo.term": "Diagnostic (Mondo)",
+        "diagnoses.mondo_term_keyword": "Diagnostic (Mondo)",
+        "hpo.category": "Type d'anormalité phénotypique (HPO)",
+        "observed_phenotype_tagged.main_category": "Type d'anormalité phénotypique (HPO)",
+        "donors.diagnoses.mondo_term_keyword": "Diagnostic(Mondo)",
+        "internal_file_id": "ID du fichier",
         "donor_id": "ID du donneur",
         "data_access": "Accès",
         "files.data_category": "Catégorie de données",
@@ -321,12 +321,12 @@
         "file_format": "Format de données",
         "file_size": "Taille",
         "search": "Recherche",
-        "search_suggest_tooltip_files": "Rechercher par Nom de fichier",
-        "search_suggest_tooltip_donors": "Rechercher par ID de donneur",
+        "search_suggest_tooltip_files": "Rechercher par nom de fichier",
+        "search_suggest_tooltip_donors": "Rechercher par ID du donneur",
         "is_harmonized": "Données harmonisées",
         "data_type": "Type de données",
         "experimental_strategy": "Stratégie expérimentale",
-        "platform": "Platforme",
+        "platform": "Plateforme",
         "files.count": "Nombre de fichiers",
         "files": "Nombre de fichiers",
         "donors": "Nombre de donneurs",
@@ -345,8 +345,8 @@
             "reset": "Effacer"
         },
         "no.result": "Aucune valeur pour cette requête",
-        "savesets.donor": "Identifiant de donneurs",
-        "savesets.file": "Identifiant de fichiers"
+        "savesets.donor": "Identifiants des donneurs",
+        "savesets.file": "Identifiants des fichiers"
     },
     "aggregation": {
         "0": "Non",
@@ -380,7 +380,7 @@
         "platform": "Plateforme",
         "illumina": "Illumina",
         "nanopore": "Nanopore",
-        "file_variant_class": "Classe de variante",
+        "file_variant_class": "Classe de variant",
         "no-data": "no-data",
         "germline": "Germline",
         "somatic": "Somatique",
@@ -388,11 +388,11 @@
         "st2": "Étude 2",
         "st3": "Étude 3",
         "st4": "Étude 4",
-        "st1.desc": "Cohorte basée sur la population axée sur des conditions complexes.",
-        "st2.desc": "Résultats des tests génomiques.",
-        "st3.desc": "Étude sur les phénotypes de cancer inhabituels.",
+        "st1.desc": "Cohorte basée sur la population générale axée sur des conditions complexes",
+        "st2.desc": "Résultats des tests génomiques",
+        "st3.desc": "Étude sur les phénotypes de cancer inhabituels",
         "st4.desc": "Une biobanque multicentrique dédiée à la recherche sur le cancer de la prostate.",
-        "rare.cancers": "Cancers rare",
+        "rare.cancers": "Cancers rares",
         "procure": "Procure",
         "general.health": "General Health",
         "cancer": "Cancer",
@@ -403,8 +403,8 @@
         "french.canadian": "French Canadian ",
         "european": "European",
         "arab": "Arab",
-        "african.or.carabean": "African or Carabean",
-        "mixted.descent": "Mixted descent",
+        "african.or.carabean": "African or Caribbean",
+        "mixted.descent": "Mixed descent",
         "east.and.southeast.asian": "East and Southeast Asian",
         "latin.american": "Latin American",
         "other": "Other",
@@ -511,15 +511,15 @@
         "ethnicity": "Ethnicité",
         "age_at_recruitment": "Âge au recrutement",
         "diagnoses.age_at_diagnosis": "Âge au diagnostique",
-        "diagnoses.tagged_icd.main_category": "Catégorie ICD",
-        "diagnoses.mondo_term_keyword": "Terme mondo",
-        "observed_phenotype_tagged.main_category": "Categorie HPO",
-        "observed_phenotype_tagged.hpo_term_keyword": "Terme HPO",
+        "diagnoses.tagged_icd.main_category": "Type de maladie (CIM-10)",
+        "diagnoses.mondo_term_keyword": "Diagnostic (Mondo)",
+        "observed_phenotype_tagged.main_category": "Type d'anormalité phénotypique (HPO)",
+        "observed_phenotype_tagged.hpo_term_keyword": "Anormalité phénotypique (HPO)",
         "vital_status": "État vital"
     },
     "repo": {
         "search": {
-            "by.facet.title": "Démarrer la recherche en selectionant une facette"
+            "by.facet.title": "Démarrer la recherche en sélectionnant une facette"
         },
         "tabs": {
             "files": "Fichiers ({count})",
@@ -528,7 +528,7 @@
         },
         "download": {
             "options.all.json": "Tout en JSON",
-            "options.all.tsv": "Valeur courantes en TSV"
+            "options.all.tsv": "Valeurs courantes en TSV"
         }
     }
 }
