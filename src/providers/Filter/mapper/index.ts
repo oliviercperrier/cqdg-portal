@@ -52,4 +52,10 @@ export const studyMapping: Map<string, string> = new Map([
     ['vital_status', 'donors.vital_status'],
     ['age_at_recruitment', 'donors.age_at_recruitment'],
     ['internal_donor_id', 'donors.internal_donor_id'],
+    ['observed_phenotype_tagged.main_category', 'donors.observed_phenotype_tagged.main_category'],
+    ['observed_phenotype_tagged.name', 'donors.observed_phenotype_tagged.name'],
+    ['diagnoses.tagged_mondo.name', 'donors.diagnoses.tagged_mondo.name'],
+    ['diagnoses.tagged_mondo.main_category', 'donors.diagnoses.tagged_mondo.main_category'],
+    ['diagnoses.tagged_icd.main_category', 'donors.diagnoses.tagged_icd.main_category'],
+    ['diagnoses.tagged_icd.name', 'donors.diagnoses.tagged_icd.name'],
 ]);
