@@ -1,23 +1,23 @@
 {
     "global": {
         "last.updated.date": "Dernière mise à jour",
-        "empty": "Aucune Données",
+        "empty": "Aucune donnée",
         "documentation": "Documentation",
         "files.title": "Fichiers",
-        "files": "fichiers",
+        "files": "Fichiers",
         "donors.title": "Donneurs",
-        "donors": "donneurs",
-        "studies": "études",
+        "donors": "Donneurs",
+        "studies": "Études",
         "studies.title": "Études",
-        "study": "étude",
+        "study": "Étude",
         "login": "Connexion",
         "total": "Total",
         "more": "Autres",
-        "show": "voir",
+        "show": "Voir",
         "less": "Réduire",
         "cart": "Panier",
-        "select.all": "tout sélectionner",
-        "none": "aucun",
+        "select.all": "Tout sélectionner",
+        "none": "Aucun",
         "manifest": "Manifest",
         "download": "Téléchargement",
         "data": "Données",
@@ -35,7 +35,7 @@
         },
         "tables": {
             "showing": "sur",
-            "selected": "items sélectionnées",
+            "selected": "Items sélectionnées",
             "actions": {
                 "clinical.data": "Données Cliniques",
                 "export": "Export Current View",
@@ -68,13 +68,13 @@
             "update.confirm": "Ajouter à l'ensemble",
             "update.success.title": "Votre ensemble a été mis à jour",
             "update.success.description": "Vous pouvez rappeler vos ensembles à partir de la barre de facettes.",
-            "update.error.title": "Un erreur est survenue",
+            "update.error.title": "Une erreur est survenue",
             "update.error.description": "Il n'a pas été possible de mettre à jour votre ensemble. Veuillez réessayer.",
-            "delete.success.title": "Votre ensemble a été supprimer",
-            "delete.success.description": "Votre ensemble à bel et bien été retirer  avec succès",
-            "delete.error.title": "Un erreur est survenue",
+            "delete.success.title": "Votre ensemble a été supprimé",
+            "delete.success.description": "Votre ensemble à été retiré avec succès",
+            "delete.error.title": "Une erreur est survenue",
             "delete.error.description": "Il n'a pas été possible de supprimer votre ensemble. Veuillez réessayer.",
-            "delete": "Supprimer d'un ensemble existant",
+            "delete": "Supprimer un ensemble existant",
             "delete.title": "Retirer de l'ensemble de {type}",
             "delete.label": "Ensemble de {type}",
             "delete.confirm": "Retirer de l'ensemble",
@@ -135,13 +135,13 @@
     "terms": {
         "decline": "Refuser",
         "accept": "Accepter",
-        "1": "Vous êtes responsable du maintien de la confidentialité de votre compte et de toutes les activités qui se déroulent par suite de l’utilisation de votre compte;",
-        "2": "Vous êtes responsable de tout le matériel que vous soumettez sur ce site. Vous ne devez pas transmettre du contenu ou des documents qui contiennent des fichiers corrompus, des virus ou tout autre fichier logiciel similaire qui puissent endommager le fonctionnement d’un système informatique. Vous devez vous assurer qu’aucun renseignements personnels soient inclus dans les données soumises au CQDG;",
-        "3": "En conformité avec les politiques d’accès aux données des études fiduciaires, vous devez prendre les mesures appropriées pour protéger les données contre tout vol, perte, interception, utilisation ou divulgation non autorisée;",
-        "4": "Vous utiliserez les ensembles de données à accès contrôlé uniquement en relation avec le projet de recherche décrit dans une demande d'accès aux données approuvée pour chaque ensemble de données;",
-        "5": "Vous adhérez aux clauses concernant la propriété intellectuelle (le cas échéant) telles que spécifiées dans les politiques d’accès et utilisation des données des études fiduciaires;",
-        "6": "Vous ne ferez aucune tentative d’identifier ou de contacter des participants ou des groupes de participants auprès desquels les données ont été collectées, ou de générer des informations qui pourraient permettre de déterminer facilement l’identité des participants;",
-        "7": "Vous rapporterez toute divulgation non autorisée de données, violation de la sécurité des données ou autres incidents de gestion de données contraires aux conditions d'accès aux données;"
+        "1": "Vous êtes responsable du maintien de la confidentialité de votre compte et de toutes les activités en lien avec l’utilisation de votre compte;",
+        "2": "Vous êtes responsable de tout le matériel que vous soumettez sur ce site. Vous ne devez pas transmettre du contenu ou des documents qui contiennent des fichiers corrompus, des virus ou tout autre fichier logiciel similaire qui puissent endommager le fonctionnement d’un système informatique. Vous devez vous assurer qu’aucun renseignement personnel ne soit inclus dans les données soumises au CQDG;",
+        "3": "Vous devez prendre les mesures appropriées pour protéger les données contre tout vol, perte, interception, utilisation ou divulgation non autorisée, conformément aux politiques d’accès aux données des études fiduciaires;",
+        "4": "Vous devez utiliser les ensembles de données à accès contrôlé uniquement pour les fins du projet de recherche approuvé;",
+        "5": "Vous devez adhérer aux clauses concernant la propriété intellectuelle (le cas échéant) telles que spécifiées dans les politiques d’accès aux données des études fiduciaires;",
+        "6": "Vous ne devez faire aucune tentative d’identifier ou de contacter des participants ou des groupes de participants auprès desquels les données ont été collectées, ou de générer des informations qui pourraient permettre d'identifier des participants;",
+        "7": "Vous devez rapporter toute divulgation non autorisée de données, violation de la sécurité des données ou autres incidents de gestion de données contraires aux conditions d'accès aux données;"
     },
     "footer": {
         "title": "Vous ne trouvez pas ce que vous chercher?",
@@ -158,7 +158,7 @@
         "actions": {
             "manifest": "Manifeste",
             "access": "Demande d'accès",
-            "link.summary": "Repertoire de fichiers"
+            "link.summary": "Répertoire de fichiers"
         },
         "title": {
             "summary": "Résumé",
@@ -203,7 +203,7 @@
                 "title": "Donneurs par type de maladie"
             },
             "graph2": {
-                "title": "Études par domaines de recherche"
+                "title": "Études par domaine de recherche"
             },
             "graph3": {
                 "title": "Donneurs par type d’anormalité phénotypique"
@@ -240,9 +240,9 @@
             "placeholder" : "DON0000068"
         },
         "studies": {
-            "tooltips" : "Recherche par nom, code, ou mot clé (ex: Cancer) de l'étude",
+            "tooltips" : "Recherche par nom, code, ou mot clé (ex: cancer) de l'étude",
             "title" : "Recherche d'études",
-            "placeholder" : "STU0000034, CARTaGENE, Cancer..."
+            "placeholder" : "STU0000034, CARTaGENE, cancer..."
         }
     },
     "charts": {
@@ -299,7 +299,7 @@
         "ethnicity": "Ethnicité",
         "age.at.recruitment": "Âge au recrutement",
         "age_at_recruitment": "Âge au recrutement",
-        "age.at.diagnosis": "Âge au diagnostique",
+        "age.at.diagnosis": "Âge au diagnostic",
         "diagnoses.age_at_diagnosis": "Âge au diagnostic",
         "diagnoses.icd_term": "Diagnostic (CIM-10)",
         "diagnoses.tagged_icd.main_category": "Type de maladie (CIM-10)",
@@ -312,7 +312,7 @@
         "diagnoses.mondo_term_keyword": "Diagnostic (Mondo)",
         "hpo.category": "Type d'anormalité phénotypique (HPO)",
         "observed_phenotype_tagged.main_category": "Type d'anormalité phénotypique (HPO)",
-        "donors.diagnoses.mondo_term_keyword": "Diagnostic(Mondo)",
+        "donors.diagnoses.mondo_term_keyword": "Diagnostic (Mondo)",
         "internal_file_id": "ID du fichier",
         "donor_id": "ID du donneur",
         "data_access": "Accès",
@@ -510,7 +510,7 @@
         "gender": "Genre",
         "ethnicity": "Ethnicité",
         "age_at_recruitment": "Âge au recrutement",
-        "diagnoses.age_at_diagnosis": "Âge au diagnostique",
+        "diagnoses.age_at_diagnosis": "Âge au diagnostic",
         "diagnoses.tagged_icd.main_category": "Type de maladie (CIM-10)",
         "diagnoses.mondo_term_keyword": "Diagnostic (Mondo)",
         "observed_phenotype_tagged.main_category": "Type d'anormalité phénotypique (HPO)",
