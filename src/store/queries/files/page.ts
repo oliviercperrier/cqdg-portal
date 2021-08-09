@@ -254,13 +254,13 @@ export const FILE_PAGE_DATA = gql`
                         key
                     }
                 }
-                observed_phenotype_tagged__name {
+                observed_phenotype_tagged__display_name {
                     buckets {
                         doc_count
                         key
                     }
                 }
-                diagnoses__tagged_mondo__name {
+                diagnoses__tagged_mondo__display_name {
                     buckets {
                         doc_count
                         key

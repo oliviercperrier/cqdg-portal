@@ -67,7 +67,7 @@ const filters: IFilterModel[] = [
         type: VisualType.Checkbox,
     },
     {
-        field: 'diagnoses.tagged_mondo.name',
+        field: 'diagnoses.tagged_mondo.display_name',
         title: 'facet.mondo.term',
         type: VisualType.Checkbox,
     },
@@ -77,7 +77,7 @@ const filters: IFilterModel[] = [
         type: VisualType.Checkbox,
     },
     {
-        field: 'observed_phenotype_tagged.name',
+        field: 'observed_phenotype_tagged.display_name',
         title: 'facet.hpo.term',
         type: VisualType.Checkbox,
     },
