@@ -19,9 +19,9 @@ const DownloadClinicalButton: React.FC<IDownloadClinicalButton> = ({ children, c
     useEffect(() => {
         if (hasError) {
             NotificationComponent({
-                description: intl.formatMessage({ id: 'global.savesets.update.error.description' }), //TODO path
+                description: intl.formatMessage({ id: 'global.clinicaldata.download.error.description' }),
                 duration: 10,
-                message: intl.formatMessage({ id: 'global.savesets.update.error.description' }), //TODO Path
+                message: intl.formatMessage({ id: 'global.clinicaldata.download.error.message' }),
                 type: NotificationType.Error,
             });
             setHasError(false);
@@ -40,7 +40,7 @@ const DownloadClinicalButton: React.FC<IDownloadClinicalButton> = ({ children, c
                     } else {
                         NotificationComponent({
                             duration: 10,
-                            message: intl.formatMessage({ id: 'global.savesets.update.error.description' }), //TODO Path,
+                            message: intl.formatMessage({ id: 'global.clinicaldata.download.success.message' }),
                             type: NotificationType.Success,
                         });
                     }
