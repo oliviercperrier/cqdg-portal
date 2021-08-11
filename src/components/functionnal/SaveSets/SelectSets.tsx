@@ -65,6 +65,8 @@ const SelectSets: React.FunctionComponent<ISelectSets> = ({ data, dictionary, on
         onSelect(Object.keys(selectedData).map((key) => ({ data: selectedData[key], key })));
     };
 
+    console.log(data);
+
     const currentValues = data.reduce((acc, item) => [...acc, ...(item.selectedValues || [])], [] as string[]);
     return (
         <StackLayout vertical>

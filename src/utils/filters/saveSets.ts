@@ -1,6 +1,7 @@
+import { ISyntheticSqon } from '@ferlab/ui/core/data/sqon/types';
+import { isEmptySqon } from '@ferlab/ui/core/data/sqon/utils';
 import isEmpty from 'lodash/isEmpty';
 
-import { ISqonGroupFilter } from 'types/interface/filters';
 import { noDuplicate } from 'utils/duplicate';
 
 interface IData {
@@ -14,12 +15,14 @@ interface IContent {
     };
 }
 const validKey = ['savesets.file', 'savesets.donor'];
-export const remapFilterToSaveSets = (data: IData, filters: ISqonGroupFilter): ISqonGroupFilter => {
-    if (isEmpty(filters)) {
+export const remapFilterToSaveSets = (data: IData, filters: ISyntheticSqon): ISyntheticSqon | null => {
+    if (isEmpty(filters) || isEmptySqon(filters)) {
         return filters;
     }
 
-    const remappedSaveSetsFilters = filters.content.map((item) => {
+    console.log(filters);
+
+    const remappedSaveSetsFilters = filters.content.map((item: any) => {
         if (validKey.includes(item.content.field)) {
             const key = item.content.field.split('.')[1];
             let result: any = [];

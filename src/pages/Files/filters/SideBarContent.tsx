@@ -1,7 +1,7 @@
 import React from 'react';
+import { readQueryParam, updateQueryParam } from '@ferlab/ui/core/data/filters/utils';
 
 import FileDonorTabs from 'components/functionnal/Tabs/FileDonor';
-import { readQueryParam, updateQueryParam } from 'utils/url/query';
 
 import DonorFilters from './DonorFilters';
 import FileFilters from './FileFilters';

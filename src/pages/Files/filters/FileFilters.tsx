@@ -1,6 +1,7 @@
 import React from 'react';
 import { MdInsertDriveFile } from 'react-icons/md';
 import FilterContainer from '@ferlab/ui/core/components/filters/FilterContainer';
+import { getSelectedFilters, updateFilters, updateQueryFilters } from '@ferlab/ui/core/data/filters/utils';
 import cloneDeep from 'lodash/cloneDeep';
 import get from 'lodash/get';
 
@@ -12,8 +13,7 @@ import { t } from 'locales/translate';
 import { FILE_GLOBAL_SEARCH } from 'store/queries/files/filters';
 import { GET_ALL_SAVE_SETS } from 'store/queries/files/saveSets';
 import { getFiltersDictionary } from 'utils/dictionnary';
-import { enhanceFilters, getSelectedFilters } from 'utils/filters';
-import { updateFilters, updateQueryFilters } from 'utils/filters';
+import { enhanceFilters } from 'utils/filters';
 import { createSubFilter, getSubFilter } from 'utils/filters/manipulator';
 import { useFilters } from 'utils/filters/useFilters';
 import { Hits, useLazyResultQuery } from 'utils/graphql/query';

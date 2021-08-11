@@ -1,3 +1,5 @@
+import { ISyntheticSqon, IValueContent, IValueFilter } from '@ferlab/ui/core/data/sqon/types';
+import { isEmptySqon, isFieldOperator } from '@ferlab/ui/core/data/sqon/utils';
 import isEmpty from 'lodash/isEmpty';
 
 import { ISqonGroupFilter, TFilterValue, TSqonGroupContent, TSqonGroupOp, TValueOp } from 'types/interface/filters';
@@ -33,17 +35,22 @@ export const createSubFilter = (field: string, value: string[], op: TValueOp = '
     return [{ content: { field: newField, value }, op }];
 };
 
-export const getSubFilter = (field: string, filters: ISqonGroupFilter | null): TFilterValue => {
-    if (isEmpty(filters)) {
+export const getSubFilter = (field: string, filters: ISyntheticSqon | null): TFilterValue => {
+    if (isEmpty(filters) || !filters || isEmptySqon(filters)) {
         return [];
     }
 
-    const newField = field.replace('__', '.');
-    for (const filter of filters!.content) {
-        if (filter.content.field === newField) {
-            return filter.content.value;
+    const findSubFilter = (sqon: any): TFilterValue | undefined => {
+        console.log(sqon);
+        if (isFieldOperator(sqon)) {
+            const valueContent = sqon.content as unknown as IValueContent;
+            if (valueContent.field === field.replace('__', '.')) {
+                return valueContent.value;
+            }
+        } else {
+            return sqon.content.reduce((acc: any, contentSqon: any) => acc || findSubFilter(contentSqon), false);
         }
-    }
+    };
 
-    return [];
+    return findSubFilter(filters) || [];
 };

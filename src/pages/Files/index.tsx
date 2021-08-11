@@ -4,6 +4,7 @@ import { MdFileDownload, MdInsertDriveFile, MdPeople } from 'react-icons/md';
 import { RouteComponentProps } from 'react-router-dom';
 import MultiLabel from '@ferlab/ui/core/components/labels/MultiLabel';
 import QueryBuilder from '@ferlab/ui/core/components/QueryBuilder';
+import { readQueryParam, updateQueryParam } from '@ferlab/ui/core/data/filters/utils';
 import StackLayout from '@ferlab/ui/core/layout/StackLayout';
 import { Tabs } from 'antd';
 import get from 'lodash/get';
@@ -20,15 +21,12 @@ import QueryLayout from 'layouts/Query';
 import { t } from 'locales/translate';
 import SideBarContent from 'pages/Files/filters/SideBarContent';
 import Summary from 'pages/Files/tabs/Summary';
-import { getQueryBuilderCache, setQueryBuilderCache } from 'store/cache/queryBuilder';
 import { FILE_PAGE_DATA } from 'store/queries/files/page';
 import { getDataWithKey } from 'utils/data/manipulation';
 import { getQueryBuilderDictionary } from 'utils/dictionnary';
-import { updateQueryFilters } from 'utils/filters';
 import { useFilters } from 'utils/filters/useFilters';
 import { EFileInputType, formatFileSize } from 'utils/formatFileSize';
 import { useLazyResultQuery } from 'utils/graphql/query';
-import { readQueryParam, updateQueryParam } from 'utils/url/query';
 
 import { presetDonorsModel } from './tabs/DonorsTable.models';
 import { FilesModel } from './tabs/FilesTable.models';
@@ -65,15 +63,13 @@ const FileRepo: React.FC<RouteComponentProps<any>> = ({ history }) => {
             <div className="file-repo__wrapper">
                 <QueryBuilder
                     IconTotal={<MdInsertDriveFile size={18} />}
+                    cacheKey="file-repo"
                     className="file-repo__query-builder"
-                    currentQuery={filters}
+                    currentQuery={filters?.content?.length ? filters : {}}
                     dictionary={getQueryBuilderDictionary()}
-                    initialState={getQueryBuilderCache('file-repo')}
-                    onChangeQuery={(_, query) => {
-                        updateQueryParam(history, 'filters', query);
-                    }}
-                    onRemoveFacet={(query) => updateQueryFilters(history, query.content.field, [])}
-                    onUpdate={(state) => setQueryBuilderCache('file-repo', state)}
+                    enableCombine
+                    enableShowHideLabels
+                    history={history}
                     total={filesTotal}
                 />
                 <div className="file-repo__summary">

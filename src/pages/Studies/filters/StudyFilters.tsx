@@ -3,6 +3,7 @@ import { MdAssignment } from 'react-icons/md';
 import { useHistory } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import FilterContainer from '@ferlab/ui/core/components/filters/FilterContainer';
+import { getSelectedFilters, updateFilters, updateQueryFilters } from '@ferlab/ui/core/data/filters/utils';
 import get from 'lodash/get';
 
 import GlobalSearch from 'components/containers/GlobalSearch';
@@ -11,8 +12,7 @@ import { t } from 'locales/translate';
 import { STUDY_GLOBAL_SEARCH } from 'store/queries/files/filters';
 import { STUDY_FILTERS } from 'store/queries/studies/filters';
 import { getFiltersDictionary } from 'utils/dictionnary';
-import { enhanceFilters, getSelectedFilters, updateQueryFilters } from 'utils/filters';
-import { updateFilters } from 'utils/filters';
+import { enhanceFilters } from 'utils/filters';
 import { createSubFilter, getSubFilter } from 'utils/filters/manipulator';
 import { useFilters } from 'utils/filters/useFilters';
 import { Hits } from 'utils/graphql/query';

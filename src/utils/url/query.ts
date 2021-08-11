@@ -1,18 +1,6 @@
 import { History } from 'history';
-import get from 'lodash/get';
 import isEmpty from 'lodash/isEmpty';
 import qs from 'query-string';
-import xss, { IFilterXSSOptions } from 'xss';
-
-const xssConfig: IFilterXSSOptions = {
-    escapeHtml: (f) => f,
-
-    stripIgnoreTag: true, // filter out all HTML not in the whitelist
-
-    stripIgnoreTagBody: ['script'], // the script tag is a special case, we need to filter out its content
-
-    whiteList: {}, // empty, means filter out all tags
-};
 
 export const updateQueryParam = (history: History, key: string, value: Record<string, any> | string): void => {
     const query = getQueryParams();
@@ -44,21 +32,6 @@ export const createQueryParams = (queryParams: IQueryParams): string => {
     }
 
     return `?${qs.stringify(query)}`;
-};
-
-interface IValues<T> {
-    defaultValue: T;
-    whiteList?: Array<T>;
-}
-export const readQueryParam = <T = ''>(key: string, options: IValues<T>, search: any = null): T => {
-    const query = getQueryParams(search);
-    let result = get<any, any, T>(query, key, options.defaultValue)!;
-    result = xss(result, xssConfig);
-    if (!isEmpty(options.whiteList) && !options.whiteList!.includes(result)) {
-        result = options.defaultValue;
-    }
-
-    return result;
 };
 
 const getQueryParams = (search: any = null) => (search ? qs.parse(search) : qs.parse(window.location.search));

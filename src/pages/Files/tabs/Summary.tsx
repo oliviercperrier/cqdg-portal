@@ -1,5 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+import { updateQueryFilters } from '@ferlab/ui/core/data/filters/utils';
 import { Card } from 'antd';
 import cx from 'classnames';
 import get from 'lodash/get';
@@ -7,7 +8,6 @@ import get from 'lodash/get';
 import BarChart from 'components/charts/Bar';
 import PieChart from 'components/charts/Pie';
 import { t } from 'locales/translate';
-import { updateQueryFilters } from 'utils/filters';
 import { createSubFilter } from 'utils/filters/manipulator';
 import { formatChartData } from 'utils/formatChartData';
 

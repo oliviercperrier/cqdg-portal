@@ -17,17 +17,14 @@ import QueryLayout from 'layouts/Query';
 import { t } from 'locales/translate';
 import CardsContent from 'pages/Studies/content/Cards';
 import { presetModel } from 'pages/Studies/content/Table.models';
-import { getQueryBuilderCache, setQueryBuilderCache } from 'store/cache/queryBuilder';
 import { setTableColumn } from 'store/cache/tableColumns';
 import { STUDIES_PAGE_DATA } from 'store/queries/studies/content';
 import { GET_TABLE_COLUMNS } from 'store/queries/tables';
 import { ITableColumnItem } from 'types/interface';
 import { getQueryBuilderDictionary } from 'utils/dictionnary';
-import { updateQueryFilters } from 'utils/filters';
 import { useFilters } from 'utils/filters/useFilters';
 import { Hits, useLazyResultQuery } from 'utils/graphql/query';
 import { usePagination } from 'utils/pagination/usePagination';
-import { updateQueryParam } from 'utils/url/query';
 
 import Filters from './filters/StudyFilters';
 
@@ -65,14 +62,12 @@ const Study: React.FC<RouteComponentProps<any>> = ({ history }) => {
             <div className={styles.content}>
                 <QueryBuilder
                     IconTotal={<MdAssignment size={18} />}
+                    cacheKey="study-repo"
                     className="file-repo__query-builder"
-                    currentQuery={filters}
+                    currentQuery={filters!}
                     dictionary={getQueryBuilderDictionary()}
                     enableSingleQuery
-                    initialState={getQueryBuilderCache('study-repo')}
-                    onChangeQuery={(_, query) => updateQueryParam(history, 'filters', query)}
-                    onRemoveFacet={(query) => updateQueryFilters(history, query.content.field, [])}
-                    onUpdate={(state) => setQueryBuilderCache('study-repo', state)}
+                    history={history}
                     total={totalStudies}
                 />
                 <BorderedContainer grow>

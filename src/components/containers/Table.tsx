@@ -30,7 +30,7 @@ const TableContainer: React.FC<ITablePage> = ({
 }) => {
     const [selectedRow, setSelectedRow] = useState<string[]>([]);
     const { filters } = useFilters();
-    const { currentPage, pageFilter, pageSize, setCurrentPageFilter } = usePagination(filters);
+    const { currentPage, pageFilter, pageSize, setCurrentPageFilter } = usePagination(filters!);
 
     const [showingData, setShowingData] = useState({ lowerRange: 1, upperRange: pageSize });
     const { data: tablesData } = useQuery<any>(GET_TABLE_COLUMNS, {
