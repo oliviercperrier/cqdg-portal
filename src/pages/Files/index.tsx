@@ -162,7 +162,11 @@ const FileRepo: React.FC<RouteComponentProps<any>> = ({ history }) => {
                                 data={getDataWithKey(result, 'Donor', 'internal_donor_id')}
                                 extraActions={(selectedRow) => (
                                     <>
-                                        <DownloadClinicalButton className="clinical-download" filters={filters}>
+                                        {/*Download clinical api is file centric, only fileFilters should be provided*/}
+                                        <DownloadClinicalButton
+                                            className="clinical-download"
+                                            filters={mappedFilters.fileFilters}
+                                        >
                                             <MdFileDownload size={16} />
                                             {t('global.tables.actions.clinical.data')}
                                         </DownloadClinicalButton>

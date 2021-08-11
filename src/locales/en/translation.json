@@ -47,8 +47,8 @@
         },
         "clinicaldata": {
             "download.error.description": "It was not possible to download the data.",
-            "download.error.message": "An Error Occurred",
-            "download.success.message": "Clinical Data downloaded"
+            "download.error.message": "An error has occurred",
+            "download.success.message": "Clinical data has been downloaded"
         },
         "savesets": {
             "title": "My {type} sets",
