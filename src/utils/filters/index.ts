@@ -27,6 +27,9 @@ interface IAggregations {
     [key: string]: IAggregation;
 }
 
+const replaceNoData = (value: any) =>
+    typeof value === 'string' || value instanceof String ? value.replace('No Data', '__missing__') : value;
+
 const getFilterWithNoSelection = (filters: ISqonGroupFilter, field: string): ISqonGroupFilter => {
     const filtered = filters.content.filter((filter) => filter.content.field !== field);
     return {
@@ -194,7 +197,8 @@ export const mapFilter = (filters: ISqonGroupFilter, mapping: Map<string, string
     const filtersContent = get(filters, 'content', [] as IValueFilter[]);
     const remapedFilterContent: IValueFilter[] = filtersContent.map((filter: IValueFilter) => {
         const field = get(filter, 'content.field', null);
-        const values = get(filter, 'content.value', []).map((v: string) => v.replace('No Data', '__missing__'));
+
+        const values = get(filter, 'content.value', []).map((v: string | number | boolean) => replaceNoData(v));
         const newFilter = {
             ...filter,
             content: {
