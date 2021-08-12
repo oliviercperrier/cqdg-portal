@@ -46,6 +46,11 @@
             },
             "columns": {}
         },
+        "clinicaldata": {
+            "download.error.description": "Il n'a pas été possible de télécharger les données.",
+            "download.error.message": "Une erreur est survenue",
+            "download.success.message": "Les données cliniques ont été téléchargés"
+        },
         "savesets": {
             "title": "Mes ensembles de {type}",
             "choose": "Choisir un ensemble",
