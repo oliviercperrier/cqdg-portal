@@ -11,8 +11,7 @@
     overflow: hidden;
 
     &:not(&-collapsed) {
-        max-width: 420px;
-        min-width: 320px;
+        width: 400px;
         > :first-child {
             margin-bottom: 1.6rem;
         }    

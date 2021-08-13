@@ -4,6 +4,10 @@
     margin: 1rem 0;
 }
 
+.donorSearchContainer {
+    display: grid;
+}
+
 .emptyDataContainer {
     background: $gray-3;
     padding: .8rem 1.6rem;

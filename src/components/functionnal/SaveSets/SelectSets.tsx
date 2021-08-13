@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { AiOutlineDown } from 'react-icons/ai';
-import StackLayout from '@ferlab/ui/core/layout/StackLayout';
 import { Select } from 'antd';
 
 import ListItem from 'components/functionnal/SaveSets/ListItem';
 import SelectWithCustomTag from 'components/functionnal/Select';
 
 import styles from './SelectSets.module.scss';
+
 const { OptGroup, Option } = Select;
 
 interface ISelectSets {
@@ -67,7 +67,7 @@ const SelectSets: React.FunctionComponent<ISelectSets> = ({ data, dictionary, on
 
     const currentValues = data.reduce((acc, item) => [...acc, ...(item.selectedValues || [])], [] as string[]);
     return (
-        <StackLayout vertical>
+        <div className={styles.donorSearchContainer}>
             <label>{dictionary?.title || 'Select'}</label>
             <SelectWithCustomTag
                 listHeight={150}
@@ -108,7 +108,7 @@ const SelectSets: React.FunctionComponent<ISelectSets> = ({ data, dictionary, on
                     return options;
                 })}
             </SelectWithCustomTag>
-        </StackLayout>
+        </div>
     );
 };
 
