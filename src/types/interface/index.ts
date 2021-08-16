@@ -17,4 +17,5 @@ export interface ITablePage {
     extraActions?: (selectedRows: string[]) => React.ReactNode;
     tableKey: string;
     setCurrentPage: (filters: IPageFilterState) => void;
+    qbuilderCacheKey: string;
 }

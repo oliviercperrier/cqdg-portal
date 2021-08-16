@@ -28,7 +28,7 @@ const FileFilters: React.FC<IFileFilters> = ({ data, history }) => {
     const {
         filters,
         mappedFilters: { fileFilters },
-    } = useFilters();
+    } = useFilters('file-repo');
 
     const { result: saveSetResults } = useLazyResultQuery<any>(GET_ALL_SAVE_SETS);
     const dataSaveSets = cloneDeep(saveSetResults?.saveSetsFile) || [];

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ISyntheticSqon } from '@ferlab/ui/core/data/sqon/types';
+import { ISqonGroupFilter, ISyntheticSqon } from '@ferlab/ui/core/data/sqon/types';
 
 import { mapFilter } from 'utils/filters';
 
@@ -7,7 +7,7 @@ import { donorMapping, fileMapping, studyMapping } from './mapper';
 
 export const FilterContext = React.createContext<IFilterTypes[]>([]);
 
-type TFilterType = (filters: ISyntheticSqon | null) => ISyntheticSqon | null;
+type TFilterType = (filters: ISqonGroupFilter | null) => ISyntheticSqon | null;
 
 interface IFilterTypes {
     type: string;

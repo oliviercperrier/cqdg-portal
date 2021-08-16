@@ -22,7 +22,7 @@ const globalSearchKey = 'internal_study_id';
 
 const StudyFilters: React.FC = () => {
     const history = useHistory();
-    const { filters: studyFilters, mappedFilters } = useFilters();
+    const { filters: studyFilters, mappedFilters } = useFilters('study-repo');
     const { data, loading, previousData } = useQuery<any>(STUDY_FILTERS, {
         variables: mappedFilters,
     });

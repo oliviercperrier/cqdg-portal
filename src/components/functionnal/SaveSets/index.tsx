@@ -38,6 +38,7 @@ type SaveSets = {
     dictionary: {
         labelType: React.ReactNode;
     };
+    qbuilderCacheKey?: string;
 };
 
 enum EType {
@@ -95,6 +96,7 @@ const SaveSets: React.FunctionComponent<SaveSets> = ({
     total,
     type,
     saveSetType = 'files',
+    qbuilderCacheKey = 'file-repo',
 }) => {
     const intl = useIntl();
 
@@ -113,7 +115,7 @@ const SaveSets: React.FunctionComponent<SaveSets> = ({
     });
     const mappedType = typeMapping[type];
     const clientApollo = useApolloClient();
-    const { mappedFilters } = useFilters();
+    const { mappedFilters } = useFilters(qbuilderCacheKey);
     // TODO manage cache and update only 1 entry instead
     const { result } = useLazyResultQuery<any>(GET_ALL_SAVE_SETS);
     const saveSetOptions =

@@ -32,7 +32,7 @@ import styles from './Donor.module.scss';
 const Study: React.FC<RouteComponentProps<any>> = ({ match: { params } }) => {
     const { id } = params;
     const filters = addFilter(null, 'internal_donor_id', [id]);
-    const { mappedFilters } = useFilters(filters);
+    const { mappedFilters } = useFilters('study-repo', filters);
     const { result } = useLazyResultQuery<any>(DONOR_PAGE_DATA, {
         variables: mappedFilters,
     });

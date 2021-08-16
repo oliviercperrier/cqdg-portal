@@ -43,7 +43,7 @@ const FileRepo: React.FC<RouteComponentProps<any>> = ({ history }) => {
         fileFirst: 25,
         fileOffset: 0,
     });
-    const { filters, mappedFilters } = useFilters();
+    const { filters, mappedFilters } = useFilters('file-repo');
     const { loading, result } = useLazyResultQuery<any>(FILE_PAGE_DATA, {
         variables: { ...pageOffsetData, ...mappedFilters },
     });
@@ -70,6 +70,7 @@ const FileRepo: React.FC<RouteComponentProps<any>> = ({ history }) => {
                     enableCombine
                     enableShowHideLabels
                     history={history}
+                    loading={loading}
                     total={filesTotal}
                 />
                 <div className="file-repo__summary">
@@ -133,6 +134,7 @@ const FileRepo: React.FC<RouteComponentProps<any>> = ({ history }) => {
                                 )}
                                 loading={loading}
                                 model={FilesModel}
+                                qbuilderCacheKey="file-repo"
                                 setCurrentPage={(filters) =>
                                     setPageOffsetData((s) => ({
                                         ...s,
@@ -174,6 +176,7 @@ const FileRepo: React.FC<RouteComponentProps<any>> = ({ history }) => {
                                 )}
                                 loading={loading}
                                 model={presetDonorsModel}
+                                qbuilderCacheKey="file-repo"
                                 setCurrentPage={(filters) =>
                                     setPageOffsetData((s) => ({
                                         ...s,

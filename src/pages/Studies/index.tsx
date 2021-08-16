@@ -33,7 +33,7 @@ import styles from './Studies.module.scss';
 const tableKey = 'study-content';
 const Study: React.FC<RouteComponentProps<any>> = ({ history }) => {
     const [showCards, setShowCards] = useState(true);
-    const { filters, mappedFilters } = useFilters();
+    const { filters, mappedFilters } = useFilters('study-repo');
 
     const { data: tablesData } = useQuery<any>(GET_TABLE_COLUMNS, {
         variables: { default: presetModel, key: tableKey },

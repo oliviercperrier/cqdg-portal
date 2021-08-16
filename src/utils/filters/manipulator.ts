@@ -1,5 +1,5 @@
-import { ISyntheticSqon, IValueContent, IValueFilter } from '@ferlab/ui/core/data/sqon/types';
-import { isEmptySqon, isFieldOperator } from '@ferlab/ui/core/data/sqon/utils';
+import { ISyntheticSqon, IValueContent } from '@ferlab/ui/core/data/sqon/types';
+import { isEmptySqon, isFieldOperator, isReference } from '@ferlab/ui/core/data/sqon/utils';
 import isEmpty from 'lodash/isEmpty';
 
 import { ISqonGroupFilter, TFilterValue, TSqonGroupContent, TSqonGroupOp, TValueOp } from 'types/interface/filters';
@@ -41,8 +41,9 @@ export const getSubFilter = (field: string, filters: ISyntheticSqon | null): TFi
     }
 
     const findSubFilter = (sqon: any): TFilterValue | undefined => {
-        console.log(sqon);
-        if (isFieldOperator(sqon)) {
+        if (isReference(sqon)) {
+            return undefined;
+        } else if (isFieldOperator(sqon)) {
             const valueContent = sqon.content as unknown as IValueContent;
             if (valueContent.field === field.replace('__', '.')) {
                 return valueContent.value;

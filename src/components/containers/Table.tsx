@@ -24,12 +24,13 @@ const TableContainer: React.FC<ITablePage> = ({
     extraActions = null,
     loading,
     model,
+    qbuilderCacheKey,
     setCurrentPage,
     tableKey,
     total,
 }) => {
     const [selectedRow, setSelectedRow] = useState<string[]>([]);
-    const { filters } = useFilters();
+    const { filters } = useFilters(qbuilderCacheKey);
     const { currentPage, pageFilter, pageSize, setCurrentPageFilter } = usePagination(filters!);
 
     const [showingData, setShowingData] = useState({ lowerRange: 1, upperRange: pageSize });

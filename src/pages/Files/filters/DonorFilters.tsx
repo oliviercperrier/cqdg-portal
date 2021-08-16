@@ -29,7 +29,7 @@ const DonorFilters: React.FC<IDonorFilters> = ({ data, history }) => {
     const {
         filters,
         mappedFilters: { donorFilters },
-    } = useFilters();
+    } = useFilters('file-repo');
     const { result: saveSetResults } = useLazyResultQuery<any>(GET_ALL_SAVE_SETS);
     const dataSaveSets = cloneDeep(saveSetResults?.saveSetsDonor) || [];
 

@@ -1,6 +1,7 @@
 import { IFilter } from '@ferlab/ui/core/components/filters/types';
 import { readQueryParam } from '@ferlab/ui/core/data/filters/utils';
-import { ISqonGroupFilter, ISyntheticSqon, IValueFilter } from '@ferlab/ui/core/data/sqon/types';
+import { ISqonGroupFilter, TSqonContent } from '@ferlab/ui/core/data/sqon/types';
+import { isFieldOperator } from '@ferlab/ui/core/data/sqon/utils';
 import get from 'lodash/get';
 import isEmpty from 'lodash/isEmpty';
 
@@ -20,6 +21,9 @@ interface IAggregations {
 }
 
 const booleanValues = ['1', '0'];
+
+const replaceNoData = (value: any) =>
+    typeof value === 'string' || value instanceof String ? value.replace('No Data', '__missing__') : value;
 
 export const enhanceFilters = (aggregations: IAggregations, key: string): IFilter[] => {
     const aggregation = aggregations[key.split('.').join('__')];
@@ -46,30 +50,45 @@ export const enhanceFilters = (aggregations: IAggregations, key: string): IFilte
     return newData;
 };
 
-export const mapFilter = (filters: ISyntheticSqon | null, mapping: Map<string, string>): ISyntheticSqon | null => {
-    const filtersContent = get(filters, 'content', [] as IValueFilter[]);
-    const remapedFilterContent: IValueFilter[] = filtersContent.map((filter: any) => {
-        const field = get(filter, 'content.field', null);
-        const values = get(filter, 'content.value', []).map((v: string) => v.replace('No Data', '__missing__'));
-        const newFilter = {
-            ...filter,
-            content: {
-                ...filter.content,
-                value: values,
-            },
-        };
-        if (mapping.has(field)) {
-            return {
-                ...newFilter,
+export const mapFilter = (filters: ISqonGroupFilter | null, mapping: Map<string, string>): ISqonGroupFilter | null => {
+    const filtersContent = get(filters, 'content', [] as TSqonContent);
+
+    if (isEmpty(filtersContent)) {
+        return null;
+    }
+
+    const mapSubFilter = (filter: any): any => {
+        if (isFieldOperator(filter)) {
+            const field = get(filter, 'content.field', null);
+            const values = get(filter, 'content.value', []).map((v: string | number | boolean) => replaceNoData(v));
+
+            const newFilter = {
+                ...filter,
                 content: {
-                    ...newFilter.content,
-                    field: mapping.get(field)!,
+                    ...filter.content,
+                    value: values,
                 },
             };
-        }
+            if (mapping.has(field)) {
+                return {
+                    ...newFilter,
+                    content: {
+                        ...newFilter.content,
+                        field: mapping.get(field)!,
+                    },
+                };
+            }
 
-        return newFilter;
-    });
+            return newFilter;
+        } else {
+            return {
+                content: filter.content.map((c: TSqonContent) => mapSubFilter(c)),
+                op: filter.op,
+            };
+        }
+    };
+
+    const remapedFilterContent = filtersContent.map((filter: any) => mapSubFilter(filter));
 
     if (isEmpty(remapedFilterContent)) {
         return null;
