@@ -68,6 +68,7 @@ const Study: React.FC<RouteComponentProps<any>> = ({ history }) => {
                     dictionary={getQueryBuilderDictionary()}
                     enableSingleQuery
                     history={history}
+                    loading={loading}
                     total={totalStudies}
                 />
                 <BorderedContainer grow>
@@ -114,7 +115,7 @@ const Study: React.FC<RouteComponentProps<any>> = ({ history }) => {
                         }
                     >
                         {showCards ? (
-                            <CardsContent data={dataSource} />
+                            <CardsContent data={dataSource} loading={loading} />
                         ) : (
                             <TableContent
                                 columns={tablesData.tableColumns.filter((item: ITableColumnItem) => !item.hidden)}

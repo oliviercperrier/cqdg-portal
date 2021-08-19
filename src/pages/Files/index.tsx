@@ -68,7 +68,6 @@ const FileRepo: React.FC<RouteComponentProps<any>> = ({ history }) => {
                     currentQuery={filters?.content?.length ? filters : {}}
                     dictionary={getQueryBuilderDictionary()}
                     enableCombine
-                    enableShowHideLabels
                     history={history}
                     loading={loading}
                     total={filesTotal}
