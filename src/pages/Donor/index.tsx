@@ -24,6 +24,7 @@ import { addFilter } from 'utils/filters/manipulator';
 import { useFilters } from 'utils/filters/useFilters';
 import { EFileInputType, formatFileSize } from 'utils/formatFileSize';
 import { Hits, useLazyResultQuery } from 'utils/graphql/query';
+import { STUDY_REPO_CACHE_KEY } from 'config/constants';
 
 import { dataCategoriesModel, experimentalStrategiesModel } from './Donor.model';
 
@@ -32,7 +33,7 @@ import styles from './Donor.module.scss';
 const Study: React.FC<RouteComponentProps<any>> = ({ match: { params } }) => {
     const { id } = params;
     const filters = addFilter(null, 'internal_donor_id', [id]);
-    const { mappedFilters } = useFilters('study-repo', filters);
+    const { mappedFilters } = useFilters(STUDY_REPO_CACHE_KEY, filters);
     const { result } = useLazyResultQuery<any>(DONOR_PAGE_DATA, {
         variables: mappedFilters,
     });

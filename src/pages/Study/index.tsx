@@ -23,6 +23,7 @@ import { addFilter } from 'utils/filters/manipulator';
 import { useFilters } from 'utils/filters/useFilters';
 import { EFileInputType, formatFileSize } from 'utils/formatFileSize';
 import { useLazyResultQuery } from 'utils/graphql/query';
+import { STUDY_REPO_CACHE_KEY } from 'config/constants';
 
 import { availableClinicalDataModel, dataCategoriesModel, experimentalStrategiesModel } from './Study.model';
 
@@ -33,7 +34,7 @@ const Study: React.FC<RouteComponentProps<any>> = ({ match: { params } }) => {
     const [isDownloading, setIsDownloading] = useState(false);
     const { id } = params;
     const filters = addFilter(null, 'internal_study_id', [id]);
-    const { mappedFilters } = useFilters('study-repo', filters);
+    const { mappedFilters } = useFilters(STUDY_REPO_CACHE_KEY, filters);
     const { result } = useLazyResultQuery<any>(STUDY_DATA_PAGE, {
         variables: mappedFilters,
     });

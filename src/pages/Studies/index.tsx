@@ -25,6 +25,7 @@ import { getQueryBuilderDictionary } from 'utils/dictionnary';
 import { useFilters } from 'utils/filters/useFilters';
 import { Hits, useLazyResultQuery } from 'utils/graphql/query';
 import { usePagination } from 'utils/pagination/usePagination';
+import { STUDY_REPO_CACHE_KEY } from 'config/constants';
 
 import Filters from './filters/StudyFilters';
 
@@ -33,7 +34,7 @@ import styles from './Studies.module.scss';
 const tableKey = 'study-content';
 const Study: React.FC<RouteComponentProps<any>> = ({ history }) => {
     const [showCards, setShowCards] = useState(true);
-    const { filters, mappedFilters } = useFilters('study-repo');
+    const { filters, mappedFilters } = useFilters(STUDY_REPO_CACHE_KEY);
 
     const { data: tablesData } = useQuery<any>(GET_TABLE_COLUMNS, {
         variables: { default: presetModel, key: tableKey },

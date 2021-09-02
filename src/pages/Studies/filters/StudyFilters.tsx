@@ -16,13 +16,14 @@ import { enhanceFilters } from 'utils/filters';
 import { createSubFilter, getSubFilter } from 'utils/filters/manipulator';
 import { useFilters } from 'utils/filters/useFilters';
 import { Hits } from 'utils/graphql/query';
+import { STUDY_REPO_CACHE_KEY } from 'config/constants';
 
 import presetFilters from './StudyFilter.model';
 const globalSearchKey = 'internal_study_id';
 
 const StudyFilters: React.FC = () => {
     const history = useHistory();
-    const { filters: studyFilters, mappedFilters } = useFilters('study-repo');
+    const { filters: studyFilters, mappedFilters } = useFilters(STUDY_REPO_CACHE_KEY);
     const { data, loading, previousData } = useQuery<any>(STUDY_FILTERS, {
         variables: mappedFilters,
     });
