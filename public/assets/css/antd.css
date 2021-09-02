@@ -16729,7 +16729,7 @@ textarea.ant-mentions {
 }
 .ant-notification-notice-message {
   margin-bottom: 8px;
-  color: rgba(0, 0, 0, 0.85);
+  color: #003457;
   font-size: 16px;
   line-height: 24px;
 }
@@ -16775,7 +16775,7 @@ textarea.ant-mentions {
   color: #FFB600;
 }
 .anticon.ant-notification-notice-icon-error {
-  color: #D06D5E;
+  color: #C54B38;
 }
 .ant-notification-notice-close {
   position: absolute;

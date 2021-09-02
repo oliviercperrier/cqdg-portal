@@ -23,23 +23,28 @@ export const getHomeStats = async (): Promise<Record<string, any>> => {
     return get(response, 'data.viewer', []);
 };
 
-export const getClinicalData = async (filters: ISqonGroupFilter): Promise<boolean> => {
+export const getClinicalData = async (filters: ISqonGroupFilter) => {
     const token = getToken();
     const data = isEmpty(filters) ? getDefaultFilters() : filters;
-    const response = await clinicalRestAPI.post(`/download/clinical`, data, {
-        headers: {
-            Authorization: `Bearer ${token}`,
-        },
-        responseType: 'blob',
-    });
-
-    if (response.status === 200) {
-        const now = new Date();
-        const dateFormatted = dateformat(now, 'yyyy-mm-dd-HH:MM:ss');
-        downloadFile(response.data, `clinical-data-${dateFormatted}.zip`);
-    }
-
-    return true;
+    return await clinicalRestAPI
+        .post(`/download/clinical`, data, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+            responseType: 'blob',
+        })
+        .then((res) => {
+            if (res.status === 200) {
+                const now = new Date();
+                const dateFormatted = dateformat(now, 'yyyy-mm-dd-HH:MM:ss');
+                downloadFile(res.data, `clinical-data-${dateFormatted}.zip`);
+            }
+            return true;
+        })
+        .catch((e) => {
+            console.error(e);
+            return false;
+        });
 };
 
 export const getRequestAccessFilesByStudyID = async (studyID: string): Promise<boolean> => {

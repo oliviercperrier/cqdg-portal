@@ -30,6 +30,7 @@ import { useLazyResultQuery } from 'utils/graphql/query';
 
 import { presetDonorsModel } from './tabs/DonorsTable.models';
 import { FilesModel } from './tabs/FilesTable.models';
+import { FILE_REPO_CACHE_KEY } from 'config/constants';
 
 import './Files.scss';
 
@@ -43,7 +44,7 @@ const FileRepo: React.FC<RouteComponentProps<any>> = ({ history }) => {
         fileFirst: 25,
         fileOffset: 0,
     });
-    const { filters, mappedFilters } = useFilters('file-repo');
+    const { filters, mappedFilters } = useFilters(FILE_REPO_CACHE_KEY);
     const { loading, result } = useLazyResultQuery<any>(FILE_PAGE_DATA, {
         variables: { ...pageOffsetData, ...mappedFilters },
     });
@@ -63,7 +64,7 @@ const FileRepo: React.FC<RouteComponentProps<any>> = ({ history }) => {
             <div className="file-repo__wrapper">
                 <QueryBuilder
                     IconTotal={<MdInsertDriveFile size={18} />}
-                    cacheKey="file-repo"
+                    cacheKey={FILE_REPO_CACHE_KEY}
                     className="file-repo__query-builder"
                     currentQuery={filters?.content?.length ? filters : {}}
                     dictionary={getQueryBuilderDictionary()}
@@ -133,7 +134,7 @@ const FileRepo: React.FC<RouteComponentProps<any>> = ({ history }) => {
                                 )}
                                 loading={loading}
                                 model={FilesModel}
-                                qbuilderCacheKey="file-repo"
+                                qbuilderCacheKey={FILE_REPO_CACHE_KEY}
                                 setCurrentPage={(filters) =>
                                     setPageOffsetData((s) => ({
                                         ...s,
@@ -159,7 +160,11 @@ const FileRepo: React.FC<RouteComponentProps<any>> = ({ history }) => {
                                 data={getDataWithKey(result, 'Donor', 'internal_donor_id')}
                                 extraActions={(selectedRow) => (
                                     <>
-                                        <DownloadClinicalButton className="clinical-download" filters={filters}>
+                                        {/*Download clinical api is file centric, only fileFilters should be provided*/}
+                                        <DownloadClinicalButton
+                                            className="clinical-download"
+                                            filters={mappedFilters.fileFilters}
+                                        >
                                             <MdFileDownload size={16} />
                                             {t('global.tables.actions.clinical.data')}
                                         </DownloadClinicalButton>
@@ -175,7 +180,7 @@ const FileRepo: React.FC<RouteComponentProps<any>> = ({ history }) => {
                                 )}
                                 loading={loading}
                                 model={presetDonorsModel}
-                                qbuilderCacheKey="file-repo"
+                                qbuilderCacheKey={FILE_REPO_CACHE_KEY}
                                 setCurrentPage={(filters) =>
                                     setPageOffsetData((s) => ({
                                         ...s,

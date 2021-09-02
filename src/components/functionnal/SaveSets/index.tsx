@@ -9,6 +9,7 @@ import { Button, Dropdown, Input, Menu, Modal, notification, Select, Tooltip } f
 import cx from 'classnames';
 import get from 'lodash/get';
 import isEmpty from 'lodash/isEmpty';
+import { FILE_REPO_CACHE_KEY } from 'config/constants';
 
 import ListItem from 'components/functionnal/SaveSets/ListItem';
 import { t } from 'locales/translate';
@@ -96,7 +97,7 @@ const SaveSets: React.FunctionComponent<SaveSets> = ({
     total,
     type,
     saveSetType = 'files',
-    qbuilderCacheKey = 'file-repo',
+    qbuilderCacheKey = FILE_REPO_CACHE_KEY,
 }) => {
     const intl = useIntl();
 

@@ -17,6 +17,7 @@ import { enhanceFilters } from 'utils/filters';
 import { createSubFilter, getSubFilter } from 'utils/filters/manipulator';
 import { useFilters } from 'utils/filters/useFilters';
 import { Hits, useLazyResultQuery } from 'utils/graphql/query';
+import { FILE_REPO_CACHE_KEY } from 'config/constants';
 
 import presetFilters from './FileFilter.model';
 
@@ -28,7 +29,7 @@ const FileFilters: React.FC<IFileFilters> = ({ data, history }) => {
     const {
         filters,
         mappedFilters: { fileFilters },
-    } = useFilters('file-repo');
+    } = useFilters(FILE_REPO_CACHE_KEY);
 
     const { result: saveSetResults } = useLazyResultQuery<any>(GET_ALL_SAVE_SETS);
     const dataSaveSets = cloneDeep(saveSetResults?.saveSetsFile) || [];

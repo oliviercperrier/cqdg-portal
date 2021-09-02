@@ -45,6 +45,11 @@
                 "restore.defaults": "Restore Defaults"
             }
         },
+        "clinicaldata": {
+            "download.error.description": "It was not possible to download the data.",
+            "download.error.message": "An error has occurred",
+            "download.success.message": "Clinical data has been downloaded"
+        },
         "savesets": {
             "title": "My {type} sets",
             "choose": "Choose a set",
@@ -229,19 +234,19 @@
     },
     "search": {
         "files": {
-            "tooltips" : "Search by ID",
-            "title" : "Search Files",
-            "placeholder" : "FIL0000456"
+            "tooltips": "Search by ID",
+            "title": "Search Files",
+            "placeholder": "FIL0000456"
         },
         "donors": {
-            "tooltips" : "Search by Donors ID",
-            "title" : "Search Donors",
-            "placeholder" : "DON0000068"
+            "tooltips": "Search by Donors ID",
+            "title": "Search Donors",
+            "placeholder": "DON0000068"
         },
         "studies": {
-            "tooltips" : "Search by Name, ID, or Study Keywords (ex: Cancer)",
-            "title" : "Search Studies",
-            "placeholder" : "STU0000034, CARTaGENE, Cancer..."
+            "tooltips": "Search by Name, ID, or Study Keywords (ex: Cancer)",
+            "title": "Search Studies",
+            "placeholder": "STU0000034, CARTaGENE, Cancer..."
         }
     },
     "charts": {

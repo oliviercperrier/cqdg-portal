@@ -49,7 +49,8 @@ const Study: React.FC<RouteComponentProps<any>> = ({ match: { params } }) => {
             <PageHeader
                 backIcon={<DonorIcon className={styles.backIcon} />}
                 extra={[
-                    <DownloadClinicalButton filters={filters} key="downloadClinicalData">
+                    // Download clinical api is file centric, only fileFilters should be provided
+                    <DownloadClinicalButton filters={mappedFilters.fileFilters} key="downloadClinicalData">
                         <AiOutlineDownload size={16} />
                         {t('global.tables.actions.clinical.data')}
                     </DownloadClinicalButton>,

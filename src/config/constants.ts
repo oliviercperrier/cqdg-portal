@@ -23,3 +23,5 @@ export const CQDG_DOCS_URL = window.env.REACT_APP_CQDG_DOCS_URL || process.env.R
 
 // Env debugging
 export const IS_DEV_ENV = window.location.hostname.includes('localhost');
+
+export const FILE_REPO_CACHE_KEY = 'file-repo';

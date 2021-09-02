@@ -18,7 +18,7 @@ import { enhanceFilters } from 'utils/filters';
 import { createSubFilter, getSubFilter } from 'utils/filters/manipulator';
 import { useFilters } from 'utils/filters/useFilters';
 import { Hits, useLazyResultQuery } from 'utils/graphql/query';
-
+import { FILE_REPO_CACHE_KEY } from 'config/constants';
 import presetFilters from './DonorFilter.model';
 
 interface IDonorFilters {
@@ -29,7 +29,7 @@ const DonorFilters: React.FC<IDonorFilters> = ({ data, history }) => {
     const {
         filters,
         mappedFilters: { donorFilters },
-    } = useFilters('file-repo');
+    } = useFilters(FILE_REPO_CACHE_KEY);
     const { result: saveSetResults } = useLazyResultQuery<any>(GET_ALL_SAVE_SETS);
     const dataSaveSets = cloneDeep(saveSetResults?.saveSetsDonor) || [];
 

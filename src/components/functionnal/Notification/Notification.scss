@@ -1,0 +1,9 @@
+@import '~@ferlab/style/themes/cqdg/colors';
+
+.clinical-download-error {
+    color: $gray-8;
+    .ant-notification-notice-message {
+        color: $gray-9;
+        font-weight: 600;
+    }
+}
